@@ -18,10 +18,5 @@
     "title" : "Mossens",
     "tel" : "031-184442",
     "menu-url" : "http://pizza.chalmers.it/mossens.png"
-  },
-  "fajitas" : {
-    "title" : "Miss Fajitas",
-    "tel" : "031-168500",
-    "menu-url" : "http://www.missfajitas.se/Material/Meny_70x100_korr5.pdf"
   }
 }
