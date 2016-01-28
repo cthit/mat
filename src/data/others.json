@@ -1,0 +1,12 @@
+{
+  "alpas" : {
+    "title" : "Alpa Baguetteria",
+    "tel" : "031-161894",
+    "menu-url" : "http://www.alpabaguetter.se/"
+  },
+  "fajitas" : {
+    "title" : "Miss Fajitas",
+    "tel" : "031-168500",
+    "menu-url" : "http://www.missfajitas.se/Material/Meny_70x100_korr5.pdf"
+  }
+}
