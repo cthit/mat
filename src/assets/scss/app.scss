@@ -42,3 +42,8 @@
 
 @include motion-ui-transitions;
 @include motion-ui-animations;
+
+.foodtable .button {
+  margin-bottom: rem-calc(5);
+  margin-top: rem-calc(5);
+}
