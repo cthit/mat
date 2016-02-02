@@ -1,9 +1,13 @@
-Campus Johanneberg food menu
+Campus Johanneberg food  menu
 ============================
 
 A simple site for quickly accessing menus for different food places around campus Johanneberg.
 
-Build with
+## Dependencies
+To build node, npm, git and bower must be installed.
+
+## Build
 ```text
+npm install
 npm run build
 ```
