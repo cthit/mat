@@ -9,5 +9,6 @@ To build node, npm, git and bower must be installed.
 ## Build
 ```text
 npm install
+bower install
 npm run build
 ```
