@@ -8,5 +8,10 @@
     "title" : "Miss Fajitas",
     "tel" : "031-168500",
     "menu-url" : "http://www.missfajitas.se/Material/Meny_70x100_korr5.pdf"
+  },
+  "einstein" : {
+    "title" : "Einstein",
+    "tel" : "031-7724170",
+    "menu-url" : "http://www.butlercatering.se/einstein"
   }
 }
