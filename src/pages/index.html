@@ -7,18 +7,27 @@ title: Mat vid campus Johanneberg
     <table class="foodtable">
       <thead>
         <tr>
-          <th width="200">Namn</th>
+          <th>Namn</th>
           <th>Telefonnummer</th>
-          <th width="150"></th>
+          <th></th>
+          <th></th>
+          </th>
         </tr>
       </thead>
       <tbody>
         {{#each pizzeria}}
-          <tr>
-            <td>{{this.title}}</td>
-            <td><a href="tel:{{this.tel}}">{{this.tel}}</a></td>
-            <td><a href="{{this.menu-url}}" class="button">Visa meny</a></td>
-          </tr>
+        <tr>
+          <td>{{this.title}}</td>
+          <td><a href="tel:{{this.tel}}">{{this.tel}}</a></td>
+          <td>
+            <a data-open="mapModal" onClick="updateMap('{{this.address}}', '{{this.title}}')" class="button hide-for-medium"><i class="fi-map"></i></a>
+            <a data-open="mapModal" onClick="updateMap('{{this.address}}', '{{this.title}}')" class="button show-for-medium"><i class="fi-map"></i> Karta</a>
+          </td>
+          <td>
+            <a href="{{this.menu-url}}" class="button hide-for-medium"><i class="fi-list"></i></a>
+            <a href="{{this.menu-url}}" class="button show-for-medium"><i class="fi-list"></i> Meny</a>
+          </td>
+        </tr>
         {{/each}}
       </tbody>
     </table>
@@ -28,18 +37,26 @@ title: Mat vid campus Johanneberg
     <table class="foodtable">
       <thead>
         <tr>
-          <th width="200">Namn</th>
+          <th>Namn</th>
           <th>Telefonnummer</th>
-          <th width="150"></th>
+          <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         {{#each burgare}}
-          <tr>
-            <td>{{this.title}}</td>
-            <td><a href="tel:{{this.tel}}">{{this.tel}}</a></td>
-            <td><a href="{{this.menu-url}}" class="button">Visa meny</a></td>
-          </tr>
+        <tr>
+          <td>{{this.title}}</td>
+          <td><a href="tel:{{this.tel}}">{{this.tel}}</a></td>
+          <td>
+            <a data-open="mapModal" onClick="updateMap('{{this.address}}', '{{this.title}}')" class="button hide-for-medium"><i class="fi-map"></i></a>
+            <a data-open="mapModal" onClick="updateMap('{{this.address}}', '{{this.title}}')" class="button show-for-medium"><i class="fi-map"></i> Karta</a>
+          </td>
+          <td>
+            <a href="{{this.menu-url}}" class="button hide-for-medium"><i class="fi-list"></i></a>
+            <a href="{{this.menu-url}}" class="button show-for-medium"><i class="fi-list"></i> Meny</a>
+          </td>
+        </tr>
         {{/each}}
       </tbody>
     </table>
@@ -51,18 +68,26 @@ title: Mat vid campus Johanneberg
     <table class="foodtable">
       <thead>
         <tr>
-          <th width="200">Namn</th>
+          <th>Namn</th>
           <th>Telefonnummer</th>
-          <th width="150"></th>
+          <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         {{#each thai}}
-          <tr>
-            <td>{{this.title}}</td>
-            <td><a href="tel:{{this.tel}}">{{this.tel}}</a></td>
-            <td><a href="{{this.menu-url}}" class="button">Visa meny</a></td>
-          </tr>
+        <tr>
+          <td>{{this.title}}</td>
+          <td><a href="tel:{{this.tel}}">{{this.tel}}</a></td>
+          <td>
+            <a data-open="mapModal" onClick="updateMap('{{this.address}}', '{{this.title}}')" class="button hide-for-medium"><i class="fi-map"></i></a>
+            <a data-open="mapModal" onClick="updateMap('{{this.address}}', '{{this.title}}')" class="button show-for-medium"><i class="fi-map"></i> Karta</a>
+          </td>
+          <td>
+            <a href="{{this.menu-url}}" class="button hide-for-medium"><i class="fi-list"></i></a>
+            <a href="{{this.menu-url}}" class="button show-for-medium"><i class="fi-list"></i> Meny</a>
+          </td>
+        </tr>
         {{/each}}
       </tbody>
     </table>
@@ -72,20 +97,47 @@ title: Mat vid campus Johanneberg
     <table class="foodtable">
       <thead>
         <tr>
-          <th width="200">Namn</th>
+          <th>Namn</th>
           <th>Telefonnummer</th>
-          <th width="150"></th>
+          <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         {{#each others}}
-          <tr>
-            <td>{{this.title}}</td>
-            <td><a href="tel:{{this.tel}}">{{this.tel}}</a></td>
-            <td><a href="{{this.menu-url}}" class="button">Visa meny</a></td>
-          </tr>
+        <tr>
+          <td>{{this.title}}</td>
+          <td><a href="tel:{{this.tel}}">{{this.tel}}</a></td>
+          <td>
+            <a data-open="mapModal" onClick="updateMap('{{this.address}}', '{{this.title}}')" class="button hide-for-medium"><i class="fi-map"></i></a>
+            <a data-open="mapModal" onClick="updateMap('{{this.address}}', '{{this.title}}')" class="button show-for-medium"><i class="fi-map"></i> Karta</a>
+          </td>
+          <td>
+            <a href="{{this.menu-url}}" class="button hide-for-medium"><i class="fi-list"></i></a>
+            <a href="{{this.menu-url}}" class="button show-for-medium"><i class="fi-list"></i> Meny</a>
+          </td>
+        </tr>
         {{/each}}
       </tbody>
     </table>
   </div>
 </div>
+<div class="reveal" id="mapModal" data-reveal>
+  <h1 id="map-title">Stuff</h1>
+  <iframe
+  id="mapFrame"
+  style="width: 100%; height: 60vh;"
+  frameborder="0" style="border:0"
+  allowfullscreen>
+  </iframe>
+  <button class="close-button" data-close aria-label="Close modal" type="button">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<script type="text/javascript">
+  function updateMap(query, title) {
+    $('#map-title').text(title);
+    $('#mapFrame').attr("src", "https://www.google.com/maps/embed/v1/place?key=AIzaSyASR-ZIYZOkHPU4Fn59PgNSe1gzIPNpPe8&q=" + query +"")
+  }
+</script>

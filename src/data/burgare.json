@@ -2,11 +2,13 @@
   "harvest" : {
     "title" : "Harvest",
     "tel" : "031-209099",
-    "menu-url" : "assets/img/Harvest.jpg"
+    "menu-url" : "assets/img/Harvest.jpg",
+    "address" : "Harvest Göteborg"
   },
   "japripps" : {
     "title" : "J.A. Pripps",
     "tel" : "031-7723950",
-    "menu-url" : "http://www.chalmerskonferens.se/restauranger/johanneberg/j-a-pripps-pub-cafe/"
+    "menu-url" : "http://www.chalmerskonferens.se/restauranger/johanneberg/j-a-pripps-pub-cafe/",
+    "address" : "J.A. Pripps Johanneberg"
   }
 }
