@@ -12,7 +12,7 @@
   "sannegarden" : {
     "title" : "Sannegården",
     "tel" : "031-162613",
-    "menu-url" : "sannegarden/"
+    "menu-url" : "assets/img/sannegarden.png"
   },
   "mossens" : {
     "title" : "Mossens",
