@@ -39,9 +39,14 @@
 @include foundation-title-bar;
 @include foundation-tooltip;
 @include foundation-top-bar;
+@include foundation-flex-grid;
 
 @include motion-ui-transitions;
 @include motion-ui-animations;
+
+header {
+  margin: 20px 0;
+}
 
 .foodtable .button {
   margin-bottom: rem-calc(5);
