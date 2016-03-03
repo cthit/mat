@@ -1,0 +1,14 @@
+{
+  "sushi-me" : {
+    "title" : "Sushi me",
+    "tel" : "031-188226",
+    "menu-url" : "assets/img/sushi-me.jpg",
+    "address" : "Sushi me, Gibraltargatan, Göteborg"
+  },
+  "yoko" : {
+    "title" : "Yoko Sushi",
+    "tel" : "031-3869926",
+    "menu-url" : "http://www.yokosushi.se/lunch.html",
+    "address" : "Yoko Sushi, Gibraltargatan, Göteborg"
+  }
+}
