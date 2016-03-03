@@ -92,6 +92,35 @@ title: Mat vid campus Johanneberg
     </table>
   </div>
   <div class="large-6 medium-12 columns">
+    <h3>Sushi</h3>
+    <table class="foodtable">
+      <thead>
+        <tr>
+          <th>Namn</th>
+          <th>Telefonnummer</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each sushi}}
+        <tr>
+          <td>{{this.title}}</td>
+          <td><a href="tel:{{this.tel}}">{{this.tel}}</a></td>
+          <td>
+            <a data-open="mapModal" onClick="updateMap('{{this.address}}', '{{this.title}}')" class="button hide-for-medium"><i class="fi-map"></i></a>
+            <a data-open="mapModal" onClick="updateMap('{{this.address}}', '{{this.title}}')" class="button show-for-medium"><i class="fi-map"></i> Karta</a>
+          </td>
+          <td>
+            <a href="{{this.menu-url}}" class="button hide-for-medium"><i class="fi-list"></i></a>
+            <a href="{{this.menu-url}}" class="button show-for-medium"><i class="fi-list"></i> Meny</a>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+  <div class="large-6 medium-12 columns">
     <h3>Övrigt</h3>
     <table class="foodtable">
       <thead>
