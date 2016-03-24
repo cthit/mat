@@ -5,7 +5,6 @@
 @import 'motion-ui';
 
 @include foundation-global-styles;
-@include foundation-grid;
 @include foundation-typography;
 @include foundation-button;
 @include foundation-forms;
@@ -56,4 +55,8 @@ header {
 #it-logo {
   width: rem-calc(100);
   float: right;
+}
+
+.min-width-buttons {
+    min-width: 100px;
 }
