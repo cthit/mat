@@ -1,9 +1,9 @@
 {
-  "harvest" : {
-    "title" : "Harvest",
+  "lumagrill" : {
+    "title" : "Luma Grill",
     "tel" : "031-209099",
-    "menu-url" : "assets/img/Harvest.jpg",
-    "address" : "Harvest Göteborg"
+    "menu-url" : "assets/img/lumagrill.pdf",
+    "address" : "Viktor Rydbergsgatan 71 Göteborg"
   },
   "japripps" : {
     "title" : "J.A. Pripps",
