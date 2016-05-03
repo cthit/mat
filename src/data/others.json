@@ -5,6 +5,12 @@
     "menu-url" : "http://www.alpabaguetter.se/",
     "address" : "Alpa Baguetteria"
   },
+  "da-claudia": {
+    "title": "Da Claudia",
+    "tel": "",
+    "menu-url": "assets/html/da_claudia.html",
+    "address": "Gibraltargatan 54, Göteborg"
+  },
   "fajitas" : {
     "title" : "Miss Fajitas",
     "tel" : "031-168500",
