@@ -15,7 +15,8 @@
     "title" : "Sannegården",
     "tel" : "031-162613",
     "menu-url" : "assets/img/sannegarden.png",
-    "address" : "Sannegårdens pizzera gibraltargatan"
+    "address" : "Sannegårdens pizzera gibraltargatan",
+    "randomizer": true
   },
   "mossens" : {
     "title" : "Mossens",

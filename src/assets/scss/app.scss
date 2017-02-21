@@ -60,3 +60,252 @@ header {
 .min-width-buttons {
     min-width: 100px;
 }
+
+.button-group {
+    margin-bottom: 0;
+}
+
+.random-button {
+    font-size: 26px !important;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    padding: 0;
+    line-height: 40px;
+    transition: 0.5s all ease;
+}
+
+.random-button-visible {
+  transform: rotate(360deg) scale(10);
+  opacity: 0;
+  border-radius: 50%;
+}
+
+#randomizer {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #000;
+    color: #fff;
+    padding: 50px;
+    overflow: auto;
+    text-align: center;
+}
+
+#randomizer h1 {
+  font-weight: 200;
+  margin-bottom: 40px;
+}
+
+
+@keyframes randomizerIntro {
+  0%, 30% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+#randomizer.randomizer-visible {
+  display: block;
+  animation: 0.9s randomizerIntro ease;
+}
+
+.randomizer-button-group {
+    font-size: 0;
+    display: inline-block;
+}
+
+.randomizer-button {
+    background-color: transparent;
+    font-size: 20px;
+    border-radius: 5px;
+    padding: 4px 15px;
+    border: 1px solid #00A8E2;
+    transition: 0.3s all ease;
+    display: inline-block;
+    color: #fff;
+}
+
+.randomizer-button-group a:first-child {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: 0;
+}
+
+.randomizer-button-group a:last-child {
+  border-left: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.randomizer-button:hover {
+  color: #fff;
+  opacity: 1;
+}
+
+
+.randomizer-button.selected {
+    background: #00A8E2;
+    border-color: #00A8E2;
+    color: #fff;
+    opacity: 1;
+}
+
+.randomizer-ingredient {
+  display: inline-block;
+  padding: 5px 25px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  color: #333333;
+  border-radius: 50px;
+  font-size: 18px;
+}
+
+#randomizer-results {
+  margin-top: 30px;
+  background: #fff;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 5px;
+  margin-bottom: 30px;
+  color: #333;
+  padding: 20px;
+  text-align: left;
+}
+
+#randomizer h3 {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  color: #999;
+  text-transform: uppercase;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#randomizer h3:first-child {
+  margin-top: 0;
+}
+
+#randomizer li {
+    list-style: none;
+}
+
+.no-scroll {
+    overflow: hidden;
+}
+
+.slot-machine-slots {
+  padding: 20px;
+  background-color: #666;
+  display: inline-block;
+  min-width: 300px;
+  border-radius: 5px;
+  vertical-align: top;
+}
+
+.slot-machine-slot {
+    width: 80px;
+    display: inline-block;
+    height: 200px;
+background: #ffffff; /* Old browsers */
+background: linear-gradient(to bottom, #fff 30%,#fff605 50%,#fff 70%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    margin: 5px;
+    vertical-align: top;
+    overflow: hidden;
+}
+
+.spak {
+    transition: 0.5s all ease-out;
+    transform-origin: bottom;
+    cursor: pointer;
+}
+
+.spak.rotate-down {
+  transform: rotateX(60deg) rotate(5deg) translateX(-5px);
+}
+
+.slot-option {
+    display: block;
+    height: 67px;
+    color: #000;
+    text-align: center;
+    overflow: hidden;
+    padding-top: 15px;
+    font-size: 12px;
+    word-break: break-word;
+}
+
+slot {
+    display: block;
+}
+
+.spinner {
+  transition: 0.5s all;
+}
+.spinner.blurred {
+    filter: blur(5px);
+}
+
+@keyframes spin {
+    from {
+        margin-top: -1000px;
+    }
+
+    to {
+        margin-top: 0;
+    }
+}
+
+.spinner.spin {
+  animation: spin 5s forwards;
+}
+
+.slot-machine-slot:nth-child(1) .spinner.spin {
+    animation-duration: 2s;
+}
+
+.slot-machine-slot:nth-child(2) .spinner.spin {
+    animation-duration: 3s;
+}
+
+.slot-machine-slot:nth-child(3) .spinner.spin {
+    animation-duration: 4s;
+}
+
+.slot-machine-slot:nth-child(4) .spinner.spin {
+    animation-duration: 5s;
+}
+
+.slot-machine-slot:nth-child(5) .spinner.spin {
+    animation-duration: 6s;
+}
+
+.slot-machine-slot:nth-child(6) .spinner.spin {
+    animation-duration: 7s;
+}
+
+.slot-machine-slot:nth-child(7) .spinner.spin {
+    animation-duration: 8s;
+}
+
+.slot-machine-slot:nth-child(8) .spinner.spin {
+    animation-duration: 9s;
+}
+
+.pizza-results {
+    color: #fff;
+}
+
+.slot-machine-body {
+    display: inline-block;
+}

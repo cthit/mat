@@ -23,6 +23,9 @@ title: Mat vid campus Johanneberg
               <a data-open="mapModal" onClick="updateMap('{{this.address}}', '{{this.title}}')" class="button show-for-medium"><i class="fi-map"></i> Karta</a>
               <a href="{{this.menu-url}}" class="button hide-for-medium"><i class="fi-list"></i></a>
               <a href="{{this.menu-url}}" class="button show-for-medium"><i class="fi-list"></i> Meny</a>
+              {{#if this.randomizer}}
+              <a href="javascript:void(0)" onClick="showRandomizer(this)" class="button random-button"><i class="fi-die-five"></i></a>
+              {{/if}}
             </div>
           </td>
         </tr>
