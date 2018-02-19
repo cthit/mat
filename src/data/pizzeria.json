@@ -14,7 +14,7 @@
   "sannegarden" : {
     "title" : "Sannegården",
     "tel" : "031-162613",
-    "menu-url" : "assets/img/sannegarden.png",
+    "menu-url" : "https://sannes.chalmers.it",
     "address" : "Sannegårdens pizzera gibraltargatan",
     "randomizer": true
   },
