@@ -10,5 +10,11 @@
     "tel" : "031-3869926",
     "menu-url" : "http://www.yokosushi.se/lunch.html",
     "address" : "Yoko Sushi, Gibraltargatan, Göteborg"
-  }
+  },
+	"sushi-lau":{
+		"title": "Sushi Lau",
+		"tel": "031-160295",
+		"menu-url": "assets/pdf/Sushi_Lau.pdf",
+		"address": "Sushi Lau, Aschebergsgatan, Göteborg"
+	}
 }
