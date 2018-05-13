@@ -1,0 +1,28 @@
+version: "2"
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: dev.Dockerfile
+    image: mat_backend:dev
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./backend:/backend_docker
+    links:
+      - "redis"
+    environment:
+      - NODE_ENV=development
+  redis:
+    image: redis
+    ports: 
+      - "6379"
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: dev.Dockerfile
+    image: mat_frontend:dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/frontend
