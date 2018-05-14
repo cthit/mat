@@ -109,6 +109,9 @@ const redisClient = redis.createClient('redis://redis:' + REDIS_PORT);
 server.listen(PORT);
 
 app.get('/api/mat.json', function(req, res){
+    res.header('Access-Control-Allow-Origin', "*");
+    res.header('Access-Control-Allow-Methods', 'GET');
+
     redisClient.exists('mat', function(err, exists){
         if(exists == 1){
             console.log("Loading from redis...");

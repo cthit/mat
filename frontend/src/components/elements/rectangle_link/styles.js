@@ -8,9 +8,7 @@ export const Container = styled.div`
 
     width:200px;
     height:200px;
-    
-    line-height:200px;
-    
+
     text-align:center;
     background-color: white;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
@@ -20,6 +18,14 @@ export const Container = styled.div`
 
 export const Link = styled(NavLink)`
     text-decoration: none;
+    display:inline-block;
+    width:100%;
+    height:100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
 `
 
 export const Text = styled.h2`

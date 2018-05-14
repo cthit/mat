@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Container } from './styles'
+import { Container, RestaurantsContainer } from './styles'
 import { Header } from '../../views/header';
 import { Footer } from '../../views/footer';
+import { DataContext } from '../../context/DataContext';
+import { RectangleLink } from '../../elements/rectangle_link'
 
 class CategoryScreen extends Component{
     
@@ -9,11 +11,31 @@ class CategoryScreen extends Component{
 		return (
             <Container>
                 <Header/>
-                <h1>Category</h1>
+                <DataContext.Consumer>
+                    {categories => (
+                        this._renderRestaurants(categories)
+                    )}
+                </DataContext.Consumer>
                 <Footer/>
             </Container>
         );
     }   
+
+    _renderRestaurants(categories){
+        const restaurants = [];
+        categories[this.props.category].forEach(restaurant => {
+            restaurants.push(
+                <RectangleLink key={restaurant.formatted_phone_number} text={restaurant.name} link="/pizzaaaaa">
+                </RectangleLink>
+            );
+        });
+
+        return (
+            <RestaurantsContainer>
+                { restaurants }
+            </RestaurantsContainer>
+        )
+    }
 
 }
 
