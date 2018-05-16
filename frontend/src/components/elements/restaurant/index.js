@@ -1,17 +1,38 @@
 import React from 'react';
-import { Container, Heading, Text, Table, TableData, Row, Element, ShowMenuButton, ShowMapButton, Bold, PhoneNumber, ButtonGroup } from './styles';
+import { Container, Heading, Text, Table, Row, ShowMenuButton, ShowMapButton, Bold, PhoneNumber, ButtonGroup } from './styles';
 //RATING
 export const Restaurant = ({data}) => 
-    <Container> 
+    <Container restaurantOpenStatus={_getRestaurantOpenStatusColor(data)}> 
         <Heading>{ data.name }</Heading>
         <PhoneNumber href={"tel:" + data.formatted_phone_number}>{ data.formatted_phone_number }</PhoneNumber>
         {_renderCurrentStatusRegardingRestaurantOpen(data)}
         {_renderOpeningHours(data)}
         <ButtonGroup>
             <ShowMenuButton target="_blank"  href={ data.link_to_menu } appearance="primary">Visa meny för {data.name}</ShowMenuButton>
+            <ShowMapButton>Visa karta</ShowMapButton>
         </ButtonGroup>
      </Container>
-//    <ShowMapButton>Visa karta</ShowMapButton>
+
+function _getRestaurantOpenStatusColor(data){
+    const now = new Date();
+    const day = now.getDay();
+    const openingHoursToday = data.opening_hours.periods[day];
+    const currentTime = now.getHours() + "" + now.getMinutes();
+
+    var openingTime = openingHoursToday.open.time;
+    var closingTime = openingHoursToday.close.time;
+
+    var tempClosingTime = closingTime < openingTime 
+        ? (parseInt(closingTime.split(":")[0], 10) + 24) + ":" + closingTime.split(":")[1] 
+        : closingTime; //Because 15:00 > 00.00
+
+    if(currentTime > openingTime && currentTime < tempClosingTime){
+        return 'open'
+    }else{
+        return 'closed';
+    }
+}
+
 function _renderCurrentStatusRegardingRestaurantOpen(data){
     const now = new Date();
     const day = now.getDay();
@@ -22,12 +43,16 @@ function _renderCurrentStatusRegardingRestaurantOpen(data){
     var openingTime = openingHoursToday.open.time;
     var closingTime = openingHoursToday.close.time;
 
+    var tempClosingTime = closingTime < openingTime 
+        ? (parseInt(closingTime.split(":")[0], 10) + 24) + ":" + closingTime.split(":")[1] 
+        : closingTime; //Because 15:00 > 00.00
+
     if(currentTime < openingTime){
         openingTime = openingTime.substr(0, 2) + ":" + openingTime.substr(2, 2);
         return (
             <Text><Bold>Öppnar</Bold> klockan <Bold>{ openingTime }</Bold></Text>
         )
-    }else if(currentTime > openingTime && currentTime < closingTime){
+    }else if(currentTime > openingTime && currentTime < tempClosingTime){
         closingTime = closingTime.substr(0, 2) + ":" + closingTime.substr(2, 2);
         return (
             <Text><Bold>Öppet</Bold> tills { closingTime } </Text>
@@ -39,26 +64,12 @@ function _renderCurrentStatusRegardingRestaurantOpen(data){
     }
 }
 
-function _openingHoursMatches(openingHours, closingHours, openingHoursData){
-    for(var i = 0; i < openingHoursData.length; i++){
-        var openingHourData = openingHoursData[i];
-        if(openingHourData.openingHours === openingHours &&
-            openingHourData.closingHours === closingHours){
-                return i;
-            }
-    }
-    
-    return -1;
-}
-
 function _renderOpeningHours(data){
     const openingHoursData = [];
 
     const name = data.name;
 
-    const days = [];
-    const openingHoursList = [];
-    const closingHoursList = [];
+    const rows = [];
 
     for(var i = 0; i < 7; i++){
         var weekday = data.opening_hours.weekday_text[i];
@@ -102,48 +113,31 @@ function _renderOpeningHours(data){
         const dayUniqueKeyElement = startDay + name + "a";
         const dayUniqueKeyText = startDay + name + "A";
 
-        const openingHoursUniqueKeyElement = startDay + name + "b";
-        const openingHoursUniqueKeyText = startDay + name + "B";
-
-        const closingHoursUniqueKeyElement = startDay + name + "c";
-        const closingHoursUniqueKeyText = startDay + name + "C";
-
-        if(startDay === endDay){
-            days.push((
-                <Element key={dayUniqueKeyElement}>
-                    <Text key={dayUniqueKeyText}>{startDay}</Text>
-                </Element>
-            ));    
-        }else{
-            days.push((
-                <Element key={dayUniqueKeyElement}>
-                    <Text key={dayUniqueKeyText}>{startDay + " - " + endDay}</Text>
-                </Element>
-            ));    
+        var daysInfo = "";
+        var hoursInfo = "";
+        
+        if(closingHours == null){
+            daysInfo = startDay;
+            hoursInfo = openingHours; //openingHours will be "Stängt"
+        } else if(startDay === endDay){
+            daysInfo = startDay;
+            hoursInfo = openingHours + " - " + closingHours;
+        } else{
+            daysInfo = startDay + " - " + endDay;
+            hoursInfo = openingHours + " - " + closingHours;
         }
 
-        openingHoursList.push((
-            <Element key={openingHoursUniqueKeyElement}>
-                <Text key={openingHoursUniqueKeyText}>{openingHours}</Text>
-            </Element>
-        ));
+        rows.push((
+            <Row key={dayUniqueKeyElement}>
+                <Text key={dayUniqueKeyText}>{daysInfo + ": " + hoursInfo}</Text>
+            </Row>
+        ));    
 
-        closingHoursList.push((
-            <Element key={closingHoursUniqueKeyElement}>
-                <Text key={closingHoursUniqueKeyText}>{closingHours}</Text>
-            </Element>
-        ));
     });
-
-    /**
-     *         
-     */
 
     return (
         <Table>
-            <Row>{days}</Row> 
-            <Row>{openingHoursList}</Row>
-            <Row>{closingHoursList}</Row> 
+            { rows }
          </Table>
     )
 }

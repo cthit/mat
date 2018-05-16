@@ -1,18 +1,21 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+    position:relative;
     padding:16px;
 
-    min-width:430px;
+    min-width:400px;
     min-height:250px;
-
-    width:300px;
-    height:250px;
 
     background-color: white;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
                     0 1px 5px 0 rgba(0, 0, 0, 0.12),
                     0 3px 1px -2px rgba(0, 0, 0, 0.2);
+
+    border-radius: 8px;
+    border: 12px solid;
+    border-color: ${props => props.restaurantOpenStatus === 'open' ? '#05c46b' : 
+                                (props.restaurantOpenStatus === 'closed' ? '#ff3f34' : 'white')};
 `
 
 export const Heading = styled.h2`
@@ -36,6 +39,7 @@ export const PhoneNumber = styled.a`
 `
 
 export const Table = styled.div`
+    width:100%;
     display:table;
     margin:8px;
 `
@@ -44,22 +48,11 @@ export const Row = styled.div`
     display:table-row;
     margin:0px;
     padding:0px;
-`
-
-export const Element = styled.div`
     text-transform:capitalize;
-    display:table-cell;
-    margin:0px;
-    padding:0px;
     
     &:nth-child(odd){
         background-color: #e7ebef;
     }
-
-    & > *{
-        text-align:center;
-    }
-
 `
 
 export const BaseLinkButton = styled.a`
@@ -105,5 +98,9 @@ export const Bold = styled.span`
 `
 
 export const ButtonGroup = styled.div`
-    margin-top:8px;
+    height: 38px; 
+    width:100%;
+    position: absolute;
+    right: 8px;
+    bottom: 16px; 
 `

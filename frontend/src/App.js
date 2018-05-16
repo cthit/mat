@@ -53,7 +53,7 @@ class App extends Component {
                   <CategoryScreen key={category} category={category}/>
                 </Route>
               );
-            }.bind(this))}
+            })}
 			  	</Switch>
         </DataContext.Provider>
 			</div>
