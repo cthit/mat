@@ -39,33 +39,88 @@ function _renderCurrentStatusRegardingRestaurantOpen(data){
     }
 }
 
+function _openingHoursMatches(openingHours, closingHours, openingHoursData){
+    for(var i = 0; i < openingHoursData.length; i++){
+        var openingHourData = openingHoursData[i];
+        if(openingHourData.openingHours === openingHours &&
+            openingHourData.closingHours === closingHours){
+                return i;
+            }
+    }
+    
+    return -1;
+}
+
 function _renderOpeningHours(data){
+    const openingHoursData = [];
+
     const name = data.name;
 
     const days = [];
     const openingHoursList = [];
     const closingHoursList = [];
 
-    data.opening_hours.weekday_text.forEach(weekday => {
-        //måndag; 11:00–21:00 -> {day}: {openingHours}-{closingHours}
+    for(var i = 0; i < 7; i++){
+        var weekday = data.opening_hours.weekday_text[i];
+        
         const day = weekday.split(" ")[0].replace(":", "");
         const openingHours = weekday.split(" ")[1].split("–")[0];
         const closingHours = weekday.split(" ")[1].split("–")[1]
-    
-        const dayUniqueKeyElement = day + name + "a";
-        const dayUniqueKeyText = day + name + "A";
+        
+        //If empty, add and just move on
+        if(openingHoursData.length === 0){
+            openingHoursData.push({
+                startDay: day,
+                endDay: day,
+                openingHours: openingHours,
+                closingHours: closingHours
+            });
+            continue;
+        }
 
-        const openingHoursUniqueKeyElement = day + name + "b";
-        const openingHoursUniqueKeyText = day + name + "B";
+        var openingHourData = openingHoursData[openingHoursData.length - 1];
+        if(openingHours === openingHourData.openingHours &&
+            closingHours === openingHourData.closingHours){
+                openingHoursData[openingHoursData.length - 1].endDay = day;
+        }else{
+            openingHoursData.push({
+                startDay: day,
+                endDay: day,
+                openingHours: openingHours,
+                closingHours: closingHours
+            });
+        }
+    }
 
-        const closingHoursUniqueKeyElement = day + name + "c";
-        const closingHoursUniqueKeyText = day + name + "C";
+    openingHoursData.forEach(openingHourData => {
+        //måndag; 11:00–21:00 -> {day}: {openingHours}-{closingHours}
+        const startDay = openingHourData.startDay;
+        const endDay = openingHourData.endDay;
+        const openingHours = openingHourData.openingHours;
+        const closingHours = openingHourData.closingHours;
 
-        days.push((
-            <Element key={dayUniqueKeyElement}>
-                <Text key={dayUniqueKeyText}>{day}</Text>
-            </Element>
-        ));
+        const dayUniqueKeyElement = startDay + name + "a";
+        const dayUniqueKeyText = startDay + name + "A";
+
+        const openingHoursUniqueKeyElement = startDay + name + "b";
+        const openingHoursUniqueKeyText = startDay + name + "B";
+
+        const closingHoursUniqueKeyElement = startDay + name + "c";
+        const closingHoursUniqueKeyText = startDay + name + "C";
+
+        if(startDay === endDay){
+            days.push((
+                <Element key={dayUniqueKeyElement}>
+                    <Text key={dayUniqueKeyText}>{startDay}</Text>
+                </Element>
+            ));    
+        }else{
+            days.push((
+                <Element key={dayUniqueKeyElement}>
+                    <Text key={dayUniqueKeyText}>{startDay + " - " + endDay}</Text>
+                </Element>
+            ));    
+        }
 
         openingHoursList.push((
             <Element key={openingHoursUniqueKeyElement}>
@@ -79,6 +134,10 @@ function _renderOpeningHours(data){
             </Element>
         ));
     });
+
+    /**
+     *         
+     */
 
     return (
         <Table>
