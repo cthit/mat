@@ -18,7 +18,6 @@ const OTHER = 'other';
 /* Settings */
 const PORT = 8080;
 const REDIS_PORT = 6379;
-const REDIS_EXPIRE = 60;
 const REDIS_EXPIRE = 1310; //You can make 1000 requests per day to Google. 
 const GOOGLE_PLACE_BASE_URL = 'https://maps.googleapis.com/maps/api/place/details/json';
 const GOOGLE_PLACE_API_KEY = 'GOOGLE_PLACE_API_KEY_HERE';
@@ -27,19 +26,19 @@ const RESTAURANTS = {
     //Pizza
     'ChIJddwD2grzT0YRmU8ZuSUJgCE': { //Pizzeria Gibraltar
         'category': PIZZA,
-        'link_to_menu': ''
+        'link_to_menu': 'http://pizzeriagibraltar.com'
     },
     'ChIJ_wboygrzT0YRtYnZgbt_F2Q': { //Pizzeria Peperoni
         'category': PIZZA,
-        'link_to_menu': ''
+        'link_to_menu': 'http://pizzeriapeperoni.se/Meny.html'
     },
     'ChIJV5iOjgrzT0YRgLrXj2ExUto': { //Sannegården Pizzeria Johanneberg
         'category': PIZZA,
-        'link_to_menu': ''
+        'link_to_menu': 'https://sannes.chalmers.it'
     },
     'ChIJCZlNBafzT0YR8A-Fnfa6zTo': { //Mossens Pizzeria
         'category': PIZZA,
-        'link_to_menu': ''
+        'link_to_menu': 'http://mossenspizzeria.se'
     },
 
     
@@ -47,11 +46,11 @@ const RESTAURANTS = {
     //Thai
     'ChIJX5vM33TzT0YRCyx2D_K0hWg': { //Arojj Dii
         'category': THAI,
-        'link_to_menu': ''
+        'link_to_menu': 'http://ijohanneberg.se/platser/goteborg/johanneberg/restauranger/arojj-dii/'
     },
     'ChIJW1EE8aDzT0YRQ6EPi_Ameb0': { //Baan Thai
         'category': THAI,
-        'link_to_menu': ''
+        'link_to_menu': 'http://www.baanthaigbg.se/meny/'
     },
 
     
@@ -59,15 +58,15 @@ const RESTAURANTS = {
     //Hamburger
     'ChIJQciMX6DzT0YRjjsg75Gzce0': { //Luma Grill
         'category': HAMBURGER,
-        'link_to_menu': ''
+        'link_to_menu': 'https://www.lumagrill.nu/menyer'
     },
     'ChIJLxoVhQzzT0YRC7c0h4_v16c': { //J.A. Pripps
         'category': HAMBURGER,
-        'link_to_menu': ''
+        'link_to_menu': 'https://chalmerskonferens.se/restauranger/johanneberg/j-a-pripps-pub-cafe/'
     },
     'ChIJabzIUKbzT0YRIgFOYpKMWWI': { //Pig 'N' Whistle
         'category': HAMBURGER,
-        'link_to_menu': ''
+        'link_to_menu': 'http://pignwhistle.se/menu/'
     },
     
     
@@ -75,29 +74,29 @@ const RESTAURANTS = {
     //Sushi
     'ChIJvR0a6wrzT0YRp9vJhNRoFOw': { //Sushi Me
         'category': SUSHI,
-        'link_to_menu': ''
+        'link_to_menu': '/res/sushi_me.jpg'
      },
     'ChIJGyWihwrzT0YRGwm7RKYNGac': { //Yoko Sushi
         'category': SUSHI,
-        'link_to_menu': ''
+        'link_to_menu': 'http://www.yokosushi.se/lunch.html'
     },
     'ChIJUwvxT3LzT0YRX9eCb9iukZ0': { //Sushi Lau
         'category': SUSHI,
-        'link_to_menu': ''
+        'link_to_menu': '/res/sushi_lau.png'
     },
 
     //Other
     'ChIJYzHHXQrzT0YRTP8fM6oIgHU': { //Alpa baguetteria
         'category': OTHER,
-        'link_to_menu': ''
+        'link_to_menu': 'http://www.alpabaguetter.se'
     },
     'ChIJrwu7iArzT0YRvNk45bt4zqQ': { //Miss Fajitas
         'category': OTHER,
-        'link_to_menu': ''
+        'link_to_menu': 'http://missfajitas.se/meny/'
     },
     'ChIJF9E4gAnzT0YRHKPZ7NI0JSg': { //Catering Göteborg (Einstein)
         'category': OTHER,
-        'link_to_menu': ''
+        'link_to_menu': 'http://www.butlercatering.se/einstein'
     }
 };
 

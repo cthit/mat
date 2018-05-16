@@ -1,15 +1,17 @@
 import React from 'react';
-import { Container, Heading, Text, Table, TableData, Row, Element, ShowMenuButton, ShowMapButton, Bold } from './styles';
-
+import { Container, Heading, Text, Table, TableData, Row, Element, ShowMenuButton, ShowMapButton, Bold, PhoneNumber, ButtonGroup } from './styles';
+//RATING
 export const Restaurant = ({data}) => 
-    <Container>
+    <Container> 
         <Heading>{ data.name }</Heading>
+        <PhoneNumber href={"tel:" + data.formatted_phone_number}>{ data.formatted_phone_number }</PhoneNumber>
         {_renderCurrentStatusRegardingRestaurantOpen(data)}
         {_renderOpeningHours(data)}
-        <ShowMenuButton appearance="primary">Visa meny för {data.name}</ShowMenuButton>
-        <ShowMapButton>Visa karta</ShowMapButton>
+        <ButtonGroup>
+            <ShowMenuButton target="_blank"  href={ data.link_to_menu } appearance="primary">Visa meny för {data.name}</ShowMenuButton>
+        </ButtonGroup>
      </Container>
-
+//    <ShowMapButton>Visa karta</ShowMapButton>
 function _renderCurrentStatusRegardingRestaurantOpen(data){
     const now = new Date();
     const day = now.getDay();
