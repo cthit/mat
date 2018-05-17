@@ -114,12 +114,12 @@ app.get('/api/mat.json', function(req, res){
 
     redisClient.exists('mat', function(err, exists){
         if(exists == 1){
-            console.log("Loading from redis...");
+            console.log("[MAT]{" + getCurrentTime() + "} Loading from redis...");
             redisClient.hgetall('mat', function(err, reply){
                 res.send(unflatten(reply));
             });
         }else{
-            console.log("Saving...");
+            console.log("[MAT]{" + getCurrentTime() + "} Saving...");
             generateMatData()
                 .then(function(response){
                     redisClient.hmset('mat', flatten(response));
@@ -177,6 +177,17 @@ function transferData(keysToTransfer, src, dest){
     keysToTransfer.forEach(key => {
         dest[key] = src[key];
     });
+}
+
+function getCurrentTime(){
+    var currentdate = new Date(); 
+    return currentdate.getFullYear() + "-" 
+                + (currentdate.getMonth()+1) + "-" 
+                + currentdate.getDate()
+                + " @ "  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
 }
 
 /*
