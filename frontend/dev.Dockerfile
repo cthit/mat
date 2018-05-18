@@ -1,16 +1,11 @@
-from node:9.11.1 as build
+from node:latest
 
-COPY /package.json /package.json
-COPY /yarn.lock /yarn.lock
+RUN mkdir /usr/src/app
+WORKDIR /usr/src/app
 
-RUN ls -l
+COPY package.json /package.json
 
-RUN yarn install
-
-RUN ls -l
-
-COPY . .
-
-RUN ls -l
+RUN yarn install 
+RUN yarn global add react-scripts 
 
 CMD yarn start
