@@ -1,14 +1,14 @@
 import React from 'react';
-import { Container, Heading, Text, Row, Column, Cell, Icon, MapLink, IconAndLinkContainer, ShowMenuButton, ShowMapButton, PhoneNumber, ButtonGroup } from './styles';
+import { Container, Heading, Text, Row, Column, Cell, MapLink, ShowMenuButton, PhoneNumber, ButtonGroup, Divider } from './styles';
 //RATING
 export const Restaurant = ({data}) => 
     <Container restaurantOpenStatus={_getRestaurantOpenStatusColor(data)}> 
         <Heading>{ data.name }</Heading>
-        <hr/>
+        <Divider/>
         {_renderCurrentStatusRegardingRestaurantOpen(data)}
         <PhoneNumber href={"tel:" + data.formatted_phone_number}>{ data.formatted_phone_number }</PhoneNumber>
         <MapLink href={'https://www.google.com/maps/place/?q=place_id:' + data.place_id}>{ _getOnlyAddress(data.formatted_address)}</MapLink>
-        <hr/>
+        <Divider/>
         <Text>Öppetider:</Text>
         {_renderOpeningHours(data)}
         <ButtonGroup>
