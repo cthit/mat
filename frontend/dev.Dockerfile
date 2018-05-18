@@ -1,12 +1,16 @@
-FROM node:latest
+from node:9.11.1 as build
 
-WORKDIR /frontend
+COPY /package.json /package.json
+COPY /yarn.lock /yarn.lock
 
-COPY /package.json /frontend/package.json
+RUN ls -l
 
-WORKDIR /frontend
-RUN npm install
+RUN yarn install
 
-EXPOSE 3000
+RUN ls -l
+
+COPY . .
+
+RUN ls -l
 
 CMD yarn start

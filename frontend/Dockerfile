@@ -1,7 +1,7 @@
-from node:latest as build
+from node:9.11.1 as build
 
 COPY /package.json /
-RUN yarn install
+RUN yarn install --production
 
 COPY . .
 RUN yarn build

@@ -25,4 +25,6 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./frontend:/frontend
+      - /frontend:
+    environment:
+      - NODE_ENV=development
