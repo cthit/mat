@@ -1,23 +1,34 @@
 import React from 'react';
-import { Container, Heading, Text, Table, Row, ShowMenuButton, ShowMapButton, Bold, PhoneNumber, ButtonGroup } from './styles';
+import { Container, Heading, Text, Row, Column, Cell, Icon, MapLink, IconAndLinkContainer, ShowMenuButton, ShowMapButton, PhoneNumber, ButtonGroup } from './styles';
 //RATING
 export const Restaurant = ({data}) => 
     <Container restaurantOpenStatus={_getRestaurantOpenStatusColor(data)}> 
         <Heading>{ data.name }</Heading>
-        <PhoneNumber href={"tel:" + data.formatted_phone_number}>{ data.formatted_phone_number }</PhoneNumber>
+        <hr/>
         {_renderCurrentStatusRegardingRestaurantOpen(data)}
+        <PhoneNumber href={"tel:" + data.formatted_phone_number}>{ data.formatted_phone_number }</PhoneNumber>
+        <MapLink href={'https://www.google.com/maps/place/?q=place_id:' + data.place_id}>{ _getOnlyAddress(data.formatted_address)}</MapLink>
+        <hr/>
+        <Text>Öppetider:</Text>
         {_renderOpeningHours(data)}
         <ButtonGroup>
-            <ShowMenuButton target="_blank"  href={ data.link_to_menu } appearance="primary">Visa meny för {data.name}</ShowMenuButton>
-            <ShowMapButton>Visa karta</ShowMapButton>
+            <ShowMenuButton target="_blank"  href={ data.link_to_menu } appearance="primary">Visa Meny</ShowMenuButton>
         </ButtonGroup>
      </Container>
+
+function _getOnlyAddress(fullAddress){
+    return fullAddress.split(",")[0];
+}
 
 function _getRestaurantOpenStatusColor(data){
     const now = new Date();
     const day = now.getDay();
     const openingHoursToday = data.opening_hours.periods[day];
     const currentTime = now.getHours() + "" + now.getMinutes();
+
+    if(openingHoursToday == null){
+        return 'closed';
+    }
 
     var openingTime = openingHoursToday.open.time;
     var closingTime = openingHoursToday.close.time;
@@ -40,6 +51,12 @@ function _renderCurrentStatusRegardingRestaurantOpen(data){
     
     const currentTime = now.getHours() + "" + now.getMinutes();
 
+    if(openingHoursToday == null){
+        return (
+            <Text> Stängt </Text>
+        )
+    }
+
     var openingTime = openingHoursToday.open.time;
     var closingTime = openingHoursToday.close.time;
 
@@ -50,16 +67,16 @@ function _renderCurrentStatusRegardingRestaurantOpen(data){
     if(currentTime < openingTime){
         openingTime = openingTime.substr(0, 2) + ":" + openingTime.substr(2, 2);
         return (
-            <Text><Bold>Öppnar</Bold> klockan <Bold>{ openingTime }</Bold></Text>
+            <Text>Öppnar klockan { openingTime }</Text>
         )
     }else if(currentTime > openingTime && currentTime < tempClosingTime){
         closingTime = closingTime.substr(0, 2) + ":" + closingTime.substr(2, 2);
         return (
-            <Text><Bold>Öppet</Bold> tills { closingTime } </Text>
+            <Text>Öppet tills { closingTime } </Text>
         )
     }else{
         return (
-            <Text> <Bold>Stängt</Bold> </Text>
+            <Text> Stängt </Text>
         )
     }
 }
@@ -69,7 +86,8 @@ function _renderOpeningHours(data){
 
     const name = data.name;
 
-    const rows = [];
+    const dayColumns = [];
+    const timeColumns = [];
 
     for(var i = 0; i < 7; i++){
         var weekday = data.opening_hours.weekday_text[i];
@@ -113,6 +131,9 @@ function _renderOpeningHours(data){
         const dayUniqueKeyElement = startDay + name + "a";
         const dayUniqueKeyText = startDay + name + "A";
 
+        const timeUniqueKeyElement = startDay + name + "b";
+        const timeUniqueKeyText = startDay + name + "B";
+
         var daysInfo = "";
         var hoursInfo = "";
         
@@ -127,17 +148,28 @@ function _renderOpeningHours(data){
             hoursInfo = openingHours + " - " + closingHours;
         }
 
-        rows.push((
-            <Row key={dayUniqueKeyElement}>
-                <Text key={dayUniqueKeyText}>{daysInfo + ": " + hoursInfo}</Text>
-            </Row>
+        dayColumns.push((
+            <Cell key={dayUniqueKeyElement}>
+                <Text key={dayUniqueKeyText}>{daysInfo + ":"}</Text>
+            </Cell>
+        ));    
+
+        timeColumns.push((
+            <Cell key={timeUniqueKeyElement}>
+                <Text key={timeUniqueKeyText}>{hoursInfo}</Text>
+            </Cell>
         ));    
 
     });
 
     return (
-        <Table>
-            { rows }
-         </Table>
+        <Row>
+            <Column align="right">
+                { dayColumns }
+            </Column>
+            <Column align="left">
+                { timeColumns }
+            </Column>
+        </Row>
     )
 }
