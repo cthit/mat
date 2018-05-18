@@ -138,7 +138,7 @@ function _renderOpeningHours(data){
         var hoursInfo = "";
         
         if(closingHours == null){
-            if(startDay != endDay){
+            if(startDay !== endDay){
                 daysInfo = startDay + " - " + endDay;
             }else{
                 daysInfo = startDay;
