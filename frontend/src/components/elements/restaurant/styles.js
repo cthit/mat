@@ -79,7 +79,7 @@ export const ShowMenuButton = styled(BaseLinkButton)`
     background-color: #44aedb;
 
     &:hover{
-        background-color: #6fc1e3;6fc1e3
+        background-color: #6fc1e3;
         cursor: pointer;
     }
 
