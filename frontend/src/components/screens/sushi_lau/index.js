@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Container, MenuContainer, Heading, SmallerHeading, Text, ColumnContainer, Column } from './styles';
+import { Container, MenuContainer, Heading, SmallerHeading, Text, ColumnContainer, Column, ListItem, List } from './styles';
 
 import { Header } from '../../views/header/index';
 import { Footer } from '../../views/footer/index';
@@ -14,12 +14,14 @@ class SushiLauScreen extends Component{
 
                     <SmallerHeading>Vardagar 11:00 - 15:00</SmallerHeading>
                     <Text>Inkl. misosoppa, dricka och grönt te</Text>
-                    <Text>Sushi 8 bitar : 60 kr</Text>
-                    <Text>Sushi 11 bitar : 72 kr</Text>
-                    <Text>Yakiniku (Biff med ris) : 77 kr</Text>
-                    <Text>Yakitorispett (4 st med ris) : 62 kr</Text>
-                    <Text>5 st rullar (Maki och Insideout) : 60 kr</Text>
                     <Text>Vid byte av pålägg på nigiri till extra lax kostar det 2 kr per st</Text>
+                    <List>
+                        <ListItem>Sushi 8 bitar : 60 kr</ListItem>
+                        <ListItem>Sushi 11 bitar : 72 kr</ListItem>
+                        <ListItem>Yakiniku (Biff med ris) : 77 kr</ListItem>
+                        <ListItem>Yakitorispett (4 st med ris) : 62 kr</ListItem>
+                        <ListItem>5 st rullar (Maki och Insideout) : 60 kr</ListItem>
+                    </List>
 
                     <SmallerHeading>Kvällsmeny och helgmeny</SmallerHeading>
                     <ColumnContainer>

@@ -22,3 +22,11 @@ export const SmallerHeading = styled.h2`
 export const Text = styled.p`
 
 `
+
+export const List = styled.ul`
+
+`
+
+export const ListItem = styled.li`
+    margin-bottom:4px;
+`
