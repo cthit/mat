@@ -84,7 +84,7 @@ const RESTAURANTS = {
     'ChIJvR0a6wrzT0YRp9vJhNRoFOw': { //Sushi Me
         'name': 'Sushi Me',
         'category': SUSHI,
-        'link_to_menu': '/res/sushi_me.jpg'
+        'link_to_menu': '/menu/sushime'
      },
     'ChIJGyWihwrzT0YRGwm7RKYNGac': { //Yoko Sushi
         'name': 'Yoko Sushi',
@@ -94,7 +94,7 @@ const RESTAURANTS = {
     'ChIJUwvxT3LzT0YRX9eCb9iukZ0': { //Sushi Lau
         'name': 'Sushi Lau',
         'category': SUSHI,
-        'link_to_menu': '/res/sushi_lau.png'
+        'link_to_menu': '/menu/sushilau'
     },
 
     //Other
