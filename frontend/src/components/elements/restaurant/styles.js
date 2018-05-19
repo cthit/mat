@@ -110,3 +110,23 @@ export const IconAndLinkContainer = styled.div`
 
 export const Divider = styled.hr`
 `
+
+export const Dot = styled.div`
+    height: 15px;
+    width: 15px;
+    background-color: ${props => props.open === 'open' ? '#05c46b' : '#ff3f34'};;
+    border-radius: 50%;
+    display: inline-block;
+`
+
+export const OpeningText = styled(Text)`
+    display:inline-block;
+    margin-left:4px;
+    margin-bottom:0px;
+`
+
+export const OpeningTimeContainer = styled.div`
+    display:flex;
+    align-items: center;
+    margin-bottom:8px; 
+`

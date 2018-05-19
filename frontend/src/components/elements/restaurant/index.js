@@ -1,11 +1,14 @@
 import React from 'react';
-import { Container, Heading, Text, Row, Column, Cell, MapLink, ShowMenuButton, PhoneNumber, ButtonGroup, Divider } from './styles';
+import { Container, Heading, Text, Row, Column, Cell, MapLink, ShowMenuButton, PhoneNumber, ButtonGroup, Divider, Dot, OpeningText, OpeningTimeContainer } from './styles';
 //RATING
 export const Restaurant = ({data}) => 
     <Container restaurantOpenStatus={_getRestaurantOpenStatusColor(data)}> 
         <Heading>{ data.name }</Heading>
         <Divider/>
-        {_renderCurrentStatusRegardingRestaurantOpen(data)}
+        <OpeningTimeContainer>
+            <Dot open={_getRestaurantOpenStatusColor(data)}/> 
+            {_renderCurrentStatusRegardingRestaurantOpen(data)}
+        </OpeningTimeContainer>
         <PhoneNumber href={"tel:" + data.formatted_phone_number}>{ data.formatted_phone_number }</PhoneNumber>
         <MapLink href={'https://www.google.com/maps/place/?q=place_id:' + data.place_id}>{ _getOnlyAddress(data.formatted_address)}</MapLink>
         <Divider/>
@@ -53,7 +56,7 @@ function _renderCurrentStatusRegardingRestaurantOpen(data){
 
     if(openingHoursToday == null){
         return (
-            <Text> Stängt </Text>
+            <OpeningText> Stängt </OpeningText>
         )
     }
 
@@ -67,16 +70,16 @@ function _renderCurrentStatusRegardingRestaurantOpen(data){
     if(currentTime < openingTime){
         openingTime = openingTime.substr(0, 2) + ":" + openingTime.substr(2, 2);
         return (
-            <Text>Öppnar klockan { openingTime }</Text>
+            <OpeningText>Öppnar klockan { openingTime }</OpeningText>
         )
     }else if(currentTime > openingTime && currentTime < tempClosingTime){
         closingTime = closingTime.substr(0, 2) + ":" + closingTime.substr(2, 2);
         return (
-            <Text>Öppet tills { closingTime } </Text>
+            <OpeningText>Öppet tills { closingTime } </OpeningText>
         )
     }else{
         return (
-            <Text> Stängt </Text>
+            <OpeningText> Stängt </OpeningText>
         )
     }
 }
