@@ -4,10 +4,11 @@ import axios from 'axios';
 
 import { DataContext } from './components/context/DataContext';
 
+import ImageScreen from './components/screens/image/index';
 import HomeScreen from './components/screens/home/index';
 import CategoryScreen from './components/screens/category/index';
-
-
+import SushiMeScreen from './components/screens/sushi_me/index';
+import SushiLauScreen from './components/screens/sushi_lau/index';
 
 class App extends Component {
   
@@ -44,6 +45,14 @@ class App extends Component {
   				<Switch>
             <Route path="/" exact>
               <HomeScreen/>
+            </Route>
+
+            <Route path="/menu/sushime" exact>
+              <SushiMeScreen></SushiMeScreen>
+            </Route>
+
+            <Route path="/menu/sushilau" exact>
+              <SushiLauScreen></SushiLauScreen>
             </Route>
 
             {Object.keys(this.state.categories).map(function(category, data) {
