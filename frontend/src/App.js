@@ -4,7 +4,6 @@ import axios from 'axios';
 
 import { DataContext } from './components/context/DataContext';
 
-import ImageScreen from './components/screens/image/index';
 import HomeScreen from './components/screens/home/index';
 import CategoryScreen from './components/screens/category/index';
 import SushiMeScreen from './components/screens/sushi_me/index';

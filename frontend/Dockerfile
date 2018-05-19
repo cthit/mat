@@ -2,6 +2,7 @@ from node:9.11.1 as build
 
 COPY /package.json /
 RUN yarn install --production
+RUN yarn global add react-scripts 
 
 COPY . .
 RUN yarn build
