@@ -47,7 +47,7 @@ class HomeScreen extends Component{
             case 'sushi':
                 return 'Sushi';
             default:
-                return '';
+                return categoryName;
         }
     }
 
