@@ -35,7 +35,7 @@ class HomeScreen extends Component{
     }
 
     _getDisplayName(categoryName){
-        switch(categoyrName){
+        switch(categoryName){
             case 'pizza':
                 return 'Pizza';
             case 'thai':
