@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab:300');
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #F7F7F7;
+}
+
+p, a, li{
+  font-family: "Roboto";
+}
+
+h1, h2, h3{
+  font-family: "Roboto Slab";
+  font-weight:300;
+}
+
+/**
+ COLOR SCHEME:
+ MAIN COLOR: Light Blue: #44aedb	
+ COLOR 1: Green: #44db71
+ COLOR 2: Dark Blue: #5b44db
+
+*/
