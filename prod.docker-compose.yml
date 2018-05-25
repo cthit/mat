@@ -11,6 +11,8 @@ services:
     image: mat_frontend
     ports:
       - "3000:80"
+    enviroment:
+      - REACT_APP_BACKEND_URL=
   backend:
     build:
       context: ./backend
