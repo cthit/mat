@@ -1,37 +1,36 @@
 import React from "react";
+
 import {
   Container,
-  Heading,
-  Text,
   Row,
   Column,
   Cell,
-  MapLink,
   ShowMenuButton,
-  PhoneNumber,
   ButtonGroup,
-  Divider,
   Dot,
   OpeningText,
   OpeningTimeContainer
 } from "./styles";
-//RATING
+
+import { Material, Divider } from "../../../../common-ui/design";
+import { HeadingLevel2, Text, Link } from "../../../../common-ui/text";
+
 export const Restaurant = ({ data }) => (
-  <Container restaurantOpenStatus={_getRestaurantOpenStatusColor(data)}>
-    <Heading>{data.name}</Heading>
+  <Material width="300px" height="300px">
+    <HeadingLevel2>{data.name}</HeadingLevel2>
     <Divider />
     <OpeningTimeContainer>
       <Dot open={_getRestaurantOpenStatusColor(data)} />
       {_renderCurrentStatusRegardingRestaurantOpen(data)}
     </OpeningTimeContainer>
-    <PhoneNumber href={"tel:" + data.formatted_phone_number}>
+    <Link href={"tel:" + data.formatted_phone_number}>
       {data.formatted_phone_number}
-    </PhoneNumber>
-    <MapLink
+    </Link>
+    <Link
       href={"https://www.google.com/maps/place/?q=place_id:" + data.place_id}
     >
       {_getOnlyAddress(data.formatted_address)}
-    </MapLink>
+    </Link>
     <Divider />
     <Text>Öppetider:</Text>
     {_renderOpeningHours(data)}
@@ -44,7 +43,7 @@ export const Restaurant = ({ data }) => (
         Visa Meny
       </ShowMenuButton>
     </ButtonGroup>
-  </Container>
+  </Material>
 );
 
 function _getOnlyAddress(fullAddress) {

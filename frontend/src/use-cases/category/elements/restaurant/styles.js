@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { Text, Link } from "../../../../common-ui/text";
+
 export const Container = styled.div`
   position: relative;
   padding: 16px;
@@ -15,34 +17,9 @@ export const Container = styled.div`
     0 3px 1px -2px rgba(0, 0, 0, 0.2);
 `;
 
-export const Heading = styled.h2`
-  margin: 0px;
-`;
+export const PhoneNumber = styled(Link)``;
 
-export const Text = styled.h3`
-  font-size: 12pt;
-  font-weight: normal;
-  margin: 0px;
-  margin-bottom: 8px;
-`;
-
-export const BaseLink = styled.a`
-  font-size: 12pt;
-  font-weight: normal;
-
-  padding: 0px;
-
-  margin: 0px;
-  margin-top: 4px;
-  margin-bottom: 4px;
-  text-decoration: none;
-  color: #44aedb;
-  display: block;
-`;
-
-export const PhoneNumber = styled(BaseLink)``;
-
-export const MapLink = styled(BaseLink)``;
+export const MapLink = styled(Link)``;
 
 export const Row = styled.div`
   width: 100%;
@@ -104,8 +81,6 @@ export const IconAndLinkContainer = styled.div`
   display: flex;
   align-items: center;
 `;
-
-export const Divider = styled.hr``;
 
 export const Dot = styled.div`
   height: 15px;

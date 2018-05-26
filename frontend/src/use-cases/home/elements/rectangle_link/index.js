@@ -1,10 +1,11 @@
 import React from "react";
-import { Container, Link, Text } from "./styles";
+import { HeadingLevel2 } from "../../../../common-ui/text";
+import { RectangleLinkMaterial, LinkToCategory } from "./styles";
 
 export const RectangleLink = ({ text, link }) => (
-  <Container>
-    <Link to={link}>
-      <Text>{text}</Text>
-    </Link>
-  </Container>
+  <RectangleLinkMaterial pliancy width="200px" height="200px">
+    <LinkToCategory to={link}>
+      <HeadingLevel2>{text}</HeadingLevel2>
+    </LinkToCategory>
+  </RectangleLinkMaterial>
 );
