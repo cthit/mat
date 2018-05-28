@@ -99,7 +99,7 @@ const RESTAURANTS = {
 
     //Other
     'ChIJYzHHXQrzT0YRTP8fM6oIgHU': { //Alpa baguetteria
-        'name': 'Alpa Baugetteria',
+        'name': 'Alpa Baguetteria',
         'category': OTHER,
         'link_to_menu': 'http://www.alpabaguetter.se'
     },
