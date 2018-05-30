@@ -2,55 +2,50 @@ import React from "react";
 
 import {
   Container,
-  Row,
-  Column,
-  Cell,
   ShowMenuButton,
   ButtonGroup,
   Dot,
   OpeningText,
-  OpeningTimeContainer
+  OpeningTimeContainer,
+  RestaurantButtonsContainer,
+  MaterialBody,
+  MaterialButtons,
+  RestaurantMaterial
 } from "./styles";
 
 import { Material, Divider } from "../../../../common-ui/design";
 import { HeadingLevel2, Text, Link } from "../../../../common-ui/text";
+import { OpeningHours } from "../../elements/OpeningHours";
+import { ContactInformation } from "../../elements/ContactInformation";
+import { RestaurantButtons } from "../../elements/RestaurantButtons";
+import { Padding } from "../../../../common-ui/layout";
 
 export const Restaurant = ({ data }) => (
-  <Material width="300px" height="300px">
-    <HeadingLevel2>{data.name}</HeadingLevel2>
-    <Divider />
-    <OpeningTimeContainer>
-      <Dot open={_getRestaurantOpenStatusColor(data)} />
-      {_renderCurrentStatusRegardingRestaurantOpen(data)}
-    </OpeningTimeContainer>
-    <Link href={"tel:" + data.formatted_phone_number}>
-      {data.formatted_phone_number}
-    </Link>
-    <Link
-      href={"https://www.google.com/maps/place/?q=place_id:" + data.place_id}
-    >
-      {_getOnlyAddress(data.formatted_address)}
-    </Link>
-    <Divider />
-    <Text>Öppetider:</Text>
-    {_renderOpeningHours(data)}
-    <ButtonGroup>
-      <ShowMenuButton
-        target="_blank"
-        href={data.link_to_menu}
-        appearance="primary"
-      >
-        Visa Meny
-      </ShowMenuButton>
-    </ButtonGroup>
-  </Material>
+  <RestaurantMaterial width="300px" height="300px">
+    <MaterialBody>
+      <HeadingLevel2>{data.name}</HeadingLevel2>
+      <Divider />
+      <ContactInformation
+        openStatus={_getOpenStatus}
+        openDisplayText={_getOpenDisplayText(data)}
+        phoneNumber={data.formatted_phone_number}
+        placeId={data.placeId}
+        formattedAdress={_getOnlyAddress(data.formatted_address)}
+      />
+      <Divider />
+      <OpeningHours openingHours={_getOpeningHoursData(data)} />
+    </MaterialBody>
+    <MaterialButtons>
+      <RestaurantButtons />
+    </MaterialButtons>
+  </RestaurantMaterial>
 );
 
 function _getOnlyAddress(fullAddress) {
   return fullAddress.split(",")[0];
 }
 
-function _getRestaurantOpenStatusColor(data) {
+function _getOpenStatus(data) {
   const now = new Date();
   const day = now.getDay();
   const openingHoursToday = data.opening_hours.periods[day];
@@ -78,7 +73,7 @@ function _getRestaurantOpenStatusColor(data) {
   }
 }
 
-function _renderCurrentStatusRegardingRestaurantOpen(data) {
+function _getOpenDisplayText(data) {
   const now = new Date();
   const day = now.getDay();
   const openingHoursToday = data.opening_hours.periods[day];
@@ -86,7 +81,7 @@ function _renderCurrentStatusRegardingRestaurantOpen(data) {
   const currentTime = now.getHours() + "" + now.getMinutes();
 
   if (openingHoursToday == null) {
-    return <OpeningText> Stängt </OpeningText>;
+    return "Stängt";
   }
 
   var openingTime = openingHoursToday.open.time;
@@ -102,19 +97,17 @@ function _renderCurrentStatusRegardingRestaurantOpen(data) {
 
   if (currentTime < openingTime) {
     openingTime = openingTime.substr(0, 2) + ":" + openingTime.substr(2, 2);
-    return <OpeningText>Öppnar klockan {openingTime}</OpeningText>;
+    return "Öppnar klockan " + openingTime;
   } else if (currentTime > openingTime && currentTime < tempClosingTime) {
     closingTime = closingTime.substr(0, 2) + ":" + closingTime.substr(2, 2);
-    return <OpeningText>Öppet tills {closingTime} </OpeningText>;
+    return "Öppet tills " + closingTime;
   } else {
-    return <OpeningText> Stängt </OpeningText>;
+    return "Stängt";
   }
 }
 
-function _renderOpeningHours(data) {
+function _getOpeningHoursData(data) {
   const openingHoursData = [];
-
-  const name = data.name;
 
   const dayColumns = [];
   const timeColumns = [];
@@ -152,55 +145,5 @@ function _renderOpeningHours(data) {
       });
     }
   }
-
-  openingHoursData.forEach(openingHourData => {
-    //måndag; 11:00–21:00 -> {day}: {openingHours}-{closingHours}
-    const startDay = openingHourData.startDay;
-    const endDay = openingHourData.endDay;
-    const openingHours = openingHourData.openingHours;
-    const closingHours = openingHourData.closingHours;
-
-    const dayUniqueKeyElement = startDay + name + "a";
-    const dayUniqueKeyText = startDay + name + "A";
-
-    const timeUniqueKeyElement = startDay + name + "b";
-    const timeUniqueKeyText = startDay + name + "B";
-
-    var daysInfo = "";
-    var hoursInfo = "";
-
-    if (closingHours == null) {
-      if (startDay !== endDay) {
-        daysInfo = startDay + " - " + endDay;
-      } else {
-        daysInfo = startDay;
-      }
-      hoursInfo = openingHours; //openingHours will be "Stängt"
-    } else if (startDay === endDay) {
-      daysInfo = startDay;
-      hoursInfo = openingHours + " - " + closingHours;
-    } else {
-      daysInfo = startDay + " - " + endDay;
-      hoursInfo = openingHours + " - " + closingHours;
-    }
-
-    dayColumns.push(
-      <Cell key={dayUniqueKeyElement}>
-        <Text key={dayUniqueKeyText}>{daysInfo + ":"}</Text>
-      </Cell>
-    );
-
-    timeColumns.push(
-      <Cell key={timeUniqueKeyElement}>
-        <Text key={timeUniqueKeyText}>{hoursInfo}</Text>
-      </Cell>
-    );
-  });
-
-  return (
-    <Row>
-      <Column align="right">{dayColumns}</Column>
-      <Column align="left">{timeColumns}</Column>
-    </Row>
-  );
+  return openingHoursData;
 }

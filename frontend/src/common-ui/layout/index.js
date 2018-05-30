@@ -5,5 +5,5 @@ export const Margin = styled.div`
 `;
 
 export const Padding = styled.div`
-  padding: 8px;
+  margin: 8px;
 `;

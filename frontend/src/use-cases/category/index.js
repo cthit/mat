@@ -5,7 +5,7 @@ import { Footer } from "../../common/views/footer";
 import { DataContext } from "../../common/context/DataContext";
 
 import { Container, RestaurantsContainer } from "./styles";
-import { Restaurant } from "./elements/restaurant";
+import { Restaurant } from "./containers/restaurant";
 
 class CategoryScreen extends Component {
   render() {
