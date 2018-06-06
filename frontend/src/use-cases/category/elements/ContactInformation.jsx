@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { Text, Link } from "../../../common-ui/text";
+import { Spacing } from "../../../common-ui/layout";
 
 export const ContactInformation = ({
   openStatus, //open, closed
@@ -11,14 +12,25 @@ export const ContactInformation = ({
   formattedAdress
 }) => (
   <div>
-    <OpeningTimeContainer>
+    <FlexCenterContainer>
       <Dot openStatus={openStatus} />
+      <Spacing />
       <Text>{openDisplayText}</Text>
-    </OpeningTimeContainer>
-    <Link href={"tel:" + phoneNumber}>{phoneNumber}</Link>
-    <Link href={"https://www.google.com/maps/place/?q=place_id:" + placeId}>
-      {formattedAdress}
-    </Link>
+    </FlexCenterContainer>
+    <Spacing />
+    <FlexCenterContainer>
+      <Image src="phone.png" />
+      <Spacing />
+      <Link href={"tel:" + phoneNumber}>{phoneNumber}</Link>
+    </FlexCenterContainer>
+    <Spacing />
+    <FlexCenterContainer>
+      <Image src="place.png" />
+      <Spacing />
+      <Link href={"https://www.google.com/maps/place/?q=place_id:" + placeId}>
+        {formattedAdress}
+      </Link>
+    </FlexCenterContainer>
   </div>
 );
 
@@ -30,8 +42,14 @@ const Dot = styled.div`
   display: inline-block;
 `;
 
-const OpeningTimeContainer = styled.div`
+const FlexCenterContainer = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 8px;
+`;
+
+const Image = styled.img`
+  width: 20px;
+  height: 20px;
+  margin: 0px;
+  padding: 0px;
 `;

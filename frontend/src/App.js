@@ -9,30 +9,24 @@ import CategoryScreen from "./use-cases/category";
 import SushiMeScreen from "./use-cases/sushi_me";
 import SushiLauScreen from "./use-cases/sushi_lau";
 
+import _ from "lodash";
+
 class App extends Component {
   componentWillMount() {
     this.setState({ categories: {} });
 
+    const endpoint =
+      process.env.NODE_ENV === "development" ? "http://127.0.0.1:8080" : "";
+
     axios
-      .get("http://127.0.0.1:8080/api/mat.json")
-      .then(
-        function(response) {
-          var categories = {};
+      .get(endpoint + "/api/mat.json")
+      .then(response => {
+        var categories = _.groupBy(response.data, data => data.category);
 
-          for (var index in response.data) {
-            var restaurantData = response.data[index];
-            if (categories[restaurantData.category] == null) {
-              categories[restaurantData.category] = [];
-            }
-
-            categories[restaurantData.category].push(restaurantData);
-          }
-
-          this.setState({
-            categories: categories
-          });
-        }.bind(this)
-      )
+        this.setState({
+          categories: categories
+        });
+      })
       .catch(function(error) {
         console.log(error);
       });

@@ -4,6 +4,12 @@ export const Material = styled.div`
   width: ${props => props.width};
   height: ${props => props.height};
 
+  max-width: ${props => props.maxWidth};
+  max-height: ${props => props.maxHeight};
+
+  min-width: ${props => props.minWidth};
+  min-height: ${props => props.minHeight};
+
   background-color: white;
   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12),
     0 2px 4px -1px rgba(0, 0, 0, 0.4);
@@ -23,4 +29,6 @@ export const Material = styled.div`
   }
 `;
 
-export const Divider = styled.hr``;
+export const Divider = styled.hr`
+  margin: 0px;
+`;

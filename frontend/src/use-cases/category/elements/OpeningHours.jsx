@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { Text } from "../../../common-ui/text";
+import { Spacing } from "../../../common-ui/layout";
 
 /**
  * openingHours is an array, every element in the array should have the following:
@@ -14,6 +15,7 @@ import { Text } from "../../../common-ui/text";
 export const OpeningHours = ({ openingHours }) => (
   <div>
     <Text>Öppetider:</Text>
+    <Spacing />
     <Row>
       <Column align="right">
         {openingHours.map(item => (
@@ -25,15 +27,18 @@ export const OpeningHours = ({ openingHours }) => (
                 {item.startDay + " - " + item.endDay + ":"}
               </Text>
             )}
+            <Spacing />
           </Cell>
         ))}
       </Column>
+      <Spacing />
       <Column align="left">
         {openingHours.map(item => (
           <Cell key={item.startDay + item.openingHours}>
             <Text key={item.startDay + item.openingHours}>
               {item.openingHours + " - " + item.closingHours}
             </Text>
+            <Spacing />
           </Cell>
         ))}
       </Column>
@@ -50,7 +55,6 @@ const Column = styled.div`
   flex: 50%;
   text-transform: capitalize;
   text-align: ${props => (props.align != null ? props.align : "none")};
-  padding: 5px;
 `;
 
 const Cell = styled.div`
