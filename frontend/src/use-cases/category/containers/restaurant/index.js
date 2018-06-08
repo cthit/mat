@@ -6,36 +6,38 @@ import { HeadingLevel2 } from "../../../../common-ui/text";
 import { OpeningHours } from "../../elements/OpeningHours";
 import { ContactInformation } from "../../elements/ContactInformation";
 import { RestaurantButtons } from "../../elements/RestaurantButtons";
-import { Padding, Spacing } from "../../../../common-ui/layout";
+import { Padding, Spacing, Margin } from "../../../../common-ui/layout";
 
 export const Restaurant = ({ data }) => (
-  <RestaurantMaterial
-    width="300px"
-    height="300px"
-    maxWidth="300px"
-    maxHeight="300px"
-    minWidth="300px"
-    minHeight="300px"
-  >
-    <Padding>
-      <MaterialBody>
-        <HeadingLevel2>{data.name}</HeadingLevel2>
-        <Spacing />
-        <ContactInformation
-          openStatus={_getOpenStatus}
-          openDisplayText={_getOpenDisplayText(data)}
-          phoneNumber={data.formatted_phone_number}
-          placeId={data.placeId}
-          formattedAdress={_getOnlyAddress(data.formatted_address)}
-        />
-        <Spacing />
-        <OpeningHours openingHours={_getOpeningHoursData(data)} />
-      </MaterialBody>
-      <MaterialButtons>
-        <RestaurantButtons linkToMenu={data.link_to_menu} />
-      </MaterialButtons>
-    </Padding>
-  </RestaurantMaterial>
+  <Margin>
+    <RestaurantMaterial
+      width="300px"
+      height="300px"
+      maxWidth="300px"
+      maxHeight="300px"
+      minWidth="300px"
+      minHeight="300px"
+    >
+      <Padding>
+        <MaterialBody>
+          <HeadingLevel2>{data.name}</HeadingLevel2>
+          <Spacing />
+          <ContactInformation
+            openStatus={_getOpenStatus}
+            openDisplayText={_getOpenDisplayText(data)}
+            phoneNumber={data.formatted_phone_number}
+            placeId={data.placeId}
+            formattedAdress={_getOnlyAddress(data.formatted_address)}
+          />
+          <Spacing />
+          <OpeningHours openingHours={_getOpeningHoursData(data)} />
+        </MaterialBody>
+        <MaterialButtons>
+          <RestaurantButtons linkToMenu={data.link_to_menu} />
+        </MaterialButtons>
+      </Padding>
+    </RestaurantMaterial>
+  </Margin>
 );
 
 function _getOnlyAddress(fullAddress) {

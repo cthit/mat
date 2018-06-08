@@ -2,70 +2,112 @@ import React, { Component } from "react";
 import {
   Container,
   MenuContainer,
-  Heading,
-  SmallerHeading,
-  Text,
   ColumnContainer,
   Column,
-  ListItem,
-  List
+  SushiLauMaterial
 } from "./styles";
 
 import { Header } from "../../common/views/header/index";
 import { Footer } from "../../common/views/footer/index";
+import { Text, Heading, HeadingLevel2 } from "../../common-ui/text";
+import { Padding, PaddingList, Spacing, Margin } from "../../common-ui/layout";
+import { List, ListItem } from "../../common-ui/list";
 
 class SushiLauScreen extends Component {
   render() {
     return (
       <Container>
         <Header />
-        <MenuContainer>
-          <Heading>Sushi Lau</Heading>
+        <SushiLauMaterial minWidth="300px" maxWidth="600px">
+          <Padding>
+            <Heading>Sushi Lau</Heading>
+            <Spacing />
+            <HeadingLevel2>Vardagar 11:00 - 15:00</HeadingLevel2>
+            <Spacing />
+            <Text>
+              Inkl. misosoppa, dricka och grönt te. Vid byte av pålägg på nigiri
+              till extra lax kostar det 2 kr per st
+            </Text>
+            <Spacing />
 
-          <SmallerHeading>Vardagar 11:00 - 15:00</SmallerHeading>
-          <Text>Inkl. misosoppa, dricka och grönt te</Text>
-          <Text>
-            Vid byte av pålägg på nigiri till extra lax kostar det 2 kr per st
-          </Text>
-          <List>
-            <ListItem>Sushi 8 bitar : 60 kr</ListItem>
-            <ListItem>Sushi 11 bitar : 72 kr</ListItem>
-            <ListItem>Yakiniku (Biff med ris) : 77 kr</ListItem>
-            <ListItem>Yakitorispett (4 st med ris) : 62 kr</ListItem>
-            <ListItem>5 st rullar (Maki och Insideout) : 60 kr</ListItem>
-          </List>
+            <PaddingList>
+              <List>
+                <ListItem>
+                  <Text>Sushi 8 bitar : 60 kr</Text>
+                </ListItem>
+                <Spacing />
+                <ListItem>
+                  <Text>Sushi 11 bitar : 72 kr</Text>
+                </ListItem>
+                <Spacing />
+                <ListItem>
+                  <Text>Yakiniku (Biff med ris) : 77 kr</Text>
+                </ListItem>
+                <Spacing />
+                <ListItem>
+                  <Text>Yakitorispett (4 st med ris) : 62 kr</Text>
+                </ListItem>
+                <Spacing />
+                <ListItem>
+                  <Text>5 st rullar (Maki och Insideout) : 60 kr</Text>
+                </ListItem>
+                <Spacing />
+              </List>
+            </PaddingList>
 
-          <SmallerHeading>Kvällsmeny och helgmeny</SmallerHeading>
-          <ColumnContainer>
-            <Column>
-              <Text>Antal</Text>
-              <Text>7 bitar</Text>
-              <Text>10 bitar</Text>
-              <Text>12 bitar</Text>
-              <Text>15 bitar</Text>
-            </Column>
-            <Column>
-              <Text>Sushi</Text>
-              <Text>68 kr</Text>
-              <Text>81 kr</Text>
-              <Text>91 kr</Text>
-              <Text>115 kr</Text>
-            </Column>
-            <Column>
-              <Text>Rullars</Text>
-              <Text>56 kr</Text>
-              <Text>78 kr</Text>
-              <Text>88 kr</Text>
-              <Text>110 kr</Text>
-            </Column>
-          </ColumnContainer>
-          <Text>Yakiniku (Biff med ris) : 83 kr</Text>
-          <Text>Yakitorispett (4 st med ris) : 63 kr</Text>
-          <Text>
-            Vid byte av pålägg på nigiri till extra lax kostar det 2 kr per st
-          </Text>
-          <Text>Senast uppdaterat 2018-05-19</Text>
-        </MenuContainer>
+            <Spacing />
+            <HeadingLevel2>Kvällsmeny och helgmeny</HeadingLevel2>
+            <Spacing />
+            <ColumnContainer>
+              <Column>
+                <Text>Antal</Text>
+                <Spacing />
+                <Text>7 bitar</Text>
+                <Spacing />
+                <Text>10 bitar</Text>
+                <Spacing />
+                <Text>12 bitar</Text>
+                <Spacing />
+                <Text>15 bitar</Text>
+                <Spacing />
+              </Column>
+              <Column>
+                <Text>Sushi</Text>
+                <Spacing />
+                <Text>68 kr</Text>
+                <Spacing />
+                <Text>81 kr</Text>
+                <Spacing />
+                <Text>91 kr</Text>
+                <Spacing />
+                <Text>115 kr</Text>
+                <Spacing />
+              </Column>
+              <Column>
+                <Text>Rullars</Text>
+                <Spacing />
+                <Text>56 kr</Text>
+                <Spacing />
+                <Text>78 kr</Text>
+                <Spacing />
+                <Text>88 kr</Text>
+                <Spacing />
+                <Text>110 kr</Text>
+                <Spacing />
+              </Column>
+            </ColumnContainer>
+            <Spacing />
+            <Text>Yakiniku (Biff med ris) : 83 kr</Text>
+            <Spacing />
+            <Text>Yakitorispett (4 st med ris) : 63 kr</Text>
+            <Spacing />
+            <Text>
+              Vid byte av pålägg på nigiri till extra lax kostar det 2 kr per st
+            </Text>
+            <Spacing />
+            <Text>Senast uppdaterat 2018-05-19</Text>
+          </Padding>
+        </SushiLauMaterial>
         <Footer />
       </Container>
     );

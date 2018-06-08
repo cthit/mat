@@ -7,8 +7,4 @@ export const RestaurantsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-
-  > * {
-    margin: 8px;
-  }
 `;

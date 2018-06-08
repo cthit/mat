@@ -29,3 +29,8 @@ export const Padding = styled.div`
   flex: 1;
   flex-direction: column;
 `;
+
+export const PaddingList = styled(Padding)`
+  padding: 0px;
+  padding-left: 20px;
+`;

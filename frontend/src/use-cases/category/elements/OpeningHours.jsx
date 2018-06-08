@@ -35,9 +35,16 @@ export const OpeningHours = ({ openingHours }) => (
       <Column align="left">
         {openingHours.map(item => (
           <Cell key={item.startDay + item.openingHours}>
-            <Text key={item.startDay + item.openingHours}>
-              {item.openingHours + " - " + item.closingHours}
-            </Text>
+            {item.closingHours == null ? (
+              <Text key={item.startDay + item.openingHours}>
+                {item.openingHours}
+                {/* openingHours will have the string 'Closed' if closingHours is null */}
+              </Text>
+            ) : (
+              <Text key={item.startDay + item.openingHours}>
+                {item.openingHours + " - " + item.closingHours}
+              </Text>
+            )}
             <Spacing />
           </Cell>
         ))}

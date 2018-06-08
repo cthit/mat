@@ -19,7 +19,6 @@ const Button = styled.a`
   width: 100px;
   height: 30px;
   line-height: 30px;
-  padding: 4px;
   border-radius: 4px;
   color: white;
   text-decoration: none;
