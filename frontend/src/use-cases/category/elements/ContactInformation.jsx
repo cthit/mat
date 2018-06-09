@@ -1,7 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-import { Text, Link } from "../../../common-ui/text";
+import { OpenStatus } from "./OpenStatus";
+import { PhoneNumber } from "./PhoneNumber";
+import { GoogleMapsLink } from "./GoogleMapsLink";
+import { Text } from "../../../common-ui/text";
 import { Spacing } from "../../../common-ui/layout";
 
 export const ContactInformation = ({
@@ -9,47 +12,15 @@ export const ContactInformation = ({
   openDisplayText, //Öppnar om, Öppet tills, Stängt
   phoneNumber,
   placeId, //Google unique place id
-  formattedAdress
+  formattedAddress
 }) => (
-  <div>
-    <FlexCenterContainer>
-      <Dot openStatus={openStatus} />
-      <Spacing />
-      <Text>{openDisplayText}</Text>
-    </FlexCenterContainer>
+  <Container>
+    <OpenStatus status={openStatus} openDisplayText={openDisplayText} />
     <Spacing />
-    <FlexCenterContainer>
-      <Image src="phone.png" />
-      <Spacing />
-      <Link href={"tel:" + phoneNumber}>{phoneNumber}</Link>
-    </FlexCenterContainer>
+    <PhoneNumber phoneNumber={phoneNumber} />
     <Spacing />
-    <FlexCenterContainer>
-      <Image src="place.png" />
-      <Spacing />
-      <Link href={"https://www.google.com/maps/place/?q=place_id:" + placeId}>
-        {formattedAdress}
-      </Link>
-    </FlexCenterContainer>
-  </div>
+    <GoogleMapsLink formattedAddress={formattedAddress} placeId={placeId} />
+  </Container>
 );
 
-const Dot = styled.div`
-  height: 15px;
-  width: 15px;
-  background-color: ${props => (props.open === "open" ? "#05c46b" : "#ff3f34")};
-  border-radius: 50%;
-  display: inline-block;
-`;
-
-const FlexCenterContainer = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const Image = styled.img`
-  width: 20px;
-  height: 20px;
-  margin: 0px;
-  padding: 0px;
-`;
+const Container = styled.div``;

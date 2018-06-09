@@ -23,11 +23,11 @@ export const Restaurant = ({ data }) => (
           <HeadingLevel2>{data.name}</HeadingLevel2>
           <Spacing />
           <ContactInformation
-            openStatus={_getOpenStatus}
+            openStatus={_getOpenStatus(data)}
             openDisplayText={_getOpenDisplayText(data)}
             phoneNumber={data.formatted_phone_number}
-            placeId={data.placeId}
-            formattedAdress={_getOnlyAddress(data.formatted_address)}
+            placeId={data.place_id}
+            formattedAddress={_getOnlyAddress(data.formatted_address)}
           />
           <Spacing />
           <OpeningHours openingHours={_getOpeningHoursData(data)} />
@@ -45,6 +45,7 @@ function _getOnlyAddress(fullAddress) {
 }
 
 function _getOpenStatus(data) {
+  console.log(data);
   const now = new Date();
   const day = now.getDay();
   const openingHoursToday = data.opening_hours.periods[day];
