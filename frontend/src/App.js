@@ -12,9 +12,12 @@ import SushiLauScreen from "./use-cases/sushi_lau";
 import _ from "lodash";
 
 class App extends Component {
-  componentWillMount() {
-    this.setState({ categories: {} });
+  constructor() {
+    super();
+    this.state = { categories: {} };
+  }
 
+  componentWillMount() {
     const endpoint =
       process.env.NODE_ENV === "development" ? "http://127.0.0.1:8080" : "";
 
