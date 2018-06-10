@@ -145,7 +145,7 @@ app.get("/api/mat.json", function(req, res) {
     if (exists == 1) {
       console.log("[MAT]{" + getCurrentTime() + "} Loading from redis...");
       redisClient.hgetall("mat", function(err, reply) {
-        res.send(unflatten(reply, { object: false }));
+        res.send(Object.values(unflatten(reply)));
       });
     } else {
       console.log("[MAT]{" + getCurrentTime() + "} Saving...");
