@@ -14,9 +14,3 @@ export const MenuContainer = styled.div`
   display: block;
   margin: auto;
 `;
-
-export const Heading = styled.h1``;
-
-export const SmallerHeading = styled.h2``;
-
-export const Text = styled.p``;

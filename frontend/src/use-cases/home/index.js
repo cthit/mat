@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { HomeContainer, LinksContainer } from "./styles";
+import { HomeContainer } from "./styles";
 
 import { RectangleLink } from "./elements/RectangleLink";
 

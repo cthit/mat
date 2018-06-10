@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 
 import { Icon } from "../../../../common-ui/image";
 import { Link } from "../../../../common-ui/text";

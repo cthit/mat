@@ -43,54 +43,27 @@ function _getOnlyAddress(fullAddress) {
 }
 
 function _getOpenStatus(data) {
-  const now = new Date();
-  const day = now.getDay();
-  const openingHoursToday = data.opening_hours.periods[day];
-  const currentTime = now.getHours() + "" + now.getMinutes();
-
-  if (openingHoursToday == null) {
-    return "closed";
-  }
-
-  var openingTime = openingHoursToday.open.time;
-  var closingTime = openingHoursToday.close.time;
-
-  var tempClosingTime =
-    closingTime < openingTime
-      ? parseInt(closingTime.split(":")[0], 10) +
-        24 +
-        ":" +
-        closingTime.split(":")[1]
-      : closingTime; //Because 15:00 > 00.00
-
-  if (currentTime > openingTime && currentTime < tempClosingTime) {
-    return "open";
-  } else {
-    return "closed";
-  }
+  return _isOpen(data) ? "open" : "closed";
 }
 
 function _getOpenDisplayText(data) {
-  const now = new Date();
-  const day = now.getDay();
-  const openingHoursToday = data.opening_hours.periods[day];
+  const open = _isOpen(data);
 
-  const currentTime = now.getHours() + "" + now.getMinutes();
-
-  if (openingHoursToday == null) {
+  if (!open) {
     return "Stängt";
   }
 
+  const now = new Date();
+  const day = now.getDay();
+  const openingHoursToday = data.opening_hours.periods.find(
+    period => parseInt(period.open.day, 10) === parseInt(day, 10)
+  );
+
+  const currentTime = now.getHours() + "" + now.getMinutes();
   var openingTime = openingHoursToday.open.time;
   var closingTime = openingHoursToday.close.time;
 
-  var tempClosingTime =
-    closingTime < openingTime
-      ? parseInt(closingTime.split(":")[0], 10) +
-        24 +
-        ":" +
-        closingTime.split(":")[1]
-      : closingTime; //Because 15:00 > 00.00
+  const tempClosingTime = _getTempClosingTime(openingTime, closingTime);
 
   if (currentTime < openingTime) {
     openingTime = openingTime.substr(0, 2) + ":" + openingTime.substr(2, 2);
@@ -101,6 +74,40 @@ function _getOpenDisplayText(data) {
   } else {
     return "Stängt";
   }
+}
+
+function _isOpen(data) {
+  const now = new Date();
+  const day = now.getDay();
+  const openingHoursToday = data.opening_hours.periods.find(
+    period => parseInt(period.open.day, 10) === parseInt(day, 10)
+  );
+
+  const currentTime = now.getHours() + "" + now.getMinutes();
+
+  if (openingHoursToday == null) {
+    return false;
+  }
+
+  var openingTime = openingHoursToday.open.time;
+  var closingTime = openingHoursToday.close.time;
+
+  const tempClosingTime = _getTempClosingTime(openingTime, closingTime);
+
+  if (currentTime > openingTime && currentTime < tempClosingTime) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function _getTempClosingTime(openingTime, closingTime) {
+  return closingTime < openingTime
+    ? parseInt(closingTime.split(":")[0], 10) +
+        24 +
+        ":" +
+        closingTime.split(":")[1]
+    : closingTime; //Because 15:00 > 00.00
 }
 
 function _getOpeningHoursData(data) {

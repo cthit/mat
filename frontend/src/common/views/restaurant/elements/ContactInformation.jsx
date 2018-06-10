@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { OpenStatus } from "./OpenStatus";
 import { PhoneNumber } from "./PhoneNumber";
 import { GoogleMapsLink } from "./GoogleMapsLink";
-import { Text } from "../../../../common-ui/text";
 import { Spacing } from "../../../../common-ui/layout";
 
 export const ContactInformation = ({

@@ -5,7 +5,7 @@ import { Footer } from "../../common/elements/footer";
 import { Restaurant } from "../../common/views/restaurant";
 import { DataContext } from "../../common/context/DataContext";
 
-import { Container, RestaurantsContainer } from "./styles";
+import { Container } from "./styles";
 import {
   FlexJustifyContentCenter,
   Margin,

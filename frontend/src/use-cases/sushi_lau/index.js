@@ -1,16 +1,10 @@
 import React, { Component } from "react";
-import {
-  Container,
-  MenuContainer,
-  ColumnContainer,
-  Column,
-  SushiLauMaterial
-} from "./styles";
+import { Container, ColumnContainer, Column, SushiLauMaterial } from "./styles";
 
 import { Header } from "../../common/elements/header";
 import { Footer } from "../../common/elements/footer";
 import { Text, Heading, HeadingLevel2 } from "../../common-ui/text";
-import { Padding, PaddingList, Spacing, Margin } from "../../common-ui/layout";
+import { Padding, PaddingList, Spacing } from "../../common-ui/layout";
 import { List, ListItem } from "../../common-ui/list";
 
 class SushiLauScreen extends Component {

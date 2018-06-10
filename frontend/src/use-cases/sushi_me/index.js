@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { SushiMeContainer, MenuContainer, Container } from "./styles";
+import { SushiMeContainer, Container } from "./styles";
 
 import { Header } from "../../common/elements/header";
 import { Footer } from "../../common/elements/footer";
