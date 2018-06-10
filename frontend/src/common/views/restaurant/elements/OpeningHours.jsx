@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
+import { concatStrings } from "../formatter/ConcatTwoStringsFormatter";
+
 import { Text } from "../../../../common-ui/text";
 import { Spacing } from "../../../../common-ui/layout";
 
@@ -20,13 +22,15 @@ export const OpeningHours = ({ openingHours }) => (
       <Column align="right">
         {openingHours.map(item => (
           <Cell key={item.startDay}>
-            {item.startDay === item.endDay ? (
-              <Text key={item.startDay}>{item.startDay + ":"}</Text>
-            ) : (
-              <Text key={item.startDay}>
-                {item.startDay + " - " + item.endDay + ":"}
-              </Text>
-            )}
+            <Text>
+              {concatStrings(
+                item.startDay,
+                item.endDay,
+                " - ",
+                item.startDay === item.endDay,
+                ":"
+              )}
+            </Text>
             <Spacing />
           </Cell>
         ))}
@@ -35,16 +39,15 @@ export const OpeningHours = ({ openingHours }) => (
       <Column align="left">
         {openingHours.map(item => (
           <Cell key={item.startDay + item.openingHours}>
-            {item.closingHours == null ? (
-              <Text key={item.startDay + item.openingHours}>
-                {item.openingHours}
-                {/* openingHours will have the string 'Closed' if closingHours is null */}
-              </Text>
-            ) : (
-              <Text key={item.startDay + item.openingHours}>
-                {item.openingHours + " - " + item.closingHours}
-              </Text>
-            )}
+            <Text>
+              {concatStrings(
+                item.openingHours,
+                item.closingHours,
+                " - ",
+                item.closingHours == null,
+                ""
+              )}
+            </Text>
             <Spacing />
           </Cell>
         ))}
