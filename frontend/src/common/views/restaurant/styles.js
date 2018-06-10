@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Material } from "../../../../common-ui/design";
+import { Material } from "../../../common-ui/design";
 
 export const RestaurantMaterial = styled(Material)`
   flex: 1;

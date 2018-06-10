@@ -14,7 +14,10 @@ import _ from "lodash";
 class App extends Component {
   constructor() {
     super();
-    this.state = { categories: {} };
+    this.state = {
+      categories: {},
+      restaurants: []
+    };
   }
 
   componentWillMount() {
@@ -24,10 +27,11 @@ class App extends Component {
     axios
       .get(endpoint + "/api/mat.json")
       .then(response => {
-        var categories = _.groupBy(response.data, data => data.category);
-
+        const categories = _.groupBy(response.data, data => data.category);
+        const restaurants = response.data;
         this.setState({
-          categories: categories
+          categories: categories,
+          restaurants: restaurants
         });
       })
       .catch(function(error) {
@@ -38,7 +42,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <DataContext.Provider value={this.state.categories}>
+        <DataContext.Provider value={this.state}>
           <Switch>
             <Route path="/" exact>
               <HomeScreen />

@@ -7,8 +7,8 @@ import {
   SushiLauMaterial
 } from "./styles";
 
-import { Header } from "../../common/views/header/index";
-import { Footer } from "../../common/views/footer/index";
+import { Header } from "../../common/elements/header";
+import { Footer } from "../../common/elements/footer";
 import { Text, Heading, HeadingLevel2 } from "../../common-ui/text";
 import { Padding, PaddingList, Spacing, Margin } from "../../common-ui/layout";
 import { List, ListItem } from "../../common-ui/list";

@@ -1,34 +1,41 @@
 import React, { Component } from "react";
 
-import { Header } from "../../common/views/header";
-import { Footer } from "../../common/views/footer";
+import { Header } from "../../common/elements/header";
+import { Footer } from "../../common/elements/footer";
+import { Restaurant } from "../../common/views/restaurant";
 import { DataContext } from "../../common/context/DataContext";
 
 import { Container, RestaurantsContainer } from "./styles";
-import { Restaurant } from "./containers/restaurant";
+import {
+  FlexJustifyContentCenter,
+  Margin,
+  Spacing,
+  Padding
+} from "../../common-ui/layout";
 
 class CategoryScreen extends Component {
   render() {
     return (
       <Container>
         <Header />
-        <DataContext.Consumer>
-          {categories => this._renderRestaurants(categories)}
-        </DataContext.Consumer>
+        <Padding>
+          <FlexJustifyContentCenter>
+            <DataContext.Consumer>
+              {data =>
+                data.categories[this.props.category].map(restaurant => (
+                  <Margin key={restaurant.name}>
+                    <Restaurant key={restaurant.name} data={restaurant} />
+                  </Margin>
+                ))
+              }
+            </DataContext.Consumer>
+          </FlexJustifyContentCenter>
+        </Padding>
+        <Spacing />
         <Footer />
+        <Spacing />
       </Container>
     );
-  }
-
-  _renderRestaurants(categories) {
-    const restaurants = [];
-    categories[this.props.category].forEach(restaurant => {
-      restaurants.push(
-        <Restaurant key={restaurant.formatted_phone_number} data={restaurant} />
-      );
-    });
-
-    return <RestaurantsContainer>{restaurants}</RestaurantsContainer>;
   }
 }
 

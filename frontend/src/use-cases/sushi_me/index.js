@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { SushiMeContainer, MenuContainer, Container } from "./styles";
 
-import { Header } from "../../common/views/header";
-import { Footer } from "../../common/views/footer";
+import { Header } from "../../common/elements/header";
+import { Footer } from "../../common/elements/footer";
 import { Spacing, PaddingList, Padding } from "../../common-ui/layout";
 import { Heading, HeadingLevel2, Text } from "../../common-ui/text";
 import { List, ListItem } from "../../common-ui/list";

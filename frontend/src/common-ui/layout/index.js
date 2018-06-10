@@ -1,31 +1,23 @@
 import styled from "styled-components";
 
-export const FlexCenter = styled.div`
+export const FlexAlignCenter = styled.div`
   display: flex;
   align-items: center;
 `;
 
+export const FlexJustifyContentCenter = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+`;
+
 export const Margin = styled.div`
-  margin: 8px;
+  margin: 4px; /*Half the standard margin*/
 `;
 
 export const Spacing = styled.div`
   width: 8px;
   height: 8px;
-`;
-
-export const VerticalPadding = styled.div`
-  padding-top: 8px;
-  padding-bottom: 8px;
-  flex: 1;
-  flex-direction: column;
-`;
-
-export const HorizontalPadding = styled.div`
-  padding-left: 8px;
-  padding-right: 8px;
-  flex: 1;
-  flex-direction: column;
 `;
 
 export const Padding = styled.div`

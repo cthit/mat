@@ -1,15 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
-import { Spacing, FlexCenter } from "../../../common-ui/layout";
-import { Text } from "../../../common-ui/text";
+import { Spacing, FlexAlignCenter } from "../../../../common-ui/layout";
+import { Text } from "../../../../common-ui/text";
 
 export const OpenStatus = ({ status, openDisplayText }) => (
-  <FlexCenter>
+  <FlexAlignCenter>
     <Dot status={status} />
     <Spacing />
     <Text>{openDisplayText}</Text>
-  </FlexCenter>
+  </FlexAlignCenter>
 );
 
 const Dot = styled.div`

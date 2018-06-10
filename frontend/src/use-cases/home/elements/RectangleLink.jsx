@@ -4,16 +4,13 @@ import { NavLink } from "react-router-dom";
 
 import { Material } from "../../../common-ui/design";
 import { HeadingLevel2 } from "../../../common-ui/text";
-import { Margin } from "../../../common-ui/layout";
 
 export const RectangleLink = ({ text, link }) => (
-  <Margin>
-    <RectangleMaterial pliancy width="200px" height="200px">
-      <LinkToCategory to={link}>
-        <HeadingLevel2>{text}</HeadingLevel2>
-      </LinkToCategory>
-    </RectangleMaterial>
-  </Margin>
+  <RectangleMaterial pliancy width="200px" height="200px">
+    <LinkToCategory to={link}>
+      <HeadingLevel2>{text}</HeadingLevel2>
+    </LinkToCategory>
+  </RectangleMaterial>
 );
 
 const RectangleMaterial = styled(Material)`
