@@ -13,6 +13,7 @@ const PIZZA = "pizza";
 const SUSHI = "sushi";
 const THAI = "thai";
 const HAMBURGER = "hamburger";
+const BAGUETTES = "baguettes";
 const OTHER = "other";
 
 /* Settings */
@@ -107,14 +108,27 @@ const RESTAURANTS = {
     category: SUSHI,
     link_to_menu: "/menu/sushilau"
   },
-
-  //Other
+  //BAGUETTES
   ChIJYzHHXQrzT0YRTP8fM6oIgHU: {
     //Alpa baguetteria
     name: "Alpa Baugetteria",
-    category: OTHER,
+    category: BAGUETTES,
     link_to_menu: "http://www.alpabaguetter.se"
   },
+  ChIJM0bil3TzT0YRltK1jge1AC4: {
+    //Baguetteria No 1
+    name: "Baguetteria No 1",
+    category: BAGUETTES,
+    link_to_menu: "http://baguetteria.se/baguetter.html"
+  },
+  ChIJ3R_ruHTzT0YRLt0Zk_WanoA: {
+    //Gunillas Baguetter
+    name: "Gunillas Baguetter",
+    category: BAGUETTES,
+    link_to_menu:
+      "http://ijohanneberg.se/platser/goteborg/johanneberg/mat-utestallen/gunillas-baguetter/"
+  },
+  //Other
   ChIJrwu7iArzT0YRvNk45bt4zqQ: {
     //Miss Fajitas
     name: "Miss Fajitas",

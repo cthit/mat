@@ -71,6 +71,8 @@ function _getDisplayName(categoryName) {
       return "Hamburgare";
     case "sushi":
       return "Sushi";
+    case "baguettes":
+      return "Baguetter";
     default:
       return categoryName;
   }
