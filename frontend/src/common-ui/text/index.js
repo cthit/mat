@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Heading = styled.h1`
+  text-align: ${props => props.align};
   color: black;
   font-family: "Roboto Slab";
   font-weight: 300;
@@ -8,6 +9,7 @@ export const Heading = styled.h1`
 `;
 
 export const HeadingLevel2 = styled.h2`
+  text-align: ${props => props.align};
   color: black;
   font-family: "Roboto Slab";
   font-weight: 300;
@@ -15,6 +17,7 @@ export const HeadingLevel2 = styled.h2`
 `;
 
 export const HeadingLevel3 = styled.h3`
+  text-align: ${props => props.align};
   color: black;
   font-family: "Roboto Slab";
   font-weight: 300;

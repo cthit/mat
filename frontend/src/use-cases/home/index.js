@@ -21,7 +21,7 @@ class HomeScreen extends Component {
       <HomeContainer>
         <Header />
         <Padding>
-          <HeadingLevel2>Alla kategorier</HeadingLevel2>
+          <HeadingLevel2 align="center">Alla kategorier</HeadingLevel2>
           <Spacing />
           <FlexJustifyContentCenter>
             <DataContext.Consumer>
@@ -39,7 +39,7 @@ class HomeScreen extends Component {
             </DataContext.Consumer>
           </FlexJustifyContentCenter>
           <Spacing />
-          <HeadingLevel2>Alla restauranger</HeadingLevel2>
+          <HeadingLevel2 align="center">Alla restauranger</HeadingLevel2>
           <Spacing />
           <FlexJustifyContentCenter>
             <DataContext.Consumer>
