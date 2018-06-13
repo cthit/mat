@@ -106,12 +106,6 @@ function _isOpen(data) {
 
   const tempClosingTime = _getTempClosingTime(openingTime, closingTime);
 
-  if (data.name.toLowerCase() === "linsen") {
-    console.log("currentTime: " + currentTime);
-    console.log("openingTime: " + openingTime);
-    console.log("tempClosingTime: " + tempClosingTime);
-  }
-
   if (currentTime > openingTime && currentTime < tempClosingTime) {
     return true;
   } else {
