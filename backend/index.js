@@ -51,7 +51,6 @@ const RESTAURANTS = {
     link_to_menu: "http://mossenspizzeria.se"
   },
 
-  // ---------------------------------------------------------
   //Thai
   ChIJX5vM33TzT0YRCyx2D_K0hWg: {
     //Arojj Dii
@@ -67,7 +66,6 @@ const RESTAURANTS = {
     link_to_menu: "http://www.baanthaigbg.se/meny/"
   },
 
-  // ---------------------------------------------------------
   //Hamburger
   ChIJQciMX6DzT0YRjjsg75Gzce0: {
     //Luma Grill
@@ -89,7 +87,6 @@ const RESTAURANTS = {
     link_to_menu: "http://pignwhistle.se/menu/"
   },
 
-  // ---------------------------------------------------------
   //Sushi
   ChIJvR0a6wrzT0YRp9vJhNRoFOw: {
     //Sushi Me
@@ -109,6 +106,7 @@ const RESTAURANTS = {
     category: SUSHI,
     link_to_menu: "/menu/sushilau"
   },
+  
   //BAGUETTES
   ChIJYzHHXQrzT0YRTP8fM6oIgHU: {
     //Alpa baguetteria
@@ -129,6 +127,7 @@ const RESTAURANTS = {
     link_to_menu:
       "http://ijohanneberg.se/platser/goteborg/johanneberg/mat-utestallen/gunillas-baguetter/"
   },
+  
   //Lunch
   ChIJF9E4gAnzT0YRHKPZ7NI0JSg: {
     //Catering Göteborg (Einstein)
