@@ -15,6 +15,7 @@ const THAI = "thai";
 const HAMBURGER = "hamburger";
 const BAGUETTES = "baguettes";
 const OTHER = "other";
+const LUNCH = "lunch";
 
 /* Settings */
 const PORT = 8080;
@@ -128,18 +129,39 @@ const RESTAURANTS = {
     link_to_menu:
       "http://ijohanneberg.se/platser/goteborg/johanneberg/mat-utestallen/gunillas-baguetter/"
   },
+  //Lunch
+  ChIJF9E4gAnzT0YRHKPZ7NI0JSg: {
+    //Catering Göteborg (Einstein)
+    name: "Einstein",
+    category: LUNCH,
+    link_to_menu: "http://www.butlercatering.se/einstein"
+  },
+
+  ChIJH10IAQvzT0YRRSfukcb9Idw: {
+    name: "Linsen",
+    category: LUNCH,
+    link_to_menu: "http://www.cafelinsen.se/lunch-meny.php"
+  },
+
+  "ChIJj0qphgzzT0YRZ7YZA-1jaj8": {
+    name: "Kårrestaurangen",
+    category: LUNCH,
+    link_to_menu:
+      "http://carboncloudrestaurantapi.azurewebsites.net/api/menuscreen/gethtmlweek?restaurantid=5"
+  },
+
+  ChIJl0Tpa3PzT0YROiSg5YkEglc: {
+    name: "Wijkanders",
+    category: LUNCH,
+    link_to_menu: "https://wijkanders.se/restaurangen/"
+  },
+
   //Other
   ChIJrwu7iArzT0YRvNk45bt4zqQ: {
     //Miss Fajitas
     name: "Miss Fajitas",
     category: OTHER,
     link_to_menu: "http://missfajitas.se/meny/"
-  },
-  ChIJF9E4gAnzT0YRHKPZ7NI0JSg: {
-    //Catering Göteborg (Einstein)
-    name: "Einstein",
-    category: OTHER,
-    link_to_menu: "http://www.butlercatering.se/einstein"
   }
 };
 

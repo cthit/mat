@@ -59,7 +59,13 @@ function _getOpenDisplayText(data) {
     period => parseInt(period.open.day, 10) === parseInt(day, 10)
   );
 
-  const currentTime = now.getHours() + "" + now.getMinutes();
+  var hours = now.getHours();
+
+  if (parseInt(hours) < 10) {
+    hours = "0" + hours;
+  }
+
+  const currentTime = hours + "" + now.getMinutes();
   var openingTime = openingHoursToday.open.time;
   var closingTime = openingHoursToday.close.time;
 
@@ -83,7 +89,13 @@ function _isOpen(data) {
     period => parseInt(period.open.day, 10) === parseInt(day, 10)
   );
 
-  const currentTime = now.getHours() + "" + now.getMinutes();
+  var hours = now.getHours();
+
+  if (parseInt(hours) < 10) {
+    hours = "0" + hours;
+  }
+
+  const currentTime = hours + "" + now.getMinutes();
 
   if (openingHoursToday == null) {
     return false;
@@ -93,6 +105,12 @@ function _isOpen(data) {
   var closingTime = openingHoursToday.close.time;
 
   const tempClosingTime = _getTempClosingTime(openingTime, closingTime);
+
+  if (data.name.toLowerCase() === "linsen") {
+    console.log("currentTime: " + currentTime);
+    console.log("openingTime: " + openingTime);
+    console.log("tempClosingTime: " + tempClosingTime);
+  }
 
   if (currentTime > openingTime && currentTime < tempClosingTime) {
     return true;
