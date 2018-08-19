@@ -2,40 +2,38 @@ import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 import axios from "axios";
 
-import { DataContext } from "./components/context/DataContext";
+import { DataContext } from "./common/context/DataContext";
 
-import HomeScreen from "./components/screens/home/index";
-import CategoryScreen from "./components/screens/category/index";
-import SushiMeScreen from "./components/screens/sushi_me/index";
-import SushiLauScreen from "./components/screens/sushi_lau/index";
+import HomeScreen from "./use-cases/home";
+import CategoryScreen from "./use-cases/category";
+import SushiMeScreen from "./use-cases/sushi_me";
+import SushiLauScreen from "./use-cases/sushi_lau";
+
+import _ from "lodash";
 
 class App extends Component {
-  componentWillMount() {
-    this.setState({ categories: {} });
+  constructor() {
+    super();
+    this.state = {
+      categories: {},
+      restaurants: []
+    };
+  }
 
+  componentWillMount() {
     const endpoint =
-      process.env.NODE_ENV == "development" ? "http://127.0.0.1:8080" : "";
+      process.env.NODE_ENV === "development" ? "http://127.0.0.1:8080" : "";
 
     axios
       .get(endpoint + "/api/mat.json")
-      .then(
-        function(response) {
-          var categories = {};
-
-          for (var index in response.data) {
-            var restaurantData = response.data[index];
-            if (categories[restaurantData.category] == null) {
-              categories[restaurantData.category] = [];
-            }
-
-            categories[restaurantData.category].push(restaurantData);
-          }
-
-          this.setState({
-            categories: categories
-          });
-        }.bind(this)
-      )
+      .then(response => {
+        const categories = _.groupBy(response.data, data => data.category);
+        const restaurants = response.data;
+        this.setState({
+          categories: categories,
+          restaurants: restaurants
+        });
+      })
       .catch(function(error) {
         console.log(error);
       });
@@ -44,7 +42,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <DataContext.Provider value={this.state.categories}>
+        <DataContext.Provider value={this.state}>
           <Switch>
             <Route path="/" exact>
               <HomeScreen />
