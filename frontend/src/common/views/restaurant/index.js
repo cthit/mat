@@ -6,7 +6,7 @@ import { OpeningHours } from "./elements/OpeningHours";
 import { ContactInformation } from "./elements/ContactInformation";
 import { RestaurantButtons } from "./elements/RestaurantButtons";
 import { Padding, Spacing } from "../../../common-ui/layout";
-import { HeadingLevel2 } from "../../../common-ui/text";
+import { HeadingLevel2, Text } from "../../../common-ui/text";
 
 export const Restaurant = ({ data }) => (
   <RestaurantMaterial
@@ -29,7 +29,11 @@ export const Restaurant = ({ data }) => (
           formattedAddress={_getOnlyAddress(data.formatted_address)}
         />
         <Spacing />
-        <OpeningHours openingHours={_getOpeningHoursData(data)} />
+        {_getOpenStatus(data) !== "unknown" ? (
+          <OpeningHours openingHours={_getOpeningHoursData(data)} />
+        ) : (
+          <Text>{data.name} har inga öppetider från Google</Text>
+        )}
       </MaterialBody>
       <MaterialButtons>
         <RestaurantButtons linkToMenu={data.link_to_menu} />
@@ -43,11 +47,20 @@ function _getOnlyAddress(fullAddress) {
 }
 
 function _getOpenStatus(data) {
-  return _isOpen(data) ? "open" : "closed";
+  return data["opening_hours"]["periods"] == null
+    ? "unknown"
+    : _isOpen(data)
+      ? "open"
+      : "closed";
 }
 
 function _getOpenDisplayText(data) {
+  const hasOpeningHours = _getOpenStatus(data) !== "unknown";
   const open = _isOpen(data);
+
+  if (!hasOpeningHours) {
+    return "Lol";
+  }
 
   if (!open) {
     return "Stängt";
@@ -83,33 +96,44 @@ function _getOpenDisplayText(data) {
 }
 
 function _isOpen(data) {
+  const hasOpeningHours = data["opening_hours"]["periods"] != undefined;
+
+  if (!hasOpeningHours) {
+    return false;
+  }
+
   const now = new Date();
   const day = now.getDay();
-  const openingHoursToday = data.opening_hours.periods.find(
-    period => parseInt(period.open.day, 10) === parseInt(day, 10)
-  );
 
-  var hours = now.getHours();
-
-  if (parseInt(hours) < 10) {
-    hours = "0" + hours;
-  }
-
-  const currentTime = hours + "" + now.getMinutes();
-
-  if (openingHoursToday == null) {
+  if (data.opening_hours == null) {
     return false;
-  }
-
-  var openingTime = openingHoursToday.open.time;
-  var closingTime = openingHoursToday.close.time;
-
-  const tempClosingTime = _getTempClosingTime(openingTime, closingTime);
-
-  if (currentTime > openingTime && currentTime < tempClosingTime) {
-    return true;
   } else {
-    return false;
+    const openingHoursToday = data.opening_hours.periods.find(
+      period => parseInt(period.open.day, 10) === parseInt(day, 10)
+    );
+
+    var hours = now.getHours();
+
+    if (parseInt(hours) < 10) {
+      hours = "0" + hours;
+    }
+
+    const currentTime = hours + "" + now.getMinutes();
+
+    if (openingHoursToday == null) {
+      return false;
+    }
+
+    var openingTime = openingHoursToday.open.time;
+    var closingTime = openingHoursToday.close.time;
+
+    const tempClosingTime = _getTempClosingTime(openingTime, closingTime);
+
+    if (currentTime > openingTime && currentTime < tempClosingTime) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
 
@@ -123,6 +147,12 @@ function _getTempClosingTime(openingTime, closingTime) {
 }
 
 function _getOpeningHoursData(data) {
+  const hasOpeningHours = data["opening_hours"]["periods"] != undefined;
+
+  if (!hasOpeningHours) {
+    return [];
+  }
+
   const openingHoursData = [];
 
   for (var i = 0; i < 7; i++) {
