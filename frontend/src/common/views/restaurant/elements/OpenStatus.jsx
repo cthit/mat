@@ -16,7 +16,11 @@ const Dot = styled.div`
   height: 15px;
   width: 15px;
   background-color: ${props =>
-    props.status === "open" ? "#05c46b" : "#ff3f34"};
+    props.status === "open"
+      ? "#05c46b"
+      : props.status === "closed"
+        ? "#ff3f34"
+        : "#FFEB3B"};
   border-radius: 50%;
   display: inline-block;
 `;

@@ -59,7 +59,7 @@ function _getOpenDisplayText(data) {
   const open = _isOpen(data);
 
   if (!hasOpeningHours) {
-    return "Lol";
+    return "Okänt";
   }
 
   if (!open) {

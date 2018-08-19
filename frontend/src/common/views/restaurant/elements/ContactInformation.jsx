@@ -7,7 +7,7 @@ import { GoogleMapsLink } from "./GoogleMapsLink";
 import { Spacing } from "../../../../common-ui/layout";
 
 export const ContactInformation = ({
-  openStatus, //open, closed
+  openStatus, //open, closed, unknown
   openDisplayText, //Öppnar om, Öppet tills, Stängt
   phoneNumber,
   placeId, //Google unique place id
