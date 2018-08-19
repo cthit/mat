@@ -106,7 +106,13 @@ const RESTAURANTS = {
     category: SUSHI,
     link_to_menu: "/menu/sushilau"
   },
-  
+  ChIJ2Z4wbFnzT0YRPer3l2XAeJU: {
+    // Johanneberg Sushi
+    name: "Johanneberg Sushi",
+    category: SUSHI,
+    link_to_menu: "http://johannebergsushi.se/meny"
+  },
+
   //BAGUETTES
   ChIJYzHHXQrzT0YRTP8fM6oIgHU: {
     //Alpa baguetteria
@@ -127,7 +133,7 @@ const RESTAURANTS = {
     link_to_menu:
       "http://ijohanneberg.se/platser/goteborg/johanneberg/mat-utestallen/gunillas-baguetter/"
   },
-  
+
   //Lunch
   ChIJF9E4gAnzT0YRHKPZ7NI0JSg: {
     //Catering Göteborg (Einstein)
@@ -161,6 +167,12 @@ const RESTAURANTS = {
     name: "Miss Fajitas",
     category: OTHER,
     link_to_menu: "http://missfajitas.se/meny/"
+  },
+  "ChIJTU-RkynzT0YRowXD5xZ_etg": {
+    //Gandhi Mahal
+    name: "Gandhi Mahal",
+    category: OTHER,
+    link_to_menu: "http://gandimahal.se/"
   }
 };
 
