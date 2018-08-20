@@ -172,7 +172,7 @@ const RESTAURANTS = {
     //Gandhi Mahal
     name: "Gandhi Mahal",
     category: OTHER,
-    link_to_menu: "http://gandimahal.se/"
+    link_to_menu: "http://www.gandhimahal.se/"
   }
 };
 
