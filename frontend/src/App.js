@@ -17,6 +17,7 @@ import {
 } from "@cthit/react-digit-components";
 
 import _ from "lodash";
+import { Footer } from "./common/elements/footer";
 
 class App extends Component {
     constructor() {
@@ -105,6 +106,7 @@ class App extends Component {
                                     )}
                                 </Switch>
                             </DataContext.Provider>
+                            <Footer />
                         </DigitLayout.Column>
                     )}
                 />
