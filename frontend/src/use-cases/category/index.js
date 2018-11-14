@@ -7,36 +7,41 @@ import { DataContext } from "../../common/context/DataContext";
 
 import { Container } from "./styles";
 import {
-  FlexJustifyContentCenter,
-  Margin,
-  Spacing,
-  Padding
+    FlexJustifyContentCenter,
+    Margin,
+    Spacing,
+    Padding
 } from "../../common-ui/layout";
 
 class CategoryScreen extends Component {
-  render() {
-    return (
-      <Container>
-        <Header />
-        <Padding>
-          <FlexJustifyContentCenter>
-            <DataContext.Consumer>
-              {data =>
-                data.categories[this.props.category].map(restaurant => (
-                  <Margin key={restaurant.name}>
-                    <Restaurant key={restaurant.name} data={restaurant} />
-                  </Margin>
-                ))
-              }
-            </DataContext.Consumer>
-          </FlexJustifyContentCenter>
-        </Padding>
-        <Spacing />
-        <Footer />
-        <Spacing />
-      </Container>
-    );
-  }
+    render() {
+        return (
+            <Container>
+                <Header />
+                <Padding>
+                    <FlexJustifyContentCenter>
+                        <DataContext.Consumer>
+                            {data =>
+                                data.categories[this.props.category].map(
+                                    restaurant => (
+                                        <Margin key={restaurant.name}>
+                                            <Restaurant
+                                                key={restaurant.name}
+                                                data={restaurant}
+                                            />
+                                        </Margin>
+                                    )
+                                )
+                            }
+                        </DataContext.Consumer>
+                    </FlexJustifyContentCenter>
+                </Padding>
+                <Spacing />
+                <Footer />
+                <Spacing />
+            </Container>
+        );
+    }
 }
 
 export default CategoryScreen;
