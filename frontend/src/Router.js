@@ -1,11 +1,11 @@
 import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
 import App from "./App";
+import { DigitProviders } from "@cthit/react-digit-components";
 
 const ReactRouter = () => (
-    <Router>
+    <DigitProviders>
         <App />
-    </Router>
+    </DigitProviders>
 );
 
 export default ReactRouter;

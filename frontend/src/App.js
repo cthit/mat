@@ -10,10 +10,9 @@ import SushiMeScreen from "./use-cases/sushi_me";
 import SushiLauScreen from "./use-cases/sushi_lau";
 
 import {
-    DigitProviders,
     DigitHeader,
     DigitLayout,
-    DigitTabs
+    DigitNavLink
 } from "@cthit/react-digit-components";
 
 import _ from "lodash";
@@ -53,87 +52,80 @@ class App extends Component {
     }
 
     render() {
+        console.log(this.state.categories);
         return (
-            <DigitProviders>
-                <DigitHeader
-                    title="Mat på Johanneberg"
-                    renderMain={() => (
-                        <DigitLayout.Column>
-                            <DigitTabs
-                                selected={this.state.selectedTab}
-                                onChange={selected => {
-                                    this.setState({
-                                        selected: selected
-                                    });
-                                }}
-                                labels={[
-                                    "Alla restauranger",
-                                    ...Object.keys(this.state.categories).map(
-                                        category => _getDisplayName(category)
-                                    )
-                                ]}
+            <DigitHeader
+                title="Mat på Johanneberg"
+                renderDrawer={() => (
+                    <DigitLayout.Column padding="0">
+                        {[
+                            { display: "Alla", link: "/" },
+                            ...Object.keys(this.state.categories).map(
+                                category => ({
+                                    display: _getDisplayName(category),
+                                    link: "/" + category
+                                })
+                            )
+                        ].map(categoryData => (
+                            <DigitNavLink
+                                key={categoryData.link}
+                                link={categoryData.link}
+                                text={categoryData.display}
                             />
-                            <DataContext.Provider value={this.state}>
-                                <Switch>
-                                    <Route path="/" exact>
-                                        <HomeScreen />
-                                    </Route>
+                        ))}
+                    </DigitLayout.Column>
+                )}
+                renderMain={() => (
+                    <DigitLayout.Column>
+                        <DataContext.Provider value={this.state}>
+                            <Switch>
+                                <Route path="/" exact>
+                                    <HomeScreen />
+                                </Route>
 
-                                    <Route path="/menu/sushime" exact>
-                                        <SushiMeScreen />
-                                    </Route>
+                                <Route path="/menu/sushime" exact>
+                                    <SushiMeScreen />
+                                </Route>
 
-                                    <Route path="/menu/sushilau" exact>
-                                        <SushiLauScreen />
-                                    </Route>
+                                <Route path="/menu/sushilau" exact>
+                                    <SushiLauScreen />
+                                </Route>
 
-                                    {Object.keys(this.state.categories).map(
-                                        function(category, data) {
-                                            const path = "/" + category;
-                                            return (
-                                                <Route
-                                                    key={path}
-                                                    path={path}
-                                                    exact
-                                                >
-                                                    <CategoryScreen
-                                                        key={category}
-                                                        category={category}
-                                                    />
-                                                </Route>
-                                            );
-                                        }
-                                    )}
-                                </Switch>
-                            </DataContext.Provider>
-                            <Footer />
-                        </DigitLayout.Column>
-                    )}
-                />
-            </DigitProviders>
+                                {Object.keys(this.state.categories).map(
+                                    function(category, data) {
+                                        const path = "/" + category;
+                                        return (
+                                            <Route key={path} path={path} exact>
+                                                <CategoryScreen
+                                                    key={category}
+                                                    category={category}
+                                                />
+                                            </Route>
+                                        );
+                                    }
+                                )}
+                            </Switch>
+                        </DataContext.Provider>
+                        <Footer />
+                    </DigitLayout.Column>
+                )}
+            />
         );
     }
 }
 
+const nameToDisplayNameMap = {
+    pizza: "Pizza",
+    thai: "Thai",
+    other: "Övrigt",
+    hamburger: "Hamburgare",
+    sushi: "Sushi",
+    baguettes: "Baguetter",
+    lunch: "Lunch"
+};
+
 function _getDisplayName(categoryName) {
-    switch (categoryName) {
-        case "pizza":
-            return "Pizza";
-        case "thai":
-            return "Thai";
-        case "other":
-            return "Övrigt";
-        case "hamburger":
-            return "Hamburgare";
-        case "sushi":
-            return "Sushi";
-        case "baguettes":
-            return "Baguetter";
-        case "lunch":
-            return "Lunch";
-        default:
-            return categoryName;
-    }
+    return nameToDisplayNameMap[categoryName];
 }
 
 export default App;

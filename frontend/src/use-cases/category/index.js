@@ -17,7 +17,6 @@ class CategoryScreen extends Component {
     render() {
         return (
             <Container>
-                <Header />
                 <Padding>
                     <FlexJustifyContentCenter>
                         <DataContext.Consumer>
@@ -36,9 +35,6 @@ class CategoryScreen extends Component {
                         </DataContext.Consumer>
                     </FlexJustifyContentCenter>
                 </Padding>
-                <Spacing />
-                <Footer />
-                <Spacing />
             </Container>
         );
     }

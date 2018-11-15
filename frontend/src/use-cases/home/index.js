@@ -1,12 +1,6 @@
 import React, { Component } from "react";
 import { HomeContainer } from "./styles";
-
-import { RectangleLink } from "./elements/RectangleLink";
-
 import { Restaurant } from "../../common/views/restaurant";
-
-import { Header } from "../../common/elements/header";
-import { Footer } from "../../common/elements/footer";
 import { DataContext } from "../../common/context/DataContext";
 import {
     FlexJustifyContentCenter,
@@ -20,31 +14,6 @@ class HomeScreen extends Component {
         return (
             <HomeContainer>
                 <Padding>
-                    <HeadingLevel2 align="center">
-                        Alla kategorier
-                    </HeadingLevel2>
-                    <Spacing />
-                    <FlexJustifyContentCenter>
-                        <DataContext.Consumer>
-                            {data =>
-                                Object.keys(data.categories).map(
-                                    categoryName => (
-                                        <Margin key={categoryName}>
-                                            <RectangleLink
-                                                key={categoryName}
-                                                text={_getDisplayName(
-                                                    categoryName,
-                                                    data
-                                                )}
-                                                link={"/" + categoryName}
-                                            />
-                                        </Margin>
-                                    )
-                                )
-                            }
-                        </DataContext.Consumer>
-                    </FlexJustifyContentCenter>
-                    <Spacing />
                     <HeadingLevel2 align="center">
                         Alla restauranger
                     </HeadingLevel2>
