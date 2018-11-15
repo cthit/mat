@@ -21,7 +21,7 @@ class CategoryScreen extends Component {
                         minItemWidth="300px"
                         padding="8px"
                         fillElement
-                        // justifyContent="center"
+                        justifyContent="center"
                     >
                         <DataContext.Consumer>
                             {data =>

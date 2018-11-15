@@ -1,10 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-
 import { concatStrings } from "../formatter/ConcatTwoStringsFormatter";
-
-import { Text } from "../../../../common-ui/text";
-import { Spacing } from "../../../../common-ui/layout";
+import { DigitText, DigitLayout } from "@cthit/react-digit-components";
+import _ from "lodash";
 
 /**
  * openingHours is an array, every element in the array should have the following:
@@ -15,45 +13,37 @@ import { Spacing } from "../../../../common-ui/layout";
  */
 
 export const OpeningHours = ({ openingHours }) => (
-    <div>
-        <Text>Öppetider:</Text>
-        <Spacing />
-        <Row>
-            <Column align="right">
-                {openingHours.map(item => (
-                    <Cell key={item.startDay}>
-                        <Text>
-                            {concatStrings(
-                                item.startDay,
-                                item.endDay,
-                                " - ",
-                                item.startDay === item.endDay,
-                                ":"
-                            )}
-                        </Text>
-                        <Spacing />
-                    </Cell>
-                ))}
-            </Column>
-            <Spacing />
-            <Column align="left">
-                {openingHours.map(item => (
-                    <Cell key={item.startDay + item.openingHours}>
-                        <Text>
-                            {concatStrings(
-                                item.openingHours,
-                                item.closingHours,
-                                " - ",
-                                item.closingHours == null,
-                                ""
-                            )}
-                        </Text>
-                        <Spacing />
-                    </Cell>
-                ))}
-            </Column>
-        </Row>
-    </div>
+    <DigitLayout.Column>
+        <DigitText.Text text="Öppetider:" />
+        <DigitLayout.Column padding="0px">
+            {openingHours.map(item => (
+                <DigitLayout.Row
+                    padding="8px"
+                    fillElement
+                    key={item.startDay + ";" + item.closingHours} //Something random
+                >
+                    <DigitText.Text
+                        text={concatStrings(
+                            _.capitalize(item.startDay),
+                            _.capitalize(item.endDay),
+                            " - ",
+                            item.startDay === item.endDay,
+                            ":"
+                        )}
+                    />
+                    <DigitText.Text
+                        text={concatStrings(
+                            item.openingHours,
+                            item.closingHours,
+                            " - ",
+                            item.closingHours == null,
+                            ""
+                        )}
+                    />
+                </DigitLayout.Row>
+            ))}
+        </DigitLayout.Column>
+    </DigitLayout.Column>
 );
 
 const Row = styled.div`
@@ -65,8 +55,4 @@ const Column = styled.div`
     flex: 50%;
     text-transform: capitalize;
     text-align: ${props => (props.align != null ? props.align : "none")};
-`;
-
-const Cell = styled.div`
-    display: block;
 `;

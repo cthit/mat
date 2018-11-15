@@ -1,26 +1,24 @@
 import React from "react";
 
-import { MaterialBody, MaterialButtons, RestaurantMaterial } from "./styles";
-
 import { OpeningHours } from "./elements/OpeningHours";
 import { ContactInformation } from "./elements/ContactInformation";
-import { RestaurantButtons } from "./elements/RestaurantButtons";
 import { Padding, Spacing } from "../../../common-ui/layout";
-import { HeadingLevel2, Text } from "../../../common-ui/text";
+
+import {
+    DigitDesign,
+    DigitText,
+    DigitButton,
+    DigitLayout
+} from "@cthit/react-digit-components";
+import { NonStyledALink } from "../../../common-ui/design";
 
 export const Restaurant = ({ data }) => (
-    <RestaurantMaterial
-        width="300px"
-        height="300px"
-        maxWidth="300px"
-        maxHeight="300px"
-        minWidth="300px"
-        minHeight="300px"
-    >
-        <Padding>
-            <MaterialBody>
-                <HeadingLevel2>{data.name}</HeadingLevel2>
-                <Spacing />
+    <DigitDesign.Card absWidth="320px" absHeight="467px">
+        <DigitDesign.CardHeader>
+            <DigitDesign.CardTitle text={data.name} />
+        </DigitDesign.CardHeader>
+        <DigitDesign.CardBody>
+            <DigitLayout.Column fillElement>
                 <ContactInformation
                     openStatus={_getOpenStatus(data)}
                     openDisplayText={_getOpenDisplayText(data)}
@@ -28,18 +26,21 @@ export const Restaurant = ({ data }) => (
                     placeId={data.place_id}
                     formattedAddress={_getOnlyAddress(data.formatted_address)}
                 />
-                <Spacing />
                 {_getOpenStatus(data) !== "unknown" ? (
                     <OpeningHours openingHours={_getOpeningHoursData(data)} />
                 ) : (
-                    <Text>{data.name} har inga öppetider från Google</Text>
+                    <DigitText.Text
+                        text={data.name + "har inga öppetider från Google"}
+                    />
                 )}
-            </MaterialBody>
-            <MaterialButtons>
-                <RestaurantButtons linkToMenu={data.link_to_menu} />
-            </MaterialButtons>
-        </Padding>
-    </RestaurantMaterial>
+            </DigitLayout.Column>
+        </DigitDesign.CardBody>
+        <DigitDesign.CardButtons reverseDirection>
+            <NonStyledALink target="_blank" href={data.link_to_menu}>
+                <DigitButton primary outlined text="Visa meny" />
+            </NonStyledALink>
+        </DigitDesign.CardButtons>
+    </DigitDesign.Card>
 );
 
 function _getOnlyAddress(fullAddress) {

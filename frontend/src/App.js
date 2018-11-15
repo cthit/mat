@@ -55,7 +55,7 @@ class App extends Component {
         return (
             <DigitHeader
                 title="Mat på Johanneberg"
-                renderDrawer={() => (
+                renderDrawer={closeDrawer => (
                     <DigitLayout.Column padding="0">
                         {[
                             { display: "Alla", link: "/" },
@@ -70,6 +70,10 @@ class App extends Component {
                                 key={categoryData.link}
                                 link={categoryData.link}
                                 text={categoryData.display}
+                                onClick={() => {
+                                    window.scrollTo(0, 0);
+                                    closeDrawer();
+                                }}
                             />
                         ))}
                     </DigitLayout.Column>

@@ -2,13 +2,13 @@ import React from "react";
 import styled from "styled-components";
 
 import { Spacing, FlexAlignCenter } from "../../../../common-ui/layout";
-import { Text } from "../../../../common-ui/text";
+import { DigitText } from "@cthit/react-digit-components";
 
 export const OpenStatus = ({ status, openDisplayText }) => (
     <FlexAlignCenter>
         <Dot status={status} />
         <Spacing />
-        <Text>{openDisplayText}</Text>
+        <DigitText.Text text={openDisplayText} />
     </FlexAlignCenter>
 );
 

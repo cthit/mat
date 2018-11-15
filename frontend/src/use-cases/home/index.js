@@ -1,23 +1,20 @@
 import React, { Component } from "react";
-import { HomeContainer } from "./styles";
 import { Restaurant } from "../../common/views/restaurant";
 import { DataContext } from "../../common/context/DataContext";
-import {
-    FlexJustifyContentCenter,
-    Padding,
-    Spacing,
-    Margin
-} from "../../common-ui/layout";
-import { HeadingLevel2 } from "../../common-ui/text";
+import { Padding } from "../../common-ui/layout";
 
 import { DigitLayout } from "@cthit/react-digit-components";
 
 class HomeScreen extends Component {
     render() {
         return (
-            <HomeContainer>
+            <DigitLayout.Column>
                 <Padding>
-                    <DigitLayout.UniformGrid minItemWidth="300px" padding="8px">
+                    <DigitLayout.UniformGrid
+                        justifyContent="center"
+                        minItemWidth="300px"
+                        padding="8px"
+                    >
                         <DataContext.Consumer>
                             {data =>
                                 data.restaurants.map(restaurant => (
@@ -30,7 +27,7 @@ class HomeScreen extends Component {
                         </DataContext.Consumer>
                     </DigitLayout.UniformGrid>
                 </Padding>
-            </HomeContainer>
+            </DigitLayout.Column>
         );
     }
 }
