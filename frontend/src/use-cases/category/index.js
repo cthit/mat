@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 
-import { Header } from "../../common/elements/header";
-import { Footer } from "../../common/elements/footer";
 import { Restaurant } from "../../common/views/restaurant";
 import { DataContext } from "../../common/context/DataContext";
 
@@ -9,31 +7,35 @@ import { Container } from "./styles";
 import {
     FlexJustifyContentCenter,
     Margin,
-    Spacing,
     Padding
 } from "../../common-ui/layout";
+
+import { DigitLayout } from "@cthit/react-digit-components";
 
 class CategoryScreen extends Component {
     render() {
         return (
             <Container>
                 <Padding>
-                    <FlexJustifyContentCenter>
+                    <DigitLayout.UniformGrid
+                        minItemWidth="300px"
+                        padding="8px"
+                        fillElement
+                        // justifyContent="center"
+                    >
                         <DataContext.Consumer>
                             {data =>
                                 data.categories[this.props.category].map(
                                     restaurant => (
-                                        <Margin key={restaurant.name}>
-                                            <Restaurant
-                                                key={restaurant.name}
-                                                data={restaurant}
-                                            />
-                                        </Margin>
+                                        <Restaurant
+                                            key={restaurant.name}
+                                            data={restaurant}
+                                        />
                                     )
                                 )
                             }
                         </DataContext.Consumer>
-                    </FlexJustifyContentCenter>
+                    </DigitLayout.UniformGrid>
                 </Padding>
             </Container>
         );

@@ -9,29 +9,26 @@ import {
     Margin
 } from "../../common-ui/layout";
 import { HeadingLevel2 } from "../../common-ui/text";
+
+import { DigitLayout } from "@cthit/react-digit-components";
+
 class HomeScreen extends Component {
     render() {
         return (
             <HomeContainer>
                 <Padding>
-                    <HeadingLevel2 align="center">
-                        Alla restauranger
-                    </HeadingLevel2>
-                    <Spacing />
-                    <FlexJustifyContentCenter>
+                    <DigitLayout.UniformGrid minItemWidth="300px" padding="8px">
                         <DataContext.Consumer>
                             {data =>
                                 data.restaurants.map(restaurant => (
-                                    <Margin key={restaurant.name}>
-                                        <Restaurant
-                                            key={restaurant.name}
-                                            data={restaurant}
-                                        />
-                                    </Margin>
+                                    <Restaurant
+                                        key={restaurant.name}
+                                        data={restaurant}
+                                    />
                                 ))
                             }
                         </DataContext.Consumer>
-                    </FlexJustifyContentCenter>
+                    </DigitLayout.UniformGrid>
                 </Padding>
             </HomeContainer>
         );

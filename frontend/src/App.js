@@ -52,7 +52,6 @@ class App extends Component {
     }
 
     render() {
-        console.log(this.state.categories);
         return (
             <DigitHeader
                 title="Mat på Johanneberg"
