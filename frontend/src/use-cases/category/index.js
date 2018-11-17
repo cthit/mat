@@ -17,25 +17,24 @@ class CategoryScreen extends Component {
         return (
             <Container>
                 <Padding>
-                    <DigitLayout.UniformGrid
-                        minItemWidth="300px"
-                        padding="8px"
-                        fillElement
-                        justifyContent="center"
-                    >
-                        <DataContext.Consumer>
-                            {data =>
-                                data.categories[this.props.category].map(
+                    <DataContext.Consumer>
+                        {data => (
+                            <DigitLayout.UniformGrid
+                                minItemWidth="300px"
+                                padding="16px"
+                                justifyItems="center"
+                            >
+                                {data.categories[this.props.category].map(
                                     restaurant => (
                                         <Restaurant
                                             key={restaurant.name}
                                             data={restaurant}
                                         />
                                     )
-                                )
-                            }
-                        </DataContext.Consumer>
-                    </DigitLayout.UniformGrid>
+                                )}
+                            </DigitLayout.UniformGrid>
+                        )}
+                    </DataContext.Consumer>
                 </Padding>
             </Container>
         );

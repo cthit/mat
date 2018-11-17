@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "dependencies": {
-        "@cthit/react-digit-components": "^0.1.2",
+        "@cthit/react-digit-components": "^0.1.7",
         "axios": "^0.18.0",
         "lodash": "^4.17.11",
         "react": "^16.6.0",

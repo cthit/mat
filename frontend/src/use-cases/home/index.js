@@ -10,22 +10,22 @@ class HomeScreen extends Component {
         return (
             <DigitLayout.Column>
                 <Padding>
-                    <DigitLayout.UniformGrid
-                        justifyContent="center"
-                        minItemWidth="300px"
-                        padding="8px"
-                    >
-                        <DataContext.Consumer>
-                            {data =>
-                                data.restaurants.map(restaurant => (
+                    <DataContext.Consumer>
+                        {data => (
+                            <DigitLayout.UniformGrid
+                                justifyItems="center"
+                                minItemWidth="320px"
+                                padding="16px"
+                            >
+                                {data.restaurants.map(restaurant => (
                                     <Restaurant
                                         key={restaurant.name}
                                         data={restaurant}
                                     />
-                                ))
-                            }
-                        </DataContext.Consumer>
-                    </DigitLayout.UniformGrid>
+                                ))}
+                            </DigitLayout.UniformGrid>
+                        )}
+                    </DataContext.Consumer>
                 </Padding>
             </DigitLayout.Column>
         );

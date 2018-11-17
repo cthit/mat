@@ -15,6 +15,10 @@ export const Margin = styled.div`
     margin: 4px; /*Half the standard margin*/
 `;
 
+export const MarginTop = styled.div`
+    margin-top: 30px;
+`;
+
 export const Spacing = styled.div`
     width: 8px;
     height: 8px;

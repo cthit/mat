@@ -833,10 +833,10 @@
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
   integrity sha512-5a6wqoJV/xEdbRNKVo6I4hO3VjyDq//8q2f9I6PBAvMesJHFauXDorcNCsr9RzvsZnaWi5NYCcfyqP1QeFHFbw==
 
-"@cthit/react-digit-components@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@cthit/react-digit-components/-/react-digit-components-0.1.2.tgz#6ad7f2dad256d633ee6aaa1aaf13fca435b31b54"
-  integrity sha512-zr4wsgYk56pY7qF+8lNIU2B8V/VsPmGqSAHWaIYp0viYxlivOGTxvEQW9r/TC9uhItEbSfOcx5ZP5eTrKYof3Q==
+"@cthit/react-digit-components@^0.1.7":
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/@cthit/react-digit-components/-/react-digit-components-0.1.7.tgz#f6eabe672f460f94b05338c5f2b5bf53e1167a00"
+  integrity sha512-AiFxsZR6I3T8G8if9bp4MSQeDM4tfSj9yHlrZbZYAUJCE8jE8fIM/1hCHS62/O2jU8hlnFkSfcv1l0Znu3SEpA==
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"

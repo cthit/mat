@@ -12,18 +12,23 @@ import SushiLauScreen from "./use-cases/sushi_lau";
 import {
     DigitHeader,
     DigitLayout,
-    DigitNavLink
+    DigitTabs,
+    DigitRedirect,
+    DigitIfElseRendering,
+    DigitLoading
 } from "@cthit/react-digit-components";
 
 import _ from "lodash";
 import { Footer } from "./common/elements/footer";
+import { MarginTop, Margin } from "./common-ui/layout";
 
 class App extends Component {
     constructor() {
         super();
         this.state = {
             categories: {},
-            restaurants: []
+            restaurants: [],
+            selected: "/"
         };
     }
 
@@ -51,68 +56,104 @@ class App extends Component {
             });
     }
 
+    onSelectedChange = selected => {
+        this.props.redirectTo(selected);
+        this.setState({
+            selected: selected
+        });
+    };
+
     render() {
         return (
-            <DigitHeader
-                title="Mat på Johanneberg"
-                renderDrawer={closeDrawer => (
-                    <DigitLayout.Column padding="0">
-                        {[
-                            { display: "Alla", link: "/" },
-                            ...Object.keys(this.state.categories).map(
-                                category => ({
-                                    display: _getDisplayName(category),
-                                    link: "/" + category
-                                })
-                            )
-                        ].map(categoryData => (
-                            <DigitNavLink
-                                key={categoryData.link}
-                                link={categoryData.link}
-                                text={categoryData.display}
-                                onClick={() => {
-                                    window.scrollTo(0, 0);
-                                    closeDrawer();
-                                }}
-                            />
-                        ))}
-                    </DigitLayout.Column>
-                )}
-                renderMain={() => (
-                    <DigitLayout.Column>
-                        <DataContext.Provider value={this.state}>
-                            <Switch>
-                                <Route path="/" exact>
-                                    <HomeScreen />
-                                </Route>
+            <div>
+                <Route
+                    render={props => {
+                        const currentPath = props.location.pathname;
 
-                                <Route path="/menu/sushime" exact>
-                                    <SushiMeScreen />
-                                </Route>
-
-                                <Route path="/menu/sushilau" exact>
-                                    <SushiLauScreen />
-                                </Route>
-
-                                {Object.keys(this.state.categories).map(
-                                    function(category, data) {
-                                        const path = "/" + category;
-                                        return (
-                                            <Route key={path} path={path} exact>
-                                                <CategoryScreen
-                                                    key={category}
-                                                    category={category}
-                                                />
-                                            </Route>
-                                        );
-                                    }
+                        return null;
+                    }}
+                />
+                <DigitHeader
+                    title="Mat på Johanneberg"
+                    renderToolbar={() => (
+                        <DigitTabs
+                            selected={this.state.selected}
+                            onChange={this.onSelectedChange}
+                            tabs={[
+                                {
+                                    text: "Alla",
+                                    value: "/"
+                                },
+                                ...Object.keys(this.state.categories).map(
+                                    category => ({
+                                        text: _getDisplayName(category),
+                                        value: "/" + category
+                                    })
+                                )
+                            ]}
+                        />
+                    )}
+                    renderMain={() => (
+                        <DigitLayout.Column>
+                            <MarginTop />
+                            <DigitIfElseRendering
+                                test={this.state.restaurants.length === 0}
+                                ifRender={() => (
+                                    <DigitLayout.Center>
+                                        <MarginTop />
+                                        <MarginTop />
+                                        <DigitLoading loading size={40} />
+                                    </DigitLayout.Center>
                                 )}
-                            </Switch>
-                        </DataContext.Provider>
-                        <Footer />
-                    </DigitLayout.Column>
-                )}
-            />
+                                elseRender={() => (
+                                    <DataContext.Provider value={this.state}>
+                                        <DigitRedirect />
+                                        <Switch>
+                                            <Route
+                                                component={HomeScreen}
+                                                path="/"
+                                                exact
+                                            />
+                                            <Route
+                                                component={SushiMeScreen}
+                                                path="/menu/sushime"
+                                                exact
+                                            />
+
+                                            <Route
+                                                component={SushiLauScreen}
+                                                path="/menu/sushilau"
+                                                exact
+                                            />
+
+                                            {Object.keys(
+                                                this.state.categories
+                                            ).map(category => {
+                                                const path = "/" + category;
+                                                return (
+                                                    <Route
+                                                        key={path}
+                                                        path={path}
+                                                        exact
+                                                        render={() => (
+                                                            <CategoryScreen
+                                                                category={
+                                                                    category
+                                                                }
+                                                            />
+                                                        )}
+                                                    />
+                                                );
+                                            })}
+                                        </Switch>
+                                    </DataContext.Provider>
+                                )}
+                            />
+                            <Footer />
+                        </DigitLayout.Column>
+                    )}
+                />
+            </div>
         );
     }
 }
