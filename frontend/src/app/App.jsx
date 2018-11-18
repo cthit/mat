@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 import axios from "axios";
 
-import { DataContext } from "./common/context/DataContext";
+import { DataContext } from "../common/context/DataContext";
 
-import HomeScreen from "./use-cases/home";
-import CategoryScreen from "./use-cases/category";
-import SushiMeScreen from "./use-cases/sushi_me";
-import SushiLauScreen from "./use-cases/sushi_lau";
+import HomeScreen from "../use-cases/home";
+import CategoryScreen from "../use-cases/category";
+import SushiMeScreen from "../use-cases/sushi_me";
+import SushiLauScreen from "../use-cases/sushi_lau";
 
 import {
     DigitHeader,
@@ -19,8 +19,8 @@ import {
 } from "@cthit/react-digit-components";
 
 import _ from "lodash";
-import { Footer } from "./common/elements/footer";
-import { MarginTop, Margin } from "./common-ui/layout";
+import { Footer } from "../common/elements/footer";
+import { MarginTop, Margin } from "../common-ui/layout";
 
 class App extends Component {
     constructor() {
