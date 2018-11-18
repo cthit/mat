@@ -1,11 +1,7 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
-import axios from "axios";
-
-import { DataContext } from "../common/context/DataContext";
-
 import HomeScreen from "../use-cases/home";
-import CategoryScreen from "../use-cases/category/Category";
+import CategoryScreen from "../use-cases/category";
 import SushiMeScreen from "../use-cases/sushi_me";
 import SushiLauScreen from "../use-cases/sushi_lau";
 
@@ -23,37 +19,13 @@ import { Footer } from "../common/elements/footer";
 import { MarginTop, Margin } from "../common-ui/layout";
 
 class App extends Component {
-    constructor() {
+    constructor(props) {
         super();
         this.state = {
-            categories: {},
-            restaurants: [],
             selected: "/"
         };
-    }
 
-    componentWillMount() {
-        const endpoint =
-            process.env.NODE_ENV === "development"
-                ? "http://127.0.0.1:8080"
-                : "";
-
-        axios
-            .get(endpoint + "/api/mat.json")
-            .then(response => {
-                const categories = _.groupBy(
-                    response.data,
-                    data => data.category
-                );
-                const restaurants = response.data;
-                this.setState({
-                    categories: categories,
-                    restaurants: restaurants
-                });
-            })
-            .catch(function(error) {
-                console.log(error);
-            });
+        props.loadRestaurants();
     }
 
     onSelectedChange = selected => {
@@ -63,41 +35,51 @@ class App extends Component {
         });
     };
 
+    componentDidMount() {
+        const path = this.props.location.pathname;
+        if (path !== this.state.selected) {
+            this.onSelectedChange(path);
+        }
+    }
+
     render() {
+        const { selected } = this.state;
+        const { categories, restaurants } = this.props;
+
         return (
             <div>
-                <Route
-                    render={props => {
-                        const currentPath = props.location.pathname;
-
-                        return null;
-                    }}
-                />
                 <DigitHeader
                     title="Mat på Johanneberg"
                     renderToolbar={() => (
                         <DigitTabs
-                            selected={this.state.selected}
+                            selected={selected}
                             onChange={this.onSelectedChange}
-                            tabs={[
-                                {
-                                    text: "Alla",
-                                    value: "/"
-                                },
-                                ...Object.keys(this.state.categories).map(
-                                    category => ({
-                                        text: _getDisplayName(category),
-                                        value: "/" + category
-                                    })
-                                )
-                            ]}
+                            tabs={
+                                !_.isEmpty(categories)
+                                    ? [
+                                          {
+                                              text: "Alla",
+                                              value: "/"
+                                          },
+                                          ...Object.keys(categories).map(
+                                              category => ({
+                                                  text: _getDisplayName(
+                                                      category
+                                                  ),
+                                                  value: "/" + category
+                                              })
+                                          )
+                                      ]
+                                    : []
+                            }
                         />
                     )}
                     renderMain={() => (
                         <DigitLayout.Column>
+                            <DigitRedirect />
                             <MarginTop />
                             <DigitIfElseRendering
-                                test={this.state.restaurants.length === 0}
+                                test={restaurants.length === 0}
                                 ifRender={() => (
                                     <DigitLayout.Center>
                                         <MarginTop />
@@ -106,29 +88,26 @@ class App extends Component {
                                     </DigitLayout.Center>
                                 )}
                                 elseRender={() => (
-                                    <DataContext.Provider value={this.state}>
-                                        <DigitRedirect />
-                                        <Switch>
-                                            <Route
-                                                component={HomeScreen}
-                                                path="/"
-                                                exact
-                                            />
-                                            <Route
-                                                component={SushiMeScreen}
-                                                path="/menu/sushime"
-                                                exact
-                                            />
+                                    <Switch>
+                                        <Route
+                                            component={HomeScreen}
+                                            path="/"
+                                            exact
+                                        />
+                                        <Route
+                                            component={SushiMeScreen}
+                                            path="/menu/sushime"
+                                            exact
+                                        />
 
-                                            <Route
-                                                component={SushiLauScreen}
-                                                path="/menu/sushilau"
-                                                exact
-                                            />
+                                        <Route
+                                            component={SushiLauScreen}
+                                            path="/menu/sushilau"
+                                            exact
+                                        />
 
-                                            {Object.keys(
-                                                this.state.categories
-                                            ).map(category => {
+                                        {Object.keys(categories).map(
+                                            category => {
                                                 const path = "/" + category;
                                                 return (
                                                     <Route
@@ -144,9 +123,9 @@ class App extends Component {
                                                         )}
                                                     />
                                                 );
-                                            })}
-                                        </Switch>
-                                    </DataContext.Provider>
+                                            }
+                                        )}
+                                    </Switch>
                                 )}
                             />
                             <Footer />
