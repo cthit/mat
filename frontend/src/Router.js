@@ -1,10 +1,11 @@
-import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
-import App from './App';
+import React from "react";
+import App from "./App.container";
+import { DigitProviders } from "@cthit/react-digit-components";
 
-const ReactRouter = () =>
-	<Router>
-		<App />
-	</Router>
+const ReactRouter = () => (
+    <DigitProviders>
+        <App />
+    </DigitProviders>
+);
 
 export default ReactRouter;

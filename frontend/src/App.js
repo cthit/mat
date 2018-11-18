@@ -9,66 +9,167 @@ import CategoryScreen from "./use-cases/category";
 import SushiMeScreen from "./use-cases/sushi_me";
 import SushiLauScreen from "./use-cases/sushi_lau";
 
+import {
+    DigitHeader,
+    DigitLayout,
+    DigitTabs,
+    DigitRedirect,
+    DigitIfElseRendering,
+    DigitLoading
+} from "@cthit/react-digit-components";
+
 import _ from "lodash";
+import { Footer } from "./common/elements/footer";
+import { MarginTop, Margin } from "./common-ui/layout";
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      categories: {},
-      restaurants: []
-    };
-  }
+    constructor() {
+        super();
+        this.state = {
+            categories: {},
+            restaurants: [],
+            selected: "/"
+        };
+    }
 
-  componentWillMount() {
-    const endpoint =
-      process.env.NODE_ENV === "development" ? "http://127.0.0.1:8080" : "";
+    componentWillMount() {
+        const endpoint =
+            process.env.NODE_ENV === "development"
+                ? "http://127.0.0.1:8080"
+                : "";
 
-    axios
-      .get(endpoint + "/api/mat.json")
-      .then(response => {
-        const categories = _.groupBy(response.data, data => data.category);
-        const restaurants = response.data;
+        axios
+            .get(endpoint + "/api/mat.json")
+            .then(response => {
+                const categories = _.groupBy(
+                    response.data,
+                    data => data.category
+                );
+                const restaurants = response.data;
+                this.setState({
+                    categories: categories,
+                    restaurants: restaurants
+                });
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+    }
+
+    onSelectedChange = selected => {
+        this.props.redirectTo(selected);
         this.setState({
-          categories: categories,
-          restaurants: restaurants
+            selected: selected
         });
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
-  }
+    };
 
-  render() {
-    return (
-      <div className="App">
-        <DataContext.Provider value={this.state}>
-          <Switch>
-            <Route path="/" exact>
-              <HomeScreen />
-            </Route>
+    render() {
+        return (
+            <div>
+                <Route
+                    render={props => {
+                        const currentPath = props.location.pathname;
 
-            <Route path="/menu/sushime" exact>
-              <SushiMeScreen />
-            </Route>
+                        return null;
+                    }}
+                />
+                <DigitHeader
+                    title="Mat på Johanneberg"
+                    renderToolbar={() => (
+                        <DigitTabs
+                            selected={this.state.selected}
+                            onChange={this.onSelectedChange}
+                            tabs={[
+                                {
+                                    text: "Alla",
+                                    value: "/"
+                                },
+                                ...Object.keys(this.state.categories).map(
+                                    category => ({
+                                        text: _getDisplayName(category),
+                                        value: "/" + category
+                                    })
+                                )
+                            ]}
+                        />
+                    )}
+                    renderMain={() => (
+                        <DigitLayout.Column>
+                            <MarginTop />
+                            <DigitIfElseRendering
+                                test={this.state.restaurants.length === 0}
+                                ifRender={() => (
+                                    <DigitLayout.Center>
+                                        <MarginTop />
+                                        <MarginTop />
+                                        <DigitLoading loading size={40} />
+                                    </DigitLayout.Center>
+                                )}
+                                elseRender={() => (
+                                    <DataContext.Provider value={this.state}>
+                                        <DigitRedirect />
+                                        <Switch>
+                                            <Route
+                                                component={HomeScreen}
+                                                path="/"
+                                                exact
+                                            />
+                                            <Route
+                                                component={SushiMeScreen}
+                                                path="/menu/sushime"
+                                                exact
+                                            />
 
-            <Route path="/menu/sushilau" exact>
-              <SushiLauScreen />
-            </Route>
+                                            <Route
+                                                component={SushiLauScreen}
+                                                path="/menu/sushilau"
+                                                exact
+                                            />
 
-            {Object.keys(this.state.categories).map(function(category, data) {
-              const path = "/" + category;
-              return (
-                <Route key={path} path={path} exact>
-                  <CategoryScreen key={category} category={category} />
-                </Route>
-              );
-            })}
-          </Switch>
-        </DataContext.Provider>
-      </div>
-    );
-  }
+                                            {Object.keys(
+                                                this.state.categories
+                                            ).map(category => {
+                                                const path = "/" + category;
+                                                return (
+                                                    <Route
+                                                        key={path}
+                                                        path={path}
+                                                        exact
+                                                        render={() => (
+                                                            <CategoryScreen
+                                                                category={
+                                                                    category
+                                                                }
+                                                            />
+                                                        )}
+                                                    />
+                                                );
+                                            })}
+                                        </Switch>
+                                    </DataContext.Provider>
+                                )}
+                            />
+                            <Footer />
+                        </DigitLayout.Column>
+                    )}
+                />
+            </div>
+        );
+    }
+}
+
+const nameToDisplayNameMap = {
+    pizza: "Pizza",
+    thai: "Thai",
+    other: "Övrigt",
+    hamburger: "Hamburgare",
+    sushi: "Sushi",
+    baguettes: "Baguetter",
+    lunch: "Lunch"
+};
+
+function _getDisplayName(categoryName) {
+    return nameToDisplayNameMap[categoryName];
 }
 
 export default App;

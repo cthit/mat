@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { Text } from "../../common-ui/text";
+import { DigitText } from "@cthit/react-digit-components";
 
 export const Footer = () => (
-  <FooterContainer>
-    <Text>Think with Portals ❤</Text>
-  </FooterContainer>
+    <FooterContainer>
+        <DigitText.Text text="Think with Portals ❤" />
+    </FooterContainer>
 );
 
 const FooterContainer = styled.div`
-  text-align: center;
+    text-align: center;
 `;
