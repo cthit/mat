@@ -5,7 +5,7 @@ import axios from "axios";
 import { DataContext } from "../common/context/DataContext";
 
 import HomeScreen from "../use-cases/home";
-import CategoryScreen from "../use-cases/category";
+import CategoryScreen from "../use-cases/category/Category";
 import SushiMeScreen from "../use-cases/sushi_me";
 import SushiLauScreen from "../use-cases/sushi_lau";
 
