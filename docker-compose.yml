@@ -13,10 +13,11 @@ services:
     links:
       - "redis"
     environment:
+      - GOOGLE_PLACE_API_KEY=AIzaSyDU37WuK50EI7VUmdC7aSoie_pboKq7lSU
       - NODE_ENV=development
   redis:
     image: redis
-    ports: 
+    ports:
       - "6379"
   frontend:
     build:

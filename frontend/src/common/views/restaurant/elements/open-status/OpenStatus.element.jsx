@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-import { Spacing, FlexAlignCenter } from "../../../../common-ui/layout";
+import { Spacing, FlexAlignCenter } from "../../../../../common-ui/layout";
 import { DigitText } from "@cthit/react-digit-components";
 
-export const OpenStatus = ({ status, openDisplayText }) => (
+const OpenStatus = ({ status, openDisplayText }) => (
     <FlexAlignCenter>
         <Dot status={status} />
         <Spacing />
@@ -24,3 +24,5 @@ const Dot = styled.div`
     border-radius: 50%;
     display: inline-block;
 `;
+
+export default OpenStatus;

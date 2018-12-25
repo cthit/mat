@@ -833,10 +833,10 @@
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
   integrity sha512-5a6wqoJV/xEdbRNKVo6I4hO3VjyDq//8q2f9I6PBAvMesJHFauXDorcNCsr9RzvsZnaWi5NYCcfyqP1QeFHFbw==
 
-"@cthit/react-digit-components@^0.1.7":
-  version "0.1.7"
-  resolved "https://registry.yarnpkg.com/@cthit/react-digit-components/-/react-digit-components-0.1.7.tgz#f6eabe672f460f94b05338c5f2b5bf53e1167a00"
-  integrity sha512-AiFxsZR6I3T8G8if9bp4MSQeDM4tfSj9yHlrZbZYAUJCE8jE8fIM/1hCHS62/O2jU8hlnFkSfcv1l0Znu3SEpA==
+"@cthit/react-digit-components@^0.1.25":
+  version "0.1.25"
+  resolved "https://registry.yarnpkg.com/@cthit/react-digit-components/-/react-digit-components-0.1.25.tgz#9a311f7a1f9350937eb7aa98cc3946b84e9de2cb"
+  integrity sha512-vT2ht9EecxGStkLkKZwtn2WhA7y6kc2MmdT2CxWNK0BbJ14idMMBikKvglinHilbRtCBlEiWMyLae3y7e4fgzA==
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
@@ -7585,6 +7585,11 @@ prettier@^1.14.2:
   version "1.15.2"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.15.2.tgz#d31abe22afa4351efa14c7f8b94b58bb7452205e"
   integrity sha512-YgPLFFA0CdKL4Eg2IHtUSjzj/BWgszDHiNQAe0VAIBse34148whfdzLagRL+QiKS+YfK5ftB6X4v/MBw8yCoug==
+
+prettier@^1.15.3:
+  version "1.15.3"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.15.3.tgz#1feaac5bdd181237b54dbe65d874e02a1472786a"
+  integrity sha512-gAU9AGAPMaKb3NNSUUuhhFAS7SCO4ALTN4nRIn6PJ075Qd28Yn2Ig2ahEJWdJwJmlEBTUfC7mMUSFy8MwsOCfg==
 
 pretty-bytes@^4.0.2:
   version "4.0.2"

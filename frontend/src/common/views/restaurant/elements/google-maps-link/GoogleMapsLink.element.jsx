@@ -1,12 +1,12 @@
 import React from "react";
 
-import { Icon } from "../../../../common-ui/image";
-import { Link } from "../../../../common-ui/text";
-import { Spacing, FlexAlignCenter } from "../../../../common-ui/layout";
-import { NonStyledALink } from "../../../../common-ui/design";
+import { Icon } from "../../../../../common-ui/image";
+import { Link } from "../../../../../common-ui/text";
+import { Spacing, FlexAlignCenter } from "../../../../../common-ui/layout";
+import { NonStyledALink } from "../../../../../common-ui/design";
 import { DigitText } from "@cthit/react-digit-components";
 
-export const GoogleMapsLink = ({ formattedAddress, placeId }) => (
+const GoogleMapsLink = ({ formattedAddress, placeId }) => (
     <FlexAlignCenter>
         <Icon src="place.png" />
         <Spacing />
@@ -17,3 +17,5 @@ export const GoogleMapsLink = ({ formattedAddress, placeId }) => (
         </NonStyledALink>
     </FlexAlignCenter>
 );
+
+export default GoogleMapsLink;

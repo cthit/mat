@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-import { OpenStatus } from "./OpenStatus";
-import { PhoneNumber } from "./PhoneNumber";
-import { GoogleMapsLink } from "./GoogleMapsLink";
-import { Spacing } from "../../../../common-ui/layout";
+import { Spacing } from "../../../../../common-ui/layout";
+import OpenStatus from "../open-status";
+import PhoneNumber from "../phone-number";
+import GoogleMapsLink from "../google-maps-link";
 
-export const ContactInformation = ({
+const ContactInformation = ({
     openStatus, //open, closed, unknown
     openDisplayText, //Öppnar om, Öppet tills, Stängt
     phoneNumber,
@@ -22,4 +22,8 @@ export const ContactInformation = ({
     </Container>
 );
 
-const Container = styled.div``;
+const Container = styled.div`
+    margin-left: 8px;
+`;
+
+export default ContactInformation;

@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, withRouter } from "react-router-dom";
 import axios from "axios";
 
-import { DataContext } from "./common/context/DataContext";
+import { DataContext } from "../common/context/DataContext";
 
-import HomeScreen from "./use-cases/home";
-import CategoryScreen from "./use-cases/category";
-import SushiMeScreen from "./use-cases/sushi_me";
-import SushiLauScreen from "./use-cases/sushi_lau";
+import HomeScreen from "../use-cases/home";
+import CategoryScreen from "../use-cases/category";
+import SushiMeScreen from "../use-cases/sushi_me";
+import SushiLauScreen from "../use-cases/sushi_lau";
 
 import {
     DigitHeader,
@@ -15,20 +15,20 @@ import {
     DigitTabs,
     DigitRedirect,
     DigitIfElseRendering,
-    DigitLoading
+    DigitLoading,
+    DigitText
 } from "@cthit/react-digit-components";
 
 import _ from "lodash";
-import { Footer } from "./common/elements/footer";
-import { MarginTop, Margin } from "./common-ui/layout";
+import { MarginTop } from "../common-ui/layout";
+import { FooterContainer, SpacingBetweenToolbarAndMain } from "./App.styles";
 
 class App extends Component {
     constructor() {
         super();
         this.state = {
             categories: {},
-            restaurants: [],
-            selected: "/"
+            restaurants: []
         };
     }
 
@@ -58,44 +58,43 @@ class App extends Component {
 
     onSelectedChange = selected => {
         this.props.redirectTo(selected);
-        this.setState({
-            selected: selected
-        });
     };
 
     render() {
         return (
-            <div>
-                <Route
-                    render={props => {
-                        const currentPath = props.location.pathname;
-
-                        return null;
-                    }}
-                />
-                <DigitHeader
-                    title="Mat på Johanneberg"
-                    renderToolbar={() => (
-                        <DigitTabs
-                            selected={this.state.selected}
-                            onChange={this.onSelectedChange}
-                            tabs={[
-                                {
-                                    text: "Alla",
-                                    value: "/"
-                                },
-                                ...Object.keys(this.state.categories).map(
-                                    category => ({
-                                        text: _getDisplayName(category),
-                                        value: "/" + category
-                                    })
-                                )
-                            ]}
-                        />
-                    )}
-                    renderMain={() => (
+            <DigitHeader
+                title="Mat"
+                renderHeader={() => (
+                    <DigitText.Text white text={"Data från Google"} />
+                )}
+                renderToolbar={() => (
+                    <DigitIfElseRendering
+                        test={this.state.restaurants.length > 0}
+                        ifRender={() => (
+                            <DigitTabs
+                                fullWidth
+                                selected={this.props.location.pathname}
+                                onChange={this.onSelectedChange}
+                                tabs={[
+                                    {
+                                        text: "Alla",
+                                        value: "/"
+                                    },
+                                    ...Object.keys(this.state.categories).map(
+                                        category => ({
+                                            text: _getDisplayName(category),
+                                            value: "/" + category
+                                        })
+                                    )
+                                ]}
+                            />
+                        )}
+                    />
+                )}
+                renderMain={() => (
+                    <>
+                        <SpacingBetweenToolbarAndMain />
                         <DigitLayout.Column>
-                            <MarginTop />
                             <DigitIfElseRendering
                                 test={this.state.restaurants.length === 0}
                                 ifRender={() => (
@@ -149,11 +148,13 @@ class App extends Component {
                                     </DataContext.Provider>
                                 )}
                             />
-                            <Footer />
+                            <FooterContainer>
+                                <DigitText.Text text="Made by digIT with ❤" />
+                            </FooterContainer>
                         </DigitLayout.Column>
-                    )}
-                />
-            </div>
+                    </>
+                )}
+            />
         );
     }
 }
@@ -172,4 +173,4 @@ function _getDisplayName(categoryName) {
     return nameToDisplayNameMap[categoryName];
 }
 
-export default App;
+export default withRouter(App);

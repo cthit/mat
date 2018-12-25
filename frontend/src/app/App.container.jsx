@@ -6,12 +6,12 @@ import { DigitRedirectActions } from "@cthit/react-digit-components";
 const mapStateToProps = (state, ownProps) => ({});
 
 const mapDispatchToProps = dispatch => ({
-    redirectTo: to => dispatch(DigitRedirectActions.redirectTo(to))
+    redirectTo: to => dispatch(DigitRedirectActions.digitRedirectTo(to))
 });
 
 export default withRouter(
     connect(
         mapStateToProps,
-        mapDispatchToProps
+            mapDispatchToProps
     )(App)
 );

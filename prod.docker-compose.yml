@@ -19,4 +19,5 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - GOOGLE_PLACE_API_KEY=AIzaSyBpKKFB6T-gvnS8KjcOt3l5MO8etMF3r8g
+      - GOOGLE_PLACE_API_KEY=AIzaSyDU37WuK50EI7VUmdC7aSoie_pboKq7lSU
+

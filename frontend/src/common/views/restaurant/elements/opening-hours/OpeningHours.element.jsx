@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { concatStrings } from "../formatter/ConcatTwoStringsFormatter";
+import { concatStrings } from "../../formatter/ConcatTwoStringsFormatter";
 import { DigitText, DigitLayout } from "@cthit/react-digit-components";
 import _ from "lodash";
 
@@ -12,14 +12,14 @@ import _ from "lodash";
  * - closingHours (String)
  */
 
-export const OpeningHours = ({ openingHours }) => (
-    <DigitLayout.Column>
+const OpeningHours = ({ openingHours }) => (
+    <DigitLayout.Column marginVertical={"4px"}>
         <DigitText.Text text="Öppetider:" />
-        <DigitLayout.Column padding="0px">
+        <DigitLayout.Column marginVertical={"4px"}>
             {openingHours.map(item => (
                 <DigitLayout.Row
-                    padding="8px"
                     fillElement
+                    marginHorizontal={"4px"}
                     key={item.startDay + ";" + item.closingHours} //Something random
                 >
                     <DigitText.Text
@@ -56,3 +56,5 @@ const Column = styled.div`
     text-transform: capitalize;
     text-align: ${props => (props.align != null ? props.align : "none")};
 `;
+
+export default OpeningHours;

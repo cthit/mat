@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "dependencies": {
-        "@cthit/react-digit-components": "^0.1.7",
+        "@cthit/react-digit-components": "^0.1.25",
         "axios": "^0.18.0",
         "lodash": "^4.17.11",
         "react": "^16.6.0",
@@ -25,5 +25,8 @@
         "not dead",
         "not ie <= 11",
         "not op_mini all"
-    ]
+    ],
+    "devDependencies": {
+        "prettier": "^1.15.3"
+    }
 }
