@@ -1,5 +1,5 @@
 import { get } from "../utils/api.utils";
 
-export function restaurants() {
+export function loadRestaurants() {
     return get("/api/mat.json");
 }

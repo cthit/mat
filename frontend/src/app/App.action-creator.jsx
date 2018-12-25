@@ -3,12 +3,11 @@ import {
     APP_LOAD_RESTAURANTS_FAILED
 } from "./App.actions";
 import _ from "lodash";
-import restaurants from "../api/restaurants";
+import { loadRestaurants } from "../api/restaurants/get.restaurants.api";
 
 export function appLoadRestaurants() {
     return dispatch => {
-        restaurants.get
-            .restaurants()
+        loadRestaurants()
             .then(response => {
                 const categories = _.groupBy(
                     response.data,

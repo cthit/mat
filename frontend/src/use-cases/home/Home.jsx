@@ -1,5 +1,4 @@
 import React from "react";
-import { DigitLayout } from "@cthit/react-digit-components";
 import DisplayRestaurants from "../../common/elements/display-restaurants";
 
 const HomeScreen = ({ restaurants }) => (

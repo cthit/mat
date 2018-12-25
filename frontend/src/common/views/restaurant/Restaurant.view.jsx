@@ -108,7 +108,7 @@ function _getOpenDisplayText(data) {
 }
 
 function _isOpen(data) {
-    const hasOpeningHours = data["opening_hours"]["periods"] != undefined;
+    const hasOpeningHours = data["opening_hours"]["periods"] !== undefined;
 
     if (!hasOpeningHours) {
         return false;
@@ -159,7 +159,7 @@ function _getTempClosingTime(openingTime, closingTime) {
 }
 
 function _getOpeningHoursData(data) {
-    const hasOpeningHours = data["opening_hours"]["periods"] != undefined;
+    const hasOpeningHours = data["opening_hours"]["periods"] !== undefined;
 
     if (!hasOpeningHours) {
         return [];
