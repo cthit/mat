@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import { Switch, Route, withRouter } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import axios from "axios";
-
-import { DataContext } from "../common/context/DataContext";
 
 import HomeScreen from "../use-cases/home";
 import CategoryScreen from "../use-cases/category";
@@ -24,12 +22,14 @@ import { MarginTop } from "../common-ui/layout";
 import { FooterContainer, SpacingBetweenToolbarAndMain } from "./App.styles";
 
 class App extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             categories: {},
             restaurants: []
         };
+
+        props.loadRestaurants();
     }
 
     componentWillMount() {
@@ -105,7 +105,7 @@ class App extends Component {
                                     </DigitLayout.Center>
                                 )}
                                 elseRender={() => (
-                                    <DataContext.Provider value={this.state}>
+                                    <>
                                         <DigitRedirect />
                                         <Switch>
                                             <Route
@@ -145,7 +145,7 @@ class App extends Component {
                                                 );
                                             })}
                                         </Switch>
-                                    </DataContext.Provider>
+                                    </>
                                 )}
                             />
                             <FooterContainer>
@@ -173,4 +173,4 @@ function _getDisplayName(categoryName) {
     return nameToDisplayNameMap[categoryName];
 }
 
-export default withRouter(App);
+export default App;

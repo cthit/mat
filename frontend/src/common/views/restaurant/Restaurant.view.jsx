@@ -12,7 +12,7 @@ import {
 import { NonStyledALink } from "../../../common-ui/design";
 import { Margin } from "../../../common-ui/layout";
 
-export const Restaurant = ({ data }) => (
+const Restaurant = ({ data }) => (
     <DigitDesign.Card
         minWidth="300px"
         width={"100%"}
@@ -202,3 +202,5 @@ function _getOpeningHoursData(data) {
     }
     return openingHoursData;
 }
+
+export default Restaurant;

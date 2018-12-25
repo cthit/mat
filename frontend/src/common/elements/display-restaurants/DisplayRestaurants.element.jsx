@@ -1,6 +1,6 @@
 import React from "react";
 import { DigitLayout } from "@cthit/react-digit-components";
-import { Restaurant } from "../../views/restaurant/Restaurant.view";
+import Restaurant from "../../views/restaurant";
 
 const DisplayRestaurants = ({ restaurants }) => (
     <DigitLayout.Row

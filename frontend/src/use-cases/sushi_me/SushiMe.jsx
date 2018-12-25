@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import { SushiMeContainer, Container } from "./SushiMe.styles";
-
 import { Spacing, PaddingList, Padding } from "../../common-ui/layout";
 import { Heading, HeadingLevel2, Text } from "../../common-ui/text";
 import { List, ListItem } from "../../common-ui/list";
+import { Container, SushiMeContainer } from "./SushiMe.styles";
 
 class SushiMeScreen extends Component {
     render() {
