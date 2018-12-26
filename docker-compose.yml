@@ -12,9 +12,6 @@ services:
       - /usr/src/app/node_modules
     links:
       - "redis"
-    environment:
-      - GOOGLE_PLACE_API_KEY=AIzaSyDU37WuK50EI7VUmdC7aSoie_pboKq7lSU
-      - NODE_ENV=development
   redis:
     image: redis
     ports:
@@ -28,5 +25,3 @@ services:
       - "3000:3000"
     volumes:
       - ./frontend:/usr/src/app
-    environment:
-      - NODE_ENV=development
