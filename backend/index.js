@@ -139,7 +139,7 @@ const RESTAURANTS = {
     //Catering Göteborg (Einstein)
     name: "Einstein",
     category: LUNCH,
-    link_to_menu: "http://www.butlercatering.se/einstein"
+    link_to_menu: "http://restaurang-einstein.se/#section_rmaslhqt3"
   },
 
   ChIJH10IAQvzT0YRRSfukcb9Idw: {
@@ -152,7 +152,7 @@ const RESTAURANTS = {
     name: "Kårrestaurangen",
     category: LUNCH,
     link_to_menu:
-      "http://carboncloudrestaurantapi.azurewebsites.net/api/menuscreen/gethtmlweek?restaurantid=5"
+      "http://carbonatescreen.azurewebsites.net/menu/week/karrestaurangen/21f31565-5c2b-4b47-d2a1-08d558129279"
   },
 
   ChIJl0Tpa3PzT0YROiSg5YkEglc: {
