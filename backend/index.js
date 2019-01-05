@@ -71,7 +71,7 @@ const RESTAURANTS = {
     //Luma Grill
     name: "Luma Grill",
     category: HAMBURGER,
-    link_to_menu: "https://www.lumagrill.nu/menyer"
+    link_to_menu: "https://www.facebook.com/ulasada09/app/1637598386514901/"
   },
   ChIJLxoVhQzzT0YRC7c0h4_v16c: {
     //J.A. Pripps
