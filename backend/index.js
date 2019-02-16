@@ -134,13 +134,13 @@ const RESTAURANTS = {
             "http://ijohanneberg.se/platser/goteborg/johanneberg/mat-utestallen/gunillas-baguetter/"
     },
 
-    //Lunch
-    ChIJF9E4gAnzT0YRHKPZ7NI0JSg: {
-        //Catering Göteborg (Einstein)
-        name: "Einstein",
-        category: LUNCH,
-        link_to_menu: "http://www.butlercatering.se/einstein"
-    },
+  //Lunch
+  ChIJF9E4gAnzT0YRHKPZ7NI0JSg: {
+    //Catering Göteborg (Einstein)
+    name: "Einstein",
+    category: LUNCH,
+    link_to_menu: "http://restaurang-einstein.se/#section_rmaslhqt3"
+  },
 
     ChIJH10IAQvzT0YRRSfukcb9Idw: {
         name: "Linsen",
@@ -148,13 +148,13 @@ const RESTAURANTS = {
         link_to_menu: "http://www.cafelinsen.se/lunch-meny.php"
     },
 
-    "ChIJj0qphgzzT0YRZ7YZA-1jaj8": {
-        name: "Kårrestaurangen",
-        category: LUNCH,
-        link_to_menu:
-            "http://carboncloudrestaurantapi.azurewebsites.net/api/menuscreen/gethtmlweek?restaurantid=5"
-    },
-
+  "ChIJj0qphgzzT0YRZ7YZA-1jaj8": {
+    name: "Kårrestaurangen",
+    category: LUNCH,
+    link_to_menu:
+      "http://carbonatescreen.azurewebsites.net/menu/week/karrestaurangen/21f31565-5c2b-4b47-d2a1-08d558129279"
+  },
+  
     ChIJl0Tpa3PzT0YROiSg5YkEglc: {
         name: "Wijkanders",
         category: LUNCH,
