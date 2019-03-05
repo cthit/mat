@@ -1,8 +1,22 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import Router from './Router';
-import registerServiceWorker from './registerServiceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import registerServiceWorker from "./registerServiceWorker";
+import App from "./app/App.container";
+import { DigitProviders } from "@cthit/react-digit-components";
+import rootReducer from "./app/App.reducer";
 
-ReactDOM.render(<Router />, document.getElementById('root'));
+ReactDOM.render(
+    <DigitProviders
+        preloadedState={{
+            app: {
+                categories: {},
+                restaurants: []
+            }
+        }}
+        rootReducer={rootReducer}
+    >
+        <App />
+    </DigitProviders>,
+    document.getElementById("root")
+);
 registerServiceWorker();

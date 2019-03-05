@@ -1,7 +1,7 @@
 version: "2"
 services:
   redis:
-    image: redis
+    image: redis:5.0.3
     ports: 
       - "6379"
   frontend:
@@ -18,5 +18,4 @@ services:
     image: mat_backend
     ports:
       - "8080:8080"
-    environment:
-      - GOOGLE_PLACE_API_KEY=AIzaSyBpKKFB6T-gvnS8KjcOt3l5MO8etMF3r8g
+

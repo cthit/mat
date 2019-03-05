@@ -4,14 +4,14 @@ import { Material } from "../../common-ui/design";
 export const Container = styled.div``;
 
 export const SushiLauMaterial = styled(Material)`
-  display: block;
-  margin: auto;
+    display: block;
+    margin: auto;
 `;
 
 export const Column = styled.div`
-  flex: 33%;
+    flex: 33%;
 `;
 
 export const ColumnContainer = styled.div`
-  display: flex;
+    display: flex;
 `;
