@@ -9,6 +9,9 @@ export function appLoadRestaurants() {
     return dispatch => {
         loadRestaurants()
             .then(response => {
+                response.data = response.data.filter(
+                    x => Object.keys(x).length
+                );
                 const categories = _.groupBy(
                     response.data,
                     data => data.category
