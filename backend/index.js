@@ -38,7 +38,7 @@ const RESTAURANTS = {
         category: PIZZA,
         link_to_menu: "http://pizzeriapeperoni.se/Meny.html"
     },
-    ChIJV5iOjgrzT0YRgLrXj2ExUto: {
+    "ChIJNwdwjgrzT0YRp-PNd9EuGDs": {
         //Sannegården Pizzeria Johanneberg
         name: "Sannegårdens Pizzeria",
         category: PIZZA,
@@ -225,6 +225,11 @@ function generateMatData() {
 }
 
 function getRestaurantData(googleData) {
+    if(googleData == null){
+        return {};
+    }
+
+
     var restaurantData = {};
 
     //Transfer from Google to restaurantData
@@ -240,6 +245,8 @@ function getRestaurantData(googleData) {
     );
 
     //Transfer from RESTAURANTS to restarurantObject
+
+    console.log(googleData);
 
     transferData(
         ["name", "category", "link_to_menu"],
