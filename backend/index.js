@@ -134,13 +134,13 @@ const RESTAURANTS = {
             "http://ijohanneberg.se/platser/goteborg/johanneberg/mat-utestallen/gunillas-baguetter/"
     },
 
-  //Lunch
-  ChIJF9E4gAnzT0YRHKPZ7NI0JSg: {
-    //Catering Göteborg (Einstein)
-    name: "Einstein",
-    category: LUNCH,
-    link_to_menu: "http://restaurang-einstein.se/#section_rmaslhqt3"
-  },
+    //Lunch
+    ChIJF9E4gAnzT0YRHKPZ7NI0JSg: {
+        //Catering Göteborg (Einstein)
+        name: "Einstein",
+        category: LUNCH,
+        link_to_menu: "http://restaurang-einstein.se/#section_rmaslhqt3"
+    },
 
     ChIJH10IAQvzT0YRRSfukcb9Idw: {
         name: "Linsen",
@@ -148,13 +148,13 @@ const RESTAURANTS = {
         link_to_menu: "http://www.cafelinsen.se/lunch-meny.php"
     },
 
-  "ChIJj0qphgzzT0YRZ7YZA-1jaj8": {
-    name: "Kårrestaurangen",
-    category: LUNCH,
-    link_to_menu:
-      "http://carbonatescreen.azurewebsites.net/menu/week/karrestaurangen/21f31565-5c2b-4b47-d2a1-08d558129279"
-  },
-  
+    "ChIJj0qphgzzT0YRZ7YZA-1jaj8": {
+        name: "Kårrestaurangen",
+        category: LUNCH,
+        link_to_menu:
+            "http://carbonatescreen.azurewebsites.net/menu/week/karrestaurangen/21f31565-5c2b-4b47-d2a1-08d558129279"
+    },
+
     ChIJl0Tpa3PzT0YROiSg5YkEglc: {
         name: "Wijkanders",
         category: LUNCH,
@@ -188,20 +188,23 @@ app.get("/api/mat.json", function(req, res) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET");
 
-    redisClient.exists("mat", function(err, exists) {
-        if (exists == 1) {
+    redisClient.exists("mat", (err, exists) => {
+        if (exists === 1) {
             console.log(
                 "[MAT]{" + getCurrentTime() + "} Loading from redis..."
             );
-            redisClient.hgetall("mat", function(err, reply) {
-                res.send(Object.values(unflatten(reply)));
+            redisClient.get("mat", (err, reply) => {
+                res.send(Object.values(JSON.parse(reply)));
             });
         } else {
             console.log("[MAT]{" + getCurrentTime() + "} Saving...");
-            generateMatData().then(function(response) {
-                redisClient.hmset("mat", flatten(response));
+            generateMatData().then((response) => {
+                redisClient.set("mat", JSON.stringify(response));
                 redisClient.expire("mat", REDIS_EXPIRE);
                 res.send(response);
+            }).catch(error => {
+                console.log(error);
+
             });
         }
     });
@@ -216,19 +219,21 @@ function generateMatData() {
         Promise.all(restaurantPromises).then(function(response) {
             var data = [];
             response.forEach(responseElement => {
-                data.push(getRestaurantData(responseElement.data.result));
+                const restaurantData = getRestaurantData(responseElement.data.result);
+                data.push(restaurantData);
             });
 
             resolve(data);
+        }).catch(error => {
+            console.log(error);
         });
     });
 }
 
 function getRestaurantData(googleData) {
-    if(googleData == null){
+    if (googleData == null) {
         return {};
     }
-
 
     var restaurantData = {};
 
@@ -246,8 +251,6 @@ function getRestaurantData(googleData) {
 
     //Transfer from RESTAURANTS to restarurantObject
 
-    console.log(googleData);
-
     transferData(
         ["name", "category", "link_to_menu"],
         RESTAURANTS[googleData.place_id],
@@ -260,11 +263,11 @@ function getRestaurantData(googleData) {
 function getGooglePlacePromise(placeId) {
     return axios.get(
         GOOGLE_PLACE_BASE_URL +
-            "?placeid=" +
-            placeId +
-            "&key=" +
-            GOOGLE_PLACE_API_KEY +
-            "&language=sv"
+        "?placeid=" +
+        placeId +
+        "&key=" +
+        GOOGLE_PLACE_API_KEY +
+        "&language=sv"
     );
 }
 

@@ -12,8 +12,10 @@ services:
       - /usr/src/app/node_modules
     links:
       - "redis"
+#    environment:
+#      - GOOGLE_PLACE_API_KEY=<API_KEY_HERE>
   redis:
-    image: redis
+    image: redis:5.0.3
     ports:
       - "6379"
   frontend:

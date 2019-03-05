@@ -22,4 +22,8 @@ const DisplayRestaurants = ({ restaurants }) => (
     </DigitLayout.Row>
 );
 
+DisplayRestaurants.defaultProps = {
+    restaurants: []
+};
+
 export default DisplayRestaurants;

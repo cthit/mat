@@ -28,33 +28,10 @@ class App extends Component {
             categories: {},
             restaurants: []
         };
-
+        
         props.loadRestaurants();
     }
 
-    componentWillMount() {
-        const endpoint =
-            process.env.NODE_ENV === "development"
-                ? "http://127.0.0.1:8080"
-                : "";
-
-        axios
-            .get(endpoint + "/api/mat.json")
-            .then(response => {
-                const categories = _.groupBy(
-                    response.data,
-                    data => data.category
-                );
-                const restaurants = response.data;
-                this.setState({
-                    categories: categories,
-                    restaurants: restaurants
-                });
-            })
-            .catch(function(error) {
-                console.log(error);
-            });
-    }
 
     onSelectedChange = selected => {
         this.props.redirectTo(selected);
@@ -72,7 +49,6 @@ class App extends Component {
                         test={this.state.restaurants.length > 0}
                         ifRender={() => (
                             <DigitTabs
-                                fullWidth
                                 selected={this.props.location.pathname}
                                 onChange={this.onSelectedChange}
                                 tabs={[
