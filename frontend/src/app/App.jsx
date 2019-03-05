@@ -24,14 +24,8 @@ import { FooterContainer, SpacingBetweenToolbarAndMain } from "./App.styles";
 class App extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            categories: {},
-            restaurants: []
-        };
-        
         props.loadRestaurants();
     }
-
 
     onSelectedChange = selected => {
         this.props.redirectTo(selected);
@@ -46,7 +40,7 @@ class App extends Component {
                 )}
                 renderToolbar={() => (
                     <DigitIfElseRendering
-                        test={this.state.restaurants.length > 0}
+                        test={this.props.restaurants.length > 0}
                         ifRender={() => (
                             <DigitTabs
                                 selected={this.props.location.pathname}
@@ -56,7 +50,7 @@ class App extends Component {
                                         text: "Alla",
                                         value: "/"
                                     },
-                                    ...Object.keys(this.state.categories).map(
+                                    ...Object.keys(this.props.categories).map(
                                         category => ({
                                             text: _getDisplayName(category),
                                             value: "/" + category
@@ -72,7 +66,7 @@ class App extends Component {
                         <SpacingBetweenToolbarAndMain />
                         <DigitLayout.Column>
                             <DigitIfElseRendering
-                                test={this.state.restaurants.length === 0}
+                                test={this.props.restaurants.length === 0}
                                 ifRender={() => (
                                     <DigitLayout.Center>
                                         <MarginTop />
@@ -102,7 +96,7 @@ class App extends Component {
                                             />
 
                                             {Object.keys(
-                                                this.state.categories
+                                                this.props.categories
                                             ).map(category => {
                                                 const path = "/" + category;
                                                 return (
