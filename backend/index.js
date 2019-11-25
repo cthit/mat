@@ -81,10 +81,10 @@ const RESTAURANTS = {
             "https://chalmerskonferens.se/restauranger/johanneberg/j-a-pripps-pub-cafe/"
     },
     ChIJabzIUKbzT0YRIgFOYpKMWWI: {
-        //Pig 'N' Whistle
-        name: "Pig 'N' Whistle",
+        //Pig 'N' Whistle / Ät & Njut
+        name: "Ät & Njut",
         category: HAMBURGER,
-        link_to_menu: "http://pignwhistle.se/menu/"
+        link_to_menu: "http://atonjut.se/meny/"
     },
 
     //Sushi
