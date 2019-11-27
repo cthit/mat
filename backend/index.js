@@ -50,6 +50,12 @@ const RESTAURANTS = {
         category: PIZZA,
         link_to_menu: "http://mossenspizzeria.se"
     },
+    ChIJabzIUKbzT0YRIgFOYpKMWWI: {
+        //Pig 'N' Whistle / Ät & Njut
+        name: "Ät & Njut",
+        category: PIZZA,
+        link_to_menu: "http://atonjut.se/meny/"
+    },
 
     //Thai
     ChIJX5vM33TzT0YRCyx2D_K0hWg: {
@@ -79,12 +85,6 @@ const RESTAURANTS = {
         category: HAMBURGER,
         link_to_menu:
             "https://chalmerskonferens.se/restauranger/johanneberg/j-a-pripps-pub-cafe/"
-    },
-    ChIJabzIUKbzT0YRIgFOYpKMWWI: {
-        //Pig 'N' Whistle / Ät & Njut
-        name: "Ät & Njut",
-        category: HAMBURGER,
-        link_to_menu: "http://atonjut.se/meny/"
     },
 
     //Sushi
