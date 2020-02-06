@@ -17,7 +17,7 @@ const Restaurant = ({ data }) => (
         minWidth="300px"
         width={"100%"}
         maxWidth={"320px"}
-        absHeight={"400px"}
+        absHeight={"430px"}
     >
         <DigitDesign.CardHeader>
             <DigitDesign.CardTitle text={data.name} />
