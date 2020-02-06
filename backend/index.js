@@ -63,7 +63,7 @@ const RESTAURANTS = {
         name: "Arojj Dii",
         category: THAI,
         link_to_menu:
-            "http://ijohanneberg.se/platser/goteborg/johanneberg/restauranger/arojj-dii/"
+            "http://minmatmeny.se/meny/goteborg/185/arojj-dii/"
     },
     ChIJW1EE8aDzT0YRQ6EPi_Ameb0: {
         //Baan Thai
