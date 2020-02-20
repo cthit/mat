@@ -20,7 +20,7 @@ const LUNCH = "lunch";
 /* Settings */
 const PORT = 8080;
 const REDIS_PORT = 6379;
-const REDIS_EXPIRE = 100000; //You can make 1000 requests per day to Google.
+const REDIS_EXPIRE = 10000000; //You can make 1000 requests per day to Google.
 const GOOGLE_PLACE_BASE_URL =
     "https://maps.googleapis.com/maps/api/place/details/json";
 const GOOGLE_PLACE_API_KEY = process.env.GOOGLE_PLACE_API_KEY;
