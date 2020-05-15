@@ -1,8 +1,9 @@
 import axios from "axios";
 
-const baseUrl =
-    process.env.NODE_ENV === "development" ? "http://127.0.0.1:8080" : "";
+export const getRequest = url => {
+    return axios.get("/api" + url);
+};
 
-export function get(endpoint) {
-    return axios.get(baseUrl + endpoint);
-}
+export const postRequest = (url, data) => {
+    return axios.post("/api" + url, data);
+};

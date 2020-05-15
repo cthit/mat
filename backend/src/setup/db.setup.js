@@ -1,0 +1,29 @@
+const pg = require("pg");
+
+const DB_HOST = "mat-db";
+const DB_PORT = 5432;
+const DB_USER = "user";
+const DB_DATABASE = "postgres";
+const DB_PASSWORD = "password";
+
+const getQuery = () => {
+    const pool = new pg.Pool({
+        user: DB_USER,
+        database: DB_DATABASE,
+        password: DB_PASSWORD,
+        host: DB_HOST,
+        port: DB_PORT
+    });
+
+    return (sql, values, convertResult) =>
+        new Promise((resolve, reject) => {
+            pool.query(sql, values, (errors, results) => {
+                if (errors) {
+                    reject(errors);
+                } else {
+                    resolve(convertResult(results));
+                }
+            });
+        });
+};
+module.exports = { getQuery };

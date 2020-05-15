@@ -1,0 +1,9 @@
+{
+  "Back": ["Back", "Tillbaka"],
+  "AdminOptions": ["Admin options", "Admin alternativ"],
+  "EditRestaurants": ["Edit restaurants", "Redigera restauranger"] ,
+  "EditCategories": ["Edit categories", "Redigera kategorier"],
+  "SwedishName": ["Swedish name", "Svenskt namn"],
+  "EnglishName": ["English name", "Engelskt namn"],
+  "Categories": ["Categories", "Kategorier"]
+}
