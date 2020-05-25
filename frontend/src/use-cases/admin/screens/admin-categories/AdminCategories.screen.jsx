@@ -4,8 +4,13 @@ import {
     DigitTextField,
     useDigitTranslations
 } from "@cthit/react-digit-components";
-import { getCategories } from "../../../../api/categories/get.categories.api";
+import {
+    getCategories,
+    getCategory
+} from "../../../../api/categories/get.categories.api";
 import { addCategory } from "../../../../api/categories/post.categories.api";
+import { editCategory } from "../../../../api/categories/put.categories.api";
+import { deleteCategory } from "../../../../api/categories/delete.categories.api";
 
 const AdminCategories = () => {
     const [text] = useDigitTranslations();
@@ -16,6 +21,9 @@ const AdminCategories = () => {
             name={"AdminCategories"}
             readAllRequest={getCategories}
             createRequest={addCategory}
+            readOneRequest={getCategory}
+            updateRequest={editCategory}
+            deleteRequest={deleteCategory}
             formInitialValues={{
                 name_sv: "",
                 name_en: ""
@@ -34,8 +42,9 @@ const AdminCategories = () => {
                     }
                 }
             }}
-            keysOrder={["name_sv", "name_en"]}
+            keysOrder={["id", "name_sv", "name_en"]}
             keysText={{
+                id: "Id",
                 name_sv: text.SwedishName,
                 name_en: text.EnglishName
             }}
@@ -43,14 +52,17 @@ const AdminCategories = () => {
             useHistoryGoBackOnBack
             tableProps={{
                 titleText: text.Categories,
-                search: true,
                 startOrderBy: "name_sv",
-                idProp: "name_sv",
+                idProp: "id",
+                margin: "auto",
+                search: true,
                 flex: "1",
                 startOrderByDirection: "asc",
-                size: { minWidth: "288px", width: "500px", maxWidth: "500px" },
-                margin: "auto"
+                size: { minWidth: "288px" },
+                padding: "0px"
             }}
+            detailsButtonText={text.Details}
+            idProp={"id"}
         />
     );
 };

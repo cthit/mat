@@ -10,8 +10,6 @@ const v4UUIDPattern = new RegExp(
     /^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i
 );
 
-const isUUID = uuid => uuid.match(v4UUIDPattern);
-
 const renameProp = (oldProp, newProp, { [oldProp]: old, ...others }) => ({
     [newProp]: old,
     ...others
@@ -39,7 +37,6 @@ const validateSchema = async (schema, data) => {
 
 module.exports = {
     to,
-    isUUID,
     renameProp,
     validateSchema
 };

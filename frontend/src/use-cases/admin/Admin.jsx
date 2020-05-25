@@ -5,9 +5,6 @@ import AdminRestaurants from "./screens/admin-restaurants";
 import AdminHome from "./screens/admin-home";
 
 const Admin = ({ location }) => {
-    console.log("hej");
-    console.log(location);
-
     return (
         <Switch>
             <Route path={"/admin/categories"} component={AdminCategories} />

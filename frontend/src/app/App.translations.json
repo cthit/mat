@@ -5,5 +5,12 @@
   "EditCategories": ["Edit categories", "Redigera kategorier"],
   "SwedishName": ["Swedish name", "Svenskt namn"],
   "EnglishName": ["English name", "Engelskt namn"],
-  "Categories": ["Categories", "Kategorier"]
+  "Categories": ["Categories", "Kategorier"],
+  "Details": ["Details", "Detaljer"],
+  "Name": ["Name", "Namn"],
+  "HideRestaurant": ["Hide restaurant for users", "Göm restaurangen för användare"],
+  "Category": ["Category", "Kategori"],
+  "Menu": ["Menu", "Meny"],
+  "CampusLocation": ["Campus location", "Campus plats"],
+  "AdminView": ["Admin view", "Adminvy"]
 }

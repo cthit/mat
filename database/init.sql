@@ -1,4 +1,5 @@
 CREATE TYPE CAMPUS AS ENUM ('johanneberg', 'lindholmen');
+CREATE TYPE WEEKDAY AS ENUM ('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday');
 
 CREATE TABLE category (
     id UUID PRIMARY KEY,
@@ -8,11 +9,19 @@ CREATE TABLE category (
 
 CREATE TABLE restaurant (
     id UUID PRIMARY KEY,
-    name VARCHAR(32),
+    name VARCHAR(32) NOT NULL,
     category_id UUID REFERENCES category(id),
-    menu VARCHAR(255),
+    menu VARCHAR(1024),
     hidden BOOL DEFAULT FALSE,
     campus_location CAMPUS NOT NULL
+);
+
+CREATE TABLE opening_hours (
+    restaurant_id UUID REFERENCES restaurant(id),
+    weekday WEEKDAY,
+    opens TIME NOT NULL, -- 0800
+    closes TIME NOT NULL,    -- 2200
+    PRIMARY KEY(restaurant_id, weekday)
 );
 
 CREATE TABLE review (

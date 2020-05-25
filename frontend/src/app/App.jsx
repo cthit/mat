@@ -25,10 +25,6 @@ const App = ({}) => {
         setCommonTranslations
     ] = useDigitTranslations();
 
-    useEffect(() => {
-        getCategories().then(response => console.log(response.data));
-    }, []);
-
     useGamma();
     const user = useGammaMe();
     const userLanguage = user == null ? null : user.language;

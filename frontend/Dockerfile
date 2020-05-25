@@ -1,4 +1,4 @@
-from node:9.11.1 as build
+FROM node:14 as build
 
 COPY /package.json /
 RUN yarn install --production
