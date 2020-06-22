@@ -1,37 +1,10 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { DigitTabs } from "@cthit/react-digit-components";
 import { useLocation, useHistory } from "react-router-dom";
-import findIndex from "lodash/findIndex";
 
 const tabs = [
-    {
-        text: "Pizza",
-        value: "pizza"
-    },
-    {
-        text: "Thai",
-        value: "thai"
-    },
-    {
-        text: "Övrigt",
-        value: "other"
-    },
-    {
-        text: "Hamburgare",
-        value: "hamburger"
-    },
-    {
-        text: "Sushi",
-        value: "sushi"
-    },
-    {
-        text: "Baguetter",
-        value: "baguettes"
-    },
-    {
-        text: "Lunch",
-        value: "lunch"
-    }
+    { text: "Johanneberg", value: "johanneberg" },
+    { text: "Lindholmen", value: "lindholmen" }
 ];
 
 const Tabs = () => {
@@ -40,8 +13,11 @@ const Tabs = () => {
 
     return (
         <DigitTabs
+            centered
+            fullWidth
+            titleFont
             onChange={value => history.push(value)}
-            selected={pathname === "/" ? "pizza" : pathname.substring(1)}
+            selected={pathname === "/" ? "johanneberg" : pathname.substring(1)}
             tabs={tabs}
         />
     );

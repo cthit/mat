@@ -7,7 +7,8 @@ const idIsUUIDMiddleware = require("../middlewares/id-is-uuid.middleware");
 const {
     handleAddRestaurant,
     handleEditRestaurant,
-    handleDeleteRestaurant
+    handleDeleteRestaurant,
+    handleSetOpeningHours
 } = require("../controllers/restaurant.controller");
 
 const getAdminRouter = (router, query) => {
@@ -33,6 +34,11 @@ const getAdminRouter = (router, query) => {
         "/restaurants/:id",
         idIsUUIDMiddleware,
         handleDeleteRestaurant(query)
+    );
+    router.put(
+        "/restaurants/:id/opening_hours",
+        idIsUUIDMiddleware,
+        handleSetOpeningHours(query)
     );
 
     return router;

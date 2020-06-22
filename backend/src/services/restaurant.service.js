@@ -1,5 +1,4 @@
 const uuid = require("uuid").v4;
-
 const { to } = require("../utils/utils");
 const {
     queryGetRestaurants,
@@ -8,6 +7,23 @@ const {
     queryEditRestaurant,
     queryGetRestaurant
 } = require("../repositories/restaurant.repository");
+const {
+    querySetOpeningHours,
+    queryGetOpeningHours,
+    queryGetAllOpeningHours,
+    queryDeleteOpeningHours
+} = require("../repositories/opening-hours.repository");
+const { find } = require("lodash");
+
+const e_weekdays = [
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
+    "sunday"
+];
 
 const addRestaurant = async (query, restaurant) => {
     const id = uuid();
@@ -19,20 +35,44 @@ const addRestaurant = async (query, restaurant) => {
 };
 
 const getRestaurants = async query => {
-    const [err, restaurants] = await to(queryGetRestaurants(query));
+    const [err, [restaurants, allOpeningHours]] = await to([
+        queryGetRestaurants(query),
+        queryGetAllOpeningHours(query)
+    ]);
 
-    return [err, restaurants];
+    const output = restaurants.map(restaurant => ({
+        ...restaurant,
+        openingHours: e_weekdays.map(weekday => {
+            const c = find(allOpeningHours, {
+                weekday,
+                restaurant_id: restaurant.id
+            });
+            return c == null
+                ? { weekday, opens: null, closes: null }
+                : { weekday, opens: c.opens, closes: c.closes };
+        })
+    }));
+
+    return [err, output];
 };
 
 const getRestaurant = async (query, id) => {
-    const [err, result] = await to(queryGetRestaurant(query, id));
+    const [err, [result, result2]] = await to([
+        queryGetRestaurant(query, id),
+        queryGetOpeningHours(query, id)
+    ]);
+
+    const openingHours = e_weekdays.map(weekday => {
+        const c = find(result2, ["weekday", weekday]);
+        return c == null ? { weekday, opens: null, closes: null } : c;
+    });
 
     var restaurant = null;
     if (result.length > 0) {
         restaurant = result[0];
     }
 
-    return [err, restaurant];
+    return [err, { ...restaurant, openingHours }];
 };
 
 const editRestaurant = async (query, id, data) => {
@@ -47,10 +87,29 @@ const deleteRestaurant = async (query, id) => {
     return [err, success];
 };
 
+const setOpeningHours = async (query, id, weekdays) => {
+    const errs = [];
+    var totalSuccess = true;
+
+    const [err] = await to([
+        weekdays.map((weekday, i) =>
+            weekday.opens == null || weekday.closes == null
+                ? queryDeleteOpeningHours(query, id, e_weekdays[i])
+                : querySetOpeningHours(query, id, {
+                      ...weekday,
+                      weekday: e_weekdays[i]
+                  })
+        )
+    ]);
+
+    return [err, err == null];
+};
+
 module.exports = {
     getRestaurants,
     addRestaurant,
     getRestaurant,
     editRestaurant,
-    deleteRestaurant
+    deleteRestaurant,
+    setOpeningHours
 };

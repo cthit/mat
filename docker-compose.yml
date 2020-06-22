@@ -52,6 +52,9 @@ services:
       - mat
     ports:
       - 5432:5432 # Used by datagrip
+    volumes:
+      - ./database/init.sql:/docker-entrypoint-initdb.d/1-schema.sql
+      - ./database/seeds.sql:/docker-entrypoint-initdb.d/2-data.sql
 
   gamma-frontend:
     image: cthit/gamma-frontend:development

@@ -3,7 +3,8 @@ const {
     addRestaurant,
     getRestaurants,
     deleteRestaurant,
-    editRestaurant
+    editRestaurant,
+    setOpeningHours
 } = require("../services/restaurant.service");
 
 const handleAddRestaurant = query => async (req, res) => {
@@ -89,11 +90,20 @@ const handleGetRestaurants = query => async (req, res) => {
 
 const handleGetVisibleRestaurants = query => async (req, res) => {};
 
+const handleSetOpeningHours = query => async (req, res) => {
+    const { id } = req.params;
+
+    const [err, success] = await setOpeningHours(query, id, req.body);
+
+    res.sendStatus(200);
+};
+
 module.exports = {
     handleAddRestaurant,
     handleEditRestaurant,
     handleDeleteRestaurant,
     handleGetRestaurant,
     handleGetRestaurants,
-    handleGetVisibleRestaurants
+    handleGetVisibleRestaurants,
+    handleSetOpeningHours
 };

@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo } from "react";
 
 import {
+    DigitBottomNavigation,
     DigitHeader,
     useDigitTranslations,
     useGamma,
@@ -8,13 +9,10 @@ import {
 } from "@cthit/react-digit-components";
 import Tabs from "./elements/tabs";
 import Header from "./elements/header";
-import { getRestaurants } from "../api/restaurants/get.restaurants.api";
 import { useLocation, Switch, Route } from "react-router-dom";
 import Admin from "../use-cases/admin";
-import Home from "../use-cases/home";
-
+import Restaurants from "../use-cases/restaurants";
 import translations from "./App.translations";
-import { getCategories } from "../api/categories/get.categories.api";
 
 const App = ({}) => {
     const { pathname } = useLocation();
@@ -47,13 +45,12 @@ const App = ({}) => {
                 justifyContent: "space-between"
             }}
             renderHeader={() => <Header />}
-            toolbarHeight={!admin ? "48px" : "0px"}
-            renderToolbar={!admin ? () => <Tabs /> : null}
+            toolbarHeight={"auto"}
             renderMain={() => (
                 <>
                     <Switch>
                         <Route path={"/admin"} component={Admin} />
-                        <Route path={"/"} component={Home} />
+                        <Route path={"/"} component={Restaurants} />
                     </Switch>
                 </>
             )}

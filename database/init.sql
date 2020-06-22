@@ -13,7 +13,10 @@ CREATE TABLE restaurant (
     category_id UUID REFERENCES category(id),
     menu VARCHAR(1024),
     hidden BOOL DEFAULT FALSE,
-    campus_location CAMPUS NOT NULL
+    campus_location CAMPUS NOT NULL,
+    maps_link VARCHAR(1024),
+    address VARCHAR(1024),
+    phone_number VARCHAR(32)
 );
 
 CREATE TABLE opening_hours (
@@ -23,6 +26,16 @@ CREATE TABLE opening_hours (
     closes TIME NOT NULL,    -- 2200
     PRIMARY KEY(restaurant_id, weekday)
 );
+
+CREATE OR REPLACE FUNCTION AddOrUpdateOpeningHours(_restaurant_id UUID, _weekday WEEKDAY, _opens TIME, _closes TIME) RETURNS VOID AS $$
+    BEGIN
+        IF EXISTS (SELECT * FROM opening_hours WHERE opening_hours.restaurant_id = _restaurant_id AND opening_hours.weekday = _weekday) THEN
+            UPDATE opening_hours SET opens = _opens, closes = _closes WHERE restaurant_id = _restaurant_id AND weekday = _weekday;
+        ELSE
+            INSERT INTO opening_hours(restaurant_id, weekday, opens, closes) VALUES (_restaurant_id, _weekday, _opens, _closes);
+        END IF;
+    END
+$$ LANGUAGE plpgsql;
 
 CREATE TABLE review (
     uid UUID NOT NULL,
