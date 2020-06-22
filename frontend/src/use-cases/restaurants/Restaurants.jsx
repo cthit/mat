@@ -6,25 +6,29 @@ import Filters from "./elements/filters";
 import { FilterContextProvider } from "./elements/filters/Filter.context";
 import RestaurantsContext from "./Restaurants.context";
 import { getCategories } from "../../api/categories/get.categories.api";
+import EatIT from "./elements/eatit";
 
 const Container = styled.div`
     width: 100%;
 
     display: grid;
     grid-template-columns: auto 300px;
-    grid-template-rows: auto;
+    grid-template-rows: min-content 1fr;
     grid-gap: 1rem;
 
     @media (max-width: 768px) {
         grid-template-columns: auto;
-        grid-template-rows: auto auto;
     }
+`;
+
+const Column = styled.div`
+    display: flex;
+    flex-direction: column;
 `;
 
 const Restaurants = () => {
     const [restaurants, setRestaurants] = useState(null);
     const [categories, setCategories] = useState(null);
-    const [filters, setFilters] = useState({});
 
     useEffect(() => {
         Promise.all([getRestaurants(), getCategories()]).then(results => {
@@ -42,7 +46,8 @@ const Restaurants = () => {
             <FilterContextProvider>
                 <Container>
                     <DisplayRestaurants restaurants={restaurants} />
-                    <Filters filters={filters} onChange={setFilters} />
+                    <EatIT />
+                    <Filters />
                 </Container>
             </FilterContextProvider>
         </RestaurantsContext.Provider>

@@ -10,13 +10,12 @@ import { NonStyledALink } from "../../../../../../../../common-ui/design";
 import Map from "@material-ui/icons/Map";
 
 const GoogleMapsLink = ({ address, mapsLink }) => (
-    <FlexAlignCenter>
+    <>
         <Map />
-        <Spacing />
         <NonStyledALink href={mapsLink}>
             <DigitText.Text text={address} />
         </NonStyledALink>
-    </FlexAlignCenter>
+    </>
 );
 
 export default GoogleMapsLink;

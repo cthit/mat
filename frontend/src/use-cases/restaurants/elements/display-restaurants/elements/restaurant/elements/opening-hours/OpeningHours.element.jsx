@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import {
     DigitText,
     DigitLayout,
@@ -12,8 +12,6 @@ const Table = styled.div`
     grid-template-columns: auto auto;
     grid-template-rows: repeat(7, 1fr);
     grid-column-gap: 1rem;
-
-    margin-top: 16px;
 `;
 
 const Row = styled.div`
@@ -47,7 +45,7 @@ const formatOpeningHours = (openingHours, weekday, text) => {
     return opens + " - " + closes;
 };
 
-const OpeningHours = ({ openingHours }) => {
+const OpeningHours = ({ openingHours, currentTime }) => {
     const [text] = useDigitTranslations();
 
     return (

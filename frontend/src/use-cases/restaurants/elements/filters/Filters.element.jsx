@@ -85,6 +85,21 @@ const Filters = () => {
                                 ]}
                             />
                             <DigitDesign.Divider />
+                            <InlineRow>
+                                <DigitText.Title text={"Öppet nu?"} />
+                                <DigitSwitch
+                                    size={{ width: "60px" }}
+                                    primary
+                                    value={state.openNow}
+                                    onChange={e =>
+                                        dispatch({
+                                            type: UPDATE_OPEN_NOW,
+                                            openNow: e.target.checked
+                                        })
+                                    }
+                                />
+                            </InlineRow>
+                            <DigitDesign.Divider />
                             <DigitText.Title text={"Kategorier?"} />
                             {categories.map(category => (
                                 <DigitCheckbox
@@ -103,21 +118,6 @@ const Filters = () => {
                                     label={category["name_" + activeLanguage]}
                                 />
                             ))}
-                            <DigitDesign.Divider />
-                            <InlineRow>
-                                <DigitText.Title text={"Öppet nu?"} />
-                                <DigitSwitch
-                                    size={{ width: "60px" }}
-                                    primary
-                                    value={state.openNow}
-                                    onChange={e =>
-                                        dispatch({
-                                            type: UPDATE_OPEN_NOW,
-                                            openNow: e.target.checked
-                                        })
-                                    }
-                                />
-                            </InlineRow>
                             <DigitDesign.Divider />
                             <DigitText.Title text={"Sortera efter..."} />
                             <DigitSelect
