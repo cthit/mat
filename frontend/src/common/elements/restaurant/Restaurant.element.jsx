@@ -4,17 +4,17 @@ import {
     DigitDesign,
     DigitButton,
     DigitLayout,
-    DigitText
+    DigitText,
+    useDigitTranslations
 } from "@cthit/react-digit-components";
-import { Margin, Spacing } from "../../../../../../common-ui/layout";
-import { NonStyledALink } from "../../../../../../common-ui/design";
 import OpenStatus from "./elements/open-status";
 import PhoneNumber from "./elements/phone-number";
 import GoogleMapsLink from "./elements/google-maps-link";
 import OpeningHours from "./elements/opening-hours";
-import FilterContext from "../../../filters/Filter.context";
 import styled from "styled-components";
 import useOpenStatus from "./hooks/use-open-status";
+import RestaurantRating from "./elements/restaurant-rating";
+import { NonStyledALink, NonStyledLink } from "../../../common-ui/design";
 
 const RestaurantBody = styled.div`
     display: grid;
@@ -29,7 +29,7 @@ const SpanWidth = styled.div`
     grid-column-end: 3;
 `;
 
-const Restaurant = ({ data }) => {
+const Restaurant = ({ data, filters, disableReview }) => {
     const {
         category_id,
         campus_location,
@@ -38,13 +38,20 @@ const Restaurant = ({ data }) => {
         address,
         maps_link,
         openingHours,
-        hidden
+        hidden,
+        rating,
+        menu,
+        id
     } = data;
 
-    const [filters] = useContext(FilterContext);
-    const openStatus = useOpenStatus(openingHours);
+    const [openStatus, currentWeekday] = useOpenStatus(openingHours);
+    const [text] = useDigitTranslations();
 
     const acceptedByFilter = useMemo(() => {
+        if (filters == null) {
+            return true;
+        }
+
         if (filters.campus !== campus_location) {
             return false;
         } else if (
@@ -75,6 +82,7 @@ const Restaurant = ({ data }) => {
                     {phone_number != null && (
                         <PhoneNumber phoneNumber={phone_number} />
                     )}
+                    {rating != null && <RestaurantRating rating={rating} />}
                     {maps_link != null && (
                         <GoogleMapsLink
                             address={address}
@@ -90,15 +98,28 @@ const Restaurant = ({ data }) => {
                         )}
 
                         {openStatus !== "no-information" && (
-                            <OpeningHours openingHours={openingHours} />
+                            <OpeningHours
+                                openingHours={openingHours}
+                                currentWeekday={currentWeekday}
+                            />
                         )}
                     </SpanWidth>
                 </RestaurantBody>
             </DigitDesign.CardBody>
             <DigitDesign.CardButtons reverseDirection>
-                <NonStyledALink target="_blank" href={data.menu}>
-                    <DigitButton primary outlined text="Visa meny" />
+                <NonStyledALink target="_blank" href={menu}>
+                    <DigitButton
+                        disabled={menu == null}
+                        primary
+                        outlined
+                        text="Visa meny"
+                    />
                 </NonStyledALink>
+                {!disableReview && (
+                    <NonStyledLink to={"/review/" + id}>
+                        <DigitButton text={text.Review} secondary outlined />
+                    </NonStyledLink>
+                )}
             </DigitDesign.CardButtons>
         </DigitDesign.Card>
     );

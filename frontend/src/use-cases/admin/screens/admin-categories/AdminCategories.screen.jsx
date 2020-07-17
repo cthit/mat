@@ -63,6 +63,7 @@ const AdminCategories = () => {
             }}
             detailsButtonText={text.Details}
             idProp={"id"}
+            readAllBackButton
         />
     );
 };

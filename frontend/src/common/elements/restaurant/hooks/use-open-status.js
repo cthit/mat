@@ -1,18 +1,16 @@
 import { useMemo } from "react";
-import findIndex from "lodash/findIndex";
 
-const currentTime = "20:30";
-const currentWeekday = 2; //"tuesday";
+const weekdays = [
+    "sunday",
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday"
+];
 
-const currentDate = new Date();
-
-var currentDay = currentDate.getDay();
-var distance = currentWeekday - currentDay;
-currentDate.setDate(currentDate.getDate() + distance);
-currentDate.setHours(parseInt(currentTime.split(":")[0]));
-currentDate.setMinutes(parseInt(currentTime.split(":")[1]));
-
-const toDate = (weekday, time) => {
+const toDate = (weekday, time, currentDate) => {
     var date = new Date();
 
     const timeParts = time.split(":");
@@ -29,17 +27,21 @@ const toDate = (weekday, time) => {
     return date;
 };
 
-const toDates = (weekday, opens, closes) => {
+const toDates = (weekday, opens, closes, currentDate) => {
     const opensHours = parseInt(opens.split(":")[0]);
     const closesHours = parseInt(closes.split(":")[0]);
 
     return [
-        toDate(weekday, opens),
-        toDate(closesHours < opensHours ? (weekday + 1) % 7 : weekday, closes)
+        toDate(weekday, opens, currentDate),
+        toDate(
+            closesHours < opensHours ? (weekday + 1) % 7 : weekday,
+            closes,
+            currentDate
+        )
     ];
 };
 
-const possibleDays = (currentWeekday, a, b, c) => {
+const possibleDays = (currentWeekday, a, b, c, currentDate) => {
     const previousWeekday =
         currentWeekday > 0 ? currentWeekday - 1 : currentWeekday;
     const nextWeekday = (currentWeekday + 1) % 7;
@@ -47,17 +49,17 @@ const possibleDays = (currentWeekday, a, b, c) => {
     return [
         ...(a.opens == null
             ? [null, null]
-            : toDates(previousWeekday, a.opens, a.closes)),
+            : toDates(previousWeekday, a.opens, a.closes, currentDate)),
         ...(b.opens == null
             ? [null, null]
-            : toDates(currentWeekday, b.opens, b.closes)),
+            : toDates(currentWeekday, b.opens, b.closes, currentDate)),
         ...(c.opens == null
             ? [null, null]
-            : toDates(nextWeekday, c.opens, c.closes))
+            : toDates(nextWeekday, c.opens, c.closes, currentDate))
     ];
 };
 
-const calc = openingHours => {
+const calc = (openingHours, currentWeekday, currentDate) => {
     //const index = (findIndex(openingHours, ["weekday", currentWeekday]) + 1) % 7;
     const index = currentWeekday;
 
@@ -70,7 +72,8 @@ const calc = openingHours => {
         index, // + (1 % 7),
         previousDay,
         currentDay,
-        nextDay
+        nextDay,
+        currentDate
     );
 
     var periodIndex = -1;
@@ -96,6 +99,17 @@ const calc = openingHours => {
 };
 
 function useOpenStatus(openingHours) {
+    const currentTime = "21:00";
+    const currentWeekday = 2; //"tuesday";
+
+    const currentDate = new Date();
+
+    var currentDay = currentDate.getDay();
+    var distance = currentWeekday - currentDay;
+    currentDate.setDate(currentDate.getDate() + distance);
+    currentDate.setHours(parseInt(currentTime.split(":")[0]));
+    currentDate.setMinutes(parseInt(currentTime.split(":")[1]));
+
     const hasOpeningHours = useMemo(() => {
         var open = false;
         for (var oh of openingHours) {
@@ -107,9 +121,15 @@ function useOpenStatus(openingHours) {
         return open;
     }, [openingHours]);
 
-    const status = useMemo(() => calc(openingHours), [openingHours]);
+    const status = useMemo(
+        () => calc(openingHours, currentWeekday, currentDate),
+        [openingHours]
+    );
 
-    return !hasOpeningHours ? "no-information" : status;
+    return [
+        !hasOpeningHours ? "no-information" : status,
+        weekdays[currentWeekday]
+    ];
 }
 
 export default useOpenStatus;

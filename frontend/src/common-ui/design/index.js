@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const Material = styled.div`
     width: ${props => props.width};
@@ -31,6 +32,10 @@ export const Material = styled.div`
 
 export const Divider = styled.hr`
     margin: 0px;
+`;
+
+export const NonStyledLink = styled(Link)`
+    text-decoration: none;
 `;
 
 export const NonStyledALink = styled.a`

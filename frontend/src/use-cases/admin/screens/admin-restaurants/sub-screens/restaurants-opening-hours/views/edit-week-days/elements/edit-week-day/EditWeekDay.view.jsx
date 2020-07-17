@@ -15,15 +15,7 @@ const EditWeekDay = ({ weekday, open, opens, closes }) => {
             <div style={{ flex: "0.5" }}>
                 <DigitText.Text bold text={text[weekday]} />
             </div>
-            <DigitCheckbox
-                {...open}
-                onChange={e =>
-                    open.onChange({ target: { value: e.target.checked } })
-                }
-                flex={"1"}
-                label={text.Open}
-                primary
-            />
+            <DigitCheckbox {...open} flex={"1"} label={text.Open} primary />
 
             <DigitTimePicker
                 {...opens}

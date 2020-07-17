@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
-import Restaurant from "./elements/restaurant";
+import Restaurant from "../../../../common/elements/restaurant";
+import FilterContext from "../filters/Filter.context";
 
 const Grid = styled.div`
+    grid-column-start: 2;
+    grid-column-end: 3;
+
     grid-row-start: 1;
     grid-row-end: 3;
+
+    justify-content: center;
 
     width: 100%;
 
@@ -14,13 +20,21 @@ const Grid = styled.div`
     grid-gap: 1rem;
 `;
 
-const DisplayRestaurants = ({ restaurants, filters }) => (
-    <Grid>
-        {restaurants.map(restaurant => (
-            <Restaurant key={restaurant.name} data={restaurant} />
-        ))}
-    </Grid>
-);
+const DisplayRestaurants = ({ restaurants }) => {
+    const [filters] = useContext(FilterContext);
+
+    return (
+        <Grid>
+            {restaurants.map(restaurant => (
+                <Restaurant
+                    key={restaurant.name}
+                    data={restaurant}
+                    filters={filters}
+                />
+            ))}
+        </Grid>
+    );
+};
 
 DisplayRestaurants.defaultProps = {
     restaurants: []

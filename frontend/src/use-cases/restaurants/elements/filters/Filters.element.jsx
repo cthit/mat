@@ -56,7 +56,6 @@ const Filters = () => {
 
     return (
         <div>
-            {" "}
             {/*Needed to make sticky work*/}
             <Sticky>
                 <DigitDesign.Card size={{ width: "100%", height: "auto" }}>

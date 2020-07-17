@@ -5,6 +5,8 @@ import {
     DigitSelect,
     DigitSwitch,
     DigitTextField,
+    DigitLayout,
+    DigitText,
     useDigitTranslations
 } from "@cthit/react-digit-components";
 import {
@@ -16,6 +18,7 @@ import { editRestaurant } from "../../../../../../api/restaurants/put.restaurant
 import { deleteRestaurant } from "../../../../../../api/restaurants/delete.restaurants.api";
 import { getCategories } from "../../../../../../api/categories/get.categories.api";
 import { useHistory, useParams } from "react-router-dom";
+import MatRating from "../../../../../../common/elements/mat-rating";
 
 const RestaurantsCRUD = () => {
     const [text, activeLanguage] = useDigitTranslations();
@@ -113,7 +116,8 @@ const RestaurantsCRUD = () => {
                 "hidden",
                 "campus_location",
                 "maps_link",
-                "phone_number"
+                "phone_number",
+                "rating"
             ]}
             createKeysOrder={[
                 "name",
@@ -144,6 +148,24 @@ const RestaurantsCRUD = () => {
             }}
             detailsButtonText={text.Details}
             idProp={"id"}
+            customDetailsRenders={{
+                rating: ({ rating }) =>
+                    rating == null ? (
+                        <DigitText.Text
+                            alignCenter
+                            bold
+                            text={text.NoRatings}
+                        />
+                    ) : (
+                        <DigitLayout.Center>
+                            <MatRating
+                                value={rating}
+                                readOnly
+                                upperLabel={text.Rating}
+                            />
+                        </DigitLayout.Center>
+                    )
+            }}
             detailsRenderCardEnd={data => (
                 <DigitButton
                     outlined
@@ -158,6 +180,8 @@ const RestaurantsCRUD = () => {
                     }
                 />
             )}
+            readAllBackButton
+            detailsTitle={one => one.name}
         />
     );
 };

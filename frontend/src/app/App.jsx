@@ -13,6 +13,7 @@ import { useLocation, Switch, Route } from "react-router-dom";
 import Admin from "../use-cases/admin";
 import Restaurants from "../use-cases/restaurants";
 import translations from "./App.translations";
+import ReviewRestaurant from "../use-cases/review-restaurant";
 
 const App = ({}) => {
     const { pathname } = useLocation();
@@ -23,7 +24,7 @@ const App = ({}) => {
         setCommonTranslations
     ] = useDigitTranslations();
 
-    useGamma();
+    const [loading, , signIn] = useGamma("/api/me", "/api/auth", false);
     const user = useGammaMe();
     const userLanguage = user == null ? null : user.language;
 
@@ -35,8 +36,6 @@ const App = ({}) => {
         setCommonTranslations(translations);
     }, []);
 
-    const admin = useMemo(() => pathname.startsWith("/admin"), [pathname]);
-
     return (
         <DigitHeader
             title="Mat"
@@ -44,12 +43,16 @@ const App = ({}) => {
                 flex: "1",
                 justifyContent: "space-between"
             }}
-            renderHeader={() => <Header />}
+            renderHeader={() => <Header loading={loading} signIn={signIn} />}
             toolbarHeight={"auto"}
             renderMain={() => (
                 <>
                     <Switch>
                         <Route path={"/admin"} component={Admin} />
+                        <Route
+                            path={"/review/:id"}
+                            component={ReviewRestaurant}
+                        />
                         <Route path={"/"} component={Restaurants} />
                     </Switch>
                 </>

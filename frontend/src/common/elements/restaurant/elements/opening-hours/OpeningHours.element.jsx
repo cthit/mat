@@ -11,7 +11,9 @@ const Table = styled.div`
     display: grid;
     grid-template-columns: auto auto;
     grid-template-rows: repeat(7, 1fr);
-    grid-column-gap: 1rem;
+    grid-column-gap: 1.5rem;
+    grid-column-start: 1;
+    grid-column-end: 3;
 `;
 
 const Row = styled.div`
@@ -45,16 +47,21 @@ const formatOpeningHours = (openingHours, weekday, text) => {
     return opens + " - " + closes;
 };
 
-const OpeningHours = ({ openingHours, currentTime }) => {
+const OpeningHours = ({ openingHours, currentWeekday }) => {
     const [text] = useDigitTranslations();
 
     return (
         <Table>
             {weekdays.map(weekday => (
                 <React.Fragment key={weekday}>
-                    <DigitText.Text alignRight text={text[weekday]} />
+                    <DigitText.Text
+                        alignRight
+                        text={text[weekday] + ":"}
+                        bold={currentWeekday === weekday}
+                    />
                     <DigitText.Text
                         text={formatOpeningHours(openingHours, weekday, text)}
+                        bold={currentWeekday === weekday}
                     />
                 </React.Fragment>
             ))}

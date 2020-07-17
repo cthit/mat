@@ -20,34 +20,48 @@ const handleGetMe = async (req, res) => {
 
 const handleOAuthCode = async (req, res) => {
     const { code } = req.body;
+
     if (code == null) {
         res.status(422).send("no code provided");
         return;
     }
+
+    console.log("Let's go: " + code);
 
     const [err, response] = await to(postGammaToken(code));
     if (err) {
         if (err.response && err.response.status === 401) {
             res.status(401).send(getGammaUri());
         } else {
-            res.status(500);
-            console.log(err);
+            res.sendStatus(500);
+            console.log(err.response.data);
         }
     } else {
         const { access_token, expires_in } = response.data;
         //Todo set the maxAge to something that expires_in.
         //req.session.cookie.maxAge = expires_in;
-        payload = jwt.decode(access_token);
-        req.session.uid = payload.uid;
-        req.session.cid = payload.user_name;
-        req.session.nick = payload.nick;
-        req.session.authorities = payload.authorities;
-        req.session.token = access_token;
-        res.status(200).send("session created");
+
+        getMe(access_token)
+            .then(response => {
+                req.session.uid = response.data.id;
+                req.session.user = response.data;
+                req.session.token = access_token;
+                res.status(200).send("session created");
+            })
+            .catch(error => {
+                console.log(error.response.data);
+                res.sendStatus(500);
+            });
     }
+};
+
+const handleSignOut = async (req, res) => {
+    req.session.destroy();
+    res.status(200).send("session destroyed");
 };
 
 module.exports = {
     handleGetMe,
-    handleOAuthCode
+    handleOAuthCode,
+    handleSignOut
 };

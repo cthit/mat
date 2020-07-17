@@ -1,3 +1,8 @@
+const { getUsers } = require("./gamma.service");
+const {
+    queryGetReviewsFromRestaurant,
+    queryGetReviews
+} = require("../repositories/review.repository");
 const uuid = require("uuid").v4;
 const { to } = require("../utils/utils");
 const {
@@ -13,7 +18,7 @@ const {
     queryGetAllOpeningHours,
     queryDeleteOpeningHours
 } = require("../repositories/opening-hours.repository");
-const { find } = require("lodash");
+const { find, filter } = require("lodash");
 
 const e_weekdays = [
     "monday",
@@ -35,44 +40,96 @@ const addRestaurant = async (query, restaurant) => {
 };
 
 const getRestaurants = async query => {
-    const [err, [restaurants, allOpeningHours]] = await to([
+    const [err, [restaurants, allOpeningHours, reviews]] = await to([
         queryGetRestaurants(query),
-        queryGetAllOpeningHours(query)
+        queryGetAllOpeningHours(query),
+        queryGetReviews(query)
     ]);
 
-    const output = restaurants.map(restaurant => ({
-        ...restaurant,
-        openingHours: e_weekdays.map(weekday => {
-            const c = find(allOpeningHours, {
-                weekday,
-                restaurant_id: restaurant.id
-            });
-            return c == null
-                ? { weekday, opens: null, closes: null }
-                : { weekday, opens: c.opens, closes: c.closes };
-        })
-    }));
+    const output = restaurants.map(restaurant => {
+        const restaurantReviews = filter(reviews, [
+            "restaurant_id",
+            restaurant.id
+        ]);
+
+        var rating = null;
+        if (restaurantReviews != null && restaurantReviews.length > 0) {
+            rating =
+                restaurantReviews.reduce(
+                    (totalRating, review) =>
+                        parseInt(review.rating + totalRating),
+                    0
+                ) / restaurantReviews.length;
+
+            //Rounds to one decimal point
+            rating = Math.round(rating * 10) / 10;
+        }
+
+        return {
+            ...restaurant,
+            openingHours: e_weekdays.map(weekday => {
+                const c = find(allOpeningHours, {
+                    weekday,
+                    restaurant_id: restaurant.id
+                });
+                return c == null
+                    ? { weekday, opens: null, closes: null }
+                    : { weekday, opens: c.opens, closes: c.closes };
+            }),
+            rating
+        };
+    });
 
     return [err, output];
 };
 
 const getRestaurant = async (query, id) => {
-    const [err, [result, result2]] = await to([
+    const [
+        err,
+        [restaurantResult, openingHoursResult, reviewsResult, usersResult]
+    ] = await to([
         queryGetRestaurant(query, id),
-        queryGetOpeningHours(query, id)
+        queryGetOpeningHours(query, id),
+        queryGetReviewsFromRestaurant(query, id),
+        getUsers()
     ]);
 
+    var restaurant = null;
+    if (restaurantResult.length > 0) {
+        restaurant = restaurantResult[0];
+    }
+
     const openingHours = e_weekdays.map(weekday => {
-        const c = find(result2, ["weekday", weekday]);
+        const c = find(openingHoursResult, ["weekday", weekday]);
         return c == null ? { weekday, opens: null, closes: null } : c;
     });
 
-    var restaurant = null;
-    if (result.length > 0) {
-        restaurant = result[0];
-    }
+    const reviews = reviewsResult.map(
+        ({ uid, rating, description, created_at, updated_at }) => {
+            const user = find(usersResult, ["id", uid]);
+            const nick = user == null ? "Deleted user" : user.nick;
+            const avatarUrl = user == null ? null : user.avatarUrl;
 
-    return [err, { ...restaurant, openingHours }];
+            return {
+                reviewer: { nick, avatarUrl },
+                rating,
+                description,
+                created_at,
+                updated_at
+            };
+        }
+    );
+
+    var rating =
+        reviewsResult.reduce(
+            (totalRating, review) => parseInt(review.rating + totalRating),
+            0
+        ) / reviewsResult.length;
+
+    //Rounds to one decimal point
+    rating = Math.round(rating * 10) / 10;
+
+    return [err, { ...restaurant, openingHours, reviews, rating }];
 };
 
 const editRestaurant = async (query, id, data) => {

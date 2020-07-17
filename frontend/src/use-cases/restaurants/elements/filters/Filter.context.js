@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from "react";
+import React, { createContext, useEffect, useReducer } from "react";
 import xor from "lodash/xor";
 
 const UPDATE_OPEN_NOW = "update-open-now";
@@ -47,17 +47,26 @@ const filterReducer = (state, action) => {
     }
 };
 
-const defaultValue = {
-    campus: "johanneberg",
-    categories: [],
-    openNow: false,
-    sortBy: "highestRating",
-    name: "",
-    reviewed: false
-};
+const savedFilter = localStorage.getItem("filters");
+
+const defaultValue =
+    savedFilter == null
+        ? {
+              campus: "johanneberg",
+              categories: [],
+              openNow: false,
+              sortBy: "highestRating",
+              name: "",
+              reviewed: false
+          }
+        : JSON.parse(savedFilter);
 
 const FilterContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(filterReducer, defaultValue);
+
+    useEffect(() => {
+        localStorage.setItem("filters", JSON.stringify(state));
+    }, [state]);
 
     return (
         <FilterContext.Provider value={[state, dispatch]}>

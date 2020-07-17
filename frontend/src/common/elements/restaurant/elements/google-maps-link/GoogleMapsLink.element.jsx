@@ -1,18 +1,13 @@
 import React from "react";
 
 import { DigitText } from "@cthit/react-digit-components";
-import { Icon } from "../../../../../../../../common-ui/image";
-import {
-    FlexAlignCenter,
-    Spacing
-} from "../../../../../../../../common-ui/layout";
-import { NonStyledALink } from "../../../../../../../../common-ui/design";
 import Map from "@material-ui/icons/Map";
+import { NonStyledALink } from "../../../../../common-ui/design";
 
 const GoogleMapsLink = ({ address, mapsLink }) => (
     <>
         <Map />
-        <NonStyledALink href={mapsLink}>
+        <NonStyledALink target={"_blank"} href={mapsLink}>
             <DigitText.Text text={address} />
         </NonStyledALink>
     </>

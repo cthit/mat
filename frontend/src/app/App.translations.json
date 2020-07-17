@@ -31,5 +31,16 @@
   "Closed": ["Closed", "Stängt"],
   "open": ["Open", "Öppet"],
   "closed": ["Closed", "Stängt"],
-  "closing-soon": ["Closing soon", "Stänger snart"]
+  "closing-soon": ["Closing soon", "Stänger snart"],
+  "SignInWithGamma": ["Sign in with Gamma", "Logga in med Gamma"],
+  "Rating": ["Rating", "Betyg"],
+  "NoRatings": ["No ratings", "Inga betyg"],
+  "Review": ["Review", "Recensera"],
+  "OtherReviews": ["Other reviews", "Andra recensioner"],
+  "YourReview": ["Your review", "Din recension"],
+  "Save": ["Save", "Spara"],
+  "YourRating": ["Rating", "Betyg"],
+  "YourDescription": ["Description", "Beskrivning"],
+  "SignInRequired": ["Sign in required", "Inloggning krävs"],
+  "SignInRequiredText": ["To be able to leave reviews on mat.chalmers.it, you'll need an IT-account.  Press the button on the top right of the website to sign in.", "För att kunna lämna recensioner på mat.chalmers.it behöver du ett IT-konto. Tryck på knappen uppe till höger för att logga in."]
 }

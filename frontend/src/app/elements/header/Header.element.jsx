@@ -8,10 +8,12 @@ import {
 } from "@cthit/react-digit-components";
 import some from "lodash/some";
 import { useHistory } from "react-router-dom";
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import { postRequest } from "../../../api/utils/api.utils";
 
 const authority = "admin";
 
-const Header = () => {
+const Header = ({ loading, signIn }) => {
     const [text] = useDigitTranslations();
     const history = useHistory();
     const user = useGammaMe();
@@ -21,17 +23,22 @@ const Header = () => {
 
     return (
         <DigitLayout.Row>
-            {admin && (
+            {!loading && user == null && (
                 <DigitButton
-                    text={text.AdminView}
-                    onClick={() => history.push("/admin")}
                     outlined
-                    margin={{ right: "16px" }}
-                    size={{ height: "40px" }}
-                    alignSelf={"center"}
+                    text={text.SignInWithGamma}
+                    startIcon={<AccountCircle />}
+                    onClick={signIn}
                 />
             )}
-            <DigitGammaActions />
+            <DigitGammaActions
+                customOptionsOnClick={item =>
+                    item === "admin" ? history.push("/admin") : null
+                }
+                customOptions={{ admin: text.AdminView }}
+                customOrder={["admin", "viewAccount", "signOut"]}
+                signOut={() => postRequest("/sign-out")}
+            />
         </DigitLayout.Row>
     );
 };

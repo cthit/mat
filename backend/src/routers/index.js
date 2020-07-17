@@ -15,7 +15,7 @@ const ensureAuthentication = (req, res, next) => {
 };
 
 const ensureAdmin = (req, res, next) => {
-    const authorities = req.session.authorities;
+    const authorities = req.session.user.authorities;
     if (authorities.includes(MAT_AUTHORITY)) {
         next();
     } else {

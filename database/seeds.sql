@@ -180,3 +180,54 @@ INSERT
 INSERT
     INTO opening_hours (restaurant_id, weekday, opens, closes)
     VALUES ('5ac07741-ce4b-482e-999d-ca5e081b52b8', 'friday', '1200', '1800');
+
+INSERT
+    INTO review(uid, restaurant_id, description, rating)
+    VALUES('88eec5c2-5ebb-4e13-9a76-fcc4dac9e74f', '5ac07741-ce4b-482e-999d-ca5e081b52b8', NULL, 3);
+
+INSERT
+    INTO review(uid, restaurant_id, description, rating)
+    VALUES('0a799f6d-c65a-4d20-8588-2ff5375d6cce', '5ac07741-ce4b-482e-999d-ca5e081b52b8', NULL, 4);
+
+INSERT
+    INTO review(uid, restaurant_id, description, rating)
+    VALUES('4efb340f-540c-4b15-a362-d402aab10195', '5ac07741-ce4b-482e-999d-ca5e081b52b8', 'This was a great restaurant!!', 5);
+
+
+INSERT
+    INTO review(uid, restaurant_id, description, rating)
+    VALUES('88eec5c2-5ebb-4e13-9a76-fcc4dac9e74f', 'c81fe007-2bd8-4e50-9fb8-5a56b52970e3', 'Nope not for me', 1);
+
+INSERT
+    INTO review(uid, restaurant_id, description, rating)
+    VALUES('0a799f6d-c65a-4d20-8588-2ff5375d6cce', 'c81fe007-2bd8-4e50-9fb8-5a56b52970e3', 'Great!!!!', 4);
+
+INSERT
+    INTO review(uid, restaurant_id, description, rating)
+    VALUES('4efb340f-540c-4b15-a362-d402aab10195', 'c81fe007-2bd8-4e50-9fb8-5a56b52970e3', 'This was a great restaurant!!', 5);
+
+INSERT
+    INTO review(uid, restaurant_id, description, rating)
+    VALUES('88eec5c2-5ebb-4e13-9a76-fcc4dac9e74f', '47097a83-7df7-478e-8f45-467b26d9f05e', NULL, 3);
+
+INSERT
+    INTO review(uid, restaurant_id, description, rating)
+    VALUES('0a799f6d-c65a-4d20-8588-2ff5375d6cce', '47097a83-7df7-478e-8f45-467b26d9f05e', NULL, 4);
+
+INSERT
+    INTO review(uid, restaurant_id, description, rating)
+    VALUES('4efb340f-540c-4b15-a362-d402aab10195', '47097a83-7df7-478e-8f45-467b26d9f05e', 'This was a great restaurant!!', 5);
+
+
+INSERT
+    INTO review(uid, restaurant_id, description, rating)
+    VALUES('9ad8946d-cfef-4f6f-8b48-cfb536d0c9eb', '47097a83-7df7-478e-8f45-467b26d9f05e', 'Nope not for me', 1);
+
+INSERT
+    INTO review(uid, restaurant_id, description, rating)
+    VALUES('bc605869-9a4d-46ec-8a29-d00819d4c195', '47097a83-7df7-478e-8f45-467b26d9f05e', 'Great!!!!', 4);
+
+INSERT
+    INTO review(uid, restaurant_id, description, rating)
+    VALUES('ec8987d7-4087-461d-bed5-9365086b6e3b', '47097a83-7df7-478e-8f45-467b26d9f05e', 'This was a great restaurant!!', 5);
+

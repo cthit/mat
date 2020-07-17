@@ -40,9 +40,19 @@ $$ LANGUAGE plpgsql;
 CREATE TABLE review (
     uid UUID NOT NULL,
     restaurant_id UUID REFERENCES restaurant(id),
-    description VARCHAR(512),
+    description VARCHAR(2048),
     rating SMALLINT NOT NULL CONSTRAINT rating_valid check (rating >= 1 AND rating <= 5),
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
     PRIMARY KEY(uid, restaurant_id)
 );
+
+CREATE OR REPLACE FUNCTION AddOrUpdateReview(_uid UUID, _restaurant_id UUID, _description VARCHAR(2048), _rating SMALLINT) RETURNS VOID AS $$
+    BEGIN
+        IF EXISTS (SELECT * FROM review WHERE uid = _uid AND restaurant_id = _restaurant_id) THEN
+            UPDATE review SET rating = _rating, description = _description, updated_at = NOW() WHERE uid = _uid AND restaurant_id = _restaurant_id;
+        ELSE
+            INSERT INTO review(uid, restaurant_id, description, rating) VALUES (_uid, _restaurant_id, _description, _rating);
+        END IF;
+    END
+$$ LANGUAGE plpgsql;

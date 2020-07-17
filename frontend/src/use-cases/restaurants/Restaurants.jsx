@@ -12,7 +12,7 @@ const Container = styled.div`
     width: 100%;
 
     display: grid;
-    grid-template-columns: auto 300px;
+    grid-template-columns: 300px auto;
     grid-template-rows: min-content 1fr;
     grid-gap: 1rem;
 
@@ -45,9 +45,9 @@ const Restaurants = () => {
         <RestaurantsContext.Provider value={{ restaurants, categories }}>
             <FilterContextProvider>
                 <Container>
-                    <DisplayRestaurants restaurants={restaurants} />
                     <EatIT />
                     <Filters />
+                    <DisplayRestaurants restaurants={restaurants} />
                 </Container>
             </FilterContextProvider>
         </RestaurantsContext.Provider>
