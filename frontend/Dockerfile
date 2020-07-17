@@ -1,6 +1,7 @@
-from node:9.11.1 as build
+from node:12.18.2 as build
 
-COPY /package.json /
+COPY /package.json .
+COPY /yarn.lock .
 RUN yarn install --production
 RUN yarn global add react-scripts 
 
