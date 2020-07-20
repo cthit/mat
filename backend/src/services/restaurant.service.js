@@ -111,7 +111,7 @@ const getRestaurant = async (query, id) => {
             const avatarUrl = user == null ? null : user.avatarUrl;
 
             return {
-                reviewer: { nick, avatarUrl },
+                reviewer: { nick, avatarUrl, uid },
                 rating,
                 description,
                 created_at,

@@ -1,6 +1,5 @@
 import React from "react";
 import {
-    DigitDesign,
     DigitEditDataCard,
     DigitTextArea,
     useDigitTranslations
@@ -8,12 +7,14 @@ import {
 import MatRating from "../../../../common/elements/mat-rating";
 import * as yup from "yup";
 import { setReview } from "../../../../api/restaurants/post.restaurants.api";
+import { NO_REVIEW } from "../../ReviewRestaurant";
 
-const ReviewForm = ({
-    restaurantId,
-    userReview = { rating: 0, description: "" }
-}) => {
+const ReviewForm = ({ loading, userReview, onSubmit }) => {
     const [text] = useDigitTranslations();
+
+    if (loading) {
+        return null;
+    }
 
     return (
         <DigitEditDataCard
@@ -21,13 +22,12 @@ const ReviewForm = ({
             flex={"1"}
             titleText={text.YourReview}
             submitText={text.Save}
-            onSubmit={values => {
-                setReview({
-                    ...values,
-                    restaurant_id: restaurantId
-                });
-            }}
-            initialValues={userReview}
+            onSubmit={values => onSubmit(values)}
+            initialValues={
+                userReview == null || userReview === NO_REVIEW
+                    ? { rating: 0, description: "" }
+                    : userReview
+            }
             keysComponentData={{
                 rating: {
                     component: MatRating,

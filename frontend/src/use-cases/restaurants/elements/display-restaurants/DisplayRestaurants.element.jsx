@@ -4,11 +4,13 @@ import Restaurant from "../../../../common/elements/restaurant";
 import FilterContext from "../filters/Filter.context";
 
 const Grid = styled.div`
-    grid-column-start: 2;
-    grid-column-end: 3;
+    @media (min-width: 768px) {
+        grid-row-start: 1;
+        grid-row-end: 3;
 
-    grid-row-start: 1;
-    grid-row-end: 3;
+        grid-column-start: 2;
+        grid-column-end: 3;
+    }
 
     justify-content: center;
 

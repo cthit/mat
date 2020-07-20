@@ -6,6 +6,7 @@ import {
 } from "@cthit/react-digit-components";
 import styled from "styled-components";
 import MatRating from "../../../../../../common/elements/mat-rating";
+import CreatedUpdatedText from "../../../../../../common/elements/created-updated-text";
 
 const Row = styled.div`
     display: flex;
@@ -43,6 +44,16 @@ const Description = styled(DigitText.Text)`
     grid-column-end: 3;
 `;
 
+const DateContainer = styled.div`
+    justify-self: flex-end;
+
+    grid-column-start: 1;
+    grid-column-end: 3;
+
+    margin-top: 0.5rem;
+    margin-left: 4px;
+`;
+
 const Review = ({ review }) => (
     <DigitDesign.Card>
         <Container>
@@ -55,6 +66,12 @@ const Review = ({ review }) => (
             <Nick bold text={review.reviewer.nick} />
             <ReviewRating value={review.rating} readOnly />
             <Description text={review.description} />
+            <DateContainer>
+                <CreatedUpdatedText
+                    updatedAt={review.updated_at}
+                    createdAt={review.created_at}
+                />
+            </DateContainer>
         </Container>
     </DigitDesign.Card>
 );

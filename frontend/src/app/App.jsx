@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo } from "react";
 
 import {
-    DigitBottomNavigation,
     DigitHeader,
     useDigitTranslations,
     useGamma,
@@ -16,9 +15,8 @@ import translations from "./App.translations";
 import ReviewRestaurant from "../use-cases/review-restaurant";
 
 const App = ({}) => {
-    const { pathname } = useLocation();
     const [
-        ,
+        text,
         ,
         setActiveLanguage,
         setCommonTranslations
@@ -26,7 +24,7 @@ const App = ({}) => {
 
     const [loading, , signIn] = useGamma("/api/me", "/api/auth", false);
     const user = useGammaMe();
-    const userLanguage = user == null ? null : user.language;
+    const userLanguage = user == null ? "en" : user.language;
 
     useEffect(() => {
         setActiveLanguage(userLanguage);
@@ -36,14 +34,20 @@ const App = ({}) => {
         setCommonTranslations(translations);
     }, []);
 
+    //Resolves issue where upperLabel and outlined doesn't work together
+    if (Object.keys(text) === 0) {
+        return null;
+    }
+
     return (
         <DigitHeader
-            title="Mat"
             headerRowProps={{
                 flex: "1",
                 justifyContent: "space-between"
             }}
-            renderHeader={() => <Header loading={loading} signIn={signIn} />}
+            renderCustomHeader={() => (
+                <Header loading={loading} signIn={signIn} />
+            )}
             toolbarHeight={"auto"}
             renderMain={() => (
                 <>

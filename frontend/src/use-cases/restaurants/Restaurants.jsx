@@ -7,6 +7,7 @@ import { FilterContextProvider } from "./elements/filters/Filter.context";
 import RestaurantsContext from "./Restaurants.context";
 import { getCategories } from "../../api/categories/get.categories.api";
 import EatIT from "./elements/eatit";
+import FiltersContainer from "./elements/filters-container";
 
 const Container = styled.div`
     width: 100%;
@@ -16,7 +17,7 @@ const Container = styled.div`
     grid-template-rows: min-content 1fr;
     grid-gap: 1rem;
 
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
         grid-template-columns: auto;
     }
 `;
@@ -46,7 +47,7 @@ const Restaurants = () => {
             <FilterContextProvider>
                 <Container>
                     <EatIT />
-                    <Filters />
+                    <FiltersContainer />
                     <DisplayRestaurants restaurants={restaurants} />
                 </Container>
             </FilterContextProvider>

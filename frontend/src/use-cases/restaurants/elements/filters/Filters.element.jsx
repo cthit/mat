@@ -20,13 +20,6 @@ import FilterContext, {
 } from "./Filter.context";
 import RestaurantsContext from "../../Restaurants.context";
 
-const Sticky = styled.div`
-    position: sticky;
-    width: 100%;
-    height: auto;
-    top: 0;
-`;
-
 const Column = styled.div`
     display: flex;
     flex-direction: column;
@@ -50,125 +43,110 @@ const InlineRow = styled.div`
  */
 
 const Filters = () => {
+    const [text] = useDigitTranslations();
     const [state, dispatch] = useContext(FilterContext);
     const { categories } = useContext(RestaurantsContext);
     const [, activeLanguage] = useDigitTranslations();
 
     return (
-        <div>
-            {/*Needed to make sticky work*/}
-            <Sticky>
-                <DigitDesign.Card size={{ width: "100%", height: "auto" }}>
-                    <DigitDesign.CardBody>
-                        <Column>
-                            <DigitText.Title text={"Campus?"} />
-                            <DigitRadioButtonGroup
-                                onChange={e =>
-                                    dispatch({
-                                        type: UPDATE_CAMPUS,
-                                        value: e.target.value
-                                    })
-                                }
-                                value={state.campus}
-                                radioButtons={[
-                                    {
-                                        id: "johanneberg",
-                                        label: "Johanneberg",
-                                        primary: true
-                                    },
-                                    {
-                                        id: "lindholmen",
-                                        label: "Lindholmen",
-                                        primary: true
-                                    }
-                                ]}
-                            />
-                            <DigitDesign.Divider />
-                            <InlineRow>
-                                <DigitText.Title text={"Öppet nu?"} />
-                                <DigitSwitch
-                                    size={{ width: "60px" }}
-                                    primary
-                                    value={state.openNow}
-                                    onChange={e =>
-                                        dispatch({
-                                            type: UPDATE_OPEN_NOW,
-                                            openNow: e.target.checked
-                                        })
-                                    }
-                                />
-                            </InlineRow>
-                            <DigitDesign.Divider />
-                            <DigitText.Title text={"Kategorier?"} />
-                            {categories.map(category => (
-                                <DigitCheckbox
-                                    key={category.id}
-                                    size={{ width: "100%" }}
-                                    primary
-                                    onChange={e =>
-                                        dispatch({
-                                            type: UPDATE_CATEGORY,
-                                            category: category.id
-                                        })
-                                    }
-                                    value={state.categories.includes(
-                                        category.id
-                                    )}
-                                    label={category["name_" + activeLanguage]}
-                                />
-                            ))}
-                            <DigitDesign.Divider />
-                            <DigitText.Title text={"Sortera efter..."} />
-                            <DigitSelect
-                                size={{ width: "100%" }}
-                                onChange={e =>
-                                    dispatch({
-                                        type: UPDATE_SORT_BY,
-                                        sortBy: e.target.value
-                                    })
-                                }
-                                value={state.sortBy}
-                                outlined
-                                valueToTextMap={{
-                                    az: "A-Ö",
-                                    za: "Ö-A",
-                                    highestRating: "Högsta betyg",
-                                    lowestRating: "Lägsta betyg"
-                                }}
-                            />
-                            <DigitDesign.Divider />
-                            <DigitText.Title text={"Namn på restaurangen..."} />
-                            <DigitTextField
-                                size={{ width: "100%" }}
-                                onChange={e =>
-                                    dispatch({
-                                        type: UPDATE_NAME,
-                                        name: e.target.value
-                                    })
-                                }
-                                value={state.name}
-                                outlined
-                            />
-                            <DigitDesign.Divider />
-                            <InlineRow>
-                                <DigitText.Title text={"Inte recenserat?"} />
-                                <DigitSwitch
-                                    size={{ width: "60px" }}
-                                    primary
-                                    value={state.reviewed}
-                                    onChange={e =>
-                                        dispatch({
-                                            type: UPDATE_REVIEWED,
-                                            openNow: e.target.checked
-                                        })
-                                    }
-                                />
-                            </InlineRow>
-                        </Column>
-                    </DigitDesign.CardBody>
-                </DigitDesign.Card>
-            </Sticky>
-        </div>
+        <Column>
+            <DigitText.Title text={text.Filter} />
+            <DigitTextField
+                upperLabel={text.RestaurantName}
+                flex={"1"}
+                size={{ width: "auto" }}
+                onChange={e =>
+                    dispatch({
+                        type: UPDATE_NAME,
+                        name: e.target.value
+                    })
+                }
+                value={state.name}
+                outlined
+            />
+            <DigitDesign.Divider />
+            <DigitRadioButtonGroup
+                padding={{ left: "6px" }}
+                onChange={e =>
+                    dispatch({
+                        type: UPDATE_CAMPUS,
+                        value: e.target.value
+                    })
+                }
+                value={state.campus}
+                radioButtons={[
+                    {
+                        id: "johanneberg",
+                        label: "Johanneberg",
+                        primary: true
+                    },
+                    {
+                        id: "lindholmen",
+                        label: "Lindholmen",
+                        primary: true
+                    }
+                ]}
+            />
+            <DigitDesign.Divider />
+            <DigitCheckbox
+                label={text.OpenRightNow}
+                primary
+                value={state.openNow || false}
+                onChange={e =>
+                    dispatch({
+                        type: UPDATE_OPEN_NOW,
+                        openNow: e.target.checked
+                    })
+                }
+            />
+            <DigitDesign.Divider />
+            {categories.map(category => (
+                <DigitCheckbox
+                    key={category.id}
+                    size={{ width: "max-content" }}
+                    primary
+                    onChange={e =>
+                        dispatch({
+                            type: UPDATE_CATEGORY,
+                            category: category.id
+                        })
+                    }
+                    value={state.categories.includes(category.id)}
+                    label={category["name_" + activeLanguage]}
+                />
+            ))}
+            <DigitDesign.Divider />
+            <DigitSelect
+                upperLabel={text.SortAfter}
+                flex={"1"}
+                onChange={e =>
+                    dispatch({
+                        type: UPDATE_SORT_BY,
+                        sortBy: e.target.value
+                    })
+                }
+                value={state.sortBy}
+                outlined
+                valueToTextMap={{
+                    az: "A-Ö",
+                    za: "Ö-A",
+                    highestRating: "Högsta betyg",
+                    lowestRating: "Lägsta betyg"
+                }}
+            />
+            <DigitDesign.Divider />
+            <DigitCheckbox
+                label={text.Reviewed}
+                primary
+                value={state.reviewed || false}
+                onChange={e =>
+                    dispatch({
+                        type: UPDATE_REVIEWED,
+                        reviewed: e.target.checked
+                    })
+                }
+            />
+        </Column>
     );
 };
 

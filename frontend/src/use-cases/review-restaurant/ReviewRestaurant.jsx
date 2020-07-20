@@ -1,41 +1,82 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { getRestaurant } from "../../api/restaurants/get.restaurants.api";
-import { DigitLoading, useGammaMe } from "@cthit/react-digit-components";
+import {
+    DigitLoading,
+    useGammaMe,
+    useGammaStatus,
+    DigitButton,
+    useDigitTranslations
+} from "@cthit/react-digit-components";
 import styled from "styled-components";
 import Restaurant from "../../common/elements/restaurant";
 import ReviewForm from "./views/review-form";
 import OtherReviews from "./elements/other-reviews";
 import find from "lodash/find";
 import SignInRequired from "./elements/sign-in-required";
+import { setReview } from "../../api/restaurants/post.restaurants.api";
+import ArrowBack from "@material-ui/icons/ArrowBack";
+import { Link } from "react-router-dom";
 
 const Grid = styled.div`
+    align-self: flex-start;
+
     display: grid;
     grid-template-columns: 350px 350px;
     grid-auto-rows: min-content;
     grid-gap: 1rem;
+
+    @media (max-width: 767px) {
+        grid-template-columns: auto;
+    }
+
     flex: 1;
     justify-content: center;
     align-content: center;
 `;
 
+const RestaurantsLink = styled(Link)`
+    grid-column-start: 1;
+    grid-column-end: -1;
+    text-decoration: none;
+    color: black;
+`;
+
+const NO_REVIEW = "no-review";
+
 const ReviewRestaurant = ({ match }) => {
     const { id } = match.params;
     const user = useGammaMe();
+    const [loading] = useGammaStatus();
     const userId = user == null ? null : user.id;
+    const [text] = useDigitTranslations();
 
     const [restaurant, setRestaurant] = useState(null);
     const [userReview, setUserReview] = useState(null);
 
-    useEffect(() => {
+    const getRestaurants = useCallback(() => {
         getRestaurant(id).then(response => {
             setRestaurant(response.data);
-            setUserReview(
+        });
+    }, [id]);
+
+    useEffect(() => {
+        getRestaurants();
+    }, []);
+
+    useEffect(() => {
+        if (restaurant != null) {
+            var userReview =
                 userId == null
                     ? null
-                    : find(response.data.reviews, ["uid", userId])
-            );
-        });
-    }, [id, userId]);
+                    : find(
+                          restaurant.reviews,
+                          review => review.reviewer.uid === userId
+                      );
+            userReview = userReview == null ? NO_REVIEW : userReview;
+
+            setUserReview(userReview);
+        }
+    }, [restaurant, userId]);
 
     if (restaurant == null) {
         return (
@@ -45,15 +86,34 @@ const ReviewRestaurant = ({ match }) => {
             />
         );
     }
-
     return (
         <Grid>
+            <RestaurantsLink to={"/"}>
+                <DigitButton
+                    outlined
+                    justifySelf={"flex-start"}
+                    startIcon={<ArrowBack />}
+                    text={text.BackToRestaurants}
+                />
+            </RestaurantsLink>
             <Restaurant data={restaurant} disableReview />
-            {user == null && <SignInRequired />}
-            {user != null && <ReviewForm restaurantId={id} />}
+            {user == null && !loading && <SignInRequired />}
+            {user != null && (
+                <ReviewForm
+                    loading={loading || userReview == null}
+                    userReview={userReview}
+                    onSubmit={values => {
+                        setReview({
+                            ...values,
+                            restaurant_id: id
+                        }).then(response => getRestaurants());
+                    }}
+                />
+            )}
             <OtherReviews reviews={restaurant.reviews} />
         </Grid>
     );
 };
 
+export { NO_REVIEW };
 export default ReviewRestaurant;

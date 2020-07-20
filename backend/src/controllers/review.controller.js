@@ -1,6 +1,5 @@
 const { setReview } = require("../services/review.service");
 const handleSetReview = query => async (req, res) => {
-    console.log(req.session);
     const [err] = await setReview(query, req.session.uid, req.body);
 
     if (err) {
