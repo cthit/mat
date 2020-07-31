@@ -23,18 +23,18 @@ const ensureAdmin = (req, res, next) => {
     }
 };
 
-const initRouters = (app, query, createRouter) => {
-    app.use("/api", getUnprotectedRouter(createRouter(), query));
+const initRouters = (app, tools, createRouter) => {
+    app.use("/api", getUnprotectedRouter(createRouter(), tools));
     app.use(
         "/api",
         ensureAuthentication,
-        getProtectedRouter(createRouter(), query)
+        getProtectedRouter(createRouter(), tools)
     );
     app.use(
         "/api/admin",
         ensureAuthentication,
         ensureAdmin,
-        getAdminRouter(createRouter(), query)
+        getAdminRouter(createRouter(), tools)
     );
 };
 

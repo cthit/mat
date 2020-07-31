@@ -91,7 +91,7 @@ const getRestaurants = async query => {
     return [err, output];
 };
 
-const getRestaurant = async (query, id) => {
+const getRestaurant = async (query, redisClient, id) => {
     const [
         err,
         [
@@ -105,9 +105,13 @@ const getRestaurant = async (query, id) => {
         queryGetRestaurant(query, id),
         queryGetOpeningHours(query, id),
         queryGetReviewsFromRestaurant(query, id),
-        getUsers(),
+        getUsers(redisClient),
         queryGetRestaurantCategory(query, id)
     ]);
+
+    if (err) {
+        return [err, null];
+    }
 
     var restaurant = null;
     if (restaurantResult.length > 0) {
@@ -115,7 +119,7 @@ const getRestaurant = async (query, id) => {
     }
 
     if (restaurant == null) {
-        return [err, restaurant];
+        return [err, null];
     }
 
     const openingHours = e_weekdays.map(weekday => {
@@ -126,7 +130,7 @@ const getRestaurant = async (query, id) => {
     const reviews = reviewsResult.map(
         ({ uid, rating, description, created_at, updated_at }) => {
             const user = find(usersResult, ["id", uid]);
-            const nick = user == null ? "Deleted user" : user.nick;
+            const nick = user == null ? "Unknown user" : user.nick;
             const avatarUrl = user == null ? null : user.avatarUrl;
 
             return {

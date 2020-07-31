@@ -7,7 +7,7 @@ const {
     setOpeningHours
 } = require("../services/restaurant.service");
 
-const handleAddRestaurant = query => async (req, res) => {
+const handleAddRestaurant = ({ query }) => async (req, res) => {
     const [err] = await addRestaurant(query, req.body);
 
     if (err) {
@@ -21,7 +21,7 @@ const handleAddRestaurant = query => async (req, res) => {
     }
 };
 
-const handleEditRestaurant = query => async (req, res) => {
+const handleEditRestaurant = ({ query }) => async (req, res) => {
     const { id } = req.params;
 
     const [err, success] = await editRestaurant(query, id, req.body);
@@ -39,7 +39,7 @@ const handleEditRestaurant = query => async (req, res) => {
     }
 };
 
-const handleDeleteRestaurant = query => async (req, res) => {
+const handleDeleteRestaurant = ({ query }) => async (req, res) => {
     const { id } = req.params;
 
     const [err, success] = await deleteRestaurant(query, id);
@@ -57,15 +57,15 @@ const handleDeleteRestaurant = query => async (req, res) => {
     }
 };
 
-const handleGetRestaurant = query => async (req, res) => {
+const handleGetRestaurant = ({ query, redisClient }) => async (req, res) => {
     const { id } = req.params;
 
-    const [err, restaurant] = await getRestaurant(query, id);
+    const [err, restaurant] = await getRestaurant(query, redisClient, id);
 
-    if (restaurant == null) {
-        res.status(404).send("restaurant doesn't exist");
-    } else if (err) {
+    if (err) {
         res.sendStatus(500);
+    } else if (restaurant == null) {
+        res.status(404).send("restaurant doesn't exist");
     } else {
         res.status(200).send(restaurant);
     }
@@ -75,7 +75,7 @@ const handleGetRestaurant = query => async (req, res) => {
     }
 };
 
-const handleGetRestaurants = query => async (req, res) => {
+const handleGetRestaurants = ({ query }) => async (req, res) => {
     const [err, restaurants] = await getRestaurants(query);
 
     if (err) {
@@ -89,9 +89,9 @@ const handleGetRestaurants = query => async (req, res) => {
     }
 };
 
-const handleGetVisibleRestaurants = query => async (req, res) => {};
+const handleGetVisibleRestaurants = ({ query }) => async (req, res) => {};
 
-const handleSetOpeningHours = query => async (req, res) => {
+const handleSetOpeningHours = ({ query }) => async (req, res) => {
     const { id } = req.params;
 
     const [err, success] = await setOpeningHours(query, id, req.body);

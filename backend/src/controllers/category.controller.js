@@ -6,7 +6,7 @@ const {
     deleteCategory
 } = require("../services/category.service");
 
-const handleAddCategory = query => async (req, res) => {
+const handleAddCategory = ({ query }) => async (req, res) => {
     const [err] = await addCategory(query, req.body);
 
     if (err) {
@@ -20,7 +20,7 @@ const handleAddCategory = query => async (req, res) => {
     }
 };
 
-const handleEditCategory = query => async (req, res) => {
+const handleEditCategory = ({ query }) => async (req, res) => {
     const { id } = req.params;
 
     const [err, success] = await editCategory(query, id, req.body);
@@ -38,7 +38,7 @@ const handleEditCategory = query => async (req, res) => {
     }
 };
 
-const handleDeleteCategory = query => async (req, res) => {
+const handleDeleteCategory = ({ query }) => async (req, res) => {
     const { id } = req.params;
 
     const [err, success] = await deleteCategory(query, id);
@@ -56,7 +56,7 @@ const handleDeleteCategory = query => async (req, res) => {
     }
 };
 
-const handleGetCategory = query => async (req, res) => {
+const handleGetCategory = ({ query }) => async (req, res) => {
     const { id } = req.params;
 
     const [err, category] = await getCategory(query, id);
@@ -73,7 +73,7 @@ const handleGetCategory = query => async (req, res) => {
     }
 };
 
-const handleGetCategories = query => async (req, res) => {
+const handleGetCategories = ({ query }) => async (req, res) => {
     const [err, categories] = await getCategories(query);
 
     if (err) {

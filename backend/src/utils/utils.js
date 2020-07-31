@@ -2,7 +2,7 @@ const to = promise => {
     if (Array.isArray(promise)) {
         return Promise.all(promise)
             .then(res => [null, res])
-            .catch(err => [err, null]);
+            .catch(err => [err, []]);
     }
 
     return promise

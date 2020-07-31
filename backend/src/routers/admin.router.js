@@ -11,34 +11,34 @@ const {
     handleSetOpeningHours
 } = require("../controllers/restaurant.controller");
 
-const getAdminRouter = (router, query) => {
-    router.post("/categories", handleAddCategory(query));
+const getAdminRouter = (router, tools) => {
+    router.post("/categories", handleAddCategory(tools));
     router.put(
         "/categories/:id",
         idIsUUIDMiddleware,
-        handleEditCategory(query)
+        handleEditCategory(tools)
     );
     router.delete(
         "/categories/:id",
         idIsUUIDMiddleware,
-        handleDeleteCategory(query)
+        handleDeleteCategory(tools)
     );
 
-    router.post("/restaurants", handleAddRestaurant(query));
+    router.post("/restaurants", handleAddRestaurant(tools));
     router.put(
         "/restaurants/:id",
         idIsUUIDMiddleware,
-        handleEditRestaurant(query)
+        handleEditRestaurant(tools)
     );
     router.delete(
         "/restaurants/:id",
         idIsUUIDMiddleware,
-        handleDeleteRestaurant(query)
+        handleDeleteRestaurant(tools)
     );
     router.put(
         "/restaurants/:id/opening_hours",
         idIsUUIDMiddleware,
-        handleSetOpeningHours(query)
+        handleSetOpeningHours(tools)
     );
 
     return router;

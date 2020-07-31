@@ -4,10 +4,10 @@ const {
     handleSignOut
 } = require("../controllers/authentication.controller");
 
-const getProtectedRouter = (router, query) => {
+const getProtectedRouter = (router, tools) => {
     router.get("/me", handleGetMe);
     router.post("/sign-out", handleSignOut);
-    router.post("/review", handleSetReview(query));
+    router.post("/review", handleSetReview(tools));
     return router;
 };
 

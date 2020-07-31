@@ -98,7 +98,7 @@ const ReviewRestaurant = ({ match }) => {
         return <FourZeroFour />;
     }
 
-    if (!restaurant && !status) {
+    if (!restaurant && status) {
         return <FiveZeroZero />;
     }
 
@@ -126,7 +126,7 @@ const ReviewRestaurant = ({ match }) => {
                     }}
                 />
             )}
-            <OtherReviews reviews={restaurant.reviews} />
+            {restaurant && <OtherReviews reviews={restaurant.reviews} />}
         </Grid>
     );
 };

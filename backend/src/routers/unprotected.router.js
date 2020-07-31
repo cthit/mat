@@ -9,18 +9,18 @@ const {
     handleGetRestaurant
 } = require("../controllers/restaurant.controller");
 
-const getUnprotectedRouter = (router, query) => {
+const getUnprotectedRouter = (router, tools) => {
     router.post("/auth", handleOAuthCode);
 
-    router.get("/categories/:id", idIsUUIDMiddleware, handleGetCategory(query));
-    router.get("/categories", handleGetCategories(query));
+    router.get("/categories/:id", idIsUUIDMiddleware, handleGetCategory(tools));
+    router.get("/categories", handleGetCategories(tools));
 
     router.get(
         "/restaurants/:id",
         idIsUUIDMiddleware,
-        handleGetRestaurant(query)
+        handleGetRestaurant(tools)
     );
-    router.get("/restaurants", handleGetRestaurants(query));
+    router.get("/restaurants", handleGetRestaurants(tools));
 
     return router;
 };
