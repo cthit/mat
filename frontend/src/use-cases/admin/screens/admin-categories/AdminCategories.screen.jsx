@@ -13,7 +13,7 @@ import { editCategory } from "../../../../api/categories/put.categories.api";
 import { deleteCategory } from "../../../../api/categories/delete.categories.api";
 
 const AdminCategories = () => {
-    const [text] = useDigitTranslations();
+    const [text, activeLanguage] = useDigitTranslations();
 
     return (
         <DigitCRUD
@@ -43,6 +43,7 @@ const AdminCategories = () => {
                 }
             }}
             keysOrder={["id", "name_sv", "name_en"]}
+            readAllKeysOrder={["name_sv", "name_en"]}
             keysText={{
                 id: "Id",
                 name_sv: text.SwedishName,
@@ -64,6 +65,22 @@ const AdminCategories = () => {
             detailsButtonText={text.Details}
             idProp={"id"}
             readAllBackButton
+            toastCreateFailed={() => text.CreateCategoryFailed}
+            toastCreateSuccessful={() => text.CreateCategorySuccess}
+            toastUpdateFailed={() => text.UpdateCategoryFailed}
+            toastUpdateSuccessful={() => text.UpdateCategorySuccess}
+            toastDeleteFailed={() => text.DeleteCategoryFailed}
+            toastDeleteSuccessful={() => text.DeleteCategorySuccess}
+            updateButtonText={() => text.UpdateCategory}
+            backButtonText={text.Back}
+            deleteButtonText={() => text.DeleteCategory}
+            createButtonText={text.CreateCategory}
+            createTitle={text.CreateCategory}
+            updateTitle={() => text.UpdateCategory}
+            detailsTitle={one => one["name_" + activeLanguage]}
+            dialogDeleteTitle={() => text.AreYouSure}
+            dialogDeleteConfirm={() => text.DeleteCategory}
+            dialogDeleteCancel={() => text.Cancel}
         />
     );
 };

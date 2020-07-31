@@ -1,9 +1,5 @@
-import React, { useEffect, useMemo } from "react";
-import {
-    DigitText,
-    DigitLayout,
-    useDigitTranslations
-} from "@cthit/react-digit-components";
+import React from "react";
+import { DigitText, useDigitTranslations } from "@cthit/react-digit-components";
 import styled from "styled-components";
 import find from "lodash/find";
 
@@ -14,16 +10,6 @@ const Table = styled.div`
     grid-column-gap: 1.5rem;
     grid-column-start: 1;
     grid-column-end: 3;
-`;
-
-const Row = styled.div`
-    display: flex;
-    flex-direction: row;
-`;
-
-const Column = styled.div`
-    display: flex;
-    flex-direction: column;
 `;
 
 const weekdays = [

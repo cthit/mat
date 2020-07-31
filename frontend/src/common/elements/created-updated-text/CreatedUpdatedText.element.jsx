@@ -22,12 +22,12 @@ const CreatedUpdatedText = ({ updatedAt, createdAt }) => {
             updatedAt == null || updatedAt === createdAt
                 ? null
                 : formatDate(updatedAt, text),
-        [updatedAt, createdAt]
+        [updatedAt, createdAt, text]
     );
 
     const createdAtFormatted = useMemo(
         () => (createdAt == null ? null : formatDate(createdAt, text)),
-        [createdAt]
+        [createdAt, text]
     );
 
     var all = "";

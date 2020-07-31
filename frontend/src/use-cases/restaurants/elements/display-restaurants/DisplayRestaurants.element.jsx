@@ -1,12 +1,21 @@
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
 import styled from "styled-components";
 import Restaurant from "../../../../common/elements/restaurant";
-import FilterContext from "../filters/Filter.context";
+import FilterContext, { RESET_FILTER } from "../filters/Filter.context";
+import orderBy from "lodash/orderBy";
+import {
+    useDigitTranslations,
+    DigitDesign,
+    DigitButton
+} from "@cthit/react-digit-components";
+import useRestaurantFilter from "./hooks/use-restaurant-filter";
+import useAdmin from "../../../../common/hooks/use-admin/use-admin";
+import RestaurantAdmin from "../../../../common/elements/restaurant-admin";
 
 const Grid = styled.div`
     @media (min-width: 768px) {
         grid-row-start: 1;
-        grid-row-end: 3;
+        grid-row-end: -1;
 
         grid-column-start: 2;
         grid-column-end: 3;
@@ -22,18 +31,74 @@ const Grid = styled.div`
     grid-gap: 1rem;
 `;
 
+const NoRestaurantsFilter = styled.div`
+    grid-row-start: 1;
+    grid-row-end: -1;
+`;
+
+const sort = (restaurants, sortBy) => {
+    switch (sortBy) {
+        case "az":
+            return orderBy(restaurants, ["name"], ["asc"]);
+        case "za":
+            return orderBy(restaurants, ["name"], ["desc"]);
+        case "highestRating":
+            return orderBy(
+                restaurants,
+                //To prevent scenarios where rating is null to be above ratings
+                [restaurant => restaurant.rating || 0],
+                ["desc"]
+            );
+        case "lowestRating":
+            return orderBy(restaurants, ["rating"], ["asc"]);
+        default:
+            return restaurants;
+    }
+};
+
 const DisplayRestaurants = ({ restaurants }) => {
-    const [filters] = useContext(FilterContext);
+    const [text] = useDigitTranslations();
+    const [filters, dispatch] = useContext(FilterContext);
+    const acceptedByFilter = useRestaurantFilter(filters);
+    const isAdmin = useAdmin();
+
+    const sortedRestaurants = useMemo(() => {
+        const filteredRestaurants = restaurants.filter(acceptedByFilter);
+        return sort(filteredRestaurants, filters.sortBy);
+    }, [restaurants, filters, acceptedByFilter]);
+
+    const sortedRestaurantsElements = useMemo(
+        () =>
+            sortedRestaurants.map(restaurant =>
+                isAdmin ? (
+                    <RestaurantAdmin key={restaurant.id} data={restaurant} />
+                ) : (
+                    <Restaurant key={restaurant.id} data={restaurant} />
+                )
+            ),
+        [sortedRestaurants, isAdmin]
+    );
 
     return (
         <Grid>
-            {restaurants.map(restaurant => (
-                <Restaurant
-                    key={restaurant.name}
-                    data={restaurant}
-                    filters={filters}
-                />
-            ))}
+            {sortedRestaurants.length === 0 && (
+                <NoRestaurantsFilter>
+                    <DigitDesign.Card>
+                        <DigitDesign.CardHeader>
+                            <DigitDesign.CardTitle text={text.NoRestaurants} />
+                        </DigitDesign.CardHeader>
+                        <DigitDesign.CardButtons reverseDirection>
+                            <DigitButton
+                                onClick={() => dispatch({ type: RESET_FILTER })}
+                                secondary
+                                raised
+                                text={text.ResetFilter}
+                            />
+                        </DigitDesign.CardButtons>
+                    </DigitDesign.Card>
+                </NoRestaurantsFilter>
+            )}
+            {sortedRestaurantsElements}
         </Grid>
     );
 };

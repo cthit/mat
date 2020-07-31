@@ -16,6 +16,8 @@ import SignInRequired from "./elements/sign-in-required";
 import { setReview } from "../../api/restaurants/post.restaurants.api";
 import ArrowBack from "@material-ui/icons/ArrowBack";
 import { Link } from "react-router-dom";
+import FourZeroFour from "../../common/elements/fourzerofour";
+import FiveZeroZero from "../../common/elements/fivezerozero";
 
 const Grid = styled.div`
     align-self: flex-start;
@@ -38,7 +40,7 @@ const RestaurantsLink = styled(Link)`
     grid-column-start: 1;
     grid-column-end: -1;
     text-decoration: none;
-    color: black;
+    color: inherit;
 `;
 
 const NO_REVIEW = "no-review";
@@ -50,21 +52,26 @@ const ReviewRestaurant = ({ match }) => {
     const userId = user == null ? null : user.id;
     const [text] = useDigitTranslations();
 
+    const [status, setStatus] = useState(null);
     const [restaurant, setRestaurant] = useState(null);
     const [userReview, setUserReview] = useState(null);
 
-    const getRestaurants = useCallback(() => {
-        getRestaurant(id).then(response => {
-            setRestaurant(response.data);
-        });
+    const _getRestaurant = useCallback(() => {
+        getRestaurant(id)
+            .then(response => {
+                setRestaurant(response.data);
+            })
+            .catch(error => {
+                setStatus(error.response.status);
+            });
     }, [id]);
 
     useEffect(() => {
-        getRestaurants();
-    }, []);
+        _getRestaurant();
+    }, [_getRestaurant]);
 
     useEffect(() => {
-        if (restaurant != null) {
+        if (restaurant != null && !loading) {
             var userReview =
                 userId == null
                     ? null
@@ -76,9 +83,9 @@ const ReviewRestaurant = ({ match }) => {
 
             setUserReview(userReview);
         }
-    }, [restaurant, userId]);
+    }, [restaurant, userId, loading]);
 
-    if (restaurant == null) {
+    if (restaurant == null && status == null) {
         return (
             <DigitLoading
                 margin={{ left: "auto", right: "auto", top: "32px" }}
@@ -86,6 +93,15 @@ const ReviewRestaurant = ({ match }) => {
             />
         );
     }
+
+    if (!restaurant && (status === 404 || status === 400)) {
+        return <FourZeroFour />;
+    }
+
+    if (!restaurant && !status) {
+        return <FiveZeroZero />;
+    }
+
     return (
         <Grid>
             <RestaurantsLink to={"/"}>
@@ -96,7 +112,7 @@ const ReviewRestaurant = ({ match }) => {
                     text={text.BackToRestaurants}
                 />
             </RestaurantsLink>
-            <Restaurant data={restaurant} disableReview />
+            {restaurant && <Restaurant data={restaurant} disableReview />}
             {user == null && !loading && <SignInRequired />}
             {user != null && (
                 <ReviewForm
@@ -106,7 +122,7 @@ const ReviewRestaurant = ({ match }) => {
                         setReview({
                             ...values,
                             restaurant_id: id
-                        }).then(response => getRestaurants());
+                        }).then(response => _getRestaurant());
                     }}
                 />
             )}

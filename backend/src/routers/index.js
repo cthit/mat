@@ -16,7 +16,7 @@ const ensureAuthentication = (req, res, next) => {
 
 const ensureAdmin = (req, res, next) => {
     const authorities = req.session.user.authorities;
-    if (authorities.includes(MAT_AUTHORITY)) {
+    if (authorities.map(({ authority }) => authority).includes(MAT_AUTHORITY)) {
         next();
     } else {
         res.status(403).send("FORBIDDEN");

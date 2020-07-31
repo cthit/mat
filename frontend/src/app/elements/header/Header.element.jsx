@@ -15,10 +15,11 @@ import { postRequest } from "../../../api/utils/api.utils";
 import styled from "styled-components";
 import Search from "@material-ui/icons/Search";
 import FilterMobileOpenContext from "../../../common/contexts/filter-mobile-open";
-
-const authority = "admin";
+import useAdmin from "../../../common/hooks/use-admin/use-admin";
 
 const MobileFilterButtonContainer = styled.div`
+    margin: 0;
+
     @media (min-width: 768px) {
         display: none;
     }
@@ -30,9 +31,7 @@ const Header = ({ loading, signIn }) => {
     const [text] = useDigitTranslations();
     const history = useHistory();
     const user = useGammaMe();
-
-    const admin =
-        user != null && some(user.authorities, ["authority", authority]);
+    const admin = useAdmin();
 
     return (
         <DigitLayout.Row
@@ -62,10 +61,18 @@ const Header = ({ loading, signIn }) => {
             )}
             <DigitGammaActions
                 customOptionsOnClick={item =>
-                    item === "admin" ? history.push("/admin") : null
+                    item === "adminCategories"
+                        ? history.push("/admin/categories")
+                        : null
                 }
-                customOptions={{ admin: text.AdminView }}
-                customOrder={["admin", "viewAccount", "signOut"]}
+                customOptions={{
+                    adminCategories: text.AdminCategories
+                }}
+                customOrder={
+                    admin
+                        ? ["adminCategories", "viewAccount", "signOut"]
+                        : ["viewAccount", "signOut"]
+                }
                 signOut={() => postRequest("/sign-out")}
                 size={{ width: "min-content" }}
             />

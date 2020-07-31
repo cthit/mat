@@ -1,17 +1,18 @@
 import React, { createContext, useEffect, useReducer } from "react";
 import xor from "lodash/xor";
 
-const UPDATE_OPEN_NOW = "update-open-now";
 const UPDATE_CAMPUS = "update-campus";
 const UPDATE_SORT_BY = "update-sort-by";
 const UPDATE_CATEGORY = "update-category";
 const UPDATE_NAME = "update-name";
-const UPDATE_REVIEWED = "update-reviewed";
+const RESET_FILTER = "reset-filter";
 
 const FilterContext = createContext([{}, () => {}]);
 
 const filterReducer = (state, action) => {
     switch (action.type) {
+        case RESET_FILTER:
+            return { ...defaultValue };
         case UPDATE_CAMPUS:
             return {
                 ...state,
@@ -21,11 +22,6 @@ const filterReducer = (state, action) => {
             return {
                 ...state,
                 categories: xor(state.categories, [action.category])
-            };
-        case UPDATE_OPEN_NOW:
-            return {
-                ...state,
-                openNow: action.openNow
             };
         case UPDATE_SORT_BY:
             return {
@@ -37,11 +33,6 @@ const filterReducer = (state, action) => {
                 ...state,
                 name: action.name
             };
-        case UPDATE_REVIEWED:
-            return {
-                ...state,
-                reviewed: action.reviewed
-            };
         default:
             return state;
     }
@@ -49,20 +40,20 @@ const filterReducer = (state, action) => {
 
 const savedFilter = localStorage.getItem("filters");
 
-const defaultValue =
-    savedFilter == null
-        ? {
-              campus: "johanneberg",
-              categories: [],
-              openNow: false,
-              sortBy: "highestRating",
-              name: "",
-              reviewed: false
-          }
-        : JSON.parse(savedFilter);
+const defaultValue = {
+    campus: "johanneberg",
+    categories: [],
+    openNow: false,
+    sortBy: "highestRating",
+    name: "",
+    reviewed: false
+};
+
+const testLoadSettings = () =>
+    savedFilter == null ? defaultValue : JSON.parse(savedFilter);
 
 const FilterContextProvider = ({ children }) => {
-    const [state, dispatch] = useReducer(filterReducer, defaultValue);
+    const [state, dispatch] = useReducer(filterReducer, testLoadSettings());
 
     useEffect(() => {
         localStorage.setItem("filters", JSON.stringify(state));
@@ -76,12 +67,11 @@ const FilterContextProvider = ({ children }) => {
 };
 
 export {
-    UPDATE_OPEN_NOW,
     UPDATE_CAMPUS,
     UPDATE_SORT_BY,
     UPDATE_CATEGORY,
     UPDATE_NAME,
-    UPDATE_REVIEWED,
+    RESET_FILTER,
     FilterContextProvider
 };
 export default FilterContext;

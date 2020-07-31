@@ -26,8 +26,6 @@ const handleOAuthCode = async (req, res) => {
         return;
     }
 
-    console.log("Let's go: " + code);
-
     const [err, response] = await to(postGammaToken(code));
     if (err) {
         if (err.response && err.response.status === 401) {

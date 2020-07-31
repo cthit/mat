@@ -5,7 +5,6 @@ import {
     DigitDesign,
     DigitRadioButtonGroup,
     DigitSelect,
-    DigitSwitch,
     DigitText,
     DigitTextField,
     useDigitTranslations
@@ -14,8 +13,6 @@ import FilterContext, {
     UPDATE_CAMPUS,
     UPDATE_CATEGORY,
     UPDATE_NAME,
-    UPDATE_OPEN_NOW,
-    UPDATE_REVIEWED,
     UPDATE_SORT_BY
 } from "./Filter.context";
 import RestaurantsContext from "../../Restaurants.context";
@@ -25,18 +22,10 @@ const Column = styled.div`
     flex-direction: column;
 `;
 
-const InlineRow = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-`;
-
 /*
     {
         campus: null | "johanneberg" | "lindholmen",
         category: ["..."],
-        openNow: false | true,
         sortBy: "highestRating" | "lowestRating" | "A-Ö" | "Ö-A",
         name: "..."
     }
@@ -88,18 +77,6 @@ const Filters = () => {
                 ]}
             />
             <DigitDesign.Divider />
-            <DigitCheckbox
-                label={text.OpenRightNow}
-                primary
-                value={state.openNow || false}
-                onChange={e =>
-                    dispatch({
-                        type: UPDATE_OPEN_NOW,
-                        openNow: e.target.checked
-                    })
-                }
-            />
-            <DigitDesign.Divider />
             {categories.map(category => (
                 <DigitCheckbox
                     key={category.id}
@@ -133,18 +110,6 @@ const Filters = () => {
                     highestRating: "Högsta betyg",
                     lowestRating: "Lägsta betyg"
                 }}
-            />
-            <DigitDesign.Divider />
-            <DigitCheckbox
-                label={text.Reviewed}
-                primary
-                value={state.reviewed || false}
-                onChange={e =>
-                    dispatch({
-                        type: UPDATE_REVIEWED,
-                        reviewed: e.target.checked
-                    })
-                }
             />
         </Column>
     );

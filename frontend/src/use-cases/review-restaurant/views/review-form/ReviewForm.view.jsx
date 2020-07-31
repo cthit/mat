@@ -6,7 +6,6 @@ import {
 } from "@cthit/react-digit-components";
 import MatRating from "../../../../common/elements/mat-rating";
 import * as yup from "yup";
-import { setReview } from "../../../../api/restaurants/post.restaurants.api";
 import { NO_REVIEW } from "../../ReviewRestaurant";
 
 const ReviewForm = ({ loading, userReview, onSubmit }) => {
@@ -46,7 +45,8 @@ const ReviewForm = ({ loading, userReview, onSubmit }) => {
                             width: "100%"
                         },
                         rows: 5,
-                        rowsMax: 10
+                        rowsMax: 10,
+                        maxLength: 500
                     }
                 }
             }}

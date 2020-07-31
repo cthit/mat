@@ -1,6 +1,8 @@
 {
     "Back": ["Back", "Tillbaka"],
+    "Cancel": ["Cancel", "Avbryt"],
     "AdminOptions": ["Admin options", "Admin alternativ"],
+    "EditRestaurant": ["Edit restaurant", "Redigera restaurang"],
     "EditRestaurants": ["Edit restaurants", "Redigera restauranger"],
     "EditCategories": ["Edit categories", "Redigera kategorier"],
     "SwedishName": ["Swedish name", "Svenskt namn"],
@@ -12,10 +14,12 @@
         "Hide restaurant for users",
         "Göm restaurangen för användare"
     ],
+    "Hidden": ["Hidden", "Gömd"],
     "Category": ["Category", "Kategori"],
     "Menu": ["Menu", "Meny"],
     "CampusLocation": ["Campus location", "Campus plats"],
-    "AdminView": ["Admin view", "Adminvy"],
+    "AdminRestaurants": ["Edit restaurants", "Redigera restauranger"],
+    "AdminCategories": ["Edit categories", "Redigera kategorier"],
     "EditOpeningHours": ["Edit opening hours", "Redigera öppetider"],
     "Open": ["Open", "Öppet"],
     "monday": ["Monday", "Måndag"],
@@ -66,5 +70,78 @@
     "NoOtherReviews": [
         "No other reviewes for this restaurant",
         "Inga andra recensioner av denna restaurang"
-    ]
+    ],
+    "CreateRestaurant": ["Create restaurant", "Skapa restaurang"],
+    "RestaurantHiddenForOtherUsers": [
+        "Restaurant hidden for other users",
+        "Restaurang är gömd för andra användare"
+    ],
+    "NoRestaurants": [
+        "No restaurants match the filter",
+        "Inga restauranger matchar filtret"
+    ],
+    "ResetFilter": ["Reset filter", "Återställa filter"],
+    "InsufficientAccess": [
+        "403 - Insufficient access",
+        "403 - Otillräcklig tillgång"
+    ],
+    "YouDontHaveAccess": [
+        "You do not have access to this page. Please contact digit@chalmers.it if you think this is a mistake.",
+        "Du har inte tillgång till denna sida. Kontakta digit@chalmers.it om du tror det här är ett misstag."
+    ],
+    "SomethingWentWrong": [
+        "500 - Something went wrong",
+        "500 - Någonting gick fel"
+    ],
+    "Contact": [
+        "If this happens often, please send a mail with what you tried to do to digit@chalmers.it",
+        "Om det här händer ofta, skicka ett mail till digit@chalmers.it med vad du försökte göra"
+    ],
+    "ContactDigit": [
+        "If you still think it is? Contact digIT@chalmers.it.",
+        "Om du fortfarande tror att du har träffat rätt, kontaka digIT@chalmers.it."
+    ],
+    "PageNotFound": ["404 - Page not found", "404 - Sida ej funnen"],
+    "TakeMeHome": ["Take me home", "Ta mig hem"],
+    "RefreshWebsite": ["Refresh website", "Uppdatera hemsidan"],
+    "OtherInformation": ["Other information", "Övrig information"],
+    "CreateRestaurantFailed": [
+        "Failed creating restaurant",
+        "Misslyckades att skapa ny restaurang"
+    ],
+    "CreateRestaurantSuccess": ["Restaurant created", "Restaurangen skapades"],
+    "UpdateRestaurantFailed": [
+        "Failed to update restaurant",
+        "Misslyckades att uppdatera restaurang"
+    ],
+    "UpdateRestaurantSuccess": [
+        "Restaurant updated",
+        "Restaurangen uppdaterades"
+    ],
+    "DeleteRestaurantFailed": [
+        "Failed to delete restaurant",
+        "Misslyckades att radera restaurangen"
+    ],
+    "DeleteRestaurantSuccess": ["Restaurant deleted", "Restaurangen raderades"],
+    "DeleteRestaurant": ["Delete restaurant", "Radera restaurang"],
+    "UpdateRestaurant": ["Update restaurant", "Uppdatera restaurang"],
+    "CreateCategoryFailed": [
+        "Failed to create category",
+        "Misslyckades att skapa kategori"
+    ],
+    "CreateCategorySuccess": ["Category created", "Kategori skapad"],
+    "UpdateCategoryFailed": [
+        "Failed to update category",
+        "Misslyckades att uppdatera kategori"
+    ],
+    "UpdateCategorySuccess": ["Category updated", "Kategori uppdaterad"],
+    "DeleteCategoryFailed": [
+        "Failed to delete category",
+        "Misslyckades att radera kategorin"
+    ],
+    "DeleteCategorySuccess": ["Category deleted", "Kategori raderad"],
+    "UpdateCategory": ["Update category", "Uppdatera kategori"],
+    "DeleteCategory": ["Delete category", "Radera kategori"],
+    "CreateCategory": ["Create category", "Skapa kategori"],
+    "AreYouSure": ["Are you sure?", "Är du säker?"]
 }

@@ -10,16 +10,6 @@ import { useHistory } from "react-router-dom";
 import { getRestaurant } from "../../../../../../api/restaurants/get.restaurants.api";
 import * as yup from "yup";
 
-const weekdays = [
-    "monday",
-    "tuesday",
-    "wednesday",
-    "thursday",
-    "friday",
-    "saturday",
-    "sunday"
-];
-
 const zeroBefore = n => (n < 10 ? "0" : "") + n;
 
 const toTime = date => {
@@ -49,12 +39,18 @@ const RestaurantsOpeningHours = ({ match }) => {
                 ...response.data,
                 openingHours: response.data.openingHours.map(weekday => {
                     if (weekday.opens == null || weekday.closes == null) {
-                        return { open: false, opens: null, closes: null };
+                        return {
+                            open: false,
+                            opens: null,
+                            closes: null,
+                            weekday: weekday.weekday
+                        };
                     }
                     return {
                         open: true,
                         opens: toDate(weekday.opens),
-                        closes: toDate(weekday.closes)
+                        closes: toDate(weekday.closes),
+                        weekday: weekday.weekday
                     };
                 })
             })
@@ -137,6 +133,9 @@ const RestaurantsOpeningHours = ({ match }) => {
                     })
                 )
             })}
+            cardProps={{
+                overflow: "auto"
+            }}
         />
     );
 };

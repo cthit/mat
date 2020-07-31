@@ -60,6 +60,10 @@ const possibleDays = (currentWeekday, a, b, c, currentDate) => {
 };
 
 const calc = (openingHours, currentWeekday, currentDate) => {
+    if (openingHours == null) {
+        return null;
+    }
+
     //const index = (findIndex(openingHours, ["weekday", currentWeekday]) + 1) % 7;
     const index = currentWeekday;
 
@@ -99,18 +103,26 @@ const calc = (openingHours, currentWeekday, currentDate) => {
 };
 
 function useOpenStatus(openingHours) {
-    const currentTime = "21:00";
-    const currentWeekday = 2; //"tuesday";
-
     const currentDate = new Date();
+    const currentWeekday = currentDate.getDay();
 
-    var currentDay = currentDate.getDay();
-    var distance = currentWeekday - currentDay;
-    currentDate.setDate(currentDate.getDate() + distance);
-    currentDate.setHours(parseInt(currentTime.split(":")[0]));
-    currentDate.setMinutes(parseInt(currentTime.split(":")[1]));
+    //To debug opening hours:
+    /*
+        const currentTime = "21:00";
+        const currentWeekday = 2; //"tuesday";
+
+        var currentDay = currentDate.getDay();
+        var distance = currentWeekday - currentDay;
+        currentDate.setDate(currentDate.getDate() + distance);
+        currentDate.setHours(parseInt(currentTime.split(":")[0]));
+        currentDate.setMinutes(parseInt(currentTime.split(":")[1]));
+    */
 
     const hasOpeningHours = useMemo(() => {
+        if (openingHours == null) {
+            return false;
+        }
+
         var open = false;
         for (var oh of openingHours) {
             if (oh.opens != null) {
@@ -123,7 +135,7 @@ function useOpenStatus(openingHours) {
 
     const status = useMemo(
         () => calc(openingHours, currentWeekday, currentDate),
-        [openingHours]
+        [openingHours, currentWeekday, currentDate]
     );
 
     return [

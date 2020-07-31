@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect } from "react";
 
 import {
     DigitHeader,
@@ -6,15 +6,30 @@ import {
     useGamma,
     useGammaMe
 } from "@cthit/react-digit-components";
-import Tabs from "./elements/tabs";
 import Header from "./elements/header";
-import { useLocation, Switch, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import Admin from "../use-cases/admin";
 import Restaurants from "../use-cases/restaurants";
 import translations from "./App.translations";
 import ReviewRestaurant from "../use-cases/review-restaurant";
+import FourZeroFour from "../common/elements/fourzerofour";
+import FiveZeroZero from "../common/elements/fivezerozero";
 
-const App = ({}) => {
+const getUserLanguage = user => {
+    var language = user == null ? null : user.language;
+
+    if (language == null) {
+        language = localStorage.getItem("language");
+    }
+
+    if (language == null) {
+        language = "en";
+    }
+
+    return language;
+};
+
+const App = () => {
     const [
         text,
         ,
@@ -22,17 +37,17 @@ const App = ({}) => {
         setCommonTranslations
     ] = useDigitTranslations();
 
-    const [loading, , signIn] = useGamma("/api/me", "/api/auth", false);
+    const [loading, error, signIn] = useGamma("/api/me", "/api/auth", false);
     const user = useGammaMe();
-    const userLanguage = user == null ? "en" : user.language;
+    const userLanguage = getUserLanguage(user);
 
     useEffect(() => {
         setActiveLanguage(userLanguage);
-    }, [userLanguage]);
+    }, [setActiveLanguage, userLanguage]);
 
     useEffect(() => {
         setCommonTranslations(translations);
-    }, []);
+    }, [setCommonTranslations]);
 
     //Resolves issue where upperLabel and outlined doesn't work together
     if (Object.keys(text) === 0) {
@@ -51,14 +66,19 @@ const App = ({}) => {
             toolbarHeight={"auto"}
             renderMain={() => (
                 <>
-                    <Switch>
-                        <Route path={"/admin"} component={Admin} />
-                        <Route
-                            path={"/review/:id"}
-                            component={ReviewRestaurant}
-                        />
-                        <Route path={"/"} component={Restaurants} />
-                    </Switch>
+                    {error && <FiveZeroZero />}
+                    {!error && (
+                        <Switch>
+                            <Route path={"/admin"} component={Admin} />
+                            <Route
+                                path={"/review/:id"}
+                                exact
+                                component={ReviewRestaurant}
+                            />
+                            <Route exact path={"/"} component={Restaurants} />
+                            <Route component={FourZeroFour} />
+                        </Switch>
+                    )}
                 </>
             )}
         />

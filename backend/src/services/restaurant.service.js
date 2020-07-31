@@ -10,7 +10,8 @@ const {
     queryAddRestaurant,
     queryDeleteRestaurant,
     queryEditRestaurant,
-    queryGetRestaurant
+    queryGetRestaurant,
+    queryGetRestaurantCategory
 } = require("../repositories/restaurant.repository");
 const {
     querySetOpeningHours,
@@ -18,6 +19,8 @@ const {
     queryGetAllOpeningHours,
     queryDeleteOpeningHours
 } = require("../repositories/opening-hours.repository");
+const { queryGetCategories } = require("../repositories/category.repository");
+
 const { find, filter } = require("lodash");
 
 const e_weekdays = [
@@ -40,10 +43,14 @@ const addRestaurant = async (query, restaurant) => {
 };
 
 const getRestaurants = async query => {
-    const [err, [restaurants, allOpeningHours, reviews]] = await to([
+    const [
+        err,
+        [restaurants, allOpeningHours, reviews, categories]
+    ] = await to([
         queryGetRestaurants(query),
         queryGetAllOpeningHours(query),
-        queryGetReviews(query)
+        queryGetReviews(query),
+        queryGetCategories(query)
     ]);
 
     const output = restaurants.map(restaurant => {
@@ -76,6 +83,7 @@ const getRestaurants = async query => {
                     ? { weekday, opens: null, closes: null }
                     : { weekday, opens: c.opens, closes: c.closes };
             }),
+            category: find(categories, { id: restaurant.category_id }),
             rating
         };
     });
@@ -86,17 +94,28 @@ const getRestaurants = async query => {
 const getRestaurant = async (query, id) => {
     const [
         err,
-        [restaurantResult, openingHoursResult, reviewsResult, usersResult]
+        [
+            restaurantResult,
+            openingHoursResult,
+            reviewsResult,
+            usersResult,
+            categoryResult
+        ]
     ] = await to([
         queryGetRestaurant(query, id),
         queryGetOpeningHours(query, id),
         queryGetReviewsFromRestaurant(query, id),
-        getUsers()
+        getUsers(),
+        queryGetRestaurantCategory(query, id)
     ]);
 
     var restaurant = null;
     if (restaurantResult.length > 0) {
         restaurant = restaurantResult[0];
+    }
+
+    if (restaurant == null) {
+        return [err, restaurant];
     }
 
     const openingHours = e_weekdays.map(weekday => {
@@ -129,7 +148,9 @@ const getRestaurant = async (query, id) => {
     //Rounds to one decimal point
     rating = Math.round(rating * 10) / 10;
 
-    return [err, { ...restaurant, openingHours, reviews, rating }];
+    const category = categoryResult.length > 0 ? categoryResult[0] : null;
+
+    return [err, { ...restaurant, openingHours, reviews, rating, category }];
 };
 
 const editRestaurant = async (query, id, data) => {

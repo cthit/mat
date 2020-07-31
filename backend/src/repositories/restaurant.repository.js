@@ -42,6 +42,13 @@ const queryGetRestaurant = (query, id) =>
         results => results.rows
     );
 
+const queryGetRestaurantCategory = (query, id) =>
+    query(
+        "SELECT name_sv, name_en FROM Category INNER JOIN Restaurant ON Restaurant.id = $1 AND Category.id = Restaurant.category_id",
+        [id],
+        results => results.rows
+    );
+
 const queryGetRestaurants = query =>
     query("SELECT * FROM restaurant", [], results => results.rows);
 
@@ -80,5 +87,6 @@ module.exports = {
     queryAddRestaurant,
     queryGetRestaurant,
     queryGetRestaurants,
-    queryEditRestaurant
+    queryEditRestaurant,
+    queryGetRestaurantCategory
 };

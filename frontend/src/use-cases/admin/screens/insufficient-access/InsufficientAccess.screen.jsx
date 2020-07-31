@@ -1,34 +1,34 @@
 import React from "react";
 import {
+    DigitText,
     DigitDesign,
     useDigitTranslations,
-    DigitText,
     DigitButton
 } from "@cthit/react-digit-components";
+import { useHistory } from "react-router-dom";
 
-const FiveZeroZero = () => {
+const InsufficientAccess = () => {
     const [text] = useDigitTranslations();
+    const history = useHistory();
 
     return (
         <DigitDesign.Card margin={"auto"} size={{ width: "300px" }}>
             <DigitDesign.CardHeader>
-                <DigitDesign.CardTitle text={text.SomethingWentWrong} />
+                <DigitDesign.CardTitle text={text.InsufficientAccess} />
             </DigitDesign.CardHeader>
-            <DigitDesign.CardHeaderImage src="/500.gif" />
+            <DigitDesign.CardHeaderImage src="/403.gif" />
             <DigitDesign.CardBody>
-                <DigitText.Text text={text.Contact} />
+                <DigitText.Text text={text.YouDontHaveAccess} />
             </DigitDesign.CardBody>
             <DigitDesign.CardButtons>
                 <DigitButton
+                    onClick={() => history.push("/")}
                     outlined
-                    text={text.RefreshWebsite}
-                    onClick={() => {
-                        document.location.href = "/";
-                    }}
+                    text={text.Back}
                 />
             </DigitDesign.CardButtons>
         </DigitDesign.Card>
     );
 };
 
-export default FiveZeroZero;
+export default InsufficientAccess;

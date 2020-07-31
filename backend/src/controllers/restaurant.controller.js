@@ -61,6 +61,7 @@ const handleGetRestaurant = query => async (req, res) => {
     const { id } = req.params;
 
     const [err, restaurant] = await getRestaurant(query, id);
+
     if (restaurant == null) {
         res.status(404).send("restaurant doesn't exist");
     } else if (err) {

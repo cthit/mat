@@ -30,12 +30,9 @@ export const Material = styled.div`
     }
 `;
 
-export const Divider = styled.hr`
-    margin: 0px;
-`;
-
 export const NonStyledLink = styled(Link)`
     text-decoration: none;
+    color: inherit;
 `;
 
 export const NonStyledALink = styled.a`

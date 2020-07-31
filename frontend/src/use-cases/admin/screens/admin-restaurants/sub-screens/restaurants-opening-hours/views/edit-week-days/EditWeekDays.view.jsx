@@ -3,7 +3,7 @@ import EditWeekDay from "./elements/edit-week-day";
 
 const EditWeekDays = ({ innerInputs, value, ...props }) => {
     return innerInputs.map((weekdayInputs, i) => (
-        <EditWeekDay weekday={value[i].weekday} {...weekdayInputs} />
+        <EditWeekDay key={i} weekday={value[i].weekday} {...weekdayInputs} />
     ));
 };
 
