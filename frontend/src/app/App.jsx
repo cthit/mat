@@ -13,7 +13,6 @@ import Restaurants from "../use-cases/restaurants";
 import translations from "./App.translations";
 import ReviewRestaurant from "../use-cases/review-restaurant";
 import FourZeroFour from "../common/elements/fourzerofour";
-import FiveZeroZero from "../common/elements/fivezerozero";
 
 const getUserLanguage = user => {
     var language = user == null ? null : user.language;
@@ -37,7 +36,7 @@ const App = () => {
         setCommonTranslations
     ] = useDigitTranslations();
 
-    const [loading, error, signIn] = useGamma("/api/me", "/api/auth", false);
+    const [loading, , signIn] = useGamma("/api/me", "/api/auth", false);
     const user = useGammaMe();
     const userLanguage = getUserLanguage(user);
 
@@ -66,19 +65,16 @@ const App = () => {
             toolbarHeight={"auto"}
             renderMain={() => (
                 <>
-                    {error && <FiveZeroZero />}
-                    {!error && (
-                        <Switch>
-                            <Route path={"/admin"} component={Admin} />
-                            <Route
-                                path={"/review/:id"}
-                                exact
-                                component={ReviewRestaurant}
-                            />
-                            <Route exact path={"/"} component={Restaurants} />
-                            <Route component={FourZeroFour} />
-                        </Switch>
-                    )}
+                    <Switch>
+                        <Route path={"/admin"} component={Admin} />
+                        <Route
+                            path={"/review/:id"}
+                            exact
+                            component={ReviewRestaurant}
+                        />
+                        <Route exact path={"/"} component={Restaurants} />
+                        <Route component={FourZeroFour} />
+                    </Switch>
                 </>
             )}
         />

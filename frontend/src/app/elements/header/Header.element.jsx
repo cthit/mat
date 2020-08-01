@@ -8,7 +8,6 @@ import {
     DigitText,
     DigitIconButton
 } from "@cthit/react-digit-components";
-import some from "lodash/some";
 import { useHistory, useLocation } from "react-router-dom";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import { postRequest } from "../../../api/utils/api.utils";
@@ -27,7 +26,7 @@ const MobileFilterButtonContainer = styled.div`
 
 const Header = ({ loading, signIn }) => {
     const { pathname } = useLocation();
-    const [open, setOpen] = useContext(FilterMobileOpenContext);
+    const [, setOpen] = useContext(FilterMobileOpenContext);
     const [text] = useDigitTranslations();
     const history = useHistory();
     const user = useGammaMe();

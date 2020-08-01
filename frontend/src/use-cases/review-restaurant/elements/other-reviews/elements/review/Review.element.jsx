@@ -8,11 +8,6 @@ import styled from "styled-components";
 import MatRating from "../../../../../../common/elements/mat-rating";
 import CreatedUpdatedText from "../../../../../../common/elements/created-updated-text";
 
-const Row = styled.div`
-    display: flex;
-    flex-direction: row;
-`;
-
 const Container = styled.div`
     padding: 1rem;
 

@@ -18,12 +18,6 @@ const Desktop = styled.div`
     }
 `;
 
-const Mobile = styled.div`
-    @media (min-width: 768px) {
-        display: none;
-    }
-`;
-
 const FiltersContainer = () => {
     const [open, setOpen] = useContext(FilterMobileOpenContext);
 
@@ -31,15 +25,13 @@ const FiltersContainer = () => {
 
     return (
         <>
-            <Mobile>
-                <SwipeableDrawer
-                    open={open}
-                    onClose={() => setOpen(false)}
-                    onOpen={() => setOpen(true)}
-                >
-                    <div style={{ padding: "0.5rem" }}>{filters}</div>
-                </SwipeableDrawer>
-            </Mobile>
+            <SwipeableDrawer
+                open={open}
+                onClose={() => setOpen(false)}
+                onOpen={() => setOpen(true)}
+            >
+                <div style={{ padding: "0.5rem" }}>{filters}</div>
+            </SwipeableDrawer>
             <Desktop>
                 <Sticky>
                     <DigitDesign.Card size={{ width: "100%", height: "auto" }}>

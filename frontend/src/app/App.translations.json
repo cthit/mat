@@ -143,5 +143,7 @@
     "UpdateCategory": ["Update category", "Uppdatera kategori"],
     "DeleteCategory": ["Delete category", "Radera kategori"],
     "CreateCategory": ["Create category", "Skapa kategori"],
-    "AreYouSure": ["Are you sure?", "Är du säker?"]
+    "AreYouSure": ["Are you sure?", "Är du säker?"],
+    "CoOrderFood": ["Ordering food together?", "Beställs mat tillsammans?"],
+    "OpenEatIT": ["Open EatIT.chalmers.it", "Öppna EatIT.chalmers.it"]
 }

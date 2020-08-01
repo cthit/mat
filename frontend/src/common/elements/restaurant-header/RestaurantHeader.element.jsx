@@ -15,7 +15,7 @@ const CustomCardHeader = styled.div`
 `;
 
 const RestaurantHeader = ({ data }) => {
-    const { category, name, hidden, menu, id } = data;
+    const { category, name, hidden } = data;
     const [text, activeLanguage] = useDigitTranslations();
 
     return (

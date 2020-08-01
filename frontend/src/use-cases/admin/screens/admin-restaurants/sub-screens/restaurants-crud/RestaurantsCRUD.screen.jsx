@@ -15,7 +15,6 @@ import { addRestaurant } from "../../../../../../api/restaurants/post.restaurant
 import { editRestaurant } from "../../../../../../api/restaurants/put.restaurants.api";
 import { deleteRestaurant } from "../../../../../../api/restaurants/delete.restaurants.api";
 import { getCategories } from "../../../../../../api/categories/get.categories.api";
-import { useHistory } from "react-router-dom";
 import RestaurantHeader from "../../../../../../common/elements/restaurant-header";
 import RestaurantBody from "../../../../../../common/elements/restaurant-body";
 import { NonStyledLink } from "../../../../../../common-ui/design";
@@ -25,7 +24,9 @@ import FourZeroFour from "../../../../../../common/elements/fourzerofour";
 import FiveZeroZero from "../../../../../../common/elements/fivezerozero";
 
 const DetailsContainer = styled.div`
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
+
     margin-bottom: 72px;
 `;
 
@@ -83,7 +84,6 @@ const RestaurantDetails = ({ data }) => {
 const RestaurantsCRUD = () => {
     const [text, activeLanguage] = useDigitTranslations();
     const [categories, setCategories] = useState(null);
-    const history = useHistory();
 
     useEffect(() => {
         getCategories().then(response => {
