@@ -8,10 +8,12 @@ const {
     handleAddRestaurant,
     handleEditRestaurant,
     handleDeleteRestaurant,
-    handleSetOpeningHours
+    handleSetOpeningHours,
+    handleGetRestaurants
 } = require("../controllers/restaurant.controller");
 
 const getAdminRouter = (router, tools) => {
+    router.get("/restaurants", handleGetRestaurants(tools));
     router.post("/categories", handleAddCategory(tools));
     router.put(
         "/categories/:id",

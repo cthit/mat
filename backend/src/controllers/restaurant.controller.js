@@ -75,6 +75,25 @@ const handleGetRestaurant = ({ query, redisClient }) => async (req, res) => {
     }
 };
 
+// Backport from old version of mat that cthit/EatIT still uses.
+const handleGetRestaurantsEatIT = ({ query }) => async (req, res) => {
+    const [err, restaurants] = await getRestaurants(query);
+
+    // Since EatIT expects menu not to be null, let's ignore them!
+    const formattedRestaurants = restaurants
+        .filter(({ menu, hidden }) => menu != null && !hidden)
+        .map(({ name, menu }) => ({ name, link_to_menu: menu }));
+
+    if (err) {
+        res.status(500).send();
+    } else {
+        res.status(200).send(formattedRestaurants);
+    }
+
+    if (err != null) {
+        console.log(err);
+    }
+};
 const handleGetRestaurants = ({ query }) => async (req, res) => {
     const [err, restaurants] = await getRestaurants(query);
 
@@ -89,7 +108,21 @@ const handleGetRestaurants = ({ query }) => async (req, res) => {
     }
 };
 
-const handleGetVisibleRestaurants = ({ query }) => async (req, res) => {};
+const handleGetVisibleRestaurants = ({ query }) => async (req, res) => {
+    const [err, restaurants] = await getRestaurants(query);
+
+    const visibleRestaurants = restaurants.filter(({ hidden }) => !hidden);
+
+    if (err) {
+        res.status(500).send();
+    } else {
+        res.status(200).send(visibleRestaurants);
+    }
+
+    if (err != null) {
+        console.log(err);
+    }
+};
 
 const handleSetOpeningHours = ({ query }) => async (req, res) => {
     const { id } = req.params;
@@ -106,5 +139,6 @@ module.exports = {
     handleGetRestaurant,
     handleGetRestaurants,
     handleGetVisibleRestaurants,
-    handleSetOpeningHours
+    handleSetOpeningHours,
+    handleGetRestaurantsEatIT
 };

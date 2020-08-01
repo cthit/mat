@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { getRestaurants } from "../../api/restaurants/get.restaurants.api";
+import {
+    getAdminRestaurants,
+    getRestaurants
+} from "../../api/restaurants/get.restaurants.api";
 import styled from "styled-components";
 import DisplayRestaurants from "./elements/display-restaurants";
 import { FilterContextProvider } from "./elements/filters/Filter.context";
@@ -14,7 +17,8 @@ import {
     useDigitTranslations,
     DigitLayout,
     DigitFAB,
-    DigitLoading
+    DigitLoading,
+    useGammaStatus
 } from "@cthit/react-digit-components";
 import Add from "@material-ui/icons/Add";
 import FiveZeroZero from "../../common/elements/fivezerozero";
@@ -40,17 +44,24 @@ const Restaurants = () => {
     const [categories, setCategories] = useState(null);
     const [text] = useDigitTranslations();
     const admin = useAdmin();
+    const [gammaLoading] = useGammaStatus();
 
     useEffect(() => {
-        Promise.all([getRestaurants(), getCategories()])
-            .then(results => {
-                setRestaurants(results[0].data);
-                setCategories(results[1].data);
-            })
-            .catch(error => {
-                setStatus(error.response.status);
-            });
-    }, []);
+        console.log(gammaLoading, admin);
+        if (!gammaLoading) {
+            Promise.all([
+                admin ? getAdminRestaurants() : getRestaurants(),
+                getCategories()
+            ])
+                .then(results => {
+                    setRestaurants(results[0].data);
+                    setCategories(results[1].data);
+                })
+                .catch(error => {
+                    setStatus(error.response.status);
+                });
+        }
+    }, [admin, gammaLoading, setStatus, setRestaurants, setCategories]);
 
     if (status) {
         return <FiveZeroZero />;

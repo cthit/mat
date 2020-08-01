@@ -5,7 +5,8 @@ const {
 const { handleOAuthCode } = require("../controllers/authentication.controller");
 const idIsUUIDMiddleware = require("../middlewares/id-is-uuid.middleware");
 const {
-    handleGetRestaurants,
+    handleGetVisibleRestaurants,
+    handleGetRestaurantsEatIT,
     handleGetRestaurant
 } = require("../controllers/restaurant.controller");
 
@@ -20,7 +21,8 @@ const getUnprotectedRouter = (router, tools) => {
         idIsUUIDMiddleware,
         handleGetRestaurant(tools)
     );
-    router.get("/restaurants", handleGetRestaurants(tools));
+    router.get("/restaurants", handleGetVisibleRestaurants(tools));
+    router.get("/mat.json", handleGetRestaurantsEatIT(tools));
 
     return router;
 };
