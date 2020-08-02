@@ -17,6 +17,7 @@
     "Hidden": ["Hidden", "Gömd"],
     "Category": ["Category", "Kategori"],
     "Menu": ["Menu", "Meny"],
+    "Address": ["Address", "Adress"],
     "CampusLocation": ["Campus location", "Campus plats"],
     "AdminRestaurants": ["Edit restaurants", "Redigera restauranger"],
     "AdminCategories": ["Edit categories", "Redigera kategorier"],

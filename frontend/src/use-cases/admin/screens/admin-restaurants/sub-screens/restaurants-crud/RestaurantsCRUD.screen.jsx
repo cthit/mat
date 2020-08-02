@@ -176,6 +176,13 @@ const RestaurantsCRUD = () => {
                         size: { width: "280px" }
                     }
                 },
+                address: {
+                    component: DigitTextField,
+                    componentProps: {
+                        outlined: true,
+                        size: { width: "280px" }
+                    }
+                },
                 phone_number: {
                     component: DigitTextField,
                     componentProps: {
@@ -191,16 +198,18 @@ const RestaurantsCRUD = () => {
                 "menu",
                 "hidden",
                 "campus_location",
+                "address",
                 "maps_link",
                 "phone_number",
                 "rating"
             ]}
-            readAllKeysOrder={["name", "campus_location"]}
+            readAllKeysOrder={["name", "address", "campus_location"]}
             createKeysOrder={[
                 "name",
                 "category_id",
                 "menu",
                 "campus_location",
+                "address",
                 "maps_link",
                 "phone_number"
             ]}
@@ -212,6 +221,7 @@ const RestaurantsCRUD = () => {
                 campus_location: text.CampusLocation,
                 maps_link: text.MapsLink,
                 phone_number: text.PhoneNumber,
+                address: text.Address,
                 hidden: text.Hidden
             }}
             useKeyTextsInUpperLabel
