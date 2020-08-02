@@ -22,6 +22,7 @@ import ArrowBack from "@material-ui/icons/ArrowBack";
 import styled from "styled-components";
 import FourZeroFour from "../../../../../../common/elements/fourzerofour";
 import FiveZeroZero from "../../../../../../common/elements/fivezerozero";
+import { useHistory } from "react-router-dom";
 
 const DetailsContainer = styled.div`
     margin-left: auto;
@@ -84,6 +85,7 @@ const RestaurantDetails = ({ data }) => {
 const RestaurantsCRUD = () => {
     const [text, activeLanguage] = useDigitTranslations();
     const [categories, setCategories] = useState(null);
+    const history = useHistory();
 
     useEffect(() => {
         getCategories().then(response => {
@@ -237,6 +239,7 @@ const RestaurantsCRUD = () => {
             dialogDeleteTitle={() => text.AreYouSure}
             dialogDeleteConfirm={() => text.DeleteRestaurant}
             dialogDeleteCancel={() => text.Cancel}
+            onDelete={() => history.push("/")}
         />
     );
 };

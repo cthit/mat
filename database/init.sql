@@ -20,11 +20,15 @@ CREATE TABLE restaurant (
 );
 
 CREATE TABLE opening_hours (
-    restaurant_id UUID REFERENCES restaurant(id),
+    restaurant_id UUID,
     weekday WEEKDAY,
     opens TIME NOT NULL, -- 0800
     closes TIME NOT NULL,    -- 2200
-    PRIMARY KEY(restaurant_id, weekday)
+    PRIMARY KEY(restaurant_id, weekday),
+    CONSTRAINT restaurant_opening_hours_fk
+                           FOREIGN KEY (restaurant_id)
+                           REFERENCES restaurant
+                           ON DELETE CASCADE
 );
 
 CREATE OR REPLACE FUNCTION AddOrUpdateOpeningHours(_restaurant_id UUID, _weekday WEEKDAY, _opens TIME, _closes TIME) RETURNS VOID AS $$

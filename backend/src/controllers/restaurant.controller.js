@@ -42,11 +42,9 @@ const handleEditRestaurant = ({ query }) => async (req, res) => {
 const handleDeleteRestaurant = ({ query }) => async (req, res) => {
     const { id } = req.params;
 
-    const [err, success] = await deleteRestaurant(query, id);
+    const [err] = await deleteRestaurant(query, id);
 
-    if (!success) {
-        res.status(404).send("category doesn't exist");
-    } else if (err) {
+    if (err) {
         res.sendStatus(500);
     } else {
         res.sendStatus(200);
