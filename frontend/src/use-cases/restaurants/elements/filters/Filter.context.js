@@ -38,8 +38,6 @@ const filterReducer = (state, action) => {
     }
 };
 
-const savedFilter = localStorage.getItem("filters");
-
 const defaultValue = {
     campus: "johanneberg",
     categories: [],
@@ -49,8 +47,10 @@ const defaultValue = {
     reviewed: false
 };
 
-const testLoadSettings = () =>
-    savedFilter == null ? defaultValue : JSON.parse(savedFilter);
+const testLoadSettings = () => {
+    const savedFilter = localStorage.getItem("filters");
+    return savedFilter == null ? defaultValue : JSON.parse(savedFilter);
+};
 
 const FilterContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(filterReducer, testLoadSettings());
