@@ -5,7 +5,8 @@ import {
     useGammaMe,
     useGammaStatus,
     DigitButton,
-    useDigitTranslations
+    useDigitTranslations,
+    useDigitToast
 } from "@cthit/react-digit-components";
 import styled from "styled-components";
 import Restaurant from "../../common/elements/restaurant";
@@ -51,6 +52,7 @@ const ReviewRestaurant = ({ match }) => {
     const [loading] = useGammaStatus();
     const userId = user == null ? null : user.id;
     const [text] = useDigitTranslations();
+    const [queueToast] = useDigitToast();
 
     const [status, setStatus] = useState(null);
     const [restaurant, setRestaurant] = useState(null);
@@ -122,7 +124,12 @@ const ReviewRestaurant = ({ match }) => {
                         setReview({
                             ...values,
                             restaurant_id: id
-                        }).then(response => _getRestaurant());
+                        }).then(response => {
+                            _getRestaurant();
+                            queueToast({
+                                text: text.ReviewSaved
+                            });
+                        });
                     }}
                 />
             )}
