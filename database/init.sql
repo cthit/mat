@@ -43,12 +43,16 @@ $$ LANGUAGE plpgsql;
 
 CREATE TABLE review (
     uid UUID NOT NULL,
-    restaurant_id UUID REFERENCES restaurant(id),
+    restaurant_id UUID,
     description VARCHAR(2048),
     rating SMALLINT NOT NULL CONSTRAINT rating_valid check (rating >= 1 AND rating <= 5),
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
-    PRIMARY KEY(uid, restaurant_id)
+    PRIMARY KEY(uid, restaurant_id),
+    CONSTRAINT restaurant_review_fk
+                           FOREIGN KEY (restaurant_id)
+                           REFERENCES restaurant
+                           ON DELETE CASCADE
 );
 
 CREATE OR REPLACE FUNCTION AddOrUpdateReview(_uid UUID, _restaurant_id UUID, _description VARCHAR(2048), _rating SMALLINT) RETURNS VOID AS $$
