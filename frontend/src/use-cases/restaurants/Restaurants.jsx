@@ -47,7 +47,6 @@ const Restaurants = () => {
     const [gammaLoading] = useGammaStatus();
 
     useEffect(() => {
-        console.log(gammaLoading, admin);
         if (!gammaLoading) {
             Promise.all([
                 admin ? getAdminRestaurants() : getRestaurants(),
