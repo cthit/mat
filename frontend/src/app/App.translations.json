@@ -146,5 +146,29 @@
     "CreateCategory": ["Create category", "Skapa kategori"],
     "AreYouSure": ["Are you sure?", "Är du säker?"],
     "CoOrderFood": ["Ordering food together?", "Beställs mat tillsammans?"],
-    "OpenEatIT": ["Open EatIT.chalmers.it", "Öppna EatIT.chalmers.it"]
+    "OpenEatIT": ["Open EatIT.chalmers.it", "Öppna EatIT.chalmers.it"],
+    "NotValidURL": ["Not a valid URL", "Inte en giltig URL"],
+    "MaxLength1024": [
+        "Max length is 1024 characters",
+        "Maxlängden är 1024 karaktärer"
+    ],
+    "PhoneNumberValidation": [
+        "Phone number has to start with +46. For example, turn 031162613 to +4631162613. No spaces are allowed.",
+        "Telefonnummer behöver starta med +46. Exempelvis ska 031162613 omvandlas till +4631162613. Inga mellanrum är tillåtna."
+    ],
+    "CategoryMustBeChosen": [
+        "Category must be chosen",
+        "Kategori måste väljas"
+    ],
+    "MaxLength32": [
+        "Max length of the name is 32 chars",
+        "Maxlängd av namnet är 32 karaktärer"
+    ],
+    "MaxLength2048Description": [
+        "Max length of the review can be 2048 characters",
+        "Maxlängd av recensionen kan bara vara 2048 karaktärer"
+    ],
+    "SwedishNameRequired": ["Swedish name required"],
+    "EnglishNameRequired": ["English name required"],
+    "ReviewSaved": ["Review saved", "Recension sparad"]
 }
