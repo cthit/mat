@@ -64,3 +64,58 @@ CREATE OR REPLACE FUNCTION AddOrUpdateReview(_uid UUID, _restaurant_id UUID, _de
         END IF;
     END
 $$ LANGUAGE plpgsql;
+
+-- contains extra information about the menu
+CREATE TABLE menu (
+    restaurant_id UUID,
+    description VARCHAR(2048),
+    active BOOL DEFAULT FALSE,
+    PRIMARY KEY (restaurant_id),
+    CONSTRAINT restaurant_menu_fk
+                       FOREIGN KEY (restaurant_id)
+                       REFERENCES restaurant
+                       ON DELETE CASCADE
+);
+
+-- e.g. Pizza 1, hamburgers, drinks
+-- has optional extra information
+CREATE TABLE menu_category (
+    id UUID PRIMARY KEY,
+    menu_restaurant_id UUID,
+    name_sv VARCHAR(32) NOT NULL,
+    name_en VARCHAR(32),
+    description_sv VARCHAR(512),
+    description_en VARCHAR(512),
+    CONSTRAINT restaurant_menu_category_fk
+                       FOREIGN KEY (menu_restaurant_id)
+                       REFERENCES menu
+                       ON DELETE CASCADE
+);
+
+-- todo: implement custom order
+-- items from the menu
+CREATE TABLE menu_item (
+    id UUID PRIMARY KEY,
+    category_id UUID NOT NULL,
+    name_sv VARCHAR(64) NOT NULL ,
+    name_en VARCHAR(64),
+    description_sv VARCHAR(512),
+    description_en VARCHAR(512),
+    price VARCHAR(16),
+    CONSTRAINT menu_category_menu_item_fk
+                   FOREIGN KEY (category_id)
+                   REFERENCES menu_category
+                   ON DELETE CASCADE
+);
+
+-- e.g. tomato
+--CREATE TABLE menu_ingredient ();
+
+-- item to ingredient connection
+--CREATE TABLE menu_item_ingredient ();
+
+-- e.g. spicy, vegetarian
+--CREATE TABLE menu_tags ();
+
+-- links items to tags
+--CREATE TABLE menu_item_tags ();

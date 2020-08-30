@@ -231,3 +231,43 @@ INSERT
     INTO review(uid, restaurant_id, description, rating)
     VALUES('ec8987d7-4087-461d-bed5-9365086b6e3b', '47097a83-7df7-478e-8f45-467b26d9f05e', 'This was a great restaurant!!', 5);
 
+-- Menu (Sannegården)
+INSERT
+    INTO menu (restaurant_id, description, active)
+    VALUES ('47097a83-7df7-478e-8f45-467b26d9f05e', '(Vanlig pizza) / (Familjepizza) priser', true);
+
+-- categories
+
+INSERT
+    INTO menu_category (id, menu_restaurant_id, name_sv)
+    VALUES ('eedf7d4d-81a5-4999-90f1-18d08bb6a8b5', '47097a83-7df7-478e-8f45-467b26d9f05e', 'Grupp 1');
+
+INSERT
+    INTO menu_category (id, menu_restaurant_id, name_sv)
+    VALUES ('dbd310df-7284-4bb7-8be3-7b2d1ce00c5d', '47097a83-7df7-478e-8f45-467b26d9f05e', 'Grupp 2');
+
+-- items
+
+INSERT
+    INTO menu_item (id, category_id, name_sv, description_sv, price)
+    VALUES ('d4896703-ae19-43fe-8c99-cd079faf68ce', 'eedf7d4d-81a5-4999-90f1-18d08bb6a8b5', 'Kebabpizza', 'Ananas, Glass, Godis', '90/180kr');
+
+INSERT
+    INTO menu_item (id, category_id, name_sv, description_sv, price)
+    VALUES ('7bffc4fa-2d9c-45a9-9c1e-28e4a60e7c1f', 'eedf7d4d-81a5-4999-90f1-18d08bb6a8b5', 'Hawaii', 'Ananas, Glass, Godis', '80/160kr');
+
+INSERT
+    INTO menu_item (id, category_id, name_sv, description_sv, price)
+    VALUES ('1c3dfd6c-e5ef-41b5-8002-94c854b341b2', 'eedf7d4d-81a5-4999-90f1-18d08bb6a8b5', 'Marinara', 'Ananas, Glass, Godis', '85/170kr');
+
+INSERT
+    INTO menu_item (id, category_id, name_sv, description_sv, price)
+    VALUES ('81f1e8fe-6298-4a42-a548-856539d05617', 'dbd310df-7284-4bb7-8be3-7b2d1ce00c5d', 'Bombay', 'Ananas, Glass, Godis', '85/170kr');
+
+INSERT
+    INTO menu_item (id, category_id, name_sv, description_sv, price)
+    VALUES ('3789e8d4-075c-4a05-914c-844f95355407', 'dbd310df-7284-4bb7-8be3-7b2d1ce00c5d', 'Ravena', 'Ananas, Glass, Godis', '105/210kr');
+
+INSERT
+    INTO menu_item (id, category_id, name_sv, description_sv, price)
+    VALUES ('0a3a7ece-a04e-4618-b94d-682be3a76f3c', 'dbd310df-7284-4bb7-8be3-7b2d1ce00c5d', 'Frutti', 'Ananas, Glass, Godis', '100/200kr');

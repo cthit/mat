@@ -1,5 +1,6 @@
 const restaurantValidation = require("./validation/restaurant.validation");
 const openingHoursValidation = require("./validation/opening-hours.validation");
+const { getMenu } = require("../services/menu.service");
 const { getRestaurant } = require("../services/restaurant.service");
 const {
     addRestaurant,
@@ -150,6 +151,14 @@ const handleSetOpeningHours = ({ query }) => async (req, res) => {
     res.sendStatus(200);
 };
 
+const handleGetMenu = ({ query }) => async (req, res) => {
+    const { id } = req.params;
+
+    const [err, menu] = await getMenu(query, id);
+
+    res.status(200).send(menu);
+};
+
 module.exports = {
     handleAddRestaurant,
     handleEditRestaurant,
@@ -158,5 +167,6 @@ module.exports = {
     handleGetRestaurants,
     handleGetVisibleRestaurants,
     handleSetOpeningHours,
-    handleGetRestaurantsEatIT
+    handleGetRestaurantsEatIT,
+    handleGetMenu
 };

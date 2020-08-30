@@ -7,7 +7,8 @@ const idIsUUIDMiddleware = require("../middlewares/id-is-uuid.middleware");
 const {
     handleGetVisibleRestaurants,
     handleGetRestaurantsEatIT,
-    handleGetRestaurant
+    handleGetRestaurant,
+    handleGetMenu
 } = require("../controllers/restaurant.controller");
 
 const getUnprotectedRouter = (router, tools) => {
@@ -16,6 +17,11 @@ const getUnprotectedRouter = (router, tools) => {
     router.get("/categories/:id", idIsUUIDMiddleware, handleGetCategory(tools));
     router.get("/categories", handleGetCategories(tools));
 
+    router.get(
+        "/restaurants/:id/menu",
+        idIsUUIDMiddleware,
+        handleGetMenu(tools)
+    );
     router.get(
         "/restaurants/:id",
         idIsUUIDMiddleware,
