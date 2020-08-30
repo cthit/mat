@@ -37,6 +37,8 @@ const Description = styled(DigitText.Text)`
     margin-left: 4px;
     grid-column-start: 1;
     grid-column-end: 3;
+    max-height: 300px;
+    overflow: auto;
 `;
 
 const DateContainer = styled.div`
