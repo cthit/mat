@@ -39,9 +39,17 @@ const NoRestaurantsFilter = styled.div`
 const sort = (restaurants, sortBy) => {
     switch (sortBy) {
         case "az":
-            return orderBy(restaurants, ["name"], ["asc"]);
+            return orderBy(
+                restaurants.map(r => ({ lname: r.name.toLowerCase(), ...r })),
+                ["lname"],
+                ["asc"]
+            );
         case "za":
-            return orderBy(restaurants, ["name"], ["desc"]);
+            return orderBy(
+                restaurants.map(r => ({ lname: r.name.toLowerCase(), ...r })),
+                ["lname"],
+                ["desc"]
+            );
         case "highestRating":
             return orderBy(
                 restaurants,
