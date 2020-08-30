@@ -1,3 +1,5 @@
+const restaurantValidation = require("./validation/restaurant.validation");
+const openingHoursValidation = require("./validation/opening-hours.validation");
 const { getRestaurant } = require("../services/restaurant.service");
 const {
     addRestaurant,
@@ -8,6 +10,12 @@ const {
 } = require("../services/restaurant.service");
 
 const handleAddRestaurant = ({ query }) => async (req, res) => {
+    try {
+        restaurantValidation().validateSync(req.body);
+    } catch (e) {
+        res.status(422).send(e);
+    }
+
     const [err] = await addRestaurant(query, req.body);
 
     if (err) {
@@ -23,6 +31,12 @@ const handleAddRestaurant = ({ query }) => async (req, res) => {
 
 const handleEditRestaurant = ({ query }) => async (req, res) => {
     const { id } = req.params;
+
+    try {
+        restaurantValidation().validateSync(req.body);
+    } catch (e) {
+        res.status(422).send(e);
+    }
 
     const [err, success] = await editRestaurant(query, id, req.body);
 
@@ -124,6 +138,12 @@ const handleGetVisibleRestaurants = ({ query }) => async (req, res) => {
 
 const handleSetOpeningHours = ({ query }) => async (req, res) => {
     const { id } = req.params;
+
+    try {
+        openingHoursValidation().validateSync(req.body);
+    } catch (e) {
+        res.status(422).send(e);
+    }
 
     const [err, success] = await setOpeningHours(query, id, req.body);
 

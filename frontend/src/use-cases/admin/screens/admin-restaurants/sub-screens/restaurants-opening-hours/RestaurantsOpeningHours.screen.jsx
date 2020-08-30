@@ -9,6 +9,7 @@ import { setOpeningHours } from "../../../../../../api/restaurants/put.restauran
 import { useHistory } from "react-router-dom";
 import { getRestaurant } from "../../../../../../api/restaurants/get.restaurants.api";
 import * as yup from "yup";
+import { openingHoursValidation } from "../../../../../../validation/opening-hours.validation";
 
 const zeroBefore = n => (n < 10 ? "0" : "") + n;
 
@@ -112,27 +113,7 @@ const RestaurantsOpeningHours = ({ match }) => {
                 outlined: true,
                 onClick: () => history.goBack()
             }}
-            validationSchema={yup.object().shape({
-                openingHours: yup.array().of(
-                    yup.object().shape({
-                        open: yup.bool(),
-                        opens: yup
-                            .date()
-                            .nullable()
-                            .when("open", {
-                                is: true,
-                                then: yup.date().required()
-                            }),
-                        closes: yup
-                            .date()
-                            .nullable()
-                            .when("open", {
-                                is: true,
-                                then: yup.date().required()
-                            })
-                    })
-                )
-            })}
+            validationSchema={openingHoursValidation(text)}
             cardProps={{
                 overflow: "auto"
             }}

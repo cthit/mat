@@ -11,6 +11,7 @@ import {
 import { addCategory } from "../../../../api/categories/post.categories.api";
 import { editCategory } from "../../../../api/categories/put.categories.api";
 import { deleteCategory } from "../../../../api/categories/delete.categories.api";
+import { categoryValidation } from "../../../../validation/category.validation";
 
 const AdminCategories = () => {
     const [text, activeLanguage] = useDigitTranslations();
@@ -81,6 +82,7 @@ const AdminCategories = () => {
             dialogDeleteTitle={() => text.AreYouSure}
             dialogDeleteConfirm={() => text.DeleteCategory}
             dialogDeleteCancel={() => text.Cancel}
+            formValidationSchema={categoryValidation(text)}
         />
     );
 };

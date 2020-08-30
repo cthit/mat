@@ -28,6 +28,10 @@ Docker can be unforgiving when trying to update dependencies.
 
 After that, you can just run `docker-compose up` to get started again.
 
+### Form validation
+
+If you have to change form validation, do not forget to update it both in the frontend and the backend. In the frontend it's in `frontend/src/validation`, and in the backend it's in `backend/src/controllers/validation`. Note that `text` and error messages are not necessary in the backend validation.
+
 ## Deployment
 
 `prod.docker-compose.yml` is a great start to deploy your instance of mat.chalmers.it. To test locally, just run `docker-compose -f prod.docker-compose.yml up --build` Some notes on it, however:

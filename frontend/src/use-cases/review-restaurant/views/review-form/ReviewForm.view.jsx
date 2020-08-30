@@ -7,6 +7,7 @@ import {
 import MatRating from "../../../../common/elements/mat-rating";
 import * as yup from "yup";
 import { NO_REVIEW } from "../../ReviewRestaurant";
+import { reviewValidation } from "../../../../validation/review.validation";
 
 const ReviewForm = ({ loading, userReview, onSubmit }) => {
     const [text] = useDigitTranslations();
@@ -45,20 +46,12 @@ const ReviewForm = ({ loading, userReview, onSubmit }) => {
                             width: "100%"
                         },
                         rows: 5,
-                        rowsMax: 10,
-                        maxLength: 500
+                        rowsMax: 10
                     }
                 }
             }}
             keysOrder={["rating", "description"]}
-            validationSchema={yup.object().shape({
-                rating: yup
-                    .number()
-                    .min(1)
-                    .max(5)
-                    .required(),
-                description: yup.string()
-            })}
+            validationSchema={reviewValidation(text)}
         />
     );
 };

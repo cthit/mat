@@ -1,3 +1,5 @@
+const categoryValidation = require("./validation/category.validation");
+
 const {
     addCategory,
     getCategories,
@@ -7,6 +9,12 @@ const {
 } = require("../services/category.service");
 
 const handleAddCategory = ({ query }) => async (req, res) => {
+    try {
+        categoryValidation().validateSync(req.body);
+    } catch (e) {
+        res.status(422).send(e);
+    }
+
     const [err] = await addCategory(query, req.body);
 
     if (err) {
@@ -22,6 +30,12 @@ const handleAddCategory = ({ query }) => async (req, res) => {
 
 const handleEditCategory = ({ query }) => async (req, res) => {
     const { id } = req.params;
+
+    try {
+        categoryValidation().validateSync(req.body);
+    } catch (e) {
+        res.status(422).send(e);
+    }
 
     const [err, success] = await editCategory(query, id, req.body);
 

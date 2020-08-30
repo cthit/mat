@@ -23,6 +23,7 @@ import styled from "styled-components";
 import FourZeroFour from "../../../../../../common/elements/fourzerofour";
 import FiveZeroZero from "../../../../../../common/elements/fivezerozero";
 import { useHistory } from "react-router-dom";
+import { restaurantValidation } from "../../../../../../validation/restaurant.validation";
 
 const DetailsContainer = styled.div`
     margin-left: auto;
@@ -111,12 +112,7 @@ const RestaurantsCRUD = () => {
             updateRequest={editRestaurant}
             deleteRequest={deleteRestaurant}
             formInitialValues={{
-                name: "",
-                category_id: "",
-                menu: "",
-                campus_location: "johanneberg",
-                maps_link: "",
-                phone_number: ""
+                campus_location: "johanneberg"
             }}
             formComponentData={{
                 name: {
@@ -250,6 +246,7 @@ const RestaurantsCRUD = () => {
             dialogDeleteConfirm={() => text.DeleteRestaurant}
             dialogDeleteCancel={() => text.Cancel}
             onDelete={() => history.push("/")}
+            formValidationSchema={restaurantValidation(text)}
         />
     );
 };
