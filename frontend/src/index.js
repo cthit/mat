@@ -5,10 +5,12 @@ import { DigitProviders } from "@cthit/react-digit-components";
 import { FilterMobileOpenContextSingletonProvider } from "./common/contexts/filter-mobile-open/FilterMobileOpen.context";
 
 ReactDOM.render(
-    <DigitProviders>
-        <FilterMobileOpenContextSingletonProvider>
-            <App />
-        </FilterMobileOpenContextSingletonProvider>
-    </DigitProviders>,
+    <React.StrictMode>
+        <DigitProviders>
+            <FilterMobileOpenContextSingletonProvider>
+                <App />
+            </FilterMobileOpenContextSingletonProvider>
+        </DigitProviders>
+    </React.StrictMode>,
     document.getElementById("root")
 );
