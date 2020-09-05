@@ -8,10 +8,14 @@ import { NonStyledALink, NonStyledLink } from "../../../common-ui/design";
 import RestaurantBody from "../restaurant-body";
 import RestaurantHeader from "../restaurant-header";
 import Launch from "@material-ui/icons/Launch";
+import RestaurantOpenMenuButton from "../restaurant-open-menu-button/RestaurantOpenMenuButton.element";
 
 const Restaurant = ({ data, disableReview }) => {
     const { menu, id, has_custom_menu } = data;
     const [text] = useDigitTranslations();
+
+    console.log(menu);
+    console.log(data);
 
     return (
         <DigitDesign.Card>
@@ -20,24 +24,11 @@ const Restaurant = ({ data, disableReview }) => {
                 <RestaurantBody data={data} />
             </DigitDesign.CardBody>
             <DigitDesign.CardButtons reverseDirection>
-                {has_custom_menu && (
-                    <NonStyledLink to={"/menu/" + id}>
-                        <DigitButton primary outlined text={text.OpenMenu} />
-                    </NonStyledLink>
-                )}
-                {!has_custom_menu && (
-                    <NonStyledALink target="_blank" href={menu}>
-                        <DigitButton
-                            disabled={menu == null}
-                            primary
-                            outlined
-                            text={
-                                menu == null ? text.OpenMenu : text.OpenMenuLink
-                            }
-                            endIcon={menu == null ? null : <Launch />}
-                        />
-                    </NonStyledALink>
-                )}
+                <RestaurantOpenMenuButton
+                    menu={menu}
+                    hasCustomMenu={has_custom_menu}
+                    id={id}
+                />
                 {!disableReview && (
                     <NonStyledLink to={"/review/" + id}>
                         <DigitButton text={text.Review} secondary outlined />

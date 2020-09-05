@@ -11,6 +11,7 @@ import styled from "styled-components";
 import { NonStyledALink, NonStyledLink } from "../../../common-ui/design";
 import Edit from "@material-ui/icons/Edit";
 import RestaurantBody from "../restaurant-body";
+import RestaurantOpenMenuButton from "../restaurant-open-menu-button/RestaurantOpenMenuButton.element";
 
 const CustomCardHeader = styled.div`
     padding-top: 16px;
@@ -25,7 +26,7 @@ const CustomCardHeader = styled.div`
 `;
 
 const RestaurantAdmin = ({ data, disableReview }) => {
-    const { category, name, hidden, menu, id } = data;
+    const { category, name, hidden, menu, id, has_custom_menu } = data;
 
     const history = useHistory();
     const [text, activeLanguage] = useDigitTranslations();
@@ -51,14 +52,11 @@ const RestaurantAdmin = ({ data, disableReview }) => {
                 <RestaurantBody data={data} />
             </DigitDesign.CardBody>
             <DigitDesign.CardButtons reverseDirection>
-                <NonStyledALink target="_blank" href={menu}>
-                    <DigitButton
-                        disabled={menu == null}
-                        primary
-                        outlined
-                        text="Visa meny"
-                    />
-                </NonStyledALink>
+                <RestaurantOpenMenuButton
+                    menu={menu}
+                    hasCustomMenu={has_custom_menu}
+                    id={id}
+                />
                 {!disableReview && (
                     <NonStyledLink to={"/review/" + id}>
                         <DigitButton text={text.Review} secondary outlined />

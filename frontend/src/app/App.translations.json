@@ -172,6 +172,5 @@
     "SwedishNameRequired": ["Swedish name required"],
     "EnglishNameRequired": ["English name required"],
     "ReviewSaved": ["Review saved", "Recension sparad"],
-    "OpenMenuLink": ["Open menu (New tab)", "Öppna meny (Ny tabb)"],
     "OpenMenu": ["Open menu", "Öppna meny"]
 }
