@@ -2,8 +2,9 @@
     "Back": ["Back", "Tillbaka"],
     "Cancel": ["Cancel", "Avbryt"],
     "AdminOptions": ["Admin options", "Admin alternativ"],
-    "EditRestaurant": ["Edit restaurant", "Redigera restaurang"],
+    "EditRestaurant": ["Edit details", "Redigera detaljer"],
     "EditRestaurants": ["Edit restaurants", "Redigera restauranger"],
+    "EditMenu": ["Edit menu", "Redigera meny"],
     "EditCategories": ["Edit categories", "Redigera kategorier"],
     "SwedishName": ["Swedish name", "Svenskt namn"],
     "EnglishName": ["English name", "Engelskt namn"],
@@ -170,5 +171,7 @@
     ],
     "SwedishNameRequired": ["Swedish name required"],
     "EnglishNameRequired": ["English name required"],
-    "ReviewSaved": ["Review saved", "Recension sparad"]
+    "ReviewSaved": ["Review saved", "Recension sparad"],
+    "OpenMenuLink": ["Open menu (New tab)", "Öppna meny (Ny tabb)"],
+    "OpenMenu": ["Open menu", "Öppna meny"]
 }

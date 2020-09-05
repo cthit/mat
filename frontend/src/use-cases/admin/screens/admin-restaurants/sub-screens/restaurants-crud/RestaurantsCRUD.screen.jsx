@@ -19,17 +19,36 @@ import RestaurantHeader from "../../../../../../common/elements/restaurant-heade
 import RestaurantBody from "../../../../../../common/elements/restaurant-body";
 import { NonStyledLink } from "../../../../../../common-ui/design";
 import ArrowBack from "@material-ui/icons/ArrowBack";
+import RestaurantMenu from "@material-ui/icons/RestaurantMenu";
+import Schedule from "@material-ui/icons/Schedule";
+import Edit from "@material-ui/icons/Edit";
 import styled from "styled-components";
 import FourZeroFour from "../../../../../../common/elements/fourzerofour";
 import FiveZeroZero from "../../../../../../common/elements/fivezerozero";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { restaurantValidation } from "../../../../../../validation/restaurant.validation";
+
+const EditLink = styled(Link)`
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+`;
 
 const DetailsContainer = styled.div`
     margin-left: auto;
     margin-right: auto;
 
     margin-bottom: 72px;
+`;
+
+const Buttons = styled.div`
+    display: grid;
+    grid-template-columns: max-content;
+    grid-auto-rows: min-content;
+    grid-gap: 8px;
+    justify-items: stretch;
+    justify-content: center;
+    padding: 16px;
 `;
 
 const RestaurantDetails = ({ data }) => {
@@ -68,16 +87,37 @@ const RestaurantDetails = ({ data }) => {
                         }}
                     />
                 </DigitDesign.CardBody>
-                <DigitDesign.CardButtons reverseDirection>
-                    <NonStyledLink to={"/admin/restaurants/" + id + "/edit"}>
-                        <DigitButton outlined text={text.EditRestaurant} />
-                    </NonStyledLink>
-                    <NonStyledLink
+                <Buttons>
+                    <EditLink to={"/admin/restaurants/" + id + "/edit"}>
+                        <DigitButton
+                            flex={"1"}
+                            margin={"0"}
+                            outlined
+                            text={text.EditRestaurant}
+                            startIcon={<Edit />}
+                        />
+                    </EditLink>
+                    <EditLink to={"/admin/restaurants/" + id + "/menu"}>
+                        <DigitButton
+                            flex={"1"}
+                            margin={"0"}
+                            outlined
+                            text={text.EditMenu}
+                            startIcon={<RestaurantMenu />}
+                        />
+                    </EditLink>
+                    <EditLink
                         to={"/admin/restaurants/" + id + "/opening_hours"}
                     >
-                        <DigitButton outlined text={text.EditOpeningHours} />
-                    </NonStyledLink>
-                </DigitDesign.CardButtons>
+                        <DigitButton
+                            flex={"1"}
+                            margin={"0"}
+                            outlined
+                            text={text.EditOpeningHours}
+                            startIcon={<Schedule />}
+                        />
+                    </EditLink>
+                </Buttons>
             </DigitDesign.Card>
         </DetailsContainer>
     );
