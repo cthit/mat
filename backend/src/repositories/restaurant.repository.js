@@ -37,7 +37,7 @@ const queryAddRestaurant = (
 
 const queryGetRestaurant = (query, id) =>
     query(
-        "SELECT * FROM restaurant WHERE id = $1",
+        "SELECT restaurant.*, menu.active as has_custom_menu FROM restaurant JOIN menu ON id = $1 AND id = menu.restaurant_id",
         [id],
         results => results.rows
     );
@@ -50,7 +50,11 @@ const queryGetRestaurantCategory = (query, id) =>
     );
 
 const queryGetRestaurants = query =>
-    query("SELECT * FROM restaurant", [], results => results.rows);
+    query(
+        "SELECT restaurant.*, COALESCE (menu.active, FALSE) AS has_custom_menu FROM restaurant LEFT JOIN menu ON id = menu.restaurant_id",
+        [],
+        results => results.rows
+    );
 
 const queryEditRestaurant = (
     query,
