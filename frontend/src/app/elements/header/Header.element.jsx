@@ -74,6 +74,16 @@ const Header = ({ loading, signIn }) => {
                 }
                 signOut={() => postRequest("/sign-out")}
                 size={{ width: "min-content" }}
+                frontendUrl={
+                    process.env.NODE_ENV === "development"
+                        ? "http://localhost:3000"
+                        : "https://gamma.chalmers.it"
+                }
+                backendUrl={
+                    process.env.NODE_ENV === "development"
+                        ? "http://localhost:8081/api"
+                        : "https://gamma.chalmers.it"
+                }
             />
         </DigitLayout.Row>
     );
