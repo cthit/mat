@@ -4,7 +4,7 @@ const getUnprotectedRouter = require("./unprotected.router");
 const getProtectedRouter = require("./protected.router");
 const getAdminRouter = require("./admin.router");
 
-const MAT_AUTHORITY = "admin";
+const MAT_AUTHORITY = process.env.MAT_GAMMA_AUTHORITY || "admin";
 
 const ensureAuthentication = (req, res, next) => {
     if (req.session.token) {

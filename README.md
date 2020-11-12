@@ -42,3 +42,15 @@ If you have to change form validation, do not forget to update it both in the fr
 ### Database migration 
 
 Right now there's no migration script installed on mat.chalmers.it. You'll have to do it manually. Just don't forget to make a backup before starting. In the future, there should be SQL files for migration in `/database/migration`. 
+
+### Environment variables 
+
+The frontend have as of right now the gamma url hardcoded to https://gamma.chalmers.it. 
+
+Environment variables for the backend:
+
+- DB_HOST, DB_PORT, DB_USER, DB_DATABASE, DB_PASSWORD: Connecting to a PostgreSQL database.
+- REDIS_HOST, REDIS_PORT: Connecting to a redis instance.
+- MAT_COOKIE_NAME, MAT_COOKIE_SECRET, MAT_COOKIE_AGE, MAT_COOKIE_DOMAIN: Cookie settings. See `session.js` for default settings.
+- MAT_PORT: Port that the backend will run on. Default is 8080.
+- MAT_GAMMA_AUTHORITY: The name of the gamma authority. Default is admin.

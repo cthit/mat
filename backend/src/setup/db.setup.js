@@ -1,10 +1,10 @@
 const pg = require("pg");
 
-const DB_HOST = "mat-db";
-const DB_PORT = 5432;
-const DB_USER = "user";
-const DB_DATABASE = "postgres";
-const DB_PASSWORD = "password";
+const DB_HOST = process.env.DB_HOST || "mat-db";
+const DB_PORT = process.env.DB_PORT || 5432;
+const DB_USER = process.env.DB_USER || "user";
+const DB_DATABASE = process.env.DB_DATABASE || "postgres";
+const DB_PASSWORD = process.env.DB_PASSWORD || "password";
 
 const getQuery = () => {
     const pool = new pg.Pool({
