@@ -1,16 +1,6 @@
 FROM node:14
-
-# Create app directory
 WORKDIR /usr/src/app
-
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-COPY package*.json ./
-
-RUN npm install --only=production
-
-COPY . .
-
-EXPOSE 8080
-CMD [ "npm", "start" ]
+COPY package.json package-lock.json ./
+RUN npm install
+COPY src src
+CMD node src/index.js
