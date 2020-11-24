@@ -34,10 +34,13 @@ If you have to change form validation, do not forget to update it both in the fr
 
 ## Deployment
 
-`prod.docker-compose.yml` is a great start to deploy your instance of mat.chalmers.it. To test locally, just run `docker-compose -f prod.docker-compose.yml up --build` Some notes on it, however:
+What's needed to run mat in production is:
 
-* You do not need to run gamma again when setting up your mat.chalmers.it instance. Gamma is expected to run separately from mat.chalmers.it. 
-* Since `prod.docker-compose.yml` is able to run locally, there are some paths that point to localhost. This should probably be changed when deploying in production.
+- Frontend
+- Backend
+- PostgreSQL database
+- Redis
+- Reverse proxy (to run the frontend and backend from the same port)
 
 ### Database migration 
 
