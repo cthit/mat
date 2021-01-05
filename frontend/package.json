@@ -4,7 +4,7 @@
     "private": true,
     "dependencies": {
         "@cthit/react-digit-components": "^0.1.26",
-        "axios": "^0.18.0",
+        "axios": "^0.21.1",
         "lodash": "^4.17.11",
         "react": "^16.6.0",
         "react-dom": "^16.6.0",
