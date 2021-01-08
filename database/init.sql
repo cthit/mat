@@ -31,7 +31,7 @@ CREATE TABLE opening_hours (
                            ON DELETE CASCADE
 );
 
-CREATE OR REPLACE FUNCTION AddOrUpdateOpeningHours(_restaurant_id UUID, _weekday WEEKDAY, _opens TIME, _closes TIME) RETURNS VOID AS $$
+CREATE FUNCTION AddOrUpdateOpeningHours(_restaurant_id UUID, _weekday WEEKDAY, _opens TIME, _closes TIME) RETURNS VOID AS $$
     BEGIN
         IF EXISTS (SELECT * FROM opening_hours WHERE opening_hours.restaurant_id = _restaurant_id AND opening_hours.weekday = _weekday) THEN
             UPDATE opening_hours SET opens = _opens, closes = _closes WHERE restaurant_id = _restaurant_id AND weekday = _weekday;
@@ -55,7 +55,7 @@ CREATE TABLE review (
                            ON DELETE CASCADE
 );
 
-CREATE OR REPLACE FUNCTION AddOrUpdateReview(_uid UUID, _restaurant_id UUID, _description VARCHAR(2048), _rating SMALLINT) RETURNS VOID AS $$
+CREATE FUNCTION AddOrUpdateReview(_uid UUID, _restaurant_id UUID, _description VARCHAR(2048), _rating SMALLINT) RETURNS VOID AS $$
     BEGIN
         IF EXISTS (SELECT * FROM review WHERE uid = _uid AND restaurant_id = _restaurant_id) THEN
             UPDATE review SET rating = _rating, description = _description, updated_at = NOW() WHERE uid = _uid AND restaurant_id = _restaurant_id;
@@ -107,6 +107,56 @@ CREATE TABLE menu_item (
                    REFERENCES menu_category
                    ON DELETE CASCADE
 );
+
+
+CREATE TABLE menu_category_order (
+    restaurant_id UUID,
+    category_id UUID,
+    position INT,
+    PRIMARY KEY (restaurant_id, position)
+);
+
+CREATE FUNCTION AddCategoryToOrder() RETURNS TRIGGER AS $add_category_to_order_trigger$
+DECLARE
+    new_position INT := COALESCE((
+        SELECT menu_category_order.position + 1
+            FROM menu_category_order
+            WHERE menu_category_order.restaurant_id = NEW.menu_restaurant_id
+            ORDER BY menu_category_order.position
+            LIMIT 1
+        ), 0);
+BEGIN
+    RAISE NOTICE '%', new_position;
+    INSERT INTO menu_category_order(restaurant_id, category_id, position) VALUES (NEW.menu_restaurant_id, NEW.id, new_position);
+    RETURN NEW;
+END
+$add_category_to_order_trigger$ LANGUAGE plpgsql;
+
+
+CREATE TRIGGER add_category_to_order_trigger
+    AFTER INSERT ON menu_category
+    FOR EACH ROW
+    EXECUTE PROCEDURE AddCategoryToOrder();
+--
+-- CREATE TABLE menu_item_order
+-- (
+--     category_id UUID,
+--     menu_id     UUID,
+--     position INT,
+--     PRIMARY KEY (category_id, menu_id, position)
+-- );
+--
+-- CREATE FUNCTION AddItemToOrder() RETURNS TRIGGER AS $add_item_to_order_trigger$
+--     BEGIN
+--         INSERT INTO menu_item_order(category_id, menu_id) VALUES (NEW.category_id, NEW.id);
+--         RETURN NEW;
+--     END
+-- $add_item_to_order_trigger$ LANGUAGE plpgsql;
+--
+-- CREATE TRIGGER add_item_to_order_trigger
+--     AFTER INSERT ON menu_item
+--     FOR EACH ROW
+--     EXECUTE PROCEDURE AddItemToOrder();
 
 -- e.g. tomato
 --CREATE TABLE menu_ingredient ();

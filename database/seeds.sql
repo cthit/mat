@@ -246,6 +246,18 @@ INSERT
     INTO menu_category (id, menu_restaurant_id, name_sv)
     VALUES ('dbd310df-7284-4bb7-8be3-7b2d1ce00c5d', '47097a83-7df7-478e-8f45-467b26d9f05e', 'Grupp 2');
 
+INSERT
+    INTO menu_category (id, menu_restaurant_id, name_sv)
+    VALUES ('070a6765-0bae-4fad-9355-78d4e60b4518', '47097a83-7df7-478e-8f45-467b26d9f05e', 'Grupp 3');
+
+INSERT
+    INTO menu_category (id, menu_restaurant_id, name_sv)
+    VALUES ('45b17233-2b69-4513-b1ef-64419cb81509', '47097a83-7df7-478e-8f45-467b26d9f05e', 'Grupp 4');
+
+INSERT
+    INTO menu_category (id, menu_restaurant_id, name_sv)
+    VALUES ('f4358af1-ba3a-437a-83bd-bc69d7cd6473', '47097a83-7df7-478e-8f45-467b26d9f05e', 'Grupp 5');
+
 -- items
 
 INSERT
@@ -271,3 +283,56 @@ INSERT
 INSERT
     INTO menu_item (id, category_id, name_sv, description_sv, price)
     VALUES ('0a3a7ece-a04e-4618-b94d-682be3a76f3c', 'dbd310df-7284-4bb7-8be3-7b2d1ce00c5d', 'Frutti', 'Ananas, Glass, Godis', '100/200kr');
+
+-- Lindholmens 
+INSERT
+    INTO menu (restaurant_id, description, active)
+    VALUES ('c81fe007-2bd8-4e50-9fb8-5a56b52970e3', '(Vanlig pizza) / (Familjepizza) priser', true);
+
+-- categories
+
+INSERT
+    INTO menu_category (id, menu_restaurant_id, name_sv)
+    VALUES ('a16d6923-f00f-4e4f-8099-4a664abd8682', 'c81fe007-2bd8-4e50-9fb8-5a56b52970e3', 'Grupp 1');
+
+INSERT
+    INTO menu_category (id, menu_restaurant_id, name_sv)
+    VALUES ('eb1f6cc8-1a4b-4487-92d1-bc68c1bb3e8a', 'c81fe007-2bd8-4e50-9fb8-5a56b52970e3', 'Grupp 2');
+
+INSERT
+    INTO menu_category (id, menu_restaurant_id, name_sv)
+    VALUES ('f14e1b0f-0649-4d52-aba3-575c9ff4d924', 'c81fe007-2bd8-4e50-9fb8-5a56b52970e3', 'Grupp 3');
+
+INSERT
+    INTO menu_category (id, menu_restaurant_id, name_sv)
+    VALUES ('426a7c08-e2cb-439b-a62f-1d9e144c2831', 'c81fe007-2bd8-4e50-9fb8-5a56b52970e3', 'Grupp 4');
+
+INSERT
+    INTO menu_category (id, menu_restaurant_id, name_sv)
+    VALUES ('78acf756-69c0-4420-a9fa-cd704709d7d8', 'c81fe007-2bd8-4e50-9fb8-5a56b52970e3', 'Grupp 5');
+
+-- items
+
+INSERT
+    INTO menu_item (id, category_id, name_sv, description_sv, price)
+    VALUES ('19e77d3d-bfc6-48b1-bf74-71f3706ca4f7', 'eedf7d4d-81a5-4999-90f1-18d08bb6a8b5', 'Kebabpizza', 'Ananas, Glass, Godis', '90/180kr');
+
+INSERT
+    INTO menu_item (id, category_id, name_sv, description_sv, price)
+    VALUES ('7b64dd8d-b0ae-4059-ad3e-01bf84f4ee8a', 'eedf7d4d-81a5-4999-90f1-18d08bb6a8b5', 'Hawaii', 'Ananas, Glass, Godis', '80/160kr');
+
+INSERT
+    INTO menu_item (id, category_id, name_sv, description_sv, price)
+    VALUES ('4865aa9f-24a4-46df-85ec-466713a495c7', 'eedf7d4d-81a5-4999-90f1-18d08bb6a8b5', 'Marinara', 'Ananas, Glass, Godis', '85/170kr');
+
+INSERT
+    INTO menu_item (id, category_id, name_sv, description_sv, price)
+    VALUES ('724c85d9-c22e-47cb-9574-f49e4c740ee2', 'dbd310df-7284-4bb7-8be3-7b2d1ce00c5d', 'Bombay', 'Ananas, Glass, Godis', '85/170kr');
+
+INSERT
+    INTO menu_item (id, category_id, name_sv, description_sv, price)
+    VALUES ('205cb6dc-20b6-45d8-bd0d-b045729b78f0', 'dbd310df-7284-4bb7-8be3-7b2d1ce00c5d', 'Ravena', 'Ananas, Glass, Godis', '105/210kr');
+
+INSERT
+    INTO menu_item (id, category_id, name_sv, description_sv, price)
+    VALUES ('6283c311-c04b-4245-8d77-42a971ad2049', 'dbd310df-7284-4bb7-8be3-7b2d1ce00c5d', 'Frutti', 'Ananas, Glass, Godis', '100/200kr');
