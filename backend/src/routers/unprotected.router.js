@@ -18,15 +18,11 @@ const getUnprotectedRouter = (router, tools) => {
     router.get("/categories", handleGetCategories(tools));
 
     router.get(
-        "/restaurants/:id/menu",
-        idIsUUIDMiddleware,
-        handleGetMenu(tools)
-    );
-    router.get(
         "/restaurants/:id",
         idIsUUIDMiddleware,
         handleGetRestaurant(tools)
     );
+
     router.get("/restaurants", handleGetVisibleRestaurants(tools));
     router.get("/mat.json", handleGetRestaurantsEatIT(tools));
 
