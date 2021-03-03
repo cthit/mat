@@ -1,6 +1,5 @@
 const restaurantValidation = require("./validation/restaurant.validation");
 const openingHoursValidation = require("./validation/opening-hours.validation");
-const { getMenu } = require("../services/menu.service");
 const { getRestaurant } = require("../services/restaurant.service");
 const {
     addRestaurant,
