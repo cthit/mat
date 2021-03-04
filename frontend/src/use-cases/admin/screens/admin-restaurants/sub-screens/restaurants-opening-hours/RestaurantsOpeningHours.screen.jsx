@@ -8,7 +8,6 @@ import EditWeekDays from "./views/edit-week-days";
 import { setOpeningHours } from "../../../../../../api/restaurants/put.restaurants.api";
 import { useHistory } from "react-router-dom";
 import { getRestaurant } from "../../../../../../api/restaurants/get.restaurants.api";
-import * as yup from "yup";
 import { openingHoursValidation } from "../../../../../../validation/opening-hours.validation";
 
 const zeroBefore = n => (n < 10 ? "0" : "") + n;
@@ -74,10 +73,12 @@ const RestaurantsOpeningHours = ({ match }) => {
                 const openingHours = values.openingHours.map(weekday =>
                     weekday.open
                         ? {
+                              open: true,
                               opens: toTime(weekday.opens),
                               closes: toTime(weekday.closes)
                           }
                         : {
+                              open: false,
                               opens: null,
                               closes: null
                           }

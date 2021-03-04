@@ -7,7 +7,7 @@ const querySetReview = (query, uid, review) =>
 
 const queryGetReviewsFromRestaurant = (query, restaurantId) =>
     query(
-        "SELECT * FROM review WHERE restaurant_id=$1",
+        "SELECT * FROM review WHERE restaurant_id = $1",
         [restaurantId],
         results => results.rows
     );

@@ -52,8 +52,20 @@ The frontend have as of right now the gamma url hardcoded to https://gamma.chalm
 
 Environment variables for the backend:
 
-- DB_HOST, DB_PORT, DB_USER, DB_DATABASE, DB_PASSWORD: Connecting to a PostgreSQL database.
-- REDIS_HOST, REDIS_PORT: Connecting to a redis instance.
-- MAT_COOKIE_NAME, MAT_COOKIE_SECRET, MAT_COOKIE_AGE, MAT_COOKIE_DOMAIN: Cookie settings. See `session.js` for default settings.
-- MAT_PORT: Port that the backend will run on. Default is 8080.
-- MAT_GAMMA_AUTHORITY: The name of the gamma authority. Default is admin.
+- `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_DATABASE`, `DB_PASSWORD`: Connecting to a PostgreSQL database.
+- `REDIS_HOST`, `REDIS_PORT`: Connecting to a redis instance.
+- `MAT_COOKIE_NAME`, `MAT_COOKIE_SECRET`, `MAT_COOKIE_AGE`, `MAT_COOKIE_DOMAIN`: Cookie settings. See `session.js` for default settings.
+- `MAT_PORT`: Port that the backend will run on. Default is `8080`.
+
+#### Gamma properties
+mat.chalmers.it is design with usaged with Gamma. Note that the defaults is matched with the values in `docker-compose.yml` for ease to start developing locally.
+
+- `GAMMA_AUTHORITY`: The name of the gamma authority. Default is `admin`.
+- `GAMMA_API_KEY`: API key from Gamma. Default is `key`.
+- `GAMMA_CLIENT_ID`, `GAMMA_CLIENT_SECRET`: Id and secret of the client from Gamma. Default is `id`/`secret`.
+- `GAMMA_BASE_URL`: URL to gamma. Should be `https://gamma.chalmers.it` is production, otherwise the default is used which points to the docker image.
+- `GAMMA_ME_URI`: Default `/users/me`.
+- `GAMMA_TOKEN_URI`: Default `/oauth/token`.
+- `GAMMA_USERS_URI`: Default: `/users/minified/`.
+- `GAMMA_AUTHORIZATION_URL`: Should be the full URL, probably: `https://gamma.chalmers.it/api/oauth/authorize`. Default: `http://localhost:8081/api/oauth/authorize`.
+- `GAMMA_REDIRECT_URL`: Should as well be the full URL, probably: `https://gamma.chalmers.it/api/auth/account/callback`. Default `http://localhost:3001/auth/account/callback`.

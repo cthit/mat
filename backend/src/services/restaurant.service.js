@@ -170,9 +170,6 @@ const deleteRestaurant = async (query, id) => {
 };
 
 const setOpeningHours = async (query, id, weekdays) => {
-    const errs = [];
-    var totalSuccess = true;
-
     const [err] = await to([
         weekdays.map((weekday, i) =>
             weekday.opens == null || weekday.closes == null
@@ -184,7 +181,7 @@ const setOpeningHours = async (query, id, weekdays) => {
         )
     ]);
 
-    return [err, err == null];
+    return [err];
 };
 
 module.exports = {

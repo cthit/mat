@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-export const openingHoursValidation = text =>
+export const openingHoursValidation = () =>
     yup.object().shape({
         openingHours: yup.array().of(
             yup.object().shape({

@@ -8,10 +8,9 @@ import {
     DigitText
 } from "@cthit/react-digit-components";
 import styled from "styled-components";
-import { NonStyledALink, NonStyledLink } from "../../../common-ui/design";
+import { NonStyledLink } from "../../../common-ui/design";
 import Edit from "@material-ui/icons/Edit";
 import RestaurantBody from "../restaurant-body";
-import RestaurantOpenMenuButton from "../restaurant-open-menu-button/RestaurantOpenMenuButton.element";
 
 const CustomCardHeader = styled.div`
     padding-top: 16px;
@@ -26,7 +25,7 @@ const CustomCardHeader = styled.div`
 `;
 
 const RestaurantAdmin = ({ data, disableReview }) => {
-    const { category, name, hidden, menu, id, has_custom_menu } = data;
+    const { category, name, hidden, id } = data;
 
     const history = useHistory();
     const [text, activeLanguage] = useDigitTranslations();
@@ -52,11 +51,6 @@ const RestaurantAdmin = ({ data, disableReview }) => {
                 <RestaurantBody data={data} />
             </DigitDesign.CardBody>
             <DigitDesign.CardButtons reverseDirection>
-                <RestaurantOpenMenuButton
-                    menu={menu}
-                    hasCustomMenu={has_custom_menu}
-                    id={id}
-                />
                 {!disableReview && (
                     <NonStyledLink to={"/review/" + id}>
                         <DigitButton text={text.Review} secondary outlined />

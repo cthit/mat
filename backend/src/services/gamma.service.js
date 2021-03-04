@@ -1,12 +1,10 @@
 const axios = require("axios");
 const { gammaSettings } = require("../utils/gamma");
 
-const apiKey = "key";
-
 const update = (redisClient, resolve, reject) => {
     axios
         .get(gammaSettings.usersUri, {
-            headers: { Authorization: "pre-shared " + apiKey }
+            headers: { Authorization: "pre-shared " + gammaSettings.apiKey }
         })
         .then(response => {
             redisClient
@@ -18,7 +16,8 @@ const update = (redisClient, resolve, reject) => {
                 )
                 .then(() => resolve(response.data))
                 .catch(error => reject(error));
-        });
+        })
+        .catch(error => reject(error));
 };
 
 const getUsers = async redisClient => {

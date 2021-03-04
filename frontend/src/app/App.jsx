@@ -13,7 +13,6 @@ import Restaurants from "../use-cases/restaurants";
 import translations from "./App.translations";
 import ReviewRestaurant from "../use-cases/review-restaurant";
 import FourZeroFour from "../common/elements/fourzerofour";
-import Menu from "../use-cases/menu";
 
 const getUserLanguage = user => {
     var language = user == null ? null : user.language;
@@ -68,7 +67,6 @@ const App = () => {
                 <>
                     <Switch>
                         <Route path={"/admin"} component={Admin} />
-                        <Route path={"/menu/:id"} component={Menu} />
                         <Route
                             path={"/review/:id"}
                             exact

@@ -19,7 +19,6 @@ import RestaurantHeader from "../../../../../../common/elements/restaurant-heade
 import RestaurantBody from "../../../../../../common/elements/restaurant-body";
 import { NonStyledLink } from "../../../../../../common-ui/design";
 import ArrowBack from "@material-ui/icons/ArrowBack";
-import RestaurantMenu from "@material-ui/icons/RestaurantMenu";
 import Schedule from "@material-ui/icons/Schedule";
 import Edit from "@material-ui/icons/Edit";
 import styled from "styled-components";
@@ -95,15 +94,6 @@ const RestaurantDetails = ({ data }) => {
                             outlined
                             text={text.EditRestaurant}
                             startIcon={<Edit />}
-                        />
-                    </EditLink>
-                    <EditLink to={"/admin/restaurants/" + id + "/menu"}>
-                        <DigitButton
-                            flex={"1"}
-                            margin={"0"}
-                            outlined
-                            text={text.EditMenu}
-                            startIcon={<RestaurantMenu />}
                         />
                     </EditLink>
                     <EditLink

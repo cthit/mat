@@ -1,14 +1,21 @@
 const axios = require("axios");
 
-const gammaBaseUrl = "http://gamma-backend:8081/api";
+const gammaBaseUrl =
+    process.env.GAMMA_BASE_URL || "http://gamma-backend:8081/api";
 const gammaSettings = {
-    clientId: "id",
-    clientSecret: "secret",
-    meUri: gammaBaseUrl + "/users/me",
-    tokenUri: gammaBaseUrl + "/oauth/token",
-    usersUri: gammaBaseUrl + "/users/minified",
-    authorizationUri: "http://localhost:8081/api/oauth/authorize",
-    redirectUri: "http://localhost:3001/auth/account/callback"
+    apiKey: process.env.GAMMA_AUTHORITY || "key",
+    authority: process.env.GAMMA_API_KEY || "admin",
+    clientId: process.env.GAMMA_CLIENT_ID || "id",
+    clientSecret: process.env.GAMMA_CLIENT_SECRET || "secret",
+    meUri: gammaBaseUrl + (process.env.GAMMA_ME_URI || "/users/me"),
+    tokenUri: gammaBaseUrl + (process.env.GAMMA_TOKEN_URI || "/oauth/token"),
+    usersUri: gammaBaseUrl + (process.env.GAMMA_USERS_URI || "/users/minified"),
+    authorizationUrl:
+        process.env.GAMMA_AUTHORIZATION_URL ||
+        "http://localhost:8081/api/oauth/authorize",
+    redirectUri:
+        process.env.GAMMA_REDIRECT_URL ||
+        "http://localhost:3001/auth/account/callback"
 };
 
 const getGammaUri = () => {
@@ -16,7 +23,7 @@ const getGammaUri = () => {
     const clientId = "client_id=" + gammaSettings.clientId;
     const redirectUri = "redirect_uri=" + gammaSettings.redirectUri;
     return (
-        gammaSettings.authorizationUri +
+        gammaSettings.authorizationUrl +
         "?" +
         responseType +
         "&" +

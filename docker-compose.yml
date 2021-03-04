@@ -85,9 +85,6 @@ services:
       REDIS_PASSWORD: ""
       REDIS_PORT: 6379
 
-      GOTIFY_KEY: "123abc"
-      GOTIFY_URL: http://gamma-gotify:8080/mail
-
       DEFAULT_CLIENT_NAME: demo
       DEFAULT_CLIENT_ID: id
       DEFAULT_CLIENT_SECRET: secret
@@ -100,7 +97,7 @@ services:
       BACKEND_URI: http://localhost:8081/api/
       PRODUCTION: "false"
       COOKIE_DOMAIN: localhost
-      IS_MOCKING_CLIENT: "true"
+      IS_MOCKING: "true"
     depends_on:
       - gamma-redis
       - gamma-db

@@ -5,7 +5,6 @@ import {
     useDigitTranslations
 } from "@cthit/react-digit-components";
 import MatRating from "../../../../common/elements/mat-rating";
-import * as yup from "yup";
 import { NO_REVIEW } from "../../ReviewRestaurant";
 import { reviewValidation } from "../../../../validation/review.validation";
 

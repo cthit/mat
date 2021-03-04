@@ -37,7 +37,7 @@ const queryAddRestaurant = (
 
 const queryGetRestaurant = (query, id) =>
     query(
-        "SELECT restaurant.* AS has_custom_menu FROM restaurant ON restaurant.id = $1",
+        "SELECT * FROM restaurant WHERE id = $1",
         [id],
         results => results.rows
     );

@@ -44,12 +44,9 @@ const handleEditRestaurant = ({ query }) => async (req, res) => {
         res.status(404).send("restaurant doesn't exist");
     } else if (err) {
         res.sendStatus(500);
+        console.log(err);
     } else {
         res.sendStatus(200);
-    }
-
-    if (err != null) {
-        console.log(err);
     }
 };
 
@@ -60,12 +57,9 @@ const handleDeleteRestaurant = ({ query }) => async (req, res) => {
 
     if (err) {
         res.sendStatus(500);
+        console.log(err);
     } else {
         res.sendStatus(200);
-    }
-
-    if (err != null) {
-        console.log(err);
     }
 };
 
@@ -75,15 +69,14 @@ const handleGetRestaurant = ({ query, redisClient }) => async (req, res) => {
     const [err, restaurant] = await getRestaurant(query, redisClient, id);
 
     if (err) {
-        res.sendStatus(500);
-    } else if (restaurant == null) {
-        res.status(404).send("restaurant doesn't exist");
+        if (restaurant == null) {
+            res.status(404).send("restaurant doesn't exist");
+        } else {
+            res.sendStatus(500);
+            console.log(err);
+        }
     } else {
         res.status(200).send(restaurant);
-    }
-
-    if (err != null) {
-        console.log(err);
     }
 };
 
@@ -98,12 +91,9 @@ const handleGetRestaurantsEatIT = ({ query }) => async (req, res) => {
 
     if (err) {
         res.status(500).send();
+        console.log(err);
     } else {
         res.status(200).send(formattedRestaurants);
-    }
-
-    if (err != null) {
-        console.log(err);
     }
 };
 const handleGetRestaurants = ({ query }) => async (req, res) => {
@@ -111,12 +101,9 @@ const handleGetRestaurants = ({ query }) => async (req, res) => {
 
     if (err) {
         res.status(500).send();
+        console.log(err);
     } else {
         res.status(200).send(restaurants);
-    }
-
-    if (err != null) {
-        console.log(err);
     }
 };
 
@@ -127,12 +114,9 @@ const handleGetVisibleRestaurants = ({ query }) => async (req, res) => {
 
     if (err) {
         res.status(500).send();
+        console.log(err);
     } else {
         res.status(200).send(visibleRestaurants);
-    }
-
-    if (err != null) {
-        console.log(err);
     }
 };
 
@@ -145,9 +129,14 @@ const handleSetOpeningHours = ({ query }) => async (req, res) => {
         res.status(422).send(e);
     }
 
-    const [err, success] = await setOpeningHours(query, id, req.body);
+    const [err] = await setOpeningHours(query, id, req.body);
 
-    res.sendStatus(200);
+    if (err) {
+        res.status(500);
+        console.log(err);
+    } else {
+        res.sendStatus(200);
+    }
 };
 
 module.exports = {
