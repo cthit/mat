@@ -3,7 +3,7 @@ let RedisStore = require("connect-redis")(session);
 
 const SESSION_NAME = process.env.MAT_COOKIE_NAME || "mat";
 const SECRET = process.env.MAT_COOKIE_SECRET || "secret";
-const AGE = process.env.MAT_COOKIE_AGE || 365 * 24 * 60 * 60 * 1000;
+const AGE = parseInt(process.env.MAT_COOKIE_AGE) || 365 * 24 * 60 * 60 * 1000;
 const DOMAIN = process.env.MAT_COOKIE_DOMAIN || "localhost";
 const SECURE = process.env.NODE_ENV === "production";
 
