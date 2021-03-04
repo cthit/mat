@@ -3,8 +3,8 @@ const axios = require("axios");
 const gammaBaseUrl =
     process.env.GAMMA_BASE_URL || "http://gamma-backend:8081/api";
 const gammaSettings = {
-    apiKey: process.env.GAMMA_AUTHORITY || "key",
-    authority: process.env.GAMMA_API_KEY || "admin",
+    apiKey: process.env.GAMMA_API_KEY || "key",
+    authority: process.env.GAMMA_AUTHORITY || "admin",
     clientId: process.env.GAMMA_CLIENT_ID || "id",
     clientSecret: process.env.GAMMA_CLIENT_SECRET || "secret",
     meUri: gammaBaseUrl + (process.env.GAMMA_ME_URI || "/users/me"),
