@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
-import { DigitDesign } from "@cthit/react-digit-components";
+import { DigitDesign, DigitSwipeableDrawer } from "@cthit/react-digit-components";
 import FilterMobileOpenContext from "../../../../common/contexts/filter-mobile-open";
 import styled from "styled-components";
 import Filters from "../filters";
-import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 
 const Sticky = styled.div`
     position: sticky;
@@ -25,13 +24,13 @@ const FiltersContainer = () => {
 
     return (
         <>
-            <SwipeableDrawer
+            <DigitSwipeableDrawer
                 open={open}
-                onClose={() => setOpen(false)}
-                onOpen={() => setOpen(true)}
-            >
-                <div style={{ padding: "0.5rem" }}>{filters}</div>
-            </SwipeableDrawer>
+                onSwipe={(s) => setOpen(s)}
+                render={() => (
+                    <div style={{ padding: "0.5rem" }}>{filters}</div>
+                )}
+            />
             <Desktop>
                 <Sticky>
                     <DigitDesign.Card size={{ width: "100%", height: "auto" }}>

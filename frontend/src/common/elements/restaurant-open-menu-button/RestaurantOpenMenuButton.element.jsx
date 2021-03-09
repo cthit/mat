@@ -9,14 +9,25 @@ import Launch from "@material-ui/icons/Launch";
 const RestaurantOpenMenuButton = ({ menu }) => {
     const [text] = useDigitTranslations();
 
-    return (
-        <NonStyledALink target="_blank" href={menu}>
+    if (menu == null || menu === "") {
+        return (
             <DigitButton
-                disabled={menu == null}
+                disabled
                 primary
                 outlined
                 text={text.OpenMenu}
-                endIcon={menu == null ? null : <Launch />}
+                endIcon={<Launch />}
+            />
+        );
+    }
+
+    return (
+        <NonStyledALink target="_blank" href={menu}>
+            <DigitButton
+                primary
+                outlined
+                text={text.OpenMenu}
+                endIcon={<Launch />}
             />
         </NonStyledALink>
     );

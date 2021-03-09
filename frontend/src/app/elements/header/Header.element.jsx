@@ -82,7 +82,7 @@ const Header = ({ loading, signIn }) => {
                 backendUrl={
                     process.env.NODE_ENV === "development"
                         ? "http://localhost:8081/api"
-                        : "https://gamma.chalmers.it"
+                        : "https://gamma.chalmers.it/api"
                 }
             />
         </DigitLayout.Row>

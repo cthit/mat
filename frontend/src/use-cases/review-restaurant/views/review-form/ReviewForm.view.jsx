@@ -2,9 +2,9 @@ import React from "react";
 import {
     DigitEditDataCard,
     DigitTextArea,
-    useDigitTranslations
+    useDigitTranslations,
+    DigitRating
 } from "@cthit/react-digit-components";
-import MatRating from "../../../../common/elements/mat-rating";
 import { NO_REVIEW } from "../../ReviewRestaurant";
 import { reviewValidation } from "../../../../validation/review.validation";
 
@@ -29,7 +29,7 @@ const ReviewForm = ({ loading, userReview, onSubmit }) => {
             }
             keysComponentData={{
                 rating: {
-                    component: MatRating,
+                    component: DigitRating,
                     componentProps: {
                         upperLabel: text.YourRating,
                         large: true

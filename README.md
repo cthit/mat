@@ -22,8 +22,8 @@ The easiest way to get started is via docker!
 Docker can be unforgiving when trying to update dependencies.
 
 * Start with updating your dependencies in one of the package.json, either the one for the frontend or the one for the backend.
-* Run `yarn install`.
-* Run `docker-compose rm`. This will remove your volumes and any previously saved data.
+* Go into the `frontend` folder, and run `yarn install`.
+* Go back to the root folder, and run `docker-compose rm`. This will remove your volumes and any previously saved data.
 * Run `docker-compose build --force-rm --no-cache mat-frontend mat-backend`.
 
 After that, you can just run `docker-compose up` to get started again.

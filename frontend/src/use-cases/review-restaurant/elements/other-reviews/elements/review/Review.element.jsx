@@ -2,10 +2,10 @@ import React from "react";
 import {
     DigitAvatar,
     DigitDesign,
-    DigitText
+    DigitText,
+    DigitRating
 } from "@cthit/react-digit-components";
 import styled from "styled-components";
-import MatRating from "../../../../../../common/elements/mat-rating";
 import CreatedUpdatedText from "../../../../../../common/elements/created-updated-text";
 
 const Container = styled.div`
@@ -18,7 +18,7 @@ const Container = styled.div`
     grid-column-gap: 1rem;
 `;
 
-const ReviewRating = styled(MatRating)`
+const ReviewRating = styled(DigitRating)`
     grid-column-start: 2;
     grid-column-end: 3;
     grid-row-start: 2;

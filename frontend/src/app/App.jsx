@@ -55,14 +55,9 @@ const App = () => {
 
     return (
         <DigitHeader
-            headerRowProps={{
-                flex: "1",
-                justifyContent: "space-between"
-            }}
             renderCustomHeader={() => (
                 <Header loading={loading} signIn={signIn} />
             )}
-            toolbarHeight={"auto"}
             renderMain={() => (
                 <>
                     <Switch>

@@ -1,11 +1,11 @@
 import React from "react";
 import ThumbsUpDown from "@material-ui/icons/ThumbsUpDown";
-import MatRating from "../../../mat-rating";
+import { DigitRating } from "@cthit/react-digit-components";
 
 const RestaurantRating = ({ rating }) => (
     <>
         <ThumbsUpDown />
-        <MatRating value={rating} readOnly />
+        <DigitRating value={rating} readOnly />
     </>
 );
 export default RestaurantRating;
