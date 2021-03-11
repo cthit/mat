@@ -14,7 +14,7 @@ const CardContainer = styled.div`
         justify-self: center;
     }
 `;
-const MobileCampusSelection = ({}) => {
+const MobileCampusSelection = () => {
     const [state, dispatch] = useContext(FilterContext);
     const [text] = useDigitTranslations();
 
