@@ -42,7 +42,17 @@ const addRestaurant = async (query, restaurant) => {
     return [err, success];
 };
 
-const getRestaurants = async query => {
+const getRestaurants = async (query, redisClient) => {
+    const [errCached, cachedRestaurants] = await to(
+        redisClient.get("restaurants")
+    );
+
+    const hasCache = errCached == null && cachedRestaurants != null;
+
+    if (hasCache) {
+        return [null, JSON.parse(cachedRestaurants)];
+    }
+
     const [
         err,
         [restaurants, allOpeningHours, reviews, categories]
@@ -87,6 +97,15 @@ const getRestaurants = async query => {
             rating
         };
     });
+
+    if (!hasCache) {
+        redisClient.set(
+            "restaurants",
+            JSON.stringify(output),
+            "ex",
+            60 * 60 * 60 * 24 //24h
+        );
+    }
 
     return [err, output];
 };
@@ -157,19 +176,23 @@ const getRestaurant = async (query, redisClient, id) => {
     return [err, { ...restaurant, openingHours, reviews, rating, category }];
 };
 
-const editRestaurant = async (query, id, data) => {
+const editRestaurant = async (query, redisClient, id, data) => {
     const [err, success] = await to(queryEditRestaurant(query, id, data));
 
+    redisClient.del("restaurants");
+
     return [err, success];
 };
 
-const deleteRestaurant = async (query, id) => {
+const deleteRestaurant = async (query, redisClient, id) => {
     const [err, success] = await to(queryDeleteRestaurant(query, id));
 
+    redisClient.del("restaurants");
+
     return [err, success];
 };
 
-const setOpeningHours = async (query, id, weekdays) => {
+const setOpeningHours = async (query, redisClient, id, weekdays) => {
     const [err] = await to([
         weekdays.map((weekday, i) =>
             weekday.opens == null || weekday.closes == null
@@ -180,6 +203,8 @@ const setOpeningHours = async (query, id, weekdays) => {
                   })
         )
     ]);
+
+    redisClient.del("restaurants");
 
     return [err];
 };

@@ -29,7 +29,7 @@ const handleAddRestaurant = ({ query }) => async (req, res) => {
     }
 };
 
-const handleEditRestaurant = ({ query }) => async (req, res) => {
+const handleEditRestaurant = ({ query, redisClient }) => async (req, res) => {
     const { id } = req.params;
 
     try {
@@ -38,7 +38,12 @@ const handleEditRestaurant = ({ query }) => async (req, res) => {
         res.status(422).send(e);
     }
 
-    const [err, success] = await editRestaurant(query, id, req.body);
+    const [err, success] = await editRestaurant(
+        query,
+        redisClient,
+        id,
+        req.body
+    );
 
     if (!success) {
         res.status(404).send("restaurant doesn't exist");
@@ -50,10 +55,10 @@ const handleEditRestaurant = ({ query }) => async (req, res) => {
     }
 };
 
-const handleDeleteRestaurant = ({ query }) => async (req, res) => {
+const handleDeleteRestaurant = ({ query, redisClient }) => async (req, res) => {
     const { id } = req.params;
 
-    const [err] = await deleteRestaurant(query, id);
+    const [err] = await deleteRestaurant(query, redisClient, id);
 
     if (err) {
         res.sendStatus(500);
@@ -80,24 +85,8 @@ const handleGetRestaurant = ({ query, redisClient }) => async (req, res) => {
     }
 };
 
-// Backport from old version of mat that cthit/EatIT still uses.
-const handleGetRestaurantsEatIT = ({ query }) => async (req, res) => {
-    const [err, restaurants] = await getRestaurants(query);
-
-    // Since EatIT expects menu not to be null, let's ignore them!
-    const formattedRestaurants = restaurants
-        .filter(({ menu, hidden }) => menu != null && !hidden)
-        .map(({ name, menu }) => ({ name, link_to_menu: menu }));
-
-    if (err) {
-        res.status(500).send();
-        console.log(err);
-    } else {
-        res.status(200).send(formattedRestaurants);
-    }
-};
-const handleGetRestaurants = ({ query }) => async (req, res) => {
-    const [err, restaurants] = await getRestaurants(query);
+const handleGetRestaurants = ({ query, redisClient }) => async (req, res) => {
+    const [err, restaurants] = await getRestaurants(query, redisClient);
 
     if (err) {
         res.status(500).send();
@@ -107,8 +96,11 @@ const handleGetRestaurants = ({ query }) => async (req, res) => {
     }
 };
 
-const handleGetVisibleRestaurants = ({ query }) => async (req, res) => {
-    const [err, restaurants] = await getRestaurants(query);
+const handleGetVisibleRestaurants = ({ query, redisClient }) => async (
+    req,
+    res
+) => {
+    const [err, restaurants] = await getRestaurants(query, redisClient);
 
     const visibleRestaurants = restaurants.filter(({ hidden }) => !hidden);
 
@@ -120,7 +112,7 @@ const handleGetVisibleRestaurants = ({ query }) => async (req, res) => {
     }
 };
 
-const handleSetOpeningHours = ({ query }) => async (req, res) => {
+const handleSetOpeningHours = ({ query, redisClient }) => async (req, res) => {
     const { id } = req.params;
 
     try {
@@ -129,7 +121,7 @@ const handleSetOpeningHours = ({ query }) => async (req, res) => {
         res.status(422).send(e);
     }
 
-    const [err] = await setOpeningHours(query, id, req.body);
+    const [err] = await setOpeningHours(query, redisClient, id, req.body);
 
     if (err) {
         res.status(500);
@@ -146,6 +138,5 @@ module.exports = {
     handleGetRestaurant,
     handleGetRestaurants,
     handleGetVisibleRestaurants,
-    handleSetOpeningHours,
-    handleGetRestaurantsEatIT
+    handleSetOpeningHours
 };
