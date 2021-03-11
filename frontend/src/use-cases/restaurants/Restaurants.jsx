@@ -8,7 +8,6 @@ import DisplayRestaurants from "./elements/display-restaurants";
 import { FilterContextProvider } from "./elements/filters/Filter.context";
 import RestaurantsContext from "./Restaurants.context";
 import { getCategories } from "../../api/categories/get.categories.api";
-import EatIT from "./elements/eatit";
 import FiltersContainer from "./elements/filters-container";
 import LanguageSelection from "./elements/language-selection";
 import useAdmin from "../../common/hooks/use-admin/use-admin";
@@ -23,13 +22,14 @@ import {
 import Add from "@material-ui/icons/Add";
 import FiveZeroZero from "../../common/elements/fivezerozero";
 import MobileCampusSelection from "./elements/mobile-campus-selection";
+import CardWithButton from "./elements/card-with-button/CardWithButton.element";
 
 const Container = styled.div`
     width: 100%;
 
     display: grid;
     grid-template-columns: 300px auto;
-    grid-template-rows: min-content min-content 1fr;
+    grid-template-rows: min-content min-content min-content 1fr;
     grid-gap: 1rem;
 
     @media (max-width: 767px) {
@@ -90,10 +90,19 @@ const Restaurants = () => {
                 <>
                     <Container admin={admin}>
                         <LanguageSelection />
-                        <EatIT />
+                        <CardWithButton
+                            title={text.CoOrderFood}
+                            link={"https://eatit.chalmers.it"}
+                            buttonText={text.OpenEatIT}
+                        />
                         <MobileCampusSelectionContainer>
                             <MobileCampusSelection />
                         </MobileCampusSelectionContainer>
+                        <CardWithButton
+                            title={text.MissingARestaurant}
+                            buttonText={text.RequestOnGithub}
+                            link={"https://github.com/cthit/mat/discussions"}
+                        />
                         <FiltersContainer />
                         <DisplayRestaurants restaurants={restaurants} />
                     </Container>
