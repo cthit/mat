@@ -237,7 +237,8 @@ const RestaurantsCRUD = () => {
                 "campus_location",
                 "address",
                 "maps_link",
-                "phone_number"
+                "phone_number",
+                "hidden"
             ]}
             keysText={{
                 id: "Id",
