@@ -33,11 +33,13 @@ const e_weekdays = [
     "sunday"
 ];
 
-const addRestaurant = async (query, restaurant) => {
+const addRestaurant = async (query, redisClient, restaurant) => {
     const id = uuid();
     const [err, success] = await to(
         queryAddRestaurant(query, { ...restaurant, id })
     );
+
+    redisClient.del("restaurants");
 
     return [err, success];
 };

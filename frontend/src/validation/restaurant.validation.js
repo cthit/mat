@@ -24,11 +24,11 @@ export const restaurantValidation = text =>
             .url(text.NotValidURL),
         phone_number: yup
             .string()
+            .nullable()
             .matches(/^\+46[0-9]*$/, {
                 excludeEmptyString: true,
                 message: text.PhoneNumberValidation
-            })
-            .nullable(),
+            }),
         address: yup
             .string()
             .max(1024, text.MaxLength1024)

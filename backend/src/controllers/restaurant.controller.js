@@ -9,14 +9,14 @@ const {
     setOpeningHours
 } = require("../services/restaurant.service");
 
-const handleAddRestaurant = ({ query }) => async (req, res) => {
+const handleAddRestaurant = ({ query, redisClient }) => async (req, res) => {
     try {
         restaurantValidation().validateSync(req.body);
     } catch (e) {
         res.status(422).send(e);
     }
 
-    const [err] = await addRestaurant(query, req.body);
+    const [err] = await addRestaurant(query, redisClient, req.body);
 
     if (err) {
         res.sendStatus(500);
