@@ -1,5 +1,6 @@
 const reviewValidation = require("./validation/review.validation");
-const { setReview } = require("../services/review.service");
+const { setReview, deleteReview } = require("../services/review.service");
+
 const handleSetReview = ({ query }) => async (req, res) => {
     try {
         reviewValidation().validateSync(req.body);
@@ -20,4 +21,14 @@ const handleSetReview = ({ query }) => async (req, res) => {
     }
 };
 
-module.exports = { handleSetReview };
+const handleDeleteReview = ({ query }) => async (req, res) => {
+    const [err] = await deleteReview(
+        query,
+        req.params.restaurantId,
+        req.params.userId
+    );
+
+    res.sendStatus(200);
+};
+
+module.exports = { handleSetReview, handleDeleteReview };

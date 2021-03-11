@@ -5,8 +5,7 @@ import {
     useGammaMe,
     DigitLayout,
     useDigitTranslations,
-    DigitText,
-    DigitIconButton
+    DigitText
 } from "@cthit/react-digit-components";
 import { useHistory, useLocation } from "react-router-dom";
 import AccountCircle from "@material-ui/icons/AccountCircle";

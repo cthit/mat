@@ -73,17 +73,16 @@ const ReviewRestaurant = ({ match }) => {
     }, [_getRestaurant]);
 
     useEffect(() => {
-        if (restaurant != null && !loading) {
-            var userReview =
-                userId == null
-                    ? null
-                    : find(
-                          restaurant.reviews,
-                          review => review.reviewer.uid === userId
-                      );
+        if (restaurant != null && !loading && userId != null) {
+            var userReview = find(
+                restaurant.reviews,
+                review => review.reviewer.uid === userId
+            );
             userReview = userReview == null ? NO_REVIEW : userReview;
 
             setUserReview(userReview);
+        } else {
+            setUserReview(null);
         }
     }, [restaurant, userId, loading]);
 
@@ -118,6 +117,8 @@ const ReviewRestaurant = ({ match }) => {
             {user == null && !loading && <SignInRequired />}
             {user != null && (
                 <ReviewForm
+                    restaurantId={restaurant.id}
+                    updateRestaurant={_getRestaurant}
                     loading={loading || userReview == null}
                     userReview={userReview}
                     onSubmit={values => {
@@ -133,7 +134,13 @@ const ReviewRestaurant = ({ match }) => {
                     }}
                 />
             )}
-            {restaurant && <OtherReviews reviews={restaurant.reviews} />}
+            {restaurant && (
+                <OtherReviews
+                    reviews={restaurant.reviews}
+                    restaurantId={restaurant.id}
+                    updateRestaurant={_getRestaurant}
+                />
+            )}
         </Grid>
     );
 };

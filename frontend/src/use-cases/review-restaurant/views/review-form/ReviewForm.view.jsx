@@ -1,17 +1,85 @@
-import React from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import {
     DigitEditDataCard,
     DigitTextArea,
     useDigitTranslations,
-    DigitRating
+    DigitRating,
+    useGammaMe,
+    useDigitToast,
+    useDigitDialog
 } from "@cthit/react-digit-components";
 import { NO_REVIEW } from "../../ReviewRestaurant";
 import { reviewValidation } from "../../../../validation/review.validation";
+import { deleteReview } from "../../../../api/restaurants/delete.restaurants.api";
 
-const ReviewForm = ({ loading, userReview, onSubmit }) => {
+const ReviewForm = ({
+    loading,
+    restaurantId,
+    userReview,
+    onSubmit,
+    updateRestaurant
+}) => {
+    const [toggleFormRefresh, setToggleFormRefresh] = useState(false);
     const [text] = useDigitTranslations();
+    const user = useGammaMe();
+    const [queueToast] = useDigitToast();
+    const [openDialog] = useDigitDialog();
 
-    if (loading) {
+    const onDelete = useCallback(() => {
+        openDialog({
+            title: text.AreYouSure,
+            confirmButtonText: text.DeleteReview,
+            cancelButtonText: text.Cancel,
+            onConfirm: () =>
+                deleteReview(restaurantId, user.id)
+                    .then(() => {
+                        updateRestaurant();
+                        setToggleFormRefresh(true);
+                        queueToast({
+                            text: text.ReviewSaved
+                        });
+                    })
+                    .catch(() => {
+                        queueToast({
+                            text: text.SomethingWentWrong
+                        });
+                    })
+        });
+    }, [
+        openDialog,
+        text,
+        restaurantId,
+        user,
+        updateRestaurant,
+        setToggleFormRefresh,
+        queueToast
+    ]);
+
+    const extraButtonProps = useMemo(() => {
+        if (userReview === "no-review") {
+            return {};
+        } else {
+            return {
+                extraButton: {
+                    text: text.DeleteReview,
+                    secondary: true,
+                    outlined: true,
+                    onClick: onDelete
+                }
+            };
+        }
+    }, [userReview, text, onDelete]);
+
+    //This is used since there's no way to access DigitEditDataCard and reset the form
+    useEffect(() => {
+        if (toggleFormRefresh) {
+            setTimeout(() => {
+                setToggleFormRefresh(false);
+            }, 100);
+        }
+    }, [toggleFormRefresh, setToggleFormRefresh]);
+
+    if (loading || toggleFormRefresh) {
         return null;
     }
 
@@ -52,6 +120,7 @@ const ReviewForm = ({ loading, userReview, onSubmit }) => {
             }}
             keysOrder={["rating", "description"]}
             validationSchema={reviewValidation(text)}
+            {...extraButtonProps}
         />
     );
 };

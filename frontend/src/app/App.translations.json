@@ -172,5 +172,8 @@
     "SwedishNameRequired": ["Swedish name required"],
     "EnglishNameRequired": ["English name required"],
     "ReviewSaved": ["Review saved", "Recension sparad"],
-    "OpenMenu": ["Open menu", "Öppna meny"]
+    "OpenMenu": ["Open menu", "Öppna meny"],
+    "DeleteReview": ["Delete review", "Radera recension"],
+    "OnlyDeleteReviewWhen": ["Do not delete the review if it's just a normal review of the restaurant or any of its food items.", "Radera inte om recensionen bara är en normal recension av restaurangen eller någon av dess menyalternativ."],
+    "ReviewDeleted": ["The review was deleted", "Recensionen har blivit raderad"]
 }

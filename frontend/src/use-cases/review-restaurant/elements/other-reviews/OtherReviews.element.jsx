@@ -8,7 +8,7 @@ const TitleContainer = styled.div`
     grid-column-end: -1;
 `;
 
-const OtherReviews = ({ reviews }) => {
+const OtherReviews = ({ reviews, restaurantId, updateRestaurant }) => {
     const [text] = useDigitTranslations();
 
     const sortedReviews = useMemo(
@@ -27,7 +27,12 @@ const OtherReviews = ({ reviews }) => {
                         <DigitText.Title text={text.OtherReviews} />
                     </TitleContainer>
                     {sortedReviews.map(review => (
-                        <Review key={review.reviewer.uid} review={review} />
+                        <Review
+                            key={review.reviewer.uid}
+                            review={review}
+                            restaurantId={restaurantId}
+                            updateRestaurant={updateRestaurant}
+                        />
                     ))}
                 </>
             )}

@@ -15,8 +15,16 @@ const queryGetReviewsFromRestaurant = (query, restaurantId) =>
 const queryGetReviews = query =>
     query("SELECT * FROM review", [], results => results.rows);
 
+const queryDeleteReview = (query, restaurantId, userId) =>
+    query(
+        "DELETE from review WHERE restaurant_id = $1 AND uid = $2",
+        [restaurantId, userId],
+        results => results.rows
+    );
+
 module.exports = {
     queryGetReviewsFromRestaurant,
     queryGetReviews,
-    querySetReview
+    querySetReview,
+    queryDeleteReview
 };
