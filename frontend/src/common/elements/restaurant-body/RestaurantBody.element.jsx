@@ -31,9 +31,11 @@ const RestaurantBody = ({ data }) => {
             {openStatus !== "no-information" && (
                 <OpenStatus openStatus={openStatus} />
             )}
-            {phone_number != null && <PhoneNumber phoneNumber={phone_number} />}
+            {phone_number != null && phone_number !== "" && (
+                <PhoneNumber phoneNumber={phone_number} />
+            )}
             {rating != null && <RestaurantRating rating={rating} />}
-            {maps_link != null && (
+            {maps_link != null && maps_link !== "" && (
                 <GoogleMapsLink address={address} mapsLink={maps_link} />
             )}
 

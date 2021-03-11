@@ -22,6 +22,7 @@ import {
 } from "@cthit/react-digit-components";
 import Add from "@material-ui/icons/Add";
 import FiveZeroZero from "../../common/elements/fivezerozero";
+import MobileCampusSelection from "./elements/mobile-campus-selection";
 
 const Container = styled.div`
     width: 100%;
@@ -36,6 +37,14 @@ const Container = styled.div`
     }
 
     margin-bottom: ${({ admin }) => (admin ? "72px" : "0")};
+`;
+
+const MobileCampusSelectionContainer = styled.div`
+    margin: 0;
+
+    @media (min-width: 768px) {
+        display: none;
+    }
 `;
 
 const Restaurants = () => {
@@ -82,6 +91,9 @@ const Restaurants = () => {
                     <Container admin={admin}>
                         <LanguageSelection />
                         <EatIT />
+                        <MobileCampusSelectionContainer>
+                            <MobileCampusSelection />
+                        </MobileCampusSelectionContainer>
                         <FiltersContainer />
                         <DisplayRestaurants restaurants={restaurants} />
                     </Container>

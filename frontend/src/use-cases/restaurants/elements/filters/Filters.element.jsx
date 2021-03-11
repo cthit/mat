@@ -110,6 +110,7 @@ const Filters = () => {
                     highestRating: "Högsta betyg",
                     lowestRating: "Lägsta betyg"
                 }}
+                margin={{ top: "16px" }}
             />
         </Column>
     );

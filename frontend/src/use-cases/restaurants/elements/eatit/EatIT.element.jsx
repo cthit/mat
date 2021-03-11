@@ -15,6 +15,11 @@ const CardContainer = styled.div`
     }
 `;
 
+const ButtonCenterer = styled.div`
+    display: block;
+    margin: auto;
+`;
+
 const EatIT = () => {
     const [text] = useDigitTranslations();
 
@@ -25,12 +30,18 @@ const EatIT = () => {
                     <DigitDesign.CardTitle text={text.CoOrderFood} />
                 </DigitDesign.CardHeader>
                 <DigitDesign.CardBody>
-                    <NonStyledALink
-                        href={"https://eatit.chalmers.it"}
-                        target={"_blank"}
-                    >
-                        <DigitButton text={text.OpenEatIT} outlined primary />
-                    </NonStyledALink>
+                    <ButtonCenterer>
+                        <NonStyledALink
+                            href={"https://eatit.chalmers.it"}
+                            target={"_blank"}
+                        >
+                            <DigitButton
+                                text={text.OpenEatIT}
+                                outlined
+                                primary
+                            />
+                        </NonStyledALink>
+                    </ButtonCenterer>
                 </DigitDesign.CardBody>
             </DigitDesign.Card>
         </CardContainer>

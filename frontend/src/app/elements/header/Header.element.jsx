@@ -41,9 +41,11 @@ const Header = ({ loading, signIn }) => {
             <DigitLayout.Row alignItems={"center"}>
                 {pathname === "/" && (
                     <MobileFilterButtonContainer>
-                        <DigitIconButton
-                            margin={"0"}
-                            icon={Search}
+                        <DigitButton
+                            text={"Filter"}
+                            margin={{ right: "16px" }}
+                            outlined
+                            startIcon={<Search />}
                             onClick={() => setOpen(true)}
                         />
                     </MobileFilterButtonContainer>

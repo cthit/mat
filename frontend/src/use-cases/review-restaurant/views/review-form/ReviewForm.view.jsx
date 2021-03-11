@@ -32,7 +32,8 @@ const ReviewForm = ({ loading, userReview, onSubmit }) => {
                     component: DigitRating,
                     componentProps: {
                         upperLabel: text.YourRating,
-                        large: true
+                        large: true,
+                        precision: 1
                     }
                 },
                 description: {
