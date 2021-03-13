@@ -1,13 +1,13 @@
 import { useMemo } from "react";
 
 const weekdays = [
-    "sunday",
     "monday",
     "tuesday",
     "wednesday",
     "thursday",
     "friday",
-    "saturday"
+    "saturday",
+    "sunday"
 ];
 
 const toDate = (weekday, time, currentDate) => {
@@ -19,7 +19,7 @@ const toDate = (weekday, time, currentDate) => {
 
     var currentDay = currentDate.getDay();
     var distance = weekday - currentDay;
-    date.setDate(currentDate.getDate() + distance);
+    date.setDate(currentDate.getDate() + distance + 1);
 
     date.setHours(hours);
     date.setMinutes(minutes);
@@ -64,16 +64,14 @@ const calc = (openingHours, currentWeekday, currentDate) => {
         return null;
     }
 
-    //const index = (findIndex(openingHours, ["weekday", currentWeekday]) + 1) % 7;
     const index = currentWeekday;
 
-    const previousDay = openingHours[index === 0 ? 6 : index - 1];
+    const previousDay = openingHours[(index - 1 + 7) % 7];
     const currentDay = openingHours[index];
     const nextDay = openingHours[(index + 1) % 7];
 
-    // + 1 % 7 is to make it into sunday = 0, monday = 1 etc
     const days = possibleDays(
-        index, // + (1 % 7),
+        index,
         previousDay,
         currentDay,
         nextDay,
@@ -104,12 +102,12 @@ const calc = (openingHours, currentWeekday, currentDate) => {
 
 function useOpenStatus(openingHours) {
     const currentDate = new Date();
-    const currentWeekday = currentDate.getDay();
+    const currentWeekday = (currentDate.getDay() - 1 + 7) % 7; // wraps so that first day is monday not sunday
 
     //To debug opening hours:
     /*
         const currentTime = "21:00";
-        const currentWeekday = 2; //"tuesday";
+        const currentWeekday = 1; //"tuesday";
 
         var currentDay = currentDate.getDay();
         var distance = currentWeekday - currentDay;
