@@ -40,7 +40,7 @@ const Container = styled.div`
 `;
 
 const MobileCampusSelectionContainer = styled.div`
-    margin: 0;
+    margin: auto;
 
     @media (min-width: 768px) {
         display: none;
