@@ -8,6 +8,12 @@ import styled from "styled-components";
 import FilterContext, { UPDATE_CAMPUS } from "../filters/Filter.context";
 
 const CardContainer = styled.div`
+    margin: auto;
+
+    @media (min-width: 768px) {
+        display: none;
+    }
+
     @media (max-width: 767px) {
         max-width: calc(100vw - 32px);
         width: 400px;

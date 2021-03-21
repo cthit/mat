@@ -1,6 +1,7 @@
 import { useCallback, useContext } from "react";
 import useAdmin from "../../../../../common/hooks/use-admin/use-admin";
 import FilterContext from "../../filters/Filter.context";
+import find from "lodash/find";
 
 function useRestaurantFilter() {
     const isAdmin = useAdmin();
@@ -26,7 +27,7 @@ function useRestaurantFilter() {
                 return false;
             } else if (
                 filters.categories.length > 0 &&
-                !filters.categories.includes(category_id)
+                !find(filters.categories, { id: category_id })
             ) {
                 return false;
             } else if (filters.openNow && openStatus === "closed") {

@@ -23,13 +23,14 @@ import Add from "@material-ui/icons/Add";
 import FiveZeroZero from "../../common/elements/fivezerozero";
 import MobileCampusSelection from "./elements/mobile-campus-selection";
 import CardWithButton from "./elements/card-with-button/CardWithButton.element";
+import ActiveFilters from "./elements/active-filters";
 
 const Container = styled.div`
     width: 100%;
 
     display: grid;
     grid-template-columns: 300px auto;
-    grid-template-rows: min-content min-content min-content 1fr;
+    grid-template-rows: min-content auto min-content min-content 1fr;
     grid-gap: 1rem;
 
     @media (max-width: 767px) {
@@ -37,14 +38,6 @@ const Container = styled.div`
     }
 
     margin-bottom: ${({ admin }) => (admin ? "72px" : "0")};
-`;
-
-const MobileCampusSelectionContainer = styled.div`
-    margin: auto;
-
-    @media (min-width: 768px) {
-        display: none;
-    }
 `;
 
 const Restaurants = () => {
@@ -95,15 +88,14 @@ const Restaurants = () => {
                             link={"https://eatit.chalmers.it"}
                             buttonText={text.OpenEatIT}
                         />
-                        <MobileCampusSelectionContainer>
-                            <MobileCampusSelection />
-                        </MobileCampusSelectionContainer>
+                        <MobileCampusSelection />
                         <CardWithButton
                             title={text.MissingARestaurant}
                             buttonText={text.RequestOnGithub}
                             link={"https://github.com/cthit/mat/discussions"}
                         />
                         <FiltersContainer />
+                        <ActiveFilters />
                         <DisplayRestaurants restaurants={restaurants} />
                     </Container>
                     {admin && (

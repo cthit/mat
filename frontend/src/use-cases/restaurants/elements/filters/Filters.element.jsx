@@ -37,6 +37,8 @@ const Filters = () => {
     const { categories } = useContext(RestaurantsContext);
     const [, activeLanguage] = useDigitTranslations();
 
+    const filterCategoriesById = state.categories.map(category => category.id);
+
     return (
         <Column>
             <DigitText.Title text={text.Filter} />
@@ -85,10 +87,10 @@ const Filters = () => {
                     onChange={e =>
                         dispatch({
                             type: UPDATE_CATEGORY,
-                            category: category.id
+                            category: { ...category }
                         })
                     }
-                    value={state.categories.includes(category.id)}
+                    value={filterCategoriesById.includes(category.id)}
                     label={category["name_" + activeLanguage]}
                 />
             ))}
@@ -105,10 +107,10 @@ const Filters = () => {
                 value={state.sortBy}
                 outlined
                 valueToTextMap={{
-                    az: "A-Ö",
-                    za: "Ö-A",
-                    highestRating: "Högsta betyg",
-                    lowestRating: "Lägsta betyg"
+                    az: text.az,
+                    za: text.za,
+                    highestRating: text.highestRating,
+                    lowestRating: text.lowestRating
                 }}
                 margin={{ top: "16px" }}
             />

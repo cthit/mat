@@ -7,10 +7,16 @@ import {
 import styled from "styled-components";
 
 const CardContainer = styled.div`
+    grid-row-start: 1;
+    grid-row-end: 3;
+
     @media (max-width: 767px) {
         max-width: calc(100vw - 32px);
         width: 400px;
         justify-self: center;
+
+        grid-row-start: 1;
+        grid-row-end: 2;
     }
 `;
 

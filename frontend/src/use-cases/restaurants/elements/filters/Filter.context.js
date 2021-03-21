@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useReducer } from "react";
-import xor from "lodash/xor";
+import xorBy from "lodash/xorBy";
 
 const UPDATE_CAMPUS = "update-campus";
 const UPDATE_SORT_BY = "update-sort-by";
@@ -12,7 +12,7 @@ const FilterContext = createContext([{}, () => {}]);
 const filterReducer = (state, action) => {
     switch (action.type) {
         case RESET_FILTER:
-            return { ...defaultValue };
+            return { ...defaultValue, campus: state.campus };
         case UPDATE_CAMPUS:
             return {
                 ...state,
@@ -21,7 +21,7 @@ const filterReducer = (state, action) => {
         case UPDATE_CATEGORY:
             return {
                 ...state,
-                categories: xor(state.categories, [action.category])
+                categories: xorBy(state.categories, [action.category], "id")
             };
         case UPDATE_SORT_BY:
             return {
@@ -38,13 +38,12 @@ const filterReducer = (state, action) => {
     }
 };
 
-const defaultValue = {
+export const defaultValue = {
     campus: "johanneberg",
     categories: [],
     openNow: false,
     sortBy: "highestRating",
-    name: "",
-    reviewed: false
+    name: ""
 };
 
 const testLoadSettings = () => {

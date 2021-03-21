@@ -1,20 +1,16 @@
 import React, { useContext, useMemo } from "react";
 import styled from "styled-components";
 import Restaurant from "../../../../common/elements/restaurant";
-import FilterContext, { RESET_FILTER } from "../filters/Filter.context";
+import FilterContext from "../filters/Filter.context";
 import orderBy from "lodash/orderBy";
-import {
-    useDigitTranslations,
-    DigitDesign,
-    DigitButton
-} from "@cthit/react-digit-components";
+import { useDigitTranslations, DigitText } from "@cthit/react-digit-components";
 import useRestaurantFilter from "./hooks/use-restaurant-filter";
 import useAdmin from "../../../../common/hooks/use-admin/use-admin";
 import RestaurantAdmin from "../../../../common/elements/restaurant-admin";
 
 const Grid = styled.div`
     @media (min-width: 768px) {
-        grid-row-start: 1;
+        grid-row-start: 2;
         grid-row-end: -1;
 
         grid-column-start: 2;
@@ -32,7 +28,7 @@ const Grid = styled.div`
 `;
 
 const NoRestaurantsFilter = styled.div`
-    grid-row-start: 1;
+    grid-row-start: 2;
     grid-row-end: -1;
 `;
 
@@ -66,7 +62,7 @@ const sort = (restaurants, sortBy) => {
 
 const DisplayRestaurants = ({ restaurants }) => {
     const [text] = useDigitTranslations();
-    const [filters, dispatch] = useContext(FilterContext);
+    const [filters] = useContext(FilterContext);
     const acceptedByFilter = useRestaurantFilter(filters);
     const isAdmin = useAdmin();
 
@@ -91,19 +87,7 @@ const DisplayRestaurants = ({ restaurants }) => {
         <Grid>
             {sortedRestaurants.length === 0 && (
                 <NoRestaurantsFilter>
-                    <DigitDesign.Card>
-                        <DigitDesign.CardHeader>
-                            <DigitDesign.CardTitle text={text.NoRestaurants} />
-                        </DigitDesign.CardHeader>
-                        <DigitDesign.CardButtons reverseDirection>
-                            <DigitButton
-                                onClick={() => dispatch({ type: RESET_FILTER })}
-                                secondary
-                                raised
-                                text={text.ResetFilter}
-                            />
-                        </DigitDesign.CardButtons>
-                    </DigitDesign.Card>
+                    <DigitText.Text bold text={text.NoRestaurants} />
                 </NoRestaurantsFilter>
             )}
             {sortedRestaurantsElements}

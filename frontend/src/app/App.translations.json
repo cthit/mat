@@ -177,5 +177,13 @@
     "OnlyDeleteReviewWhen": ["Do not delete the review if it's just a normal review of the restaurant or any of its food items.", "Radera inte om recensionen bara är en normal recension av restaurangen eller någon av dess menyalternativ."],
     "ReviewDeleted": ["The review was deleted", "Recensionen har blivit raderad"],
     "MissingARestaurant": ["Are you missing a restaurant or did you find an error?", "Saknar du en restaurang eller har du hittat något fel?"],
-    "RequestOnGithub": ["Submit on Github", "Skicka in på Github"]
+    "RequestOnGithub": ["Submit on Github", "Skicka in på Github"],
+    "johanneberg": ["Johanneberg", "Johanneberg"],
+    "lindholmen": ["Lindholmen", "Lindholmen"],
+    "az": ["A-Ö", "A-Ö"],
+    "za": ["Ö-A", "Ö-A"],
+    "highestRating": ["Highest rating", "Högsta betyg"],
+    "lowestRating": ["Lowest rating", "Lägsta betyg"],
+    "SortingBy": ["Sorting by", "Sorterar efter"],
+    "SortingCategories": ["Showing the categories", "Visar kategorierna"]
 }
