@@ -5,7 +5,7 @@ import { DigitRating } from "@cthit/react-digit-components";
 const RestaurantRating = ({ rating }) => (
     <>
         <ThumbsUpDown />
-        <DigitRating value={rating} readOnly />
+        <DigitRating precision={0.1} value={rating} readOnly />
     </>
 );
 export default RestaurantRating;
