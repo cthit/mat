@@ -21,7 +21,6 @@ import {
 } from "@cthit/react-digit-components";
 import Add from "@material-ui/icons/Add";
 import FiveZeroZero from "../../common/elements/fivezerozero";
-import MobileCampusSelection from "./elements/mobile-campus-selection";
 import CardWithButton from "./elements/card-with-button/CardWithButton.element";
 import ActiveFilters from "./elements/active-filters";
 
@@ -88,7 +87,6 @@ const Restaurants = () => {
                             link={"https://eatit.chalmers.it"}
                             buttonText={text.OpenEatIT}
                         />
-                        <MobileCampusSelection />
                         <CardWithButton
                             title={text.MissingARestaurant}
                             buttonText={text.RequestOnGithub}

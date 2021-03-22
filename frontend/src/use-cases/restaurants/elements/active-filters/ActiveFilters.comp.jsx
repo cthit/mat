@@ -11,11 +11,10 @@ import FilterContext, {
 } from "../filters/Filter.context";
 
 const ContainerNoFilter = styled.div`
-    justify-self: flex-start;
-
+    justify-self: center;
     @media (min-width: 768px) {
         grid-column-start: 2;
-        grid-column-end: 2;
+        grid-column-end: 3;
 
         grid-row-start: 1;
         grid-row-end: 2;
@@ -23,7 +22,9 @@ const ContainerNoFilter = styled.div`
 `;
 
 const Container = styled.div`
+    width: 100%;
     max-width: 400px;
+
     justify-self: center;
 
     @media (min-width: 768px) {
@@ -34,7 +35,7 @@ const Container = styled.div`
         grid-row-end: 2;
     }
     display: grid;
-    grid-auto-columns: max-content;
+    grid-auto-columns: auto;
     grid-template-rows: min-content;
     grid-auto-flow: row;
     grid-gap: 1rem;
@@ -45,10 +46,21 @@ const Container = styled.div`
 `;
 
 const Row = styled.div`
-    width: 100%;
-    display: grid;
-    grid-auto-flow: column;
-    grid-gap: 0.5rem;
+    max-width: 350px;
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+`;
+
+const Text = styled.p`
+    font-family: Roboto, serif;
+    font-size: 1rem;
+    font-weight: 400;
+    font-style: normal;
+    padding-left: 8px;
+    margin: 0;
+    letter-spacing: 0.00938em;
 `;
 
 let defaultValueWithoutCampus = JSON.parse(JSON.stringify(defaultValue));
@@ -65,15 +77,21 @@ const ActiveFilters = () => {
         setHasFilter(JSON.stringify(copy) !== defaultValueWithoutCampus);
     }, [filters]);
 
-    const SortByText = (
+    const DefaultText = (
         <DigitText.Text
             bold
-            text={text.SortingBy + ": " + text[filters.sortBy]}
+            text={
+                text[filters.campus] +
+                " - " +
+                text.SortingBy +
+                ": " +
+                text[filters.sortBy]
+            }
         />
     );
 
     if (!hasFilter) {
-        return <ContainerNoFilter>{SortByText}</ContainerNoFilter>;
+        return <ContainerNoFilter>{DefaultText}</ContainerNoFilter>;
     }
 
     console.log(filters);
@@ -82,18 +100,20 @@ const ActiveFilters = () => {
 
     return (
         <Container>
-            {SortByText}
+            {DefaultText}
             {filters.name !== "" && (
                 <DigitText.Text text={"Name: " + filters.name} />
             )}
             {filters.categories.length > 0 && (
                 <Row>
-                    <DigitText.Text text={text.SortingCategories} />
-                    {filters.categories.map(category => (
-                        <DigitText.Text
-                            key={category.id}
-                            text={category["name_" + activeLanguage] + ","}
-                        />
+                    <Text>+</Text>
+                    {filters.categories.map((category, i) => (
+                        <Text key={category.id}>
+                            {category["name_" + activeLanguage] +
+                                (i !== filters.categories.length - 1
+                                    ? ","
+                                    : "")}
+                        </Text>
                     ))}
                 </Row>
             )}
@@ -102,6 +122,7 @@ const ActiveFilters = () => {
                 secondary
                 outlined
                 text={text.ResetFilter}
+                justifySelf={"flex-end"}
             />
         </Container>
     );
