@@ -22,6 +22,8 @@ const ContainerNoFilter = styled.div`
 `;
 
 const Container = styled.div`
+    box-sizing: border-box;
+
     width: 100%;
     max-width: 400px;
 
@@ -42,7 +44,9 @@ const Container = styled.div`
 
     background-color: #fff9c4;
     padding: 1rem;
-    border-radius: 0.5rem;
+    border-radius: 4px;
+    box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%),
+        0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
 `;
 
 const Row = styled.div`
@@ -119,7 +123,6 @@ const ActiveFilters = () => {
             )}
             <DigitButton
                 onClick={() => dispatch({ type: RESET_FILTER })}
-                secondary
                 outlined
                 text={text.ResetFilter}
                 justifySelf={"flex-end"}

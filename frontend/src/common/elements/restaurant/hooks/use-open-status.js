@@ -10,16 +10,14 @@ const weekdays = [
     "sunday"
 ];
 
-const toDate = (weekday, time, currentDate) => {
+const toDate = (distance, time, currentDate) => {
     var date = new Date();
 
     const timeParts = time.split(":");
     const hours = parseInt(timeParts[0]);
     const minutes = parseInt(timeParts[1]);
 
-    var currentDay = currentDate.getDay();
-    var distance = weekday - currentDay;
-    date.setDate(currentDate.getDate() + distance + 1);
+    date.setDate(currentDate.getDate() + distance);
 
     date.setHours(hours);
     date.setMinutes(minutes);
@@ -27,14 +25,14 @@ const toDate = (weekday, time, currentDate) => {
     return date;
 };
 
-const toDates = (weekday, opens, closes, currentDate) => {
+const toDates = (distance, opens, closes, currentDate) => {
     const opensHours = parseInt(opens.split(":")[0]);
     const closesHours = parseInt(closes.split(":")[0]);
 
     return [
-        toDate(weekday, opens, currentDate),
+        toDate(distance, opens, currentDate),
         toDate(
-            closesHours < opensHours ? (weekday + 1) % 7 : weekday,
+            closesHours < opensHours ? (distance + 1) % 7 : distance,
             closes,
             currentDate
         )
@@ -42,20 +40,16 @@ const toDates = (weekday, opens, closes, currentDate) => {
 };
 
 const possibleDays = (currentWeekday, a, b, c, currentDate) => {
-    const previousWeekday =
-        currentWeekday > 0 ? currentWeekday - 1 : currentWeekday;
-    const nextWeekday = (currentWeekday + 1) % 7;
-
     return [
         ...(a.opens == null
             ? [null, null]
-            : toDates(previousWeekday, a.opens, a.closes, currentDate)),
+            : toDates(-1, a.opens, a.closes, currentDate)),
         ...(b.opens == null
             ? [null, null]
-            : toDates(currentWeekday, b.opens, b.closes, currentDate)),
+            : toDates(0, b.opens, b.closes, currentDate)),
         ...(c.opens == null
             ? [null, null]
-            : toDates(nextWeekday, c.opens, c.closes, currentDate))
+            : toDates(1, c.opens, c.closes, currentDate))
     ];
 };
 
