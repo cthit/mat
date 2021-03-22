@@ -5,6 +5,7 @@ import {
     DigitDesign,
     DigitRadioButtonGroup,
     DigitSelect,
+    DigitSwitch,
     DigitText,
     DigitTextField,
     useDigitTranslations
@@ -13,6 +14,7 @@ import FilterContext, {
     UPDATE_CAMPUS,
     UPDATE_CATEGORY,
     UPDATE_NAME,
+    UPDATE_OPEN_NOW,
     UPDATE_SORT_BY
 } from "./Filter.context";
 import RestaurantsContext from "../../Restaurants.context";
@@ -77,6 +79,19 @@ const Filters = () => {
                         primary: true
                     }
                 ]}
+            />
+            <DigitDesign.Divider />
+            <DigitSwitch
+                size={{ width: "max-content" }}
+                primary
+                onChange={e =>
+                    dispatch({
+                        type: UPDATE_OPEN_NOW,
+                        openNow: e.target.checked
+                    })
+                }
+                value={state.openNow}
+                label={text.OpenRightNow}
             />
             <DigitDesign.Divider />
             {categories.map(category => (

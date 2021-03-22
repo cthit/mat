@@ -67,6 +67,10 @@ const Text = styled.p`
     letter-spacing: 0.00938em;
 `;
 
+const TextNoPadding = styled(Text)`
+    padding-left: 0;
+`;
+
 let defaultValueWithoutCampus = JSON.parse(JSON.stringify(defaultValue));
 delete defaultValueWithoutCampus.campus;
 defaultValueWithoutCampus = JSON.stringify(defaultValueWithoutCampus);
@@ -98,19 +102,18 @@ const ActiveFilters = () => {
         return <ContainerNoFilter>{DefaultText}</ContainerNoFilter>;
     }
 
-    console.log(filters);
-
-    console.log(activeLanguage);
-
     return (
         <Container>
             {DefaultText}
             {filters.name !== "" && (
-                <DigitText.Text text={"Name: " + filters.name} />
+                <DigitText.Text text={text.Name + ": " + filters.name} />
+            )}
+            {filters.openNow && (
+                <DigitText.Text text={"+ " + text.OpenRightNow} />
             )}
             {filters.categories.length > 0 && (
                 <Row>
-                    <Text>+</Text>
+                    <TextNoPadding>+</TextNoPadding>
                     {filters.categories.map((category, i) => (
                         <Text key={category.id}>
                             {category["name_" + activeLanguage] +

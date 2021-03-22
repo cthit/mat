@@ -30,7 +30,10 @@ function useRestaurantFilter() {
                 !find(filters.categories, { id: category_id })
             ) {
                 return false;
-            } else if (filters.openNow && openStatus === "closed") {
+            } else if (
+                filters.openNow &&
+                (openStatus === "closed" || openStatus === "no-information")
+            ) {
                 return false;
             } else if (!isAdmin && hidden) {
                 return false;

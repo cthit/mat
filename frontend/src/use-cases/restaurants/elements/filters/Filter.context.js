@@ -5,6 +5,7 @@ const UPDATE_CAMPUS = "update-campus";
 const UPDATE_SORT_BY = "update-sort-by";
 const UPDATE_CATEGORY = "update-category";
 const UPDATE_NAME = "update-name";
+const UPDATE_OPEN_NOW = "open-now";
 const RESET_FILTER = "reset-filter";
 
 const FilterContext = createContext([{}, () => {}]);
@@ -32,6 +33,11 @@ const filterReducer = (state, action) => {
             return {
                 ...state,
                 name: action.name
+            };
+        case UPDATE_OPEN_NOW:
+            return {
+                ...state,
+                openNow: action.openNow
             };
         default:
             return state;
@@ -71,6 +77,7 @@ export {
     UPDATE_CATEGORY,
     UPDATE_NAME,
     RESET_FILTER,
+    UPDATE_OPEN_NOW,
     FilterContextProvider
 };
 export default FilterContext;
