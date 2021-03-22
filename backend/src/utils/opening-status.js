@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+const moment = require("moment-timezone");
 
 const weekdays = [
     "monday",
@@ -94,8 +94,27 @@ const calc = (openingHours, currentWeekday, currentDate) => {
         : "closed";
 };
 
-function useOpenStatus(openingHours) {
-    const currentDate = new Date();
+const hasOpeningHours = openingHours => {
+    if (openingHours == null) {
+        return false;
+    }
+
+    var open = false;
+    for (var oh of openingHours) {
+        if (oh.opens != null) {
+            open = true;
+            break;
+        }
+    }
+    return open;
+};
+
+const getOpenStatus = openingHours => {
+    const currentDate = new Date(
+        moment()
+            .tz("Europe/Stockholm")
+            .format("YYYY/MM/DD HH:mm:ss")
+    );
     const currentWeekday = (currentDate.getDay() - 1 + 7) % 7; // wraps so that first day is monday not sunday
 
     //To debug opening hours:
@@ -110,30 +129,11 @@ function useOpenStatus(openingHours) {
         currentDate.setMinutes(parseInt(currentTime.split(":")[1]));
     */
 
-    const hasOpeningHours = useMemo(() => {
-        if (openingHours == null) {
-            return false;
-        }
+    if (!hasOpeningHours(openingHours)) {
+        return "no-information";
+    }
 
-        var open = false;
-        for (var oh of openingHours) {
-            if (oh.opens != null) {
-                open = true;
-                break;
-            }
-        }
-        return open;
-    }, [openingHours]);
+    return calc(openingHours, currentWeekday, currentDate);
+};
 
-    const status = useMemo(
-        () => calc(openingHours, currentWeekday, currentDate),
-        [openingHours, currentWeekday, currentDate]
-    );
-
-    return [
-        !hasOpeningHours ? "no-information" : status,
-        weekdays[currentWeekday]
-    ];
-}
-
-export default useOpenStatus;
+module.exports = getOpenStatus;

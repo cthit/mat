@@ -1,3 +1,4 @@
+const getOpenStatus = require("../utils/opening-status");
 const { getUsers } = require("./gamma.service");
 const {
     queryGetReviewsFromRestaurant,
@@ -84,17 +85,20 @@ const getRestaurants = async (query, redisClient) => {
             rating = Math.round(rating * 10) / 10;
         }
 
+        const openingHours = e_weekdays.map(weekday => {
+            const c = find(allOpeningHours, {
+                weekday,
+                restaurant_id: restaurant.id
+            });
+            return c == null
+                ? { weekday, opens: null, closes: null }
+                : { weekday, opens: c.opens, closes: c.closes };
+        });
+
         return {
             ...restaurant,
-            openingHours: e_weekdays.map(weekday => {
-                const c = find(allOpeningHours, {
-                    weekday,
-                    restaurant_id: restaurant.id
-                });
-                return c == null
-                    ? { weekday, opens: null, closes: null }
-                    : { weekday, opens: c.opens, closes: c.closes };
-            }),
+            openingHours,
+            openStatus: getOpenStatus(openingHours),
             category: find(categories, { id: restaurant.category_id }),
             rating
         };
@@ -175,7 +179,17 @@ const getRestaurant = async (query, redisClient, id) => {
 
     const category = categoryResult.length > 0 ? categoryResult[0] : null;
 
-    return [err, { ...restaurant, openingHours, reviews, rating, category }];
+    return [
+        err,
+        {
+            ...restaurant,
+            openingHours,
+            openStatus: getOpenStatus(openingHours),
+            reviews,
+            rating,
+            category
+        }
+    ];
 };
 
 const editRestaurant = async (query, redisClient, id, data) => {

@@ -6,7 +6,7 @@ import GoogleMapsLink from "../restaurant/elements/google-maps-link";
 import { DigitLayout, DigitText } from "@cthit/react-digit-components";
 import OpeningHours from "../restaurant/elements/opening-hours";
 import styled from "styled-components";
-import useOpenStatus from "../restaurant/hooks/use-open-status";
+import useCurrentWeekday from "../restaurant/hooks/use-current-weekday";
 
 const SpanWidth = styled.div`
     grid-column-start: 1;
@@ -22,9 +22,16 @@ const Container = styled.div`
 `;
 
 const RestaurantBody = ({ data }) => {
-    const { phone_number, address, maps_link, openingHours, rating } = data;
+    const {
+        phone_number,
+        address,
+        maps_link,
+        openingHours,
+        rating,
+        openStatus
+    } = data;
 
-    const [openStatus, currentWeekday] = useOpenStatus(openingHours);
+    const currentWeekday = useCurrentWeekday(openingHours);
 
     return (
         <Container>
