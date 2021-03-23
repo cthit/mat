@@ -15,7 +15,7 @@ const RestaurantOpenMenuButton = ({ menu }) => {
                 disabled
                 primary
                 outlined
-                text={text.OpenMenu}
+                text={text.Menu}
                 endIcon={<Launch />}
             />
         );
@@ -26,7 +26,7 @@ const RestaurantOpenMenuButton = ({ menu }) => {
             <DigitButton
                 primary
                 outlined
-                text={text.OpenMenu}
+                text={text.Menu}
                 endIcon={<Launch />}
             />
         </NonStyledALink>
