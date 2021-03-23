@@ -46,14 +46,20 @@ const addRestaurant = async (query, redisClient, restaurant) => {
 };
 
 const getRestaurants = async (query, redisClient) => {
-    const [errCached, cachedRestaurants] = await to(
+    const [errCached, cachedRestaurantsRaw] = await to(
         redisClient.get("restaurants")
     );
 
-    const hasCache = errCached == null && cachedRestaurants != null;
+    const hasCache = errCached == null && cachedRestaurantsRaw != null;
 
     if (hasCache) {
-        return [null, JSON.parse(cachedRestaurants)];
+        let cachedRestaurants = JSON.parse(cachedRestaurantsRaw);
+        cachedRestaurants = cachedRestaurants.map(restaurant => ({
+            ...restaurant,
+            openStatus: getOpenStatus(restaurant.openingHours)
+        }));
+
+        return [null, cachedRestaurants];
     }
 
     const [
