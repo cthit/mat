@@ -9,16 +9,16 @@ import {
     useDigitToast
 } from "@cthit/react-digit-components";
 import styled from "styled-components";
-import Restaurant from "../../common/elements/restaurant";
-import ReviewForm from "./views/review-form";
-import OtherReviews from "./elements/other-reviews";
+import Restaurant from "../../common/components/restaurant";
+import ReviewForm from "./review-form";
+import OtherReviews from "./other-reviews";
 import find from "lodash/find";
-import SignInRequired from "./elements/sign-in-required";
+import SignInRequired from "./sign-in-required";
 import { setReview } from "../../api/restaurants/post.restaurants.api";
 import ArrowBack from "@material-ui/icons/ArrowBack";
 import { Link } from "react-router-dom";
-import FourZeroFour from "../../common/elements/fourzerofour";
-import FiveZeroZero from "../../common/elements/fivezerozero";
+import FourZeroFour from "../../common/components/fourzerofour";
+import FiveZeroZero from "../../common/components/fivezerozero";
 
 const Grid = styled.div`
     align-self: flex-start;

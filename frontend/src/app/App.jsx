@@ -6,13 +6,13 @@ import {
     useGamma,
     useGammaMe
 } from "@cthit/react-digit-components";
-import Header from "./elements/header";
+import Header from "./header";
 import { Switch, Route } from "react-router-dom";
 import Admin from "../use-cases/admin";
 import Restaurants from "../use-cases/restaurants";
 import translations from "./App.translations";
 import ReviewRestaurant from "../use-cases/review-restaurant";
-import FourZeroFour from "../common/elements/fourzerofour";
+import FourZeroFour from "../common/components/fourzerofour";
 
 const getUserLanguage = user => {
     var language = user == null ? null : user.language;

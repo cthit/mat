@@ -4,25 +4,25 @@ import {
     getRestaurants
 } from "../../api/restaurants/get.restaurants.api";
 import styled from "styled-components";
-import DisplayRestaurants from "./elements/display-restaurants";
-import { FilterContextProvider } from "./elements/filters/Filter.context";
+import DisplayRestaurants from "./display-restaurants";
+import { FilterContextProvider } from "./filters/Filter.comp.context";
 import RestaurantsContext from "./Restaurants.context";
 import { getCategories } from "../../api/categories/get.categories.api";
-import FiltersContainer from "./elements/filters-container";
-import LanguageSelection from "./elements/language-selection";
+import FiltersContainer from "./filters-container";
+import LanguageSelection from "./language-selection";
 import useAdmin from "../../common/hooks/use-admin/use-admin";
-import { NonStyledLink } from "../../common-ui/design";
 import {
     useDigitTranslations,
     DigitLayout,
     DigitFAB,
     DigitLoading,
-    useGammaStatus
+    useGammaStatus,
+    DigitDesign
 } from "@cthit/react-digit-components";
 import Add from "@material-ui/icons/Add";
-import FiveZeroZero from "../../common/elements/fivezerozero";
-import CardWithButton from "./elements/card-with-button/CardWithButton.element";
-import ActiveFilters from "./elements/active-filters";
+import FiveZeroZero from "../../common/components/fivezerozero";
+import CardWithButton from "./card-with-button";
+import ActiveFilters from "./active-filters";
 
 const Container = styled.div`
     width: 100%;
@@ -98,13 +98,13 @@ const Restaurants = () => {
                     </Container>
                     {admin && (
                         <DigitLayout.DownRightPosition>
-                            <NonStyledLink to={"/admin/restaurants/add"}>
+                            <DigitDesign.Link to={"/admin/restaurants/add"}>
                                 <DigitFAB
                                     primary
                                     text={text.CreateRestaurant}
                                     icon={Add}
                                 />
-                            </NonStyledLink>
+                            </DigitDesign.Link>
                         </DigitLayout.DownRightPosition>
                     )}
                 </>

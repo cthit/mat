@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import RestaurantsCRUD from "./sub-screens/restaurants-crud";
-import RestaurantsOpeningHours from "./sub-screens/restaurants-opening-hours";
+import RestaurantsCRUD from "./restaurants-crud";
+import RestaurantsOpeningHours from "./restaurants-opening-hours";
 
 const AdminRestaurants = () => {
     return (
