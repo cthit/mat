@@ -36,8 +36,6 @@ services:
     volumes:
       - ./backend:/usr/src/app
       - /usr/src/app/node_modules
-  #    environment:
-  #      - GOOGLE_PLACE_API_KEY=<API_KEY_HERE>
 
   mat-redis:
     image: redis:5.0
