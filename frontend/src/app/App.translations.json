@@ -1,0 +1,188 @@
+{
+    "Back": ["Back", "Tillbaka"],
+    "Cancel": ["Cancel", "Avbryt"],
+    "AdminOptions": ["Admin options", "Admin alternativ"],
+    "EditRestaurant": ["Edit details", "Redigera detaljer"],
+    "EditRestaurants": ["Edit restaurants", "Redigera restauranger"],
+    "EditMenu": ["Edit menu", "Redigera meny"],
+    "EditCategories": ["Edit categories", "Redigera kategorier"],
+    "SwedishName": ["Swedish name", "Svenskt namn"],
+    "EnglishName": ["English name", "Engelskt namn"],
+    "Categories": ["Categories", "Kategorier"],
+    "Details": ["Details", "Detaljer"],
+    "Name": ["Name", "Namn"],
+    "HideRestaurant": [
+        "Hide restaurant for users",
+        "Göm restaurangen för användare"
+    ],
+    "Hidden": ["Hidden", "Gömd"],
+    "Category": ["Category", "Kategori"],
+    "Menu": ["Menu", "Meny"],
+    "Address": ["Address", "Adress"],
+    "CampusLocation": ["Campus location", "Campus plats"],
+    "AdminRestaurants": ["Edit restaurants", "Redigera restauranger"],
+    "AdminCategories": ["Edit categories", "Redigera kategorier"],
+    "EditOpeningHours": ["Edit opening hours", "Redigera öppetider"],
+    "Open": ["Open", "Öppet"],
+    "monday": ["Monday", "Måndag"],
+    "tuesday": ["Tuesday", "Tisdag"],
+    "wednesday": ["Wednesday", "Onsdag"],
+    "thursday": ["Thursday", "Torsdag"],
+    "friday": ["Friday", "Fredag"],
+    "saturday": ["Saturday", "Lördag"],
+    "sunday": ["Sunday", "Söndag"],
+    "SaveOpeningHours": ["Save opening hours", "Spara öppetider"],
+    "Restaurants": ["Restaurants", "Restauranger"],
+    "EditedOpeningHours": ["Opening hours updated", "Öppetider uppdaterades"],
+    "FailedEditOpeningHours": [
+        "Failed to update opening hours",
+        "Misslyckades att updatera öppetider"
+    ],
+    "MapsLink": ["Google Maps link", "Google Maps länk"],
+    "PhoneNumber": ["Phone number", "Telefonnummer"],
+    "Closed": ["Closed", "Stängt"],
+    "open": ["Open", "Öppet"],
+    "closed": ["Closed", "Stängt"],
+    "closing-soon": ["Closing soon", "Stänger snart"],
+    "SignInWithGamma": ["Sign in", "Logga in"],
+    "Rating": ["Rating", "Betyg"],
+    "NoRatings": ["No ratings", "Inga betyg"],
+    "Review": ["Review", "Recensera"],
+    "OtherReviews": ["Other reviews", "Andra recensioner"],
+    "YourReview": ["Your review", "Din recension"],
+    "Save": ["Save", "Spara"],
+    "YourRating": ["Rating", "Betyg"],
+    "YourDescription": ["Description", "Beskrivning"],
+    "SignInRequired": ["Sign in required", "Inloggning krävs"],
+    "SignInRequiredText": [
+        "To be able to leave reviews on mat.chalmers.it, you'll need an IT-account.  Press the button on the top right of the website to sign in.",
+        "För att kunna lämna recensioner på mat.chalmers.it behöver du ett IT-konto. Tryck på knappen uppe till höger för att logga in."
+    ],
+    "Updated": ["Updated", "Uppdaterat"],
+    "Created": ["Created", "Skapad"],
+    "BackToRestaurants": ["Back to restaurants", "Tillbaka till restauranger"],
+    "Filter": ["Filter", "Filter"],
+    "RestaurantName": ["Name of restaurant", "Namn på restaurangen"],
+    "SortAfter": ["Sort restaurants on", "Sortera restauranger efter"],
+    "OpenRightNow": ["Open right now", "Öppet just nu"],
+    "Reviewed": [
+        "Restaurants that you have not reviewed",
+        "Restauranger som du inte har recenserat"
+    ],
+    "NoOtherReviews": [
+        "No other reviewes for this restaurant",
+        "Inga andra recensioner av denna restaurang"
+    ],
+    "CreateRestaurant": ["Create restaurant", "Skapa restaurang"],
+    "RestaurantHiddenForOtherUsers": [
+        "Restaurant hidden for other users",
+        "Restaurang är gömd för andra användare"
+    ],
+    "NoRestaurants": [
+        "No restaurants match the filter",
+        "Inga restauranger matchar filtret"
+    ],
+    "ResetFilter": ["Reset filter", "Återställa filter"],
+    "InsufficientAccess": [
+        "403 - Insufficient access",
+        "403 - Otillräcklig tillgång"
+    ],
+    "YouDontHaveAccess": [
+        "You do not have access to this page. Please contact digit@chalmers.it if you think this is a mistake.",
+        "Du har inte tillgång till denna sida. Kontakta digit@chalmers.it om du tror det här är ett misstag."
+    ],
+    "SomethingWentWrong": [
+        "500 - Something went wrong",
+        "500 - Någonting gick fel"
+    ],
+    "Contact": [
+        "If this happens often, please send a mail with what you tried to do to digit@chalmers.it",
+        "Om det här händer ofta, skicka ett mail till digit@chalmers.it med vad du försökte göra"
+    ],
+    "ContactDigit": [
+        "If you still think it is? Contact digIT@chalmers.it.",
+        "Om du fortfarande tror att du har träffat rätt, kontaka digIT@chalmers.it."
+    ],
+    "PageNotFound": ["404 - Page not found", "404 - Sida ej funnen"],
+    "TakeMeHome": ["Take me home", "Ta mig hem"],
+    "RefreshWebsite": ["Refresh website", "Uppdatera hemsidan"],
+    "OtherInformation": ["Other information", "Övrig information"],
+    "CreateRestaurantFailed": [
+        "Failed creating restaurant",
+        "Misslyckades att skapa ny restaurang"
+    ],
+    "CreateRestaurantSuccess": ["Restaurant created", "Restaurangen skapades"],
+    "UpdateRestaurantFailed": [
+        "Failed to update restaurant",
+        "Misslyckades att uppdatera restaurang"
+    ],
+    "UpdateRestaurantSuccess": [
+        "Restaurant updated",
+        "Restaurangen uppdaterades"
+    ],
+    "DeleteRestaurantFailed": [
+        "Failed to delete restaurant",
+        "Misslyckades att radera restaurangen"
+    ],
+    "DeleteRestaurantSuccess": ["Restaurant deleted", "Restaurangen raderades"],
+    "DeleteRestaurant": ["Delete restaurant", "Radera restaurang"],
+    "UpdateRestaurant": ["Update restaurant", "Uppdatera restaurang"],
+    "CreateCategoryFailed": [
+        "Failed to create category",
+        "Misslyckades att skapa kategori"
+    ],
+    "CreateCategorySuccess": ["Category created", "Kategori skapad"],
+    "UpdateCategoryFailed": [
+        "Failed to update category",
+        "Misslyckades att uppdatera kategori"
+    ],
+    "UpdateCategorySuccess": ["Category updated", "Kategori uppdaterad"],
+    "DeleteCategoryFailed": [
+        "Failed to delete category",
+        "Misslyckades att radera kategorin"
+    ],
+    "DeleteCategorySuccess": ["Category deleted", "Kategori raderad"],
+    "UpdateCategory": ["Update category", "Uppdatera kategori"],
+    "DeleteCategory": ["Delete category", "Radera kategori"],
+    "CreateCategory": ["Create category", "Skapa kategori"],
+    "AreYouSure": ["Are you sure?", "Är du säker?"],
+    "CoOrderFood": ["Ordering food together?", "Beställs mat tillsammans?"],
+    "OpenEatIT": ["Open EatIT", "Öppna EatIT"],
+    "NotValidURL": ["Not a valid URL", "Inte en giltig URL"],
+    "MaxLength1024": [
+        "Max length is 1024 characters",
+        "Maxlängden är 1024 karaktärer"
+    ],
+    "PhoneNumberValidation": [
+        "Phone number has to start with +46. For example, turn 031162613 to +4631162613. No spaces are allowed.",
+        "Telefonnummer behöver starta med +46. Exempelvis ska 031162613 omvandlas till +4631162613. Inga mellanrum är tillåtna."
+    ],
+    "CategoryMustBeChosen": [
+        "Category must be chosen",
+        "Kategori måste väljas"
+    ],
+    "MaxLength32": [
+        "Max length of the name is 32 chars",
+        "Maxlängd av namnet är 32 karaktärer"
+    ],
+    "MaxLength2048Description": [
+        "Max length of the review can be 2048 characters",
+        "Maxlängd av recensionen kan bara vara 2048 karaktärer"
+    ],
+    "SwedishNameRequired": ["Swedish name required"],
+    "EnglishNameRequired": ["English name required"],
+    "ReviewSaved": ["Review saved", "Recension sparad"],
+    "DeleteReview": ["Delete review", "Radera recension"],
+    "OnlyDeleteReviewWhen": ["Do not delete the review if it's just a normal review of the restaurant or any of its food items.", "Radera inte om recensionen bara är en normal recension av restaurangen eller någon av dess menyalternativ."],
+    "ReviewDeleted": ["The review was deleted", "Recensionen har blivit raderad"],
+    "MissingARestaurant": ["Are you missing a restaurant or did you find an error?", "Saknar du en restaurang eller har du hittat något fel?"],
+    "RequestOnGithub": ["Submit on Github", "Skicka in på Github"],
+    "johanneberg": ["Johanneberg", "Johanneberg"],
+    "lindholmen": ["Lindholmen", "Lindholmen"],
+    "az": ["A-Ö", "A-Ö"],
+    "za": ["Ö-A", "Ö-A"],
+    "highestRating": ["Highest rating", "Högsta betyg"],
+    "lowestRating": ["Lowest rating", "Lägsta betyg"],
+    "SortingBy": ["Sorting by", "Sorterar efter"],
+    "SortingCategories": ["Showing the categories", "Visar kategorierna"]
+}

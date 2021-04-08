@@ -1,11 +1,7 @@
-FROM node:latest
-
-RUN mkdir /usr/src/app
+FROM node:14
 WORKDIR /usr/src/app
-
-COPY package.json package.json
-
+COPY package.json package-lock.json ./
 RUN npm install
 RUN npm install nodemon -g
-
-CMD nodemon -L index.js
+COPY src src
+CMD nodemon -L ./src/index.js

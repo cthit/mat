@@ -1,29 +1,119 @@
-version: "2"
+version: "3"
+networks:
+  gamma:
+  mat:
+
 services:
-  backend:
-    build:
-      context: ./backend
-      dockerfile: dev.Dockerfile
-    image: mat_backend:dev
-    ports:
-      - "8080:8080"
-    volumes:
-      - ./backend:/usr/src/app
-      - /usr/src/app/node_modules
-    links:
-      - "redis"
-#    environment:
-#      - GOOGLE_PLACE_API_KEY=<API_KEY_HERE>
-  redis:
-    image: redis:5.0.3
-    ports:
-      - "6379"
-  frontend:
+  mat-frontend:
     build:
       context: ./frontend
       dockerfile: dev.Dockerfile
     image: mat_frontend:dev
+    depends_on:
+      - mat-backend
+    networks:
+      - mat
     ports:
-      - "3000:3000"
+      - 3001:3000
     volumes:
       - ./frontend:/usr/src/app
+      - /usr/src/app/node_modules
+
+  mat-backend:
+    build:
+      context: ./backend
+      dockerfile: dev.Dockerfile
+    image: mat_backend:dev
+    depends_on:
+      - gamma-backend
+      - mat-redis
+      - mat-db
+    networks:
+      - mat
+      - gamma
+    ports:
+      - 8082:8080
+    volumes:
+      - ./backend:/usr/src/app
+      - /usr/src/app/node_modules
+
+  mat-redis:
+    image: redis:5.0
+    networks:
+      - mat
+
+  mat-db:
+    image: postgres:10
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: password
+    networks:
+      - mat
+    ports:
+      - 5432:5432 # Used by datagrip
+    volumes:
+      - ./database/init.sql:/docker-entrypoint-initdb.d/1-schema.sql
+      - ./database/seeds.sql:/docker-entrypoint-initdb.d/2-data.sql
+
+  gamma-frontend:
+    image: cthit/gamma-frontend:development
+    environment:
+      HTTP_PROXY: http://gamma-backend:8081
+    depends_on:
+      - gamma-backend
+    networks:
+      - gamma
+    ports:
+      - 3000:3000
+
+  gamma-backend:
+    image: cthit/gamma-backend
+    environment:
+      # Default admin user name = admin
+      # Default admin password  = password
+
+      DB_USER: user
+      DB_PASSWORD: password
+      DB_HOST: gamma-db
+      DB_PORT: 5432
+      DB_NAME: postgres
+
+      REDIS_HOST: gamma-redis
+      REDIS_PASSWORD: ""
+      REDIS_PORT: 6379
+
+      DEFAULT_CLIENT_NAME: demo
+      DEFAULT_CLIENT_ID: id
+      DEFAULT_CLIENT_SECRET: secret
+      DEFAULT_REDIRECT_URI: http://localhost:3001/auth/account/callback
+      DEFAULT_API_KEY: key
+
+      SERVER_PORT: 8081
+      SUCCESSFUL_LOGIN: http://localhost:3000
+      CORS_ALLOWED_ORIGIN: http://localhost:3000
+      BACKEND_URI: http://localhost:8081/api/
+      PRODUCTION: "false"
+      COOKIE_DOMAIN: localhost
+      IS_MOCKING: "true"
+    depends_on:
+      - gamma-redis
+      - gamma-db
+    networks:
+      - gamma
+    ports:
+      - 8081:8081
+
+  gamma-redis:
+    image: redis:5.0
+    networks:
+      - gamma
+
+  gamma-db:
+    image: postgres:10
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: password
+    networks:
+      - gamma

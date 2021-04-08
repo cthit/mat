@@ -3,22 +3,23 @@
     "version": "0.1.0",
     "private": true,
     "dependencies": {
-        "@cthit/react-digit-components": "^0.1.26",
-        "axios": "^0.18.0",
-        "lodash": "^4.17.11",
-        "react": "^16.6.0",
-        "react-dom": "^16.6.0",
-        "react-redux": "^5.1.1",
-        "react-router-dom": "^4.3.1",
-        "react-scripts": "^2.1.5",
-        "redux": "^4.0.1",
-        "styled-components": "3.3.2"
+        "@babel/runtime": "7.13.10",
+        "@cthit/react-digit-components": "1.0.3",
+        "@material-ui/icons": "4.11.2",
+        "axios": "0.21.1",
+        "lodash": "4.17.21",
+        "prop-types": "15.7.2",
+        "react": "17.0.1",
+        "react-dom": "17.0.1",
+        "react-is": "17.0.1",
+        "react-router-dom": "5.2.0",
+        "styled-components": "5.2.1",
+        "yup": "0.32.9"
     },
+    "proxy": "http://mat-backend:8080",
     "scripts": {
         "start": "react-scripts start",
-        "build": "react-scripts build",
-        "test": "react-scripts test --env=jsdom",
-        "eject": "react-scripts eject"
+        "build": "react-scripts build"
     },
     "browserslist": [
         ">0.2%",
@@ -27,6 +28,7 @@
         "not op_mini all"
     ],
     "devDependencies": {
-        "prettier": "^1.15.3"
+        "prettier": "1.15.3",
+        "react-scripts": "3.4.0"
     }
 }

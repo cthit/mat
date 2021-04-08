@@ -1,22 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import registerServiceWorker from "./registerServiceWorker";
-import App from "./app/App.container";
+import App from "./app/App";
 import { DigitProviders } from "@cthit/react-digit-components";
-import rootReducer from "./app/App.reducer";
+import { FilterMobileOpenContextSingletonProvider } from "./common/contexts/filter-mobile-open/FilterMobileOpen.context";
 
 ReactDOM.render(
-    <DigitProviders
-        preloadedState={{
-            app: {
-                categories: {},
-                restaurants: []
-            }
-        }}
-        rootReducer={rootReducer}
-    >
-        <App />
-    </DigitProviders>,
+    <React.StrictMode>
+        <DigitProviders>
+            <FilterMobileOpenContextSingletonProvider>
+                <App />
+            </FilterMobileOpenContextSingletonProvider>
+        </DigitProviders>
+    </React.StrictMode>,
     document.getElementById("root")
 );
-registerServiceWorker();

@@ -1,8 +1,24 @@
 import axios from "axios";
 
-const baseUrl =
-    process.env.NODE_ENV === "development" ? "http://127.0.0.1:8080" : "";
+export const getRequest = (url, convert = response => response) => {
+    return new Promise((resolve, reject) => {
+        axios
+            .get("/api" + url)
+            .then(response => {
+                resolve(convert(response));
+            })
+            .catch(error => reject(error));
+    });
+};
 
-export function get(endpoint) {
-    return axios.get(baseUrl + endpoint);
-}
+export const postRequest = (url, data) => {
+    return axios.post("/api" + url, data);
+};
+
+export const putRequest = (url, data) => {
+    return axios.put("/api" + url, data);
+};
+
+export const deleteRequest = url => {
+    return axios.delete("/api" + url);
+};
